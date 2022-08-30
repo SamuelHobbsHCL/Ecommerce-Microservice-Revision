@@ -13,8 +13,8 @@ export class RegistrationService {
   constructor(private _http : HttpClient) { }
 
   public registerUser(user: User) : Observable<any> {
-    return this._http.post<any>("http://localhost:8080/api/user-registration", user, {
-      headers: this.requestHeader,
+    return this._http.post<any>("http://localhost:8080/auth/signup", user, {
+      headers: this.requestHeader
     });
   }
 }
