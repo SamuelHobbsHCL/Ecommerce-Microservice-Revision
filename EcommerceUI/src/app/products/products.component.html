@@ -3,12 +3,18 @@
         <ng-container *ngFor="let item of productList">
             <div class="card col-md-3">
                 <img src="../../assets/images/products/{{item.productImage}}" alt="">
+            <div (click)="onSelect(item)" class="card col-md-3">
+                <img src="../../assets/images/{{item.productImage}}" alt="">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.productName}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.productDescription}}</p>
                 <p><strong>Price:</strong> ${{item.unitPrice}}</p>
                 <button class="btn btn-primary" (click)=addtocart(item)>Add to cart</button>
+                
             </div>
         </ng-container>
 
     </div>
 </div>
+<div *ngIf="selectedProduct">
+    <div>{{selectedProduct.name}}</div>
+  </div>

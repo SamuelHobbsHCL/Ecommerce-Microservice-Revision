@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
+import { Product } from '../common/product';
 
 @Component({
   selector: 'app-products',
@@ -9,8 +10,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  
   public productList : any;
+  id : any;
   searchKey:string ="";
   constructor(private api : ApiService, private cartService : CartService) { }
 
@@ -20,6 +22,13 @@ export class ProductsComponent implements OnInit {
       this.productList = res;
       //console.log(this.productList)
     });
+  }
+  
+  selectedProduct: any;
+  testing : any;
+  onSelect(product: any): void{
+    this.selectedProduct = this.api.getProductById(product.productId);
+
   }
 
   addtocart(item: any){
