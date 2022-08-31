@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -16,7 +17,7 @@ export class ProductsComponent implements OnInit {
   public productList : any;
   isLoaded:boolean=false;
   searchKey:string ="";
-  constructor(private api : ApiService, private cartService : CartService) { }
+  constructor(private api : ApiService, private cartService : CartService, private _router: Router) { }
 
   ngOnInit(): void {
     this.api.getProduct()
@@ -26,7 +27,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   
-  selectedProduct: any;
+  selectedProduct: any = [];
 
   onSelect(product: any): Promise<Product>{
       this.api.getProductById(product.productId).subscribe((data) => {
@@ -41,6 +42,8 @@ export class ProductsComponent implements OnInit {
     //console.log(this.selectedProduct);
     return this.selectedProduct;
   }
+
+  
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
