@@ -22,6 +22,7 @@ import com.hcl.capstone.model.enumeration.AuthProvider;
 @Entity
 @Table(name = "USERS")
 public class User {
+	public User(){}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +59,14 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;
+	
+	public User(String userName, String password, String firstName, String lastName, String email) {
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 	
 	public long getUserId() {
 		return userId;
