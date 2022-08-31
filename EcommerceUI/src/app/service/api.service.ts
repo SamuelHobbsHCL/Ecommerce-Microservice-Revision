@@ -13,6 +13,8 @@ export class ApiService {
   requestHeader = new HttpHeaders(
     { "No-Auth" : "True"}
   );
+
+  product: Product | undefined;
   
   constructor(private http : HttpClient) { }
 
@@ -22,7 +24,6 @@ export class ApiService {
       return res;
     }))
   }
-  product: Product;
   
 getProductById(id: string): Observable<Product>{
   return this.http.get<Product>("http://localhost:8080/product/" + id).pipe(map((data: Product) => this.product = {
