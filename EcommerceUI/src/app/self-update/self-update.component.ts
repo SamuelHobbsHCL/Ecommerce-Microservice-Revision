@@ -28,7 +28,7 @@ export class SelfUpdateComponent implements OnInit {
   }
 
   public get_Id(){
-    var id = this.user.userId;
+    var id = this.user.userid;
     return id;
   }
 

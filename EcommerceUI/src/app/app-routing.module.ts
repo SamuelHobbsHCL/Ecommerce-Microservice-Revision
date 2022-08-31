@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'admin',component: AdminComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path:'product-details/:id', component: ProductDetailsComponent},
-  {path: 'inventory', component: InventoryComponent}
+  {path: 'inventory', component: InventoryComponent},
   {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'self-update/:userid', component: SelfUpdateComponent}
 ];

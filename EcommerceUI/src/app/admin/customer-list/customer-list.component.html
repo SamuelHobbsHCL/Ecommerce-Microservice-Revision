@@ -31,7 +31,7 @@
                             <span *ngFor="let role of user.roles">{{role.roleName}}<br/></span>
                         </td>
                         <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
+                            <a href="/update/{{user.userId}}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
                             <a (click)="deleteUser(user.userId)" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
