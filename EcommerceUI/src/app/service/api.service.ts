@@ -25,7 +25,7 @@ export class ApiService {
   }
   
 getProductById(id: string): Observable<Product>{
-  return this.http.get<Product>("http://localhost:8080/product/" + id).pipe(map((data: Product) => this.product = {
+  return this.http.get<Product>("http://localhost:8080/api/product/" + id).pipe(map((data: Product) => this.product = {
     productId: (data as any).productId,
     productName: (data as any).productName,
     unitPrice: (data as any).unitPrice,
