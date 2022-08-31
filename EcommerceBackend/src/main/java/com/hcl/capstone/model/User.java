@@ -1,5 +1,6 @@
 package com.hcl.capstone.model;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -55,6 +56,18 @@ public class User {
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;
 	
+	public User() {
+	}
+
+	// Sets everything but usesrId, roles & authProvider	
+	public User(String userName, String password, String firstName, String lastName, String email) {
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
 	public long getUserId() {
 		return userId;
 	}
@@ -117,6 +130,25 @@ public class User {
 
 	public void setAuthProvider(AuthProvider authProvider) {
 		this.authProvider = authProvider;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, firstName, lastName, password, userId, userName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
+				&& userId == other.userId && Objects.equals(userName, other.userName);
 	}
 
 }
