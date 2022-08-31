@@ -1,0 +1,119 @@
+.intro-2 {
+    background: url("../../../assets/images/splash-background.jpg")no-repeat;
+    background-size: cover;
+}
+
+.navbar {
+    box-shadow: none;
+}
+
+.logo {
+    margin-top: 20px;
+    margin-left: 120px;
+}
+
+.logo_size {
+    width: 50px;
+    height: 50px;
+}
+
+.right-element {
+    margin-right: 50px;
+}
+
+.nav-bar {
+    margin-top: 0px;
+}
+
+.nav-link {
+    font-family: "CocoGothic";
+    color: black;
+}
+
+.nav-link:hover {
+    color: #5b86e5;
+}
+
+.splash-product {
+    width: 900px;
+    height: 500px;
+    margin-top: 130px;
+    margin-right: 100px;
+}
+
+.splash-left-column {
+    margin-top: 150px;
+    margin-right: 130px;
+}
+
+.splash-big-font {
+    font-family: "Quicksilver", sans-serif;
+    font-size: 80px;
+    padding: 5px;
+    background: -webkit-linear-gradient(#3ed1dc, #5b86e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.view {
+    height: 100vh !important;
+    padding: 50px;
+}
+
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #424f95 !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .margins {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 740px) {
+    .full-height,
+    .full-height body,
+    .full-height header,
+    .full-height header .view {
+        height: 1020px;
+    }
+}
+
+.splash-button {
+    cursor: pointer;
+    display: flex;
+    margin-top: 3%;
+    height: 30px;
+    width: 150px;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: linear-gradient(90deg, #5b86e5 0%, #3ed1dc 91%);
+}
+
+.splash-button:hover {
+    cursor: pointer;
+    background-color: white;
+    border: solid 1px transparent;
+    background-image: linear-gradient(90deg, rgba(15, 98, 254, 1) 0%, rgba(0, 157, 154, 1) 91%);
+    box-shadow: 5px 1000px 1px #fff inset;
+}
+
+.splash-text {
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+.splash-text:hover {
+    color: #5b86e5;
+}
+
+.button-wrapper {
+    position: absolute;
+    bottom: 220px;
+    left: 230px;
+}

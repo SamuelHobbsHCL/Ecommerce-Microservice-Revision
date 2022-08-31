@@ -43,11 +43,7 @@ public class User {
 	@Column(name="EMAIL", nullable=false, length=255)
 	private String email;
 
-	@ManyToMany(cascade = {
-			CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(
 		name = "USER_ROLES",
 		joinColumns = @JoinColumn(name = "USER_ID"),
