@@ -10,8 +10,8 @@ public class LoginRequest {
     private String password;
     
 
-
-    public LoginRequest(@NotBlank String email, @NotBlank String password) {
+	public LoginRequest(@NotBlank String email, @NotBlank String password) {
+		super();
 		this.email = email;
 		this.password = password;
 	}
