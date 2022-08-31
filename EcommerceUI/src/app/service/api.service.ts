@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import { Product } from '../common/product';
-
+import { Product }from '../common/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -43,5 +42,6 @@ throwError(error: any) {
   console.error(error);
   return Observable.throw(error.json().error || 'Server error');
 }
+
 
 }

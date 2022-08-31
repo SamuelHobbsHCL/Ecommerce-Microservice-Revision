@@ -58,7 +58,7 @@ public class UserService {
 		return usersRepository.save(user);
 	}
 
-	public void sendRegistrationConfirmationEmail(User user) {
+	private void sendRegistrationConfirmationEmail(User user) {
 		Mail mailer = new Mail();
 		try {
 			mailer.send(user);
@@ -81,14 +81,26 @@ public class UserService {
 		if (!userRepo.isPresent()) {
 			return null;
 		}
-
+		
 		user.setUserId(id);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+
+		user.setPassword(encodedPassword);
+		user.setAuthProvider(AuthProvider.LOCAL);
+		
+		Roles role = roleRepository.findByName("USER");
+		Set<Roles> userRoles = new HashSet<>();
+		userRoles.add(role);
+
+		user.setRoles(userRoles);
+
 		usersRepository.save(user);
 
 		return usersRepository.findById(id);
 	}
 
-	// NOTE - not fully camel case (should be getUserByEmailAndPassword)
 	public User getUserbyEmailAndPassword(String email, String password) {
 		return usersRepository.findByEmailAndPassword(email, password);
 	}
@@ -161,12 +173,10 @@ public class UserService {
 		}
 	}
 
-	// NOTE - not fully camel case
 	public User getUserbyUserName(String userName) {
 		return usersRepository.findByUserName(userName);
 	}
 
-	// NOTE - not fully camel case
 	public User getUserbyEmail(String email) {
 		return usersRepository.findByEmail(email);
 	}

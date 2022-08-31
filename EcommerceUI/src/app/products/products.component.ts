@@ -18,7 +18,6 @@ export class ProductsComponent implements OnInit {
   isLoaded:boolean=false;
   searchKey:string ="";
   constructor(private api : ApiService, private cartService : CartService, private _router : Router) { }
-
   ngOnInit(): void {
     this.api.getProduct()
     .subscribe(res=>{
@@ -26,7 +25,7 @@ export class ProductsComponent implements OnInit {
       //console.log(this.productList)
     });
   }
-  
+
   selectedProduct: any;
 
   goToProductDetails(product: any) {
@@ -46,6 +45,7 @@ export class ProductsComponent implements OnInit {
     //console.log(this.selectedProduct);
     return this.selectedProduct;
   }
+
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
