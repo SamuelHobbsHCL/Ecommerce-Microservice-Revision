@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserAuthService } from './user-auth.service';
+import {map} from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,13 @@ export class UserService {
   }
 
   public getAllUsers() : Observable<any> {
-    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/users/");
+    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/users/")
+    .pipe(map((res:any)=>{
+      return res;
+    }));
+  }
+   
+  public getCurrentUser() : Observable<any> {
+    return this.httpClient.get<any>(this.PATH_OF_API + "/user/");
   }
 }
