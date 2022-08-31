@@ -65,7 +65,7 @@ CREATE TABLE `order_items` (
   CONSTRAINT `fk_order_item_order1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_item_product1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_item_user1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (181,3,1,32,61,NULL);
+INSERT INTO `order_items` VALUES (181,3,1,32,61,NULL),(184,1,1,49,63,NULL),(185,2,1,49,63,NULL),(192,1,1,57,65,NULL),(193,2,1,57,65,NULL),(194,3,1,57,65,NULL),(195,1,1,49,64,NULL),(196,2,1,49,64,NULL),(197,3,1,49,64,NULL);
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `fk_order_address1` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_address2` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (61,32,'2022-08-30',60.00,1,1,'COMPLETED'),(62,32,'2022-08-30',1050.00,1,1,'In Progress');
+INSERT INTO `orders` VALUES (61,32,'2022-08-30',60.00,1,1,'COMPLETED'),(62,32,'2022-08-30',1050.00,1,1,'In Progress'),(63,49,'2022-08-30',1760.00,1,1,'COMPLETED'),(64,49,'2022-08-30',4550.99,1,1,'COMPLETED'),(65,57,'2022-08-30',1820.00,1,1,'COMPLETED'),(66,58,'2022-08-30',1760.00,1,1,'In Progress'),(67,49,'2022-08-30',1129.00,1,1,'In Progress');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `products` (
   `product_description` varchar(255) NOT NULL,
   PRIMARY KEY (`product_id`),
   UNIQUE KEY `product_id_UNIQUE` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Men\'s Ace embroidered sneaker',770.00,28,'gucciMen.jpg','The Ace low-top sneaker in leather'),(2,'Gucci Logo Women',990.00,9,'Guccilogo.jpg','Women\'s Rhyton Gucci logo leather sneaker'),(3,'Yeezy Boost 350',60.00,6,'yeezy.jpg','Yeeze Boost 350 sneakers'),(4,'Nike Air Jordan 1',70.00,39,'nike.jpg','Nike Air Jordan 1 sneaker'),(5,'Nike Air Max 270',161.00,40,'AirMax270.jpg','Nike Air Max 270\nNike Men\'s Shoes'),(6,'NMD_R1 PRIMEBLUE SHOES',150.00,46,'addidas.jpg','PROGRESSIVE SNEAKERS ROOTED IN RUNNING.'),(7,'Adidas Ivy Park x Ultraboost OG',384.00,49,'addidaspink.jpg',' Ivy Park x Ultraboost OG \'Ivy Heart\' Mens Sneakers');
+INSERT INTO `products` VALUES (1,'iPhone 13 - 512 GB',1129.00,25,'product1.png','Iphone 13 - 512 GB'),(2,'Macbook Pro 16\"',2772.99,22,'product2.jpg','Macbook Pro 16\"'),(3,'Sony Playstation 5',649.00,23,'product3.jpg','Sony Playstation 5'),(4,'Sony WF-1000XM4',229.99,39,'product4.jpg','Sony Headphones'),(5,'Samsung - 55\" Odyssey',3499.99,40,'product5.jpg','Samsung TV'),(6,'Samsung Galaxy Watch 5',449.99,46,'product6.jpg','Samsung Watch'),(7,'Xbox Series X',629.00,49,'product7.jpeg','Xbox Series X'),(8,'Nintendo Switch OLED',333.33,45,'product8.jpeg','Nintendo Switch OLED');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +218,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (1,32),(1,33),(2,32),(2,49),(2,50),(3,33);
+INSERT INTO `user_roles` VALUES (1,32),(1,33),(2,32),(2,49),(2,50),(2,52),(2,57),(2,58),(3,33);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +241,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `user_name_UNIQUE` (`user_name`),
   UNIQUE KEY `iduser_UNIQUE` (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,7 +250,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (32,'admin','$2a$10$CAS6iCORONH12sWOyzeX9eolj.vv63lG18sZhgu/LCcSMo2En5PDO','Admin','Admin','admin@gmail.com','LOCAL'),(33,'boss','$2a$10$ERIORYKMjnrX8KEmabKVxuTmiK3k44oAP7saio8XAmrEKka7x49oi','Boss','Boss','boss@gmail.com','LOCAL'),(49,'user','$2a$10$h8kqjRSZ6rw/KF2RjU3lCOA7VY8nHFUzrvufJ1TplPSGvae8NNoDy','User','User','user@gmail.com','LOCAL'),(50,'tyler','$2a$10$/r5C9Ol5dRHolfjpJMlOTOJO/orVRjEAWZTFhv/MvnVLJl6r9OSly','Tyler','Tyhlker','werwer@gmail.com','LOCAL');
+INSERT INTO `users` VALUES (32,'admin','$2a$10$CAS6iCORONH12sWOyzeX9eolj.vv63lG18sZhgu/LCcSMo2En5PDO','Admin','Admin','admin@gmail.com','LOCAL'),(33,'boss','$2a$10$ERIORYKMjnrX8KEmabKVxuTmiK3k44oAP7saio8XAmrEKka7x49oi','Boss','Boss','boss@gmail.com','LOCAL'),(49,'user','$2a$10$h8kqjRSZ6rw/KF2RjU3lCOA7VY8nHFUzrvufJ1TplPSGvae8NNoDy','User','User','user@gmail.com','LOCAL'),(50,'tyler','$2a$10$/r5C9Ol5dRHolfjpJMlOTOJO/orVRjEAWZTFhv/MvnVLJl6r9OSly','Tyler','Tyhlker','werwer@gmail.com','LOCAL'),(52,'test222','$2a$10$oBUYEJnscbtjwDxXirDF5u8ZQql6Fm4azu8d2IP1abBdYCcmyUduC','Test','Test','test22@gmail.com','LOCAL'),(57,'alicetest@gmail.com','$2a$10$xbYv8bM201Sr86.HvMPDY.TxG7c/azN9sLWo4FfJLY.VYHth4pQ6e','Alice','Test','alicetest@gmail.com','OKTA'),(58,'huong.nguyen@hcl.com','$2a$10$UlCBexMRg.qW6LlV2fju0u/xq3JKNib4GX1IALqGJ1gln8jzcAG6u','Alice Huong','Nguyen','huong.nguyen@hcl.com','OKTA');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -263,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-30 15:04:49
+-- Dump completed on 2022-08-30 23:06:12
