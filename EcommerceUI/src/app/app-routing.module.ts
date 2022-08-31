@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OktaCallbackComponent } from '@okta/okta-angular';
 import { AdminComponent } from './admin/admin.component';
+import { InventoryComponent } from './admin/inventory/inventory.component';
 import { CartComponent } from './cart/cart.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'forbidden',component: ForbiddenComponent},
   {path: 'admin',component: AdminComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
-  {path:'product-details/:id', component: ProductDetailsComponent}
+  {path:'product-details/:id', component: ProductDetailsComponent},
+  {path: 'inventory', component: InventoryComponent}
 ];
 
 @NgModule({
