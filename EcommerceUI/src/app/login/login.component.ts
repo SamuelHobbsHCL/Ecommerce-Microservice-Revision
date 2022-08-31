@@ -41,6 +41,10 @@ export class LoginComponent implements OnInit {
     this.getUserDetails();
   }
 
+  public isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
+  }
+
   checkAuthenticated() {
     this.isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
       filter((s: AuthState) => !!s),
@@ -74,7 +78,7 @@ export class LoginComponent implements OnInit {
         if (role === 'ADMIN') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/products']);
         }
       },
       (error) => {
@@ -91,6 +95,12 @@ export class LoginComponent implements OnInit {
 
   public async oktaLogout(): Promise<void> {
     await this.oktaAuth.signOut();
+    this.userAuthService.clear();
+  }
+  public logout() {
+    this.userAuthService.clear();
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 
 }

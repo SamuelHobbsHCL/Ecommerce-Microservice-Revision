@@ -11,3 +11,12 @@
     top: 20px;
     color: blue;
 }
+
+.name {
+    font-family: "Timeline";
+    font-size: 30px;
+}
+
+.margin {
+    margin-left: 20px;
+}

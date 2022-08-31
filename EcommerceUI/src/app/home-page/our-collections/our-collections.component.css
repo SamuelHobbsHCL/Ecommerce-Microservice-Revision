@@ -1,0 +1,65 @@
+.collection-tv-button {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    border-color: #5b86e5;
+    background-image: url("../../../assets/images/icon-tv.png");
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position: center;
+    padding-bottom: 20px;
+}
+
+.collection-phone-button {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    border-color: #5b86e5;
+    background-image: url("../../../assets/images/icon-phone.png");
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position: center;
+    padding-bottom: 20px;
+}
+
+.collection-laptop-button {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    border-color: #5b86e5;
+    background-image: url("../../../assets/images/icon-computer.png");
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position: center;
+    padding-bottom: 20px;
+}
+
+.collection-game-button {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    border-color: #5b86e5;
+    background-image: url("../../../assets/images/icon-game.png");
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position: center;
+    padding-bottom: 20px;
+}
+
+.collection-heading {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.container {
+    margin-bottom: 50px;
+}

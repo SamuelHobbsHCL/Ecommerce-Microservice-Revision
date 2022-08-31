@@ -22,6 +22,11 @@ import { CustomerListComponent } from './admin/customer-list/customer-list.compo
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NewProductsComponent } from './home-page/new-products/new-products.component';
+import { OurCollectionsComponent } from './home-page/our-collections/our-collections.component';
+import { SplashPageComponent } from './home-page/splash-page/splash-page.component';
+import { FooterComponent } from './footer/footer.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -42,7 +47,12 @@ const oktaAuth = new OktaAuth({
     ForbiddenComponent,
     AdminComponent,
     CustomerListComponent,
-    InventoryComponent
+    InventoryComponent,
+    HomePageComponent,
+    NewProductsComponent,
+    OurCollectionsComponent,
+    SplashPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

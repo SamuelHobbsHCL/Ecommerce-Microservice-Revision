@@ -58,7 +58,7 @@ public class UserService {
 		return usersRepository.save(user);
 	}
 
-	private void sendRegistrationConfirmationEmail(User user) {
+	public void sendRegistrationConfirmationEmail(User user) {
 		Mail mailer = new Mail();
 		try {
 			mailer.send(user);
