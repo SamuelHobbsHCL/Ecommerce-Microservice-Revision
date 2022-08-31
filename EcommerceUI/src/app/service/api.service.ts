@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {map} from 'rxjs/operators';
+import { data } from 'jquery';
+import { Observable } from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 import { Product }from '../common/product';
 @Injectable({
@@ -20,21 +22,25 @@ export class ApiService {
       return res;
     }))
   }
-  product: Product | undefined;
-
-  getProductById(id: string){
-    this.http.get<Product>("http://localhost:8080/product/" + id).subscribe((data: Product) => this.product = {
+  product: Product;
+  
+getProductById(id: string): Observable<Product>{
+  return this.http.get<Product>("http://localhost:8080/product/" + id).pipe(map((data: Product) => this.product = {
     productId: (data as any).productId,
     productName: (data as any).productName,
     unitPrice: (data as any).unitPrice,
     productStock: (data as any).productStock,
     productImage: (data as any).productImage,
     productDescription: (data as any).productDescription
-    }
-    );
-    console.log(this.product);
-    return this.product;
-
+    }),
+  catchError(error => this.throwError(error))
+)
 
 }
+
+throwError(error: any) {
+  console.error(error);
+  return Observable.throw(error.json().error || 'Server error');
+}
+
 }
