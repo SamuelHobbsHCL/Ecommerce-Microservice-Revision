@@ -9,6 +9,7 @@ import { LoginSuccessComponent } from './login-success/login-success.component';
 import { LoginComponent } from './login/login.component';
 import { ProductsComponent } from './products/products.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ApiService } from './service/api.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
