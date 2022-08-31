@@ -17,6 +17,8 @@ export class CartComponent implements OnInit {
   products: any[] = [];
   product : any = null;
 
+  quantity: number = 0;
+
   constructor(private cartService : CartService, private router : Router) { }
 
   ngOnInit(): void {
@@ -28,6 +30,37 @@ export class CartComponent implements OnInit {
       console.log(this.order);
       console.log(this.orderItems);
     })
+  }
+
+  addtocart(item: any){
+    this.cartService.addtoCart(item, 1).subscribe(data => {
+      //console.log(data);
+      Swal.fire(
+        'Success!',
+        'Product added to cart!',
+        'success'
+      ).then(function(){
+        window.location.reload();
+      })
+    });
+  }
+
+  increaseQuantity(item: any) {
+    if(item.quantity){ 
+      item.quantity++;
+      
+   }else{
+   item.quantity=1;
+   }
+   console.log(item);
+   this.cartService.addtoCart(item, item.quantity);
+  }
+  decreaseQuantity(item: any) {
+    if(item.quantity>0){
+      item.quantity--;
+    }
+    console.log(item);
+    this.cartService.addtoCart(item, item.quantity);
   }
 
   removeItem(item: any){    
