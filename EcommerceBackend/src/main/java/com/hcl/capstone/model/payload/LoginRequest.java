@@ -16,10 +16,6 @@ public class LoginRequest {
 		this.password = password;
 	}
 
-    public LoginRequest(@NotBlank String email, @NotBlank String password) {
-		this.email = email;
-		this.password = password;
-	}
     
 	public String getEmail() {
 		return email;
