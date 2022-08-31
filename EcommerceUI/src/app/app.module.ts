@@ -28,7 +28,8 @@ import { OurCollectionsComponent } from './home-page/our-collections/our-collect
 import { SplashPageComponent } from './home-page/splash-page/splash-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-
+import { UserUpdateComponent } from './user-update/user-update.component';
+import { SelfUpdateComponent } from './self-update/self-update.component';
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -54,7 +55,9 @@ const oktaAuth = new OktaAuth({
     OurCollectionsComponent,
     SplashPageComponent,
     FooterComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    UserUpdateComponent,
+    SelfUpdateComponent
   ],
   imports: [
     BrowserModule,
