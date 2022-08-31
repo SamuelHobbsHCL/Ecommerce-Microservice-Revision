@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
+import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
@@ -12,7 +14,7 @@ import { Product } from '../common/product';
 export class ProductsComponent implements OnInit {
   
   public productList : any;
-  id : any;
+  isLoaded:boolean=false;
   searchKey:string ="";
   constructor(private api : ApiService, private cartService : CartService) { }
 
@@ -25,10 +27,19 @@ export class ProductsComponent implements OnInit {
   }
   
   selectedProduct: any;
-  testing : any;
-  onSelect(product: any): void{
-    this.selectedProduct = this.api.getProductById(product.productId);
 
+  onSelect(product: any): Promise<Product>{
+      this.api.getProductById(product.productId).subscribe((data) => {
+      this.selectedProduct = data;
+      this.isLoaded = true;
+
+    }, (error: any) => {
+      console.log("Unable to find product");
+    }
+    
+    );
+    //console.log(this.selectedProduct);
+    return this.selectedProduct;
   }
 
   addtocart(item: any){
