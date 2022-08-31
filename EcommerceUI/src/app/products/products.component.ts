@@ -28,6 +28,10 @@ export class ProductsComponent implements OnInit {
   
   selectedProduct: any;
 
+  goToProductDetails(product: any) {
+    this._router.navigate(['/product-details', product.productId]);
+  }
+
   onSelect(product: any): Promise<Product>{
       this.api.getProductById(product.productId).subscribe((data) => {
       this.selectedProduct = data;
