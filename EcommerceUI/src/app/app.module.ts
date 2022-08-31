@@ -22,6 +22,7 @@ import { CustomerListComponent } from './admin/customer-list/customer-list.compo
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { OrdersComponent } from './orders/orders.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -42,7 +43,8 @@ const oktaAuth = new OktaAuth({
     ForbiddenComponent,
     AdminComponent,
     CustomerListComponent,
-    InventoryComponent
+    InventoryComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

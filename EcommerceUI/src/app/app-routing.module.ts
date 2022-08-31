@@ -8,6 +8,8 @@ import { LoginSuccessComponent } from './login-success/login-success.component';
 import { LoginComponent } from './login/login.component';
 import { ProductsComponent } from './products/products.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { OrdersComponent } from './orders/orders.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'products', pathMatch: 'full'},
@@ -18,7 +20,8 @@ const routes: Routes = [
   {path: 'registration',component: RegistrationComponent},
   {path: 'forbidden',component: ForbiddenComponent},
   {path: 'admin',component: AdminComponent},
-  {path: 'login/callback', component: OktaCallbackComponent}
+  {path: 'login/callback', component: OktaCallbackComponent},
+  {path: 'orders',component: OrdersComponent}
 ];
 
 @NgModule({
