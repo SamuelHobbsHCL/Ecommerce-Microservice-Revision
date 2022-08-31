@@ -41,6 +41,11 @@ public class AdminController {
 		return userService.getAllUsers();
 	}
 	
+	@GetMapping("/admin/products")
+	public List<Product> getAllProducts() {
+		return productsService.getAllProducts();
+	}
+	
 	@PostMapping("/admin/add-product")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Product addProduct(@RequestBody Product product) {
