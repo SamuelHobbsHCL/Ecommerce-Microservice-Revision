@@ -88,6 +88,7 @@ public class UserService {
 		return usersRepository.findById(id);
 	}
 
+	// NOTE - not fully camel case (should be getUserByEmailAndPassword)
 	public User getUserbyEmailAndPassword(String email, String password) {
 		return usersRepository.findByEmailAndPassword(email, password);
 	}
@@ -160,10 +161,12 @@ public class UserService {
 		}
 	}
 
+	// NOTE - not fully camel case
 	public User getUserbyUserName(String userName) {
 		return usersRepository.findByUserName(userName);
 	}
 
+	// NOTE - not fully camel case
 	public User getUserbyEmail(String email) {
 		return usersRepository.findByEmail(email);
 	}
