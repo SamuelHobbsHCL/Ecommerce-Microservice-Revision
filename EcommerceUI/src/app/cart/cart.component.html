@@ -22,7 +22,12 @@
                             <td><img style="width: 120px;" src="../../assets/images/{{item.product.productImage}}" alt=""></td>
                             <td style="width: 25%;">{{item.product.productDescription}}</td>
                             <th style="width: 12%;">${{item.product.unitPrice}}</th>
-                            <td style="width: 12%;">{{item.quantity}}</td>
+                            <td style="width: 12%;">
+                                <button type ="button"><i class = "fa fa-minus"></i></button>
+                                {{item.quantity}}
+                                <button type ="button"><i class = "fa fa-plus"></i></button>
+                            </td>
+                            
                             <td style="width: 12%;">${{item.product.unitPrice * item.quantity}}</td>
                             <td>
                                 <button (click)="removeItem(item.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
