@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
+
+  navigateToInventory() {
+    this._router.navigate(['/inventory'])
+  }
 
   ngOnInit(): void {
   }
