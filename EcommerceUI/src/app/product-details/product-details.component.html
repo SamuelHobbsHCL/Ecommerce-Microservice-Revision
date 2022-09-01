@@ -1,14 +1,27 @@
+<div class="container d-flex justify-content-center" >
+    
+</div>
 <div class="container d-flex justify-content-center">
     <div class="col">
         <br/>
-        <h1> {{product.productName}}</h1>
+        <h1>{{product.productName}}</h1>
 
         <img src="{{product.productImage}}" class="image-size" alt="">
         <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{product.productName}}</h5>
         <p>{{product.productDescription}}</p>
         <p><strong>Price:</strong> ${{product.unitPrice}}</p>
-
-        <button class="btn btn-primary" (click)=addtocart(product)>Add to cart</button>
+        <div class="col">
+            <div class="row-md">
+                <button class="btn btn-primary" (click)=addtocart(product)>Add to cart</button>
+    
+            </div>
+            <br>
+            <div class="row-md">
+                <button class="btn btn-primary" (click)="goBack()">Back</button>
+            </div>
+    
+        </div>
+        
     </div>
-</div>
+    
 <br/>
