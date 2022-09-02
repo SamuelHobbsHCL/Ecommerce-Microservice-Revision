@@ -16,6 +16,12 @@ export class AdminService {
       return res;
     }));
   }
+  public getAllProducts(){
+    return this.http.get<any>(this.PATH_OF_API + "/admin/products")
+    .pipe(map((res:any)=>{
+      return res;
+    }));
+  }
 
   public deleteUser(id : any) {
     return this.http.delete(this.PATH_OF_API + "/admin/delete-user/" + id);

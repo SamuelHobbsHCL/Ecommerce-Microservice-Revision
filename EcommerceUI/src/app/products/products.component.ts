@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
+import { Product } from '../common/product';
 
 @Component({
   selector: 'app-products',
@@ -9,11 +13,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  
   public productList : any;
+  isLoaded:boolean=false;
   searchKey:string ="";
-  constructor(private api : ApiService, private cartService : CartService) { }
-
+  constructor(private api : ApiService, private cartService : CartService, private _router : Router) { }
   ngOnInit(): void {
     this.api.getProduct()
     .subscribe(res=>{
@@ -21,6 +25,27 @@ export class ProductsComponent implements OnInit {
       //console.log(this.productList)
     });
   }
+
+  selectedProduct: any;
+
+  goToProductDetails(product: any) {
+    this._router.navigate(['/product-details', product.productId]);
+  }
+
+  onSelect(product: any): Promise<Product>{
+      this.api.getProductById(product.productId).subscribe((data) => {
+      this.selectedProduct = data;
+      this.isLoaded = true;
+
+    }, (error: any) => {
+      console.log("Unable to find product");
+    }
+    
+    );
+    //console.log(this.selectedProduct);
+    return this.selectedProduct;
+  }
+
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {

@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictPropertyInitialization":false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -16,6 +17,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    "noImplicitAny": false,
+    
     "lib": [
       "es2018",
       "dom"
@@ -26,5 +29,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+    
   }
+  
 }

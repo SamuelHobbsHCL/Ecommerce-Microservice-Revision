@@ -22,8 +22,15 @@ import { CustomerListComponent } from './admin/customer-list/customer-list.compo
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NewProductsComponent } from './home-page/new-products/new-products.component';
+import { OurCollectionsComponent } from './home-page/our-collections/our-collections.component';
+import { SplashPageComponent } from './home-page/splash-page/splash-page.component';
+import { FooterComponent } from './footer/footer.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
+import { SelfUpdateComponent } from './self-update/self-update.component';
 import { OrdersComponent } from './orders/orders.component';
-
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -44,6 +51,14 @@ const oktaAuth = new OktaAuth({
     AdminComponent,
     CustomerListComponent,
     InventoryComponent,
+    HomePageComponent,
+    NewProductsComponent,
+    OurCollectionsComponent,
+    SplashPageComponent,
+    FooterComponent,
+    ProductDetailsComponent,
+    UserUpdateComponent,
+    SelfUpdateComponent,
     OrdersComponent
   ],
   imports: [

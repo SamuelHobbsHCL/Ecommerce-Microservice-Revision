@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/service/api.service';
-
 
 @Component({
   selector: 'app-orders',
@@ -8,9 +6,8 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  public orderList : any;
 
-  constructor(private api : ApiService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
