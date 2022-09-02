@@ -7,7 +7,7 @@
                         <h2>Product <b>Management</b></h2>
                     </div>
                     <div class="col-xs-7">
-                        <button type = "button" class = "btn btn-light" (click) = "navigateToUsers()">User Management</button>
+
                         <a href="#" class="btn btn-primary" style="float: right;"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
 
                     </div>
@@ -31,11 +31,11 @@
                         <td>{{product.productName}}</td>
                         <td>${{product.unitPrice}}</td>
                         <td>{{product.productStock}}</td>
-                        <td>{{product.productimage}}</td>
+                        <td><img src="{{product.productImage}}" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
                             <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
-                            
+
                         </td>
                     </tr>
                 </tbody>
@@ -54,4 +54,7 @@
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-light" (click)="navigateToUsers()">User Management</button>
+    <br/>
+    <br/>
 </div>

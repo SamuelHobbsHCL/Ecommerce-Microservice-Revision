@@ -11,44 +11,58 @@
 
                                 <form class="mx-1 mx-md-4" #registrationForm="ngForm" (ngSubmit)="registerUser()">
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" required #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched" />
-                                            <label class="form-label" for="form3Example1c">Username</label>
+                                    <div class="align-items-center mb-4">
+                                        <div>
+                                            <i class="fas fa-user fa-lg me-2 fa-fw"></i>
+                                            <label class="form-label" for="floatingUsername">Username</label>
+                                        </div>
+                                        <div class="flex-fill mb-0">
+                                            <input id="floatingUsername" type="text" class="form-control" name="userName" [(ngModel)]="user.userName" required #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched" />
+
                                             <div>
                                                 <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">Username is required!</small>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" required #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" />
+                                    <div class="align-items-center mb-4">
+                                        <div>
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <label class="form-label" for="form3Example1c">First Name</label>
+                                        </div>
+
+                                        <div class="flex-fill mb-0">
+                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" required #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" />
                                             <div>
                                                 <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">First Name is required!</small>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" required #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" />
+                                    <div class="align-items-center mb-4">
+                                        <div>
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <label class="form-label" for="form3Example1c">Last Name</label>
+                                        </div>
+
+                                        <div class="flex-fill mb-0">
+                                            <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" required #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" />
+
                                             <div>
                                                 <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">Last Name is required!</small>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched" />
+                                    <div class="align-items-center mb-4">
+                                        <div>
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <label class="form-label" for="form3Example3c">Email</label>
+                                        </div>
+
+                                        <div class="flex-fill mb-0">
+                                            <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched" />
+
                                             <div *ngIf="email.errors && (email.invalid && email.touched)">
                                                 <small class="text-danger" *ngIf="email.errors.required">Email is required!</small>
                                                 <small class="text-danger" *ngIf="email.errors.pattern">Email is not valid!</small>
@@ -56,11 +70,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" />
+                                    <div class="align-items-center mb-4">
+                                        <div>
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <label class="form-label" for="form3Example4c">Password</label>
+                                        </div>
+
+                                        <div class="flex-fill mb-0">
+                                            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" />
+
                                             <div>
                                                 <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required!</small>
                                             </div>

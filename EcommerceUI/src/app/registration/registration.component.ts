@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { RegistrationService } from '../service/registration.service';
 import { User } from '../user';
 
@@ -11,7 +12,6 @@ import { User } from '../user';
 export class RegistrationComponent implements OnInit {
 
   user = new User();
-  msg='';
 
   constructor(private _service : RegistrationService, private _router: Router) { }
 
@@ -22,12 +22,24 @@ export class RegistrationComponent implements OnInit {
     this._service.registerUser(this.user).subscribe(
       data => {
         console.log("Response received!");
-        this.msg="Registration successful!";
-        this._router.navigate(['/login']);
+       
+        Swal.fire(
+          'Success!',
+          'User Successfully Registered !',
+          'success'
+        ).then(() =>{
+          this._router.navigate(['/login']);
+        })
       },
       error => {
         console.log("Error!");
-        this.msg = error.error;
+        Swal.fire(
+          'Error!',
+          'Error! Please check username and/or email!',
+          'error'
+        ).then(() =>{
+        
+        })
       }
     )
 
