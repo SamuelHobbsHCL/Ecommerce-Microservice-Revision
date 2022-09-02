@@ -46,21 +46,19 @@ export class CartComponent implements OnInit {
   }
 
   increaseQuantity(item: any) {
-    if(item.quantity){ 
-      item.quantity++;
-      
-   }else{
-   item.quantity=1;
-   }
    console.log(item);
-   this.cartService.addtoCart(item, item.quantity);
+   console.log(item.product.productId);
+   this.cartService.addtoCart(item.product, 1).subscribe(data=> {
+    window.location.reload();
+   });
   }
   decreaseQuantity(item: any) {
-    if(item.quantity>0){
-      item.quantity--;
-    }
     console.log(item);
-    this.cartService.addtoCart(item, item.quantity);
+    if(item.quantity >1){
+    this.cartService.addtoCart(item.product, -1).subscribe(data=> {
+      window.location.reload();
+   });
+  }
   }
 
   removeItem(item: any){    
