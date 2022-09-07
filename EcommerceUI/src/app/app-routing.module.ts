@@ -18,6 +18,8 @@ import { SelfUpdateComponent } from './self-update/self-update.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
+import { AddProductComponent } from './add-product/add-product.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -32,6 +34,7 @@ const routes: Routes = [
   {path: 'login/callback', component: OktaCallbackComponent},
   {path:'product-details/:id', component: ProductDetailsComponent},
   {path: 'inventory', component: InventoryComponent},
+  {path:'inventory/add', component:AddProductComponent},
   {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'self-update/:userid', component: SelfUpdateComponent},
   {path: 'about', component: AboutUsComponent},

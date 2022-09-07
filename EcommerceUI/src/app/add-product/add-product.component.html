@@ -1,0 +1,17 @@
+<div>
+    <h1>Add Products</h1>
+    <form>
+        <label for="productName">Product Name : </label>
+        <input type="text" id="productName" name="productName" [(ngModel)]="product.productName"><br><br>
+        <label for="fname">Product Price : </label>
+        <input type="text" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice"><br><br>
+        <label for="lname">Product Image : </label>
+        <input type="text" id="productImage" name="productImage" [(ngModel)]="product.productImage"><br><br>
+        <label for="email">Product Description : </label>
+        <input type="text" id="productDescription" name="productDescription" [(ngModel)]="product.productDescription"><br><br>
+        <label for="password">Product Stock: </label>
+        <input type="text" id="productStock" name="productStock" [(ngModel)]="product.productStock"><br><br>
+        <button (click)="addProduct(product)">Add Product</button>
+      </form>
+      <a href="./inventory" type="button">Go Back</a>
+</div>
