@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
+import com.hcl.capstone.model.Order;
 import com.hcl.capstone.service.ProductService;
 import com.hcl.capstone.service.UserService;
+import com.hcl.capstone.service.OrderService;
+
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
@@ -30,6 +33,10 @@ public class AdminController {
 	
 	@Autowired
 	private ProductService productsService;
+	
+	//
+	@Autowired
+	private OrderService orderService;
 
 	@DeleteMapping("/admin/delete-user/{id}")
 	public void deleteUserById(@PathVariable(value = "id") long id) {
@@ -44,6 +51,12 @@ public class AdminController {
 	@GetMapping("/admin/products")
 	public List<Product> getAllProducts() {
 		return productsService.getAllProducts();
+	}
+	
+	//
+	@GetMapping("/admin/orders")
+	public List<Order> getAllOrders(){
+		return orderService.getAllOrders();
 	}
 	
 	@PostMapping("/admin/add-product")
