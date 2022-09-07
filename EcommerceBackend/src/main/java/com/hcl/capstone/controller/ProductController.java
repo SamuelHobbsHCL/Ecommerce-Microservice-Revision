@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.model.Product;
@@ -18,18 +19,26 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 public class ProductController {
 
 	@Autowired
-	private ProductService productsService;
+	private ProductService productService;
 	
 	@GetMapping("/api/products")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Product> getAllProducts(){
-		return productsService.getAllProducts();
+		return productService.getAllProducts();
 	}
 	
 	@GetMapping("/api/product/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Product getProductById(@PathVariable(value = "id") long id){
-		return productsService.getProductById(id);
+		return productService.getProductById(id);
+	}
+	
+	@GetMapping("/api/product/search")
+	@CrossOrigin("http://localhost:4200")
+	public List<Product> searchProducts(@RequestParam String searchStr, 
+			@RequestParam int index, @RequestParam int count) {
+		// Returns top <count> results starting from <index>
+		return productService.searchProducts(searchStr, index, count);
 	}
 	
 }
