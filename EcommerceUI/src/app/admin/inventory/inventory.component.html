@@ -34,8 +34,7 @@
                         <td><img src="{{product.productImage}}" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
-                            <a (click)="deleteProduct(product.productId)" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -55,6 +54,7 @@
         </div>
     </div>
     <button type="button" class="btn btn-light" (click)="navigateToUsers()">User Management</button>
+    <button type="button" class="btn btn-light" (click)="navigateToTest()">Test</button>
     <br/>
     <br/>
 </div>

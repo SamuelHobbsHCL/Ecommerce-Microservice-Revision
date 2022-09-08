@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   public productList : any;
   isLoaded:boolean=false;
   searchKey:string ="";
+  
   constructor(private api : ApiService, private cartService : CartService, private _router : Router) { }
   ngOnInit(): void {
     this.api.getProduct()
