@@ -24,4 +24,10 @@ export class InventoryComponent implements OnInit {
     });
   }
 
+  public deleteProduct(productId : any) {
+    console.log(productId);
+    this.adminService.deleteProduct(parseInt(productId)).subscribe(data => {
+      window.location.reload();
+    });
+  }
 }

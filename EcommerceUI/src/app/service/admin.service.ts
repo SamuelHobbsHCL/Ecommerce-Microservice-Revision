@@ -33,4 +33,9 @@ export class AdminService {
     return this.http.post<any>("http://localhost:8080/inventory/add", product, {
     });
   }
+  
+  public deleteProduct(productId : any) {
+    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
+  }
+
 }
