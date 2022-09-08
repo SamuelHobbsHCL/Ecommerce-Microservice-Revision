@@ -15,6 +15,12 @@ export class InventoryComponent implements OnInit {
   navigateToUsers() {
     this._router.navigate(['admin']);
   }
+  navigateToTest() {
+    this._router.navigate(['test'])
+  }
+  navigateToUpdateProduct() {
+    this._router.navigate(['/updateproduct'])
+  }
 
   ngOnInit(): void {
     this.adminService.getAllProducts()
