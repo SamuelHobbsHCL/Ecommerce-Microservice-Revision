@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -13,17 +13,31 @@ import { Product } from '../common/product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  
-  public productList : any;
-  isLoaded:boolean=false;
-  searchKey:string ="";
-  constructor(private api : ApiService, private cartService : CartService, private _router : Router) { }
-  ngOnInit(): void {
-    this.api.getProduct()
-    .subscribe(res=>{
-      this.productList = res;
-      //console.log(this.productList)
+  public productList : Product[];
+  isLoaded: boolean=false;
+  searchStr: string = "";
+
+  constructor(protected api : ApiService, private cartService : CartService, private _router : Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.searchStr = params['search'];
     });
+    console.log(this.searchStr);
+  }
+  
+  ngOnInit(): void {
+    // If searchStr is not present, search all products; else, search matching products
+    if (this.searchStr ==  undefined) {
+      this.api.getProduct()
+      .subscribe(res=>{
+        this.productList = res;
+      });
+    } else {
+      // TODO Placeholder params for testing
+      this.api.getSearchResult(this.searchStr,"0","10")
+        .subscribe(res => {
+          this.productList = res;
+        });
+    }
   }
 
   selectedProduct: any;
@@ -46,7 +60,6 @@ export class ProductsComponent implements OnInit {
     return this.selectedProduct;
   }
 
-
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
       //console.log(data);
@@ -57,9 +70,14 @@ export class ProductsComponent implements OnInit {
       ).then(function(){
         window.location.reload();
       })
-    });
-
-   
+    });   
   }
 
+  search(searchStr: string){
+    console.log(searchStr);
+    this._router.navigate(['/products'], { queryParams: { search: searchStr } });
+    //this._router.navigate(['/products'], { queryParams: { search: searchStr } ,  queryParamsHandling: 'preserve' })
+    //this.searchStr = searchStr;
+    //window.location.reload();
+  }
 }

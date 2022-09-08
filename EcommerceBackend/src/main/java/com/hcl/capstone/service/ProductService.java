@@ -47,9 +47,6 @@ public class ProductService {
 	}
 	
 	public List<Product> searchProducts(String searchStr, int index, int count) {
-		// Page number must be valid index, size a positive number
-		if (index < 0 || count <= 0)
-			return null;
 		Pageable pageable = PageRequest.of(index, count);
 		// Returns top <count> results starting from <index>
 		return productRepository.findAllByProductNameContaining(searchStr,pageable);
