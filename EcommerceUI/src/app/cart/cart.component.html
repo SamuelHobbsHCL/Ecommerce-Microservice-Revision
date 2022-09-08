@@ -1,6 +1,6 @@
 <ng-container *ngIf="orderItems.length !=0">
-    <section style="background-color: #f2f2f2;" class="view">
-        <div class="container py-5 ">
+    <div style="background-color: #f2f2f2;">
+        <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -18,26 +18,30 @@
                                             <div class="col-md-2 col-lg-2 col-xl-2">
                                                 <img src="{{item.product.productImage}}" class="img-fluid rounded-3">
                                             </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <div class="col-md-3 col-lg-2 col-xl-2">
                                                 <!-- <h6 class="text-muted">Categories</h6> -->
                                                 <h6 class="text-black mb-0">{{item.product.productName}}</h6>
                                             </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <button class="btn btn-link px-2" (click)="decreaseQuantity(item)">
-                          <i class="fas fa-minus"></i>
-                        </button>
+                                            <div class="col-md-3 col-lg-2 ">
 
-                                                <input value="{{item.quantity}}" type="text" class="form-control form-control-sm" readonly/>
+                                                <h6 class="text-black mb-0">${{item.product.unitPrice}}</h6>
+                                            </div>
+                                            <div class="col-md-3 col-lg-2 col-xl-2 d-flex">
+                                                <a class="btn btn-link" (click)="decreaseQuantity(item)">
+                                                    <i class="fas fa-minus"></i>
+                                                </a>
 
-                                                <button class="btn btn-link px-2" (click)="increaseQuantity(item)">
-                          <i class="fas fa-plus"></i>
-                        </button>
+                                                <div style="padding: 5px">{{item.quantity}}</div>
+
+                                                <a class="btn btn-link" (click)="increaseQuantity(item)">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
                                             </div>
                                             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                                 <h6 class="mb-0">${{item.quantity * item.product.unitPrice | number: '1.2-2'}}</h6>
                                             </div>
                                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                <a (click)="removeItem(item.id)" class="text-muted delete-button"><i class="fas fa-times"></i></a>
+                                                <a (click)="removeItem(item.id)" class="text-muted delete-button btn"><i class="fas fa-times"></i></a>
                                             </div>
                                             <hr class="my-4">
                                         </div>
@@ -83,7 +87,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </ng-container>
 
 <ng-container *ngIf="orderItems.length == 0">
