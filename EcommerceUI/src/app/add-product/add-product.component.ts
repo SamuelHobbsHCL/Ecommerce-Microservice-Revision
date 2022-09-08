@@ -21,6 +21,7 @@ export class AddProductComponent implements OnInit {
   addProduct(product : Product){
     this._service.addProduct(this.product).subscribe(
       data => {
+        console.log(product);
         console.log("Response received!");
        
         Swal.fire(

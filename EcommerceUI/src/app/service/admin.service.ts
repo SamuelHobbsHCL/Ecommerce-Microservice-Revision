@@ -30,7 +30,7 @@ export class AdminService {
   }
 
   public addProduct(product: Product) : Observable<any> {
-    return this.http.post<any>("http://localhost:8080/inventory/add", product, {
+    return this.http.post<any>(this.PATH_OF_API + "/inventory/add/", product, {
     });
   }
   
@@ -38,7 +38,7 @@ export class AdminService {
     return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
   }
 
-  public updateProduct(productId: any) {
-    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
+  public updateProduct(product : any) {
+    return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
   }
 }

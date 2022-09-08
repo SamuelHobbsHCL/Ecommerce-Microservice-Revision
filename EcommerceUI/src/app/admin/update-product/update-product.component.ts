@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdminService } from 'src/app/service/admin.service';
 import { ApiService } from 'src/app/service/api.service';
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../../common/product';
 import Swal from 'sweetalert2';
-import { Product } from '../../common/product'
-
+import { AdminService } from '../../service/admin.service';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -27,7 +26,7 @@ export class UpdateProductComponent implements OnInit {
       this.curProduct = this.apiService.getProductById(this.id);
     });
     this.apiService.getProductById(this.id).subscribe((data) => {
-      this.curProduct = data;
+    this.curProduct = data;
     this.product.productId = this.curProduct.productId;
     this.product.productName = this.curProduct.productName;
     this.product.unitPrice = this.curProduct.unitPrice;
