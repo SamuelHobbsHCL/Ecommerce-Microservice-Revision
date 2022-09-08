@@ -35,6 +35,9 @@ app:
       - http://localhost:4200/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
-
+      
+stripe:
+   key:
+    secret: sk_test_51LfG2CDyv2YM2ORIjtiJkJGmGipL1DTVTfO9GKNq5uK4spVAuhRkLXCeRMg37JJZnb1bttWSajTgISZaKjQU8uGP00RHhtfS0s
 
   

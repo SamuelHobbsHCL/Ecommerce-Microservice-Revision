@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UpdateService } from '../service/self-update.service';
+import { UserService } from '../service/user.service';
 import { User } from '../user';
 
 @Component({
@@ -9,21 +10,18 @@ import { User } from '../user';
   styleUrls: ['./self-update.component.css']
 })
 export class SelfUpdateComponent implements OnInit {
-  api: any;
 
-  constructor(private service:UpdateService) { }
+  constructor(private service:UpdateService, private userService:UserService) { }
 
   user = new User();
   response : any;
   msg = '';
 
-  public userList:any;
-
   ngOnInit(): void {
-    this.api.getCurrentUser()
+    this.userService.getCurrentUser()
     .subscribe((res: any)=>{
-      this.userList = res;
-      //console.log(this.productList)
+      this.user = res;
+      console.log(this.user);
     });
   }
 

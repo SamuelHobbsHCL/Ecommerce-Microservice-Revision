@@ -48,6 +48,6 @@ export class UserService {
   }
    
   public getCurrentUser() : Observable<any> {
-    return this.httpClient.get<any>(this.PATH_OF_API + "/user/");
+    return this.httpClient.get<any>(this.PATH_OF_API + "/user/getCurrentUser");
   }
 }

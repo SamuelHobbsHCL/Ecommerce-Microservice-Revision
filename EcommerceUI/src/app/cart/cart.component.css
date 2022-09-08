@@ -1,48 +1,90 @@
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 130vh !important;
+    }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.bg-grey {
+    background: -webkit-linear-gradient(#3ed1dc, #5b86e5);
+    ;
+}
+
+@media (min-width: 992px) {
+    .card-registration-2 .bg-grey {
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    .card-registration-2 .bg-grey {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+.delete-button {
+    cursor: pointer;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+body {
+    background-color: #eee;
+    font-family: 'Calibri', sans-serif !important;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
 .card {
-    height: 60vh;
-    margin: 25px;
-    padding: 25px;
+    margin-bottom: 30px;
+    border: 0;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    letter-spacing: .5px;
+    border-radius: 8px;
+    -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+    box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
 }
 
-.center img {
-    text-decoration: none;
-    color: inherit;
-    border: none;
-    outline: none;
-    height: 162px;
-    width: 250px;
-    margin: 20px 0px;
-}
-
-h4,
-h6 {
-    font-weight: 400;
-}
-
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.card-table {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: none;
-    word-wrap: break-word;
+.card .card-header {
     background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: .25rem;
+    border-bottom: none;
+    padding: 24px;
+    border-bottom: 1px solid #f6f7fb;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
-.center .btn {
-    font-size: 14px !important;
-    margin-top: 20px !important;
-    font-weight: 400;
-    padding: 12px 72px;
-    border-radius: 3px !important;
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+.card .card-body {
+    padding: 30px;
+    background-color: transparent;
+}
+
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
+    background-color: #4466f2!important;
+    border-color: #4466f2!important;
+}
+
+.view {
+    height: 60vh !important;
+    padding: 50px;
 }

@@ -30,6 +30,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -57,7 +58,8 @@ const oktaAuth = new OktaAuth({
     FooterComponent,
     ProductDetailsComponent,
     UserUpdateComponent,
-    SelfUpdateComponent
+    SelfUpdateComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
