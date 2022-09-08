@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { Product } from '../common/product';
-import { AddProductService } from '../service/add-product.service'
 import Swal from 'sweetalert2';
 import { AdminService } from '../service/admin.service';
 
