@@ -11,6 +11,8 @@
         <input type="text" id="productStock" name="productStock" [(ngModel)]="product.productStock"><br><br>
         <label for="productImage">Product Image: </label>
         <input type="text" id="productImage" name="productImage" [(ngModel)]="product.productImage"><br><br>
+        <label for="productDescription">Product Description: </label>
+        <input type="text" id="productDescription" name="productDescription" [(ngModel)]="product.productDescription"><br><br>
         <button (click) = "updateProduct(product)" class="btn btn-primary" type="submit">Update</button>
       </form>
       <button type = "button" class = "btn btn-light" style = "float: right;" (click) = "navigateToInventory()">Product Management</button>
