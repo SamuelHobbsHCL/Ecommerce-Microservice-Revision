@@ -34,7 +34,7 @@
                         <td><img src="{{product.productImage}}" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <a href="navigateToUpdateProduct()" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
+                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
 
                         </td>
                     </tr>
@@ -56,7 +56,6 @@
     </div>
     <button type="button" class="btn btn-light" (click)="navigateToUsers()">User Management</button>
     <button type="button" class="btn btn-light" (click)="navigateToTest()">Test</button>
-    <button type="button" class="btn btn-light" (click)="navigateToUpdateProduct()"></button>
     <br/>
     <br/>
 </div>

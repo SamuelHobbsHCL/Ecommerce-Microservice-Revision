@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { ApiService } from 'src/app/service/api.service';
+import { Product } from '../../common/product'
 
 @Component({
   selector: 'app-update-product',
@@ -12,7 +13,9 @@ export class UpdateProductComponent implements OnInit {
 
   id: string;
   private sub: any;
-  product: any = [];
+  curProduct: any;
+
+  product = new Product();
 
 
   constructor(private adminService : AdminService, private route: ActivatedRoute, private _router : Router, private apiService : ApiService) { }
@@ -20,18 +23,25 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; 
-      this.product = this.apiService.getProductById(this.id);
+      this.curProduct = this.apiService.getProductById(this.id);
     });
     this.apiService.getProductById(this.id).subscribe((data) => {
-      this.product = data;
+      this.curProduct = data;
+    this.product.productId = this.curProduct.productId;
+    this.product.productName = this.curProduct.productName;
+    this.product.unitPrice = this.curProduct.unitPrice;
+    this.product.productDescription = this.curProduct.productDescription;
+    this.product.productImage = this.curProduct.productImage;
+    this.product.productStock = this.curProduct.productStock;
 
     }, (error: any) => {
       console.log("Unable to find product");
     }
     
     );
-    //console.log(this.selectedProduct);
-    return this.product;
+    
+    console.log(this.curProduct);
+    return this.curProduct;
   }
 
   navigateToInventory() {

@@ -18,6 +18,7 @@ import { SelfUpdateComponent } from './self-update/self-update.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
+import { UpdateProductComponent } from './admin/update-product/update-product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -35,7 +36,9 @@ const routes: Routes = [
   {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'self-update/:userid', component: SelfUpdateComponent},
   {path: 'about', component: AboutUsComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'updateproduct/:id', component: UpdateProductComponent}
+  
 ];
 
 @NgModule({

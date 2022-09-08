@@ -18,8 +18,8 @@ export class InventoryComponent implements OnInit {
   navigateToTest() {
     this._router.navigate(['test'])
   }
-  navigateToUpdateProduct() {
-    this._router.navigate(['/updateproduct'])
+  navigateToUpdateProduct(product : any) {
+    this._router.navigate(['/updateproduct', product.productId])
   }
 
   ngOnInit(): void {
