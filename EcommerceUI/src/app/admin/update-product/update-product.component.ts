@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { ApiService } from 'src/app/service/api.service';
+import Swal from 'sweetalert2';
 import { Product } from '../../common/product'
 
 @Component({
@@ -52,9 +53,14 @@ export class UpdateProductComponent implements OnInit {
     this._router.navigate(['/updateproduct'])
   }
 
-  public updateProduct(productId:any) {
-    console.log(productId);
-    this.adminService.updateProduct(parseInt(productId)).subscribe(data => {
+  public updateProduct(product:any) {
+    console.log(product);
+    this.adminService.updateProduct(product).subscribe(data => {
+      Swal.fire(
+        'Success',
+        'Product has been updated',
+        'success'
+      )
       window.location.reload();
     })
   }
