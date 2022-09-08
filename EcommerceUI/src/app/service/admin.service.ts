@@ -26,12 +26,4 @@ export class AdminService {
   public deleteUser(id : any) {
     return this.http.delete(this.PATH_OF_API + "/admin/delete-user/" + id);
   }
-
-  public deleteProduct(productId : any) {
-    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
-  }
-
-  public updateProduct(productId: any) {
-    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
-  }
 }
