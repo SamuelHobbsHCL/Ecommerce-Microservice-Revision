@@ -4,6 +4,7 @@ import { Product } from '../common/product';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +17,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   product: any = [];
 
 
-  constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService) { }
+  constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -33,6 +34,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     );
     //console.log(this.selectedProduct);
     return this.product;
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 
