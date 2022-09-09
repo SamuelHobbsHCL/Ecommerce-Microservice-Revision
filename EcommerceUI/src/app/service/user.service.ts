@@ -8,7 +8,7 @@ import { UserAuthService } from './user-auth.service';
 })
 export class UserService {
 
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = 'http://localhost:8081';
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
