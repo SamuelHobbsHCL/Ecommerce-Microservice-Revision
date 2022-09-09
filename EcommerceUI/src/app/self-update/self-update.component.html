@@ -1,6 +1,6 @@
 <div>
   <h1>Hello {{user.firstName}} {{user.lastName}}</h1>
-  <h1>Account Management for User {{user.userId}}</h1>
+  <h1>Account Management for User {{user.userid}}</h1>
     <form>
       <label for="uname">Username : </label>
       <input type="text" id="uname" name="uname" [(ngModel)]="user.userName"><br><br>
@@ -12,6 +12,6 @@
       <input type="text" id="email" name="email" [(ngModel)]="user.email"><br><br>
       <label for="password">Password : </label>
       <input type="text" id="password" name="password" [(ngModel)]="user.password"><br><br>
-      <button (click)="userSelfUpdate(user.userId,user)">Update</button>
+      <button (click)="userSelfUpdate(user.userid,user)">Update</button>
     </form>
 </div>
