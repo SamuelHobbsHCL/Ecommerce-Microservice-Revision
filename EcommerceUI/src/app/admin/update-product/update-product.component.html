@@ -1,0 +1,19 @@
+<div>
+    <h1>Update Product</h1>
+    <form>
+        <label for="productId">Product ID: </label>
+        <input type="text" id="productId" name="productId" [(ngModel)]="product.productId"><br><br>
+        <label for="productName">Product Name: </label>
+        <input type="text" id="productName" name="productName" [(ngModel)]="product.productName"><br><br>
+        <label for="unitPrice">Unit Price: </label>
+        <input type="text" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice"><br><br>
+        <label for="productStock">Product Stock: </label>
+        <input type="text" id="productStock" name="productStock" [(ngModel)]="product.productStock"><br><br>
+        <label for="productImage">Product Image: </label>
+        <input type="text" id="productImage" name="productImage" [(ngModel)]="product.productImage"><br><br>
+        <label for="productDescription">Product Description: </label>
+        <input type="text" id="productDescription" name="productDescription" [(ngModel)]="product.productDescription"><br><br>
+        <button (click) = "updateProduct(product)" class="btn btn-primary" type="submit">Update</button>
+      </form>
+      <button type = "button" class = "btn btn-light" style = "float: right;" (click) = "navigateToInventory()">Product Management</button>
+</div>

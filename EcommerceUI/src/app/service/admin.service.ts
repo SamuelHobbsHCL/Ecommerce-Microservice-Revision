@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Product } from '../common/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +27,18 @@ export class AdminService {
 
   public deleteUser(id : any) {
     return this.http.delete(this.PATH_OF_API + "/admin/delete-user/" + id);
+  }
+
+  public addProduct(product: Product) : Observable<any> {
+    return this.http.post<any>(this.PATH_OF_API + "/inventory/add/", product, {
+    });
+  }
+  
+  public deleteProduct(productId : any) {
+    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
+  }
+
+  public updateProduct(product : any) {
+    return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
   }
 }

@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-xs-7">
 
-                        <a href="#" class="btn btn-primary" style="float: right;"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                        <a routerLink="./add" class="btn btn-primary" style="float: right;"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
 
                     </div>
                 </div>
@@ -34,8 +34,8 @@
                         <td><img src="{{product.productImage}}" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
-
+                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
+                            <a type="button" (click)="deleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
                 </tbody>

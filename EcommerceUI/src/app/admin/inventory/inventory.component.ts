@@ -15,6 +15,12 @@ export class InventoryComponent implements OnInit {
   navigateToUsers() {
     this._router.navigate(['admin']);
   }
+  navigateToTest() {
+    this._router.navigate(['test'])
+  }
+  navigateToUpdateProduct(product : any) {
+    this._router.navigate(['/updateproduct', product.productId])
+  }
 
   ngOnInit(): void {
     this.adminService.getAllProducts()
@@ -24,4 +30,10 @@ export class InventoryComponent implements OnInit {
     });
   }
 
+  public deleteProduct(productId : any) {
+    console.log(productId);
+    this.adminService.deleteProduct(parseInt(productId)).subscribe(data => {
+      window.location.reload();
+    });
+  }
 }
