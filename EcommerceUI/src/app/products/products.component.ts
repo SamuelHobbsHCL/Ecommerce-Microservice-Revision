@@ -17,14 +17,13 @@ export class ProductsComponent implements OnInit {
   isLoaded: boolean=false;
   searchStr: string = "";
 
-  constructor(protected api : ApiService, private cartService : CartService, private _router : Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.searchStr = params['search'];
-    });
-    console.log(this.searchStr);
-  }
+  constructor(protected api : ApiService, private cartService : CartService, private _router : Router) { }
   
   ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts(): void {
     // If searchStr is not present, search all products; else, search matching products
     if (this.searchStr ==  undefined) {
       this.api.getProduct()
@@ -32,12 +31,12 @@ export class ProductsComponent implements OnInit {
         this.productList = res;
       });
     } else {
-      // TODO Placeholder params for testing
+      // TODO add pagination
       this.api.getSearchResult(this.searchStr,"0","10")
         .subscribe(res => {
           this.productList = res;
         });
-    }
+    }    
   }
 
   selectedProduct: any;
@@ -74,10 +73,7 @@ export class ProductsComponent implements OnInit {
   }
 
   search(searchStr: string){
-    console.log(searchStr);
-    this._router.navigate(['/products'], { queryParams: { search: searchStr } });
-    //this._router.navigate(['/products'], { queryParams: { search: searchStr } ,  queryParamsHandling: 'preserve' })
-    //this.searchStr = searchStr;
-    //window.location.reload();
+    this.searchStr = searchStr;
+    this.getProducts();
   }
 }
