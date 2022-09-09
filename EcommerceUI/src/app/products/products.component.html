@@ -1,10 +1,18 @@
 <div class="container">
+    <div class="searchbar">
+        <form (ngSubmit)="search(searchStr.value)">
+            <input id="searchStr" #searchStr name="searchStr" type="text" placeholder="Search...">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
     <div class="row">
         <ng-container *ngFor="let item of productList">
             <div (click)="onSelect(item)" class="card col-md-3">
                 <img src="{{item.productImage}}" alt="">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.productName}}</h5>
-                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.productDescription}}</p>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
+                    {{item.productName}}</h5>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
+                    {{item.productDescription}}</p>
 
                 <p><strong>Price:</strong> ${{item.unitPrice}}</p>
 
