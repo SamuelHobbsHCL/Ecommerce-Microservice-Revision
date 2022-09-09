@@ -39,9 +39,9 @@ const routes: Routes = [
   {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'updateproduct/:id', component: UpdateProductComponent}
+  {path: 'updateproduct/:id', component: UpdateProductComponent},
   {path: 'self-update', component: SelfUpdateComponent},
-  {path: 'check-out', component: CheckoutComponent},
+  {path: 'check-out', component: CheckoutComponent}
 ];
 
 @NgModule({
