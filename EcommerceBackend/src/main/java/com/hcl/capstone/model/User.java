@@ -22,8 +22,7 @@ import com.hcl.capstone.model.enumeration.AuthProvider;
 @Entity
 @Table(name = "USERS")
 public class User {
-	public User(){}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "USER_ID")
@@ -55,10 +54,15 @@ public class User {
 		inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Roles> roles;
 	
+	@Column(name="ADDRESS_ID")
+	private long addressId;
+	
 	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;
+	
+	public User(){}
 	
 	public User(String userName, String password, String firstName, String lastName, String email) {
 		this.userName = userName;
@@ -66,6 +70,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		
 	}
 	
 	public long getUserId() {
@@ -131,5 +136,14 @@ public class User {
 	public void setAuthProvider(AuthProvider authProvider) {
 		this.authProvider = authProvider;
 	}
+
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
+
 
 }

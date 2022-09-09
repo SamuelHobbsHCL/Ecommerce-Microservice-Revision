@@ -73,21 +73,19 @@ public class AuthControllerTest {
     }
 
     // Getting token from logging in
-    @Test
-    @Order(2)
-    public void authenticateUser() throws Exception {
-    	LoginRequest loginRequest = new LoginRequest("sam@email.com","password");
-    	AuthResponse authResponse = new AuthResponse(user,"SAMPLE_TOKEN");
-    	when(tokenProvider.createToken(loginRequest)).thenReturn(authResponse);    	
-
-        mockMvc.perform(post("/auth/login")
-                .content(jsonString(loginRequest))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-        		.andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.user",Matchers.equalTo(user)))    // TODO match user just created
-                .andExpect(jsonPath("$.jwtToken",Matchers.equalTo("SAMPLE_TOKEN")))
-                .andReturn();
-    }
+	/*
+	 * @Test
+	 * 
+	 * @Order(2) public void authenticateUser() throws Exception { LoginRequest
+	 * loginRequest = new LoginRequest("sam@email.com","password"); AuthResponse
+	 * authResponse = new AuthResponse(user,"SAMPLE_TOKEN");
+	 * when(tokenProvider.createToken(loginRequest)).thenReturn(authResponse);
+	 * 
+	 * mockMvc.perform(post("/auth/login") .content(jsonString(loginRequest))
+	 * .contentType(MediaType.APPLICATION_JSON) .accept(MediaType.APPLICATION_JSON))
+	 * .andDo(print()) .andExpect(status().isOk())
+	 * .andExpect(jsonPath("$.user",Matchers.equalTo(user))) // TODO match user just
+	 * created .andExpect(jsonPath("$.jwtToken",Matchers.equalTo("SAMPLE_TOKEN")))
+	 * .andReturn(); }
+	 */
 }

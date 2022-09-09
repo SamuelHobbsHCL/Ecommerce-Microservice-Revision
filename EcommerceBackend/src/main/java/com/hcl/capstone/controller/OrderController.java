@@ -152,8 +152,13 @@ public class OrderController {
 	}
 
 	@DeleteMapping(value = "/user/delete-order-item/{id}")
-	public void deleteOrderItemById(@PathVariable("id") long id) {
+	public void deleteOrderItemById(@PathVariable("id") long id, Authentication authentication) {
 		orderService.deleteOrderItemById(id);
+		Order order = orderService.getOrderInProgress(authentication);
+		User user = userService.getCurrentLoggedInUser(authentication);
+		double orderTotal = orderService.getOrderTotal(user, order);
+		order.setOrderTotal(orderTotal);
+		orderService.updateOrder(order);
 	}
 
 }

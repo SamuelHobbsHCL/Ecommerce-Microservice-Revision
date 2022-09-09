@@ -30,6 +30,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -65,10 +66,9 @@ const oktaAuth = new OktaAuth({
     SelfUpdateComponent,
     AboutUsComponent,
     ContactComponent,
-    SelfUpdateComponent,
     AddProductComponent,
-    UpdateProductComponent
-    
+    UpdateProductComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

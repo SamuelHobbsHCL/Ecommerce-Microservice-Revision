@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -36,11 +37,11 @@ const routes: Routes = [
   {path: 'inventory', component: InventoryComponent},
   {path: 'inventory/add', component:AddProductComponent},
   {path: 'update/:userid', component: UserUpdateComponent},
-  {path: 'self-update/:userid', component: SelfUpdateComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'updateproduct/:id', component: UpdateProductComponent}
-  
+  {path: 'self-update', component: SelfUpdateComponent},
+  {path: 'check-out', component: CheckoutComponent},
 ];
 
 @NgModule({

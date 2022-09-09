@@ -65,7 +65,9 @@ export class CartComponent implements OnInit {
     console.log("clicked remove item");
     this.cartService.deleteOrderItemById(item).subscribe(data => {
       console.log(data);
+      console.log(this.order);
       window.location.reload();
+
     });
   }
   emptycart(){
