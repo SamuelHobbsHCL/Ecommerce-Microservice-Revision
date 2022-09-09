@@ -31,6 +31,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderListComponent } from './admin/order-list/order-list/order-list.component';
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -59,7 +60,8 @@ const oktaAuth = new OktaAuth({
     ProductDetailsComponent,
     UserUpdateComponent,
     SelfUpdateComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

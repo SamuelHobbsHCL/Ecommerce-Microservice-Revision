@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/service/admin.service';
 
-
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrderListComponent implements OnInit {
+
   public orderList:any;
 
   constructor(private adminService : AdminService) { }
@@ -19,5 +19,4 @@ export class OrdersComponent implements OnInit {
       console.log(this.orderList);
     });
   }
-
 }
