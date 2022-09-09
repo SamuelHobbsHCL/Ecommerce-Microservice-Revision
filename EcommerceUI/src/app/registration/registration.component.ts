@@ -12,6 +12,7 @@ import { User } from '../user';
 export class RegistrationComponent implements OnInit {
 
   user = new User();
+  msg='';
 
   constructor(private _service : RegistrationService, private _router: Router) { }
 
@@ -40,6 +41,8 @@ export class RegistrationComponent implements OnInit {
         ).then(() =>{
         
         })
+        this.msg="Registration successful!";
+        this._router.navigate(['/login']);
       }
     )
 

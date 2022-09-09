@@ -36,6 +36,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
 
+
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',

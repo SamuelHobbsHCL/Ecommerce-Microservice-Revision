@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
   { path: 'home-page', component: HomePageComponent},
@@ -41,7 +42,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'updateproduct/:id', component: UpdateProductComponent},
   {path: 'self-update', component: SelfUpdateComponent},
-  {path: 'check-out', component: CheckoutComponent}
+  {path: 'check-out', component: CheckoutComponent},
 ];
 
 @NgModule({
