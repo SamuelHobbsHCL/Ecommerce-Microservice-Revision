@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
 
-  PATH_OF_API = 'http://localhost:8081';
+  PATH_OF_API = 'http://localhost:8080';
 
   requestHeader = new HttpHeaders(
     { "No-Auth" : "True"}

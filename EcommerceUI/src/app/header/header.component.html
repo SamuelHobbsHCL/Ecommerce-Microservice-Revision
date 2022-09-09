@@ -47,18 +47,18 @@
                 <div style="font-size: 10px;" class="badge bg-danger">{{totalItem}}</div>
             </a>
             <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-circle-user"></i> </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <ng-container *ngIf="!isLoggedIn()">
-                  <li><a class="dropdown-item" href="/login">Sign in</a></li>
-                  </ng-container>
-                  <ng-container *ngIf="isLoggedIn()">
-                  <li><a class="dropdown-item" href="/login">Sign out</a></li>
-                  </ng-container>
-              </ul>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-circle-user"></i> </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <ng-container *ngIf="!isLoggedIn()">
+                    <li><a class="dropdown-item" href="/login">Sign in</a></li>
+                    </ng-container>
+                    <ng-container *ngIf="isLoggedIn()">
+                    <li><a class="dropdown-item" href="/login">Sign out</a></li>
+                    </ng-container>
+                </ul>
             </div>
         </div>
         <!-- Right elements -->

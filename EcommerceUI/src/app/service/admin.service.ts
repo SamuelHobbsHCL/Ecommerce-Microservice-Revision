@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 })
 export class AdminService {
 
-  PATH_OF_API = 'http://localhost:8081';
+  PATH_OF_API = 'http://localhost:8080';
 
   constructor(private http : HttpClient) { }
 
