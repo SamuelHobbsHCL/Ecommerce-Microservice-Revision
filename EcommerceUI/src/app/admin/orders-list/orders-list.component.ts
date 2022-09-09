@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-orders-list',
+  templateUrl: './orders-list.component.html',
+  styleUrls: ['./orders-list.component.css']
 })
-export class OrderListComponent implements OnInit {
+export class OrdersListComponent implements OnInit {
 
   public orderList:any;
 
-  constructor(private adminService : AdminService) { }
+  constructor(private adminService : AdminService, private _router: Router) { }
 
   ngOnInit(): void {
     this.adminService.getAllOrders()
