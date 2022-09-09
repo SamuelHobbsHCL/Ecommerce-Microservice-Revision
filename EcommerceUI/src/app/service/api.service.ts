@@ -18,7 +18,7 @@ export class ApiService {
   constructor(private http : HttpClient) { }
 
   getProduct(){
-    return this.http.get<any>("http://localhost:8080/api/products")
+    return this.http.get<any>("http://localhost:8081/api/products")
     .pipe(map((res:any)=>{
       return res;
     }))

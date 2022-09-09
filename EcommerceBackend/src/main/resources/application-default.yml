@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ecommerce
     username: root
-    password: Alicenguyen!
+    password: Amethyst2017!
     driver-class-name: com.mysql.cj.jdbc.Driver
   main:
     allow-bean-definition-overriding: true
@@ -20,6 +20,7 @@ okta:
     redirect-uri: /oauth2/callback/okta
          
 server:
+  port: 8081
   tomcat:
     relaxed-query-chars: '|,{,},[,]'
 
