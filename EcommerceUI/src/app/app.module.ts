@@ -35,6 +35,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 const oktaAuth = new OktaAuth({
@@ -69,7 +70,8 @@ const oktaAuth = new OktaAuth({
     ContactComponent,
     AddProductComponent,
     UpdateProductComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

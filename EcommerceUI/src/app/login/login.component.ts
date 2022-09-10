@@ -5,6 +5,7 @@ import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { AuthState, OktaAuth } from '@okta/okta-auth-js';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { UserAuthService } from '../service/user-auth.service';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
@@ -18,7 +19,9 @@ import { User } from '../user';
 
 export class LoginComponent implements OnInit {
 
-  AUTH_URL = "http://localhost:8080/oauth2/authorize/okta?redirect_uri=http://localhost:4200/oauth2/callback/okta";
+  PATH_OF_API = environment.apiUrl;
+
+  AUTH_URL = this.PATH_OF_API + "/oauth2/authorize/okta?redirect_uri=" + window.location.origin + "/oauth2/callback/okta";
 
   user = new User();
   response : any;
@@ -39,10 +42,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.checkAuthenticated();
     this.getUserDetails();
+    console.log(window.location.origin);
+    
   }
 
   public isLoggedIn() {
     return this.userAuthService.isLoggedIn();
+  }
+
+  public isDatabaseLoggedIn() {
+    if(this.userAuthService.getDatabaseLogin() === "true") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   checkAuthenticated() {
@@ -71,6 +84,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         this.userAuthService.setRoles(response.user.roles);
         this.userAuthService.setToken(response.jwtToken);
+        this.userAuthService.setDatabaseLogin("true");
 
         const role = response.user.roles[0].roleName;
         const roleList = response.user.roles;

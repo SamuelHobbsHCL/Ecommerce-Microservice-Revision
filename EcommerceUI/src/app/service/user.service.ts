@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { UserAuthService } from './user-auth.service';
 import {map} from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = environment.apiUrl;
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 

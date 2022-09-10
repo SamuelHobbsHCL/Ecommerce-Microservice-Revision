@@ -12,11 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.ArgumentMatchers;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,8 +24,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hcl.capstone.controller.AuthController;
 import com.hcl.capstone.model.User;
-import com.hcl.capstone.model.payload.AuthResponse;
-import com.hcl.capstone.model.payload.LoginRequest;
 import com.hcl.capstone.security.jwt.TokenProvider;
 import com.hcl.capstone.service.UserService;
 
@@ -51,7 +48,7 @@ public class AuthControllerTest {
     
     @BeforeAll
 	public void init() {
-    	user = new User("samhobbs","password","Sam","Hobbs","sam@email.com"); 
+    	user = new User("samhobbs","password","Sam","Hobbs","sam@email.com", 1); 
 		MockitoAnnotations.openMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
 	}

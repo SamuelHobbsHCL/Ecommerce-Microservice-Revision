@@ -35,4 +35,12 @@ export class UserAuthService {
     }
   }
 
+  public setDatabaseLogin(databaseLogin : string) {
+    localStorage.setItem('databaseLogin', databaseLogin);
+  }
+  
+  public getDatabaseLogin() : string {
+    return localStorage.getItem('databaseLogin') as string;
+  }
+
 }

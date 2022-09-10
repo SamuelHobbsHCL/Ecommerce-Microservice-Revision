@@ -9,7 +9,7 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class NewProductsComponent implements OnInit {
 
-  public productList : any;
+  public productList : any = {};
 
   constructor(private api : ApiService, private cartService : CartService) { }
 

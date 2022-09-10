@@ -52,7 +52,7 @@ export class AuthInterceptor implements HttpInterceptor {
     } 
     private addOktaToken(request: HttpRequest<unknown>, oktaToken: string): HttpRequest<unknown> {
         let req = request;
-        const allowedOrigins = ['http://localhost'];
+        const allowedOrigins = ['http://localhost', 'https://hcl-capstone-ecommerce-group1-backend.azurewebsites.net'];
         if (!!allowedOrigins.find(origin => request.url.includes(origin))) {
           req = request.clone({ setHeaders: { 'Authorization': `Bearer ${oktaToken}` } });
         }

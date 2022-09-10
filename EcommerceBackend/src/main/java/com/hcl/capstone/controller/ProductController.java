@@ -46,7 +46,7 @@ public class ProductController {
 	@PostMapping("/inventory/add")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Product addProduct(@RequestBody Product product){
-		return productsService.saveProduct(product);
+		return productService.saveProduct(product);
 	}
 	
 }

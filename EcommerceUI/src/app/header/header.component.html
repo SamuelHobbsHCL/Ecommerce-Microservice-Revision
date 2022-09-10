@@ -3,9 +3,7 @@
     <!-- Container wrapper -->
     <div class="container-fluid">
         <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
         <!-- Collapsible wrapper -->
@@ -50,17 +48,23 @@
                 <i class="fas fa-shopping-cart"></i>
                 <div style="font-size: 10px;" class="badge bg-danger">{{totalItem}}</div>
             </a>
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-circle-user"></i> </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">profile</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <ng-container *ngIf="!isLoggedIn()">
-                    <li><a class="dropdown-item" href="/login">Sign in</a></li>
+                    <i class="fa-solid fa-circle-user"></i> </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <ng-container *ngIf="!isLoggedIn()">
+                        <li><a class="dropdown-item" href="/login">Sign in</a></li>
                     </ng-container>
-                    <ng-container *ngIf="isLoggedIn()">
-                    <li><a class="dropdown-item" href="/login">Sign out</a></li>
+                    <ng-container *ngIf="isDatabaseLoggedIn()">
+                        <li><a class="dropdown-item" href="/login">Sign out</a></li>
+                    </ng-container>
+                    <!-- If log in with Okta -->
+                    <ng-container *ngIf="(isAuthenticated$  | async) === true">
+                        <li><a class="dropdown-item" href="/login">Sign out from Okta</a></li>
                     </ng-container>
                 </ul>
             </div>
