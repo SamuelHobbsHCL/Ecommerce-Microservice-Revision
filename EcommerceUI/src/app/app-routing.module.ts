@@ -17,6 +17,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrdersListComponent } from './admin/orders-list/orders-list.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -33,7 +35,8 @@ const routes: Routes = [
   {path: 'inventory', component: InventoryComponent},
   {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'self-update/:userid', component: SelfUpdateComponent},
-  {path: 'orders',component: OrdersComponent}
+  {path: 'orders',component: OrdersComponent},
+  {path: 'orders-list',component: OrdersListComponent}
 ];
 
 @NgModule({
