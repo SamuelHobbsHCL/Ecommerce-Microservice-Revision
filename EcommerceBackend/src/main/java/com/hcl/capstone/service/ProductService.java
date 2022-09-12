@@ -51,5 +51,9 @@ public class ProductService {
 		// Returns top <count> results starting from <index>
 		return productRepository.findAllByProductNameContaining(searchStr,pageable);
 	}
+	
+	public List<Product> searchProducts(String searchStr) {
+		return productRepository.findAllByProductNameContaining(searchStr);
+	}
 
 }

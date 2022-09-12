@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { Product } from '../common/product';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table'
 
 @Component({
   selector: 'app-products',
@@ -13,30 +15,52 @@ import { Product } from '../common/product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   public productList : Product[];
+  public searchedProducts : Product[];
   isLoaded: boolean=false;
   searchStr: string = "";
   searchKey:string ="";
+
+  public pageSize = 10;
+  public currentPage = 0;
+
+  constructor(protected api : ApiService, private cartService : CartService, private _router : Router) { }
   
-  constructor(private api : ApiService, private cartService : CartService, private _router : Router) { }
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.getProducts();
   }
 
-  getProducts(): void {
+  public handlePage(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.pageIterator();
+  }
+
+  private getProducts(): void {
+    console.log(this.searchStr);
     // If searchStr is not present, search all products; else, search matching products
-    if (this.searchStr ==  undefined) {
+    if (this.searchStr == undefined || this.searchStr == "") {
       this.api.getProduct()
-      .subscribe(res=>{
-        this.productList = res;
+        .subscribe(res => {
+          this.searchedProducts = res;
+          this.pageIterator();
       });
     } else {
       // TODO add pagination
-      this.api.getSearchResult(this.searchStr,"0","10")
+      this.api.getSearchResult(this.searchStr)
         .subscribe(res => {
-          this.productList = res;
+          this.searchedProducts = res;
+          this.pageIterator();
         });
     }    
+  }
+
+  private pageIterator() {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = (this.currentPage + 1) * this.pageSize;
+    this.productList = this.searchedProducts.slice(startIndex,endIndex);
   }
 
   selectedProduct: any;
@@ -46,22 +70,17 @@ export class ProductsComponent implements OnInit {
   }
 
   onSelect(product: any): Promise<Product>{
-      this.api.getProductById(product.productId).subscribe((data) => {
+    this.api.getProductById(product.productId).subscribe((data) => {
       this.selectedProduct = data;
       this.isLoaded = true;
-
-    }, (error: any) => {
+      }, (error: any) => {
       console.log("Unable to find product");
-    }
-    
-    );
-    //console.log(this.selectedProduct);
+    });
     return this.selectedProduct;
   }
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
-      //console.log(data);
       Swal.fire(
         'Success!',
         'Product added to cart!',

@@ -37,6 +37,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -80,7 +82,9 @@ const oktaAuth = new OktaAuth({
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    OktaAuthModule
+    OktaAuthModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,
