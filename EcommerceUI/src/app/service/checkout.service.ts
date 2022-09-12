@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { PaymentInfo } from '../common/payment-info';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { PaymentInfo } from '../common/payment-info';
 })
 export class CheckoutService {
 
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = environment.apiUrl;
+
   private paymentIntentUrl = this.PATH_OF_API + "/api/payment-intent";
 
   constructor(private httpClient: HttpClient) { }

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Product } from '../common/product';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = environment.apiUrl;
 
   constructor(private http : HttpClient) { }
 

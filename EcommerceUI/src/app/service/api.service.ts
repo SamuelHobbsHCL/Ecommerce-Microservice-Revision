@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Product }from '../common/product';
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ApiService {
     { "No-Auth" : "True"}
   );
 
-  PATH_OF_API = 'http://localhost:8080';
+  PATH_OF_API = environment.apiUrl;
 
   product: Product | undefined;
   products: Product[] | undefined;
