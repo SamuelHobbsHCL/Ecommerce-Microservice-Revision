@@ -40,23 +40,14 @@ export class ApiService {
     )
   }
 
-  getSearchResult(searchStr: string, index: string, count: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search", { params: {searchStr, index, count}});
-    /*
-    return this.http.get(this.PATH_OF_API + "/api/product/search")
-      .pipe(
-        map((data: Product[]) => 
-          (data as any).map((product: Product) => ({
-            productId: product.productId,
-            productName: product.productName,
-            unitPrice: product.unitPrice,
-            productStock: product.productStock,
-            productImage: product.productImage,
-            productDescription: product.productDescription
-          }))
-      )
-    )
-    */
+  // Send page parameters to backend - allow it to handle pagination
+  public getSearchResultPages(searchStr: string, index: string, count: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search/page", { params: {searchStr, index, count} });
+  }
+
+  // Only send search string - allow frontend to handle pagination
+  public getSearchResult(searchStr: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search", { params: {searchStr} });
   }
 
   throwError(error: any) {

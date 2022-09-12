@@ -4,6 +4,9 @@
             <input id="searchStr" #searchStr name="searchStr" type="text" placeholder="Search...">
             <button type="submit">Submit</button>
         </form>
+        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+            [length]="searchedProducts.length" [pageIndex]="currentPage" (page)="handlePage($event)">
+        </mat-paginator>
     </div>
     <div class="row">
         <ng-container *ngFor="let item of productList">
@@ -13,19 +16,14 @@
                     {{item.productName}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
                     {{item.productDescription}}</p>
-
                 <p><strong>Price:</strong> ${{item.unitPrice}}</p>
-
-
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-primary" (click)=addtocart(item)>Add to cart</button>
-
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-primary" (click)="goToProductDetails(item)">View More</button>
                     </div>
-
                 </div>
             </div>
         </ng-container>

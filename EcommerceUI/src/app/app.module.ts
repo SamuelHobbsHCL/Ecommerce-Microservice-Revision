@@ -30,6 +30,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { SelfUpdateComponent } from './self-update/self-update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -66,7 +69,9 @@ const oktaAuth = new OktaAuth({
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    OktaAuthModule
+    OktaAuthModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,
