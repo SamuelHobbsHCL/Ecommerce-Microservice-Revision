@@ -20,16 +20,22 @@
                 <th>User ID</th>
                 <th>Order Date</th>
                 <th>Total</th>
+                <th>Shipping Address</th>
+                <th>Billing Address</th>
                 <th>Status</th>
+                
+
             </tr>
         </thead>
         <tbody>
         <ng-container *ngFor="let order of orderList">
             <tr>
                 <td>{{order.orderId}}</td>
-                <td>{{order.userId}}</td>
+                <td>{{order.user.userId}}</td>
                 <td>{{order.orderDate}}</td>
                 <td>{{order.orderTotal}}</td>
+                <td>{{order.shippingAddressId}}</td>
+                <td>{{order.billingAddressId}}</td>
                 <td>{{order.orderStatus}}</td>
             </tr>
         </ng-container>
