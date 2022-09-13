@@ -55,7 +55,6 @@ a:active {
 .btn-lg {
     padding: .5rem 0.1rem;
     font-size: 1rem;
-    border-radius: 0;
     color: white !important;
     background-color: #42A5F5;
     height: 2.8rem !important;
