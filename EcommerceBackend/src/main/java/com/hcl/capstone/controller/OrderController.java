@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,7 +28,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 public class OrderController {
-	final String IN_PROGRESS = "In Progress";
+	final static String IN_PROGRESS = "In Progress";
 	@Autowired
 	private OrderService orderService;
 
