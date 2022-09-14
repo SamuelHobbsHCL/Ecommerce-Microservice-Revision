@@ -29,8 +29,7 @@ public class UserController {
     
     @GetMapping("/user/getCurrentUser")
     public User getCurrentLoggedInUser(Authentication authentication) {
-    	User user = userService.getCurrentLoggedInUser(authentication);
-    	return user;
+    	return userService.getCurrentLoggedInUser(authentication);
     }
     
     @PutMapping("/user/update/{id}")

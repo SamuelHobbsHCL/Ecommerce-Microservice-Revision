@@ -66,8 +66,6 @@ public class UserService {
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

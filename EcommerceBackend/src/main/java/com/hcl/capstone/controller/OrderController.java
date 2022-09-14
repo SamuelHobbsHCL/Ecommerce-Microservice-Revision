@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,7 +28,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 public class OrderController {
-
+	final static String IN_PROGRESS = "In Progress";
 	@Autowired
 	private OrderService orderService;
 
@@ -50,7 +49,7 @@ public class OrderController {
 		long orderId = -1;
 
 		for (Order order : orders) {
-			if (order.getOrderStatus().equals("In Progress")) {
+			if (order.getOrderStatus().equals(IN_PROGRESS)) {
 				orderId = order.getOrderId();
 			}
 		}
@@ -61,7 +60,7 @@ public class OrderController {
 			order = new Order();
 			Date date = new Date();
 			order.setOrderDate(date);
-			order.setOrderStatus("In Progress");
+			order.setOrderStatus(IN_PROGRESS);
 			order.setUser(user);
 			order.setBillingAddressId(1);
 			order.setShippingAddressId(1);
@@ -82,9 +81,7 @@ public class OrderController {
 	public List<Order> getOrderDetail(Authentication authentication) {
 
 		User user = userService.getCurrentLoggedInUser(authentication);
-
-		List<Order> orders = orderService.getAllOrderByUser(user);
-		return orders;
+		return orderService.getAllOrderByUser(user);
 	}
 
 	@GetMapping(value = "/user/get-order-in-progress")
@@ -102,13 +99,13 @@ public class OrderController {
 
 	@PostMapping(value = "/user/check-out")
 	public String checkOut(Authentication authentication)
-			throws AddressException, MessagingException, IOException {
+			throws MessagingException, IOException {
 		User userCheckout = userService.getCurrentLoggedInUser(authentication);
 		if (userCheckout != null) {
 
 			Order orderCheckout = orderService.getOrderInProgress(authentication);
 
-			if (orderCheckout.getOrderStatus().equals("In Progress")) {
+			if (orderCheckout.getOrderStatus().equals(IN_PROGRESS)) {
 				List<OrderItem> itemsCheckout = orderService.getAllOrderItemsByUserAndOrder(userCheckout,
 						orderCheckout);
 
