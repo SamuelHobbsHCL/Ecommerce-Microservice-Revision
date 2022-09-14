@@ -92,7 +92,7 @@ public class OrderService {
 		Optional<Order> orderRepo = orderRepository.findById(orderId);
 		
 		if(!orderRepo.isPresent()) {
-			return null;
+			return Optional.empty();
 		}
 		
 		order.setOrderId(orderId);
