@@ -56,7 +56,7 @@ public class OrderController {
 
 	@PostMapping(value = "/user/check-out")
 	public String checkOut(Authentication authentication)
-			throws AddressException, MessagingException, IOException {
+			throws MessagingException, IOException {
 		return orderService.checkOut(authentication);
 	}
 
