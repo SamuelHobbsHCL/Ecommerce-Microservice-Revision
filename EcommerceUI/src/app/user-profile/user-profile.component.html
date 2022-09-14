@@ -47,7 +47,7 @@
                                 <div class="col-lg-3 order-lg-2">
                                     <div class="card-profile-image">
                                         <a href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
+                                            <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" alt= "profile image" class="rounded-circle">
                                         </a>
                                     </div>
                                 </div>
@@ -114,21 +114,21 @@
                                     </article>
                                     <div class="track">
                                         <ng-container *ngIf="order.orderStatus ==='COMPLETED'">
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
-                                            <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Shipped</span> </div>
-                                            <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">Delivered</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-check"></em> </span> <span class="text">Order confirmed</span> </div>
+                                            <div class="step"> <span class="icon"> <em class="fa fa-user"></em> </span> <span class="text">Shipped</span> </div>
+                                            <div class="step"> <span class="icon"> <em class="fa fa-truck"></em> </span> <span class="text">Delivered</span> </div>
                                         </ng-container>
 
                                         <ng-container *ngIf="order.orderStatus ==='SHIPPED'">
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Shipped</span> </div>
-                                            <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">Delivered</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-check"></em> </span> <span class="text">Order confirmed</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-user"></em> </span> <span class="text">Shipped</span> </div>
+                                            <div class="step"> <span class="icon"> <em class="fa fa-truck"></em> </span> <span class="text">Delivered</span> </div>
                                         </ng-container>
 
                                         <ng-container *ngIf="order.orderStatus ==='DELIVERED'">
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Shipped</span> </div>
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">Delivered</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-check"></em> </span> <span class="text">Order confirmed</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-user"></em> </span> <span class="text">Shipped</span> </div>
+                                            <div class="step active"> <span class="icon"> <em class="fa fa-truck"></em> </span> <span class="text">Delivered</span> </div>
                                         </ng-container>
 
 
@@ -137,7 +137,7 @@
                                     <ul class="row">
                                         <li class="col-md-6" *ngFor="let item of order.cartItems">
                                             <figure class="itemside mb-3">
-                                                <div class="aside"><img src="{{item.product.productImage}}" class="img-sm border"></div>
+                                                <div class="aside"><img src="{{item.product.productImage}}" alt="product image" class="img-sm border"></div>
                                                 <figcaption class="info align-self-center">
                                                     <div class="title"><strong>{{item.product.productName}}</strong></div><span class="text-muted">${{item.product.unitPrice}}</span>
                                                 </figcaption>
