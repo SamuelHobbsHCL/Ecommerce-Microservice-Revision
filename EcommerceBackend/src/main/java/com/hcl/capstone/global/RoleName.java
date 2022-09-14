@@ -1,5 +1,5 @@
 package com.hcl.capstone.global;
 
 public class RoleName {
-	final String USER = "User";
+	public final String USER = "User";
 }
