@@ -34,6 +34,11 @@ public class OrderService {
 		return orderItemRepository.findByUser(user);
 	}
 	
+	//
+	public List<Order> getAllOrders() {
+		return orderRepository.findAll();
+	}
+	
 	public List<Order> getAllOrderByUser(User user) {
 		return orderRepository.findByUser(user);
 	}

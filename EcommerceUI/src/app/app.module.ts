@@ -36,10 +36,10 @@ import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { OrdersComponent } from './orders/orders.component';
+import { OrdersListComponent } from './admin/orders-list/orders-list.component';
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -74,6 +74,8 @@ const oktaAuth = new OktaAuth({
     UpdateProductComponent,
     CheckoutComponent,
     UserProfileComponent
+    OrdersComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule,

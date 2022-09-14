@@ -58,6 +58,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  public isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
+  }
+
   checkAuthenticated() {
     this.isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
       filter((s: AuthState) => !!s),
