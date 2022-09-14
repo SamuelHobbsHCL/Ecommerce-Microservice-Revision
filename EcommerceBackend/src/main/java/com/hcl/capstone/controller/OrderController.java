@@ -1,7 +1,5 @@
 package com.hcl.capstone.controller;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -14,13 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
-import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.service.OrderService;
-import com.hcl.capstone.service.ProductService;
 import com.hcl.capstone.service.UserService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -56,7 +51,7 @@ public class OrderController {
 
 	@PostMapping(value = "/user/check-out")
 	public String checkOut(Authentication authentication)
-			throws MessagingException, IOException {
+			throws MessagingException {
 		return orderService.checkOut(authentication);
 	}
 

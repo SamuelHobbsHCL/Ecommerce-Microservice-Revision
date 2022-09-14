@@ -1,13 +1,10 @@
 package com.hcl.capstone.service;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -101,7 +98,7 @@ public class OrderService {
 	}
 	
 	public String checkOut(Authentication authentication)
-			throws AddressException, MessagingException, IOException {
+			throws MessagingException {
 		User userCheckout = userService.getCurrentLoggedInUser(authentication);
 		if (userCheckout != null) {
 
