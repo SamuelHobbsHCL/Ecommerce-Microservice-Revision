@@ -81,20 +81,6 @@ public class UserService {
 		if (!userRepo.isPresent()) {
 			return null;
 		}
-		
-		user.setUserId(id);
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-
-		user.setPassword(encodedPassword);
-		user.setAuthProvider(AuthProvider.LOCAL);
-		
-		Roles role = roleRepository.findByName("USER");
-		Set<Roles> userRoles = new HashSet<>();
-		userRoles.add(role);
-
-		user.setRoles(userRoles);
 
 		usersRepository.save(user);
 

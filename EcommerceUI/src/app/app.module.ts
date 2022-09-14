@@ -39,6 +39,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserProfileSecurityComponent } from './user-profile/user-profile-security/user-profile-security.component';
+import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
+import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -73,7 +76,10 @@ const oktaAuth = new OktaAuth({
     AddProductComponent,
     UpdateProductComponent,
     CheckoutComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserProfileSecurityComponent,
+    UserProfileOrderHistoryComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

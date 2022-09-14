@@ -22,11 +22,14 @@ import { ContactComponent } from './contact/contact.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './admin/update-product/update-product.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileSecurityComponent } from './user-profile/user-profile-security/user-profile-security.component';
+import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
+import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home-page', pathMatch: 'full'},
-  { path: 'home-page', component: HomePageComponent},
+  {path: '', redirectTo: 'home-page', pathMatch: 'full'},
+  {path: 'home-page', component: HomePageComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
@@ -45,6 +48,9 @@ const routes: Routes = [
   {path: 'self-update', component: SelfUpdateComponent},
   {path: 'check-out', component: CheckoutComponent},
   {path: 'user-profile', component: UserProfileComponent},
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: 'user-profile-security', component: UserProfileSecurityComponent},
+  {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent},
 ];
 
 @NgModule({

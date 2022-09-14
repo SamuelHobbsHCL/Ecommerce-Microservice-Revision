@@ -30,7 +30,7 @@ export class SelfUpdateComponent implements OnInit {
   }
 
   public get_Id(userTest:User){
-    var id = userTest.userid;
+    var id = userTest.userId;
     return id;
   }
 
