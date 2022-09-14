@@ -167,7 +167,7 @@
                                 <div class="row  justify-content-between" *ngFor="let item of orderItems">
                                     <div class="col-auto col-md-4">
                                         <div class="media flex-column flex-sm-row">
-                                            <img class=" img-fluid" src="{{item.product.productImage}}" width="62" height="62">
+                                            <img class=" img-fluid" src="{{item.product.productImage}}" alt="product image" width="62" height="62">
                                             <div class="media-body  my-auto">
                                                 <div class="row ">
                                                     <div class="col-auto">
@@ -181,7 +181,7 @@
                                         <p class="boxed">{{item.quantity}}</p>
                                     </div>
                                     <div class=" pl-0 flex-sm-col col-3  my-auto ">
-                                        <p><b>${{item.quantity*item.product.unitPrice}}</b></p>
+                                        <p><strong>${{item.quantity*item.product.unitPrice}}</strong></p>
                                     </div>
                                     <hr class="my-2">
                                 </div>

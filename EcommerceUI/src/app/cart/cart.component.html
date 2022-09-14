@@ -16,7 +16,7 @@
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let item of orderItems">
                                             <div class="col-md-2 col-lg-2 col-xl-2">
-                                                <img src="{{item.product.productImage}}" class="img-fluid rounded-3">
+                                                <img src="{{item.product.productImage}}" alt = "product image" class="img-fluid rounded-3">
                                             </div>
                                             <div class="col-md-3 col-lg-2 col-xl-2">
                                                 <!-- <h6 class="text-muted">Categories</h6> -->
@@ -28,7 +28,7 @@
                                             </div>
                                             <div class="col-md-3 col-lg-2 col-xl-2 d-flex">
                                                 <a class="btn btn-link" (click)="decreaseQuantity(item)">
-                                                    <i class="fas fa-minus"></i>
+                                                    <em class="fas fa-minus"></em>
                                                 </a>
 
                                                 <div style="padding: 5px">{{item.quantity}}</div>
@@ -100,7 +100,7 @@
 
                     <div class="card-body cart">
                         <div class="col-sm-12 empty-cart-cls text-center">
-                            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <img src="https://i.imgur.com/dCdflKN.png" alt="empty cart image" width="130" height="130" class="img-fluid mb-4 mr-3">
                             <h3><strong>Your Cart is Empty</strong></h3>
                             <h4>Add something to make me happy :)</h4>
                             <a href="/products" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
