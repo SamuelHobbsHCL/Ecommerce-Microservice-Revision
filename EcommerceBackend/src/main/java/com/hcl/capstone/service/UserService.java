@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.global.RoleName;
 import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Roles;
 import com.hcl.capstone.model.User;
@@ -47,7 +48,7 @@ public class UserService {
 		user.setPassword(encodedPassword);
 		user.setAuthProvider(AuthProvider.LOCAL);
 
-		Roles role = roleRepository.findByName("USER");
+		Roles role = roleRepository.findByName(RoleName.USER);
 		Set<Roles> userRoles = new HashSet<>();
 		userRoles.add(role);
 
@@ -90,7 +91,7 @@ public class UserService {
 		user.setPassword(encodedPassword);
 		user.setAuthProvider(AuthProvider.LOCAL);
 		
-		Roles role = roleRepository.findByName("USER");
+		Roles role = roleRepository.findByName(RoleName.USER);
 		Set<Roles> userRoles = new HashSet<>();
 		userRoles.add(role);
 
