@@ -105,6 +105,8 @@
                                             </div>
                                         </div>
                                     <div class="track">
+                                        <ng-container *ngFor="let order of orders" class="card-body">
+                                            <h4>Order ID: {{order.orderId}}</h4>
                                         <ng-container *ngIf="order.orderStatus ==='COMPLETED'">
                                             <div class="step active"> <span class="icon"> <em class="fa fa-check"></em> </span> <span class="text">Order confirmed</span> </div>
                                             <div class="step"> <span class="icon">  <em class="fa fa-user"></em> </span> <span class="text">Shipped</span> </div>
@@ -122,7 +124,7 @@
                                             <div class="step active"> <span class="icon"> <em class="fa fa-user"></em> </span> <span class="text">Shipped</span> </div>
                                             <div class="step active"> <span class="icon"> <em class="fa fa-truck"></em> </span> <span class="text">Delivered</span> </div>
                                         </ng-container>
-
+                                    </ng-container>
 
                                                         </div>
                                                         <hr>
