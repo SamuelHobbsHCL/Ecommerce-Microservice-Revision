@@ -1,0 +1,130 @@
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders justify-content-center">
+        <a class="nav-link " href="/user-profile " target="__blank ">Overview</a>
+        <a class="nav-link " href="/my-profile " target="__blank ">My Profile</a>
+        <a class="nav-link active " href="/user-profile-order-history " target="__blank ">My Orders</a>
+        <a class="nav-link " href="/user-profile-security " target="__blank ">Security</a>
+
+    </nav>
+    <hr class="mt-0 mb-4 ">
+    <div class="row">
+        <div class="col-xl-6 order-xl-2 mb-5 ">
+            <div class="card bg-secondary shadow ">
+                <div class="card-header bg-white border-0 ">
+                    <div class="row align-items-center ">
+                        <div class="col-8 ">
+                            <h3 class="mb-0 ">My Current Orders</h3>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <ng-container *ngIf="!hasCurrentOrder() ">
+                        <h4 class="text-muted ">THERE ARE NO CURRENT ORDERS...</h4>
+                    </ng-container>
+                </div>
+
+                <div *ngFor="let order of orders " class="card-body ">
+                    <ng-container *ngIf="order.orderStatus !=='DELIVERED' ">
+                        <h4>Order ID: {{order.orderId}}</h4>
+                        <article class="card ">
+                            <div class="card-body row ">
+                                <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
+                                <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
+                                <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
+
+                            </div>
+                        </article>
+                        <div class="track ">
+                            <ng-container *ngIf="order.orderStatus==='COMPLETED' ">
+                                <div class="step active "> <span class="icon "> <i class="fa fa-check "></i> </span> <span class="text ">Order confirmed</span> </div>
+                                <div class="step "> <span class="icon "> <i class="fa fa-user "></i> </span> <span class="text ">Shipped</span> </div>
+                                <div class="step "> <span class="icon "> <i class="fa fa-truck "></i> </span> <span class="text ">Delivered</span> </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="order.orderStatus==='SHIPPED' ">
+                                <div class="step active "> <span class="icon "> <i class="fa fa-check "></i> </span> <span class="text ">Order confirmed</span> </div>
+                                <div class="step active "> <span class="icon "> <i class="fa fa-user "></i> </span> <span class="text ">Shipped</span> </div>
+                                <div class="step "> <span class="icon "> <i class="fa fa-truck "></i> </span> <span class="text ">Delivered</span> </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="order.orderStatus==='DELIVERED' ">
+                                <div class="step active "> <span class="icon "> <i class="fa fa-check "></i> </span> <span class="text ">Order confirmed</span> </div>
+                                <div class="step active "> <span class="icon "> <i class="fa fa-user "></i> </span> <span class="text ">Shipped</span> </div>
+                                <div class="step active "> <span class="icon "> <i class="fa fa-truck "></i> </span> <span class="text ">Delivered</span> </div>
+                            </ng-container>
+
+                        </div>
+                        <hr>
+                        <ul class="row ">
+                            <li class="col-md-6 " *ngFor="let item of order.cartItems ">
+                                <figure class="itemside mb-3 ">
+                                    <div class="aside "><img src="{{item.product.productImage}} " class="img-sm border "></div>
+                                    <figcaption class="info align-self-center ">
+                                        <div class="title "><strong>{{item.product.productName}}</strong></div><span class="text-muted ">${{item.product.unitPrice}}</span>
+                                    </figcaption>
+                                </figure>
+                            </li>
+
+                        </ul>
+                        <hr>
+                    </ng-container>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-xl-6 order-xl-2 mb-5 ">
+            <div class="card bg-secondary shadow ">
+                <div class="card-header bg-white border-0 ">
+                    <div class="row align-items-center ">
+                        <div class="col-8 ">
+                            <h3 class="mb-0 ">My Purchase History</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <ng-container *ngIf="!hasPurchaseHistory() ">
+                        <h4 class="text-muted ">YOU DO NOT HAVE ANY PURCHASE HISTORY...</h4>
+                    </ng-container>
+                </div>
+                <div *ngFor="let order of orders " class="card-body ">
+                    <ng-container *ngIf="order.orderStatus==='DELIVERED' ">
+                        <h4>Order ID: {{order.orderId}}</h4>
+                        <article class="card ">
+                            <div class="card-body row ">
+                                <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
+                                <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
+                                <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
+
+                            </div>
+                        </article>
+                        <hr>
+                        <ul class="row ">
+                            <li class="col-md-6 " *ngFor="let item of order.cartItems ">
+                                <figure class="itemside mb-3 ">
+                                    <div class="aside "><img src="{{item.product.productImage}} " class="img-sm border "></div>
+                                    <figcaption class="info align-self-center ">
+                                        <div class="title "><strong>{{item.product.productName}}</strong></div><span class="text-muted ">${{item.product.unitPrice}}</span>
+                                    </figcaption>
+                                </figure>
+                            </li>
+
+                        </ul>
+                        <hr>
+                    </ng-container>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -40,6 +40,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OrdersComponent } from './orders/orders.component';
 import { OrdersListComponent } from './admin/orders-list/orders-list.component';
+import { UserProfileSecurityComponent } from './user-profile/user-profile-security/user-profile-security.component';
+import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
+import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
+
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
   clientId: '0oa6b7ee0wwOnJzuz5d7',
@@ -73,9 +77,13 @@ const oktaAuth = new OktaAuth({
     AddProductComponent,
     UpdateProductComponent,
     CheckoutComponent,
-    UserProfileComponent
+    UserProfileComponent,
     OrdersComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    UserProfileComponent,
+    UserProfileSecurityComponent,
+    UserProfileOrderHistoryComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

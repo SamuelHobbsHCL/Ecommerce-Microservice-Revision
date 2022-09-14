@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { AddressService } from 'src/app/service/address.service';
+import { CartService } from 'src/app/service/cart.service';
+import { UpdateService } from 'src/app/service/self-update.service';
+import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/user';
 import Swal from 'sweetalert2';
-import { AddressService } from '../service/address.service';
-import { CartService } from '../service/cart.service';
-import { UpdateService } from '../service/self-update.service';
-import { UserService } from '../service/user.service';
-import { User } from '../user';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-user-profile-order-history',
+  templateUrl: './user-profile-order-history.component.html',
+  styleUrls: ['./user-profile-order-history.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileOrderHistoryComponent implements OnInit {
 
   constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService, private cartService:CartService) { }
 
@@ -41,9 +41,19 @@ export class UserProfileComponent implements OnInit {
       });
     
   }
+
   public hasCurrentOrder() {
     for(let order of this.orders) {
       if(order.orderStatus === "COMPLETED") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public hasPurchaseHistory() {
+    for(let order of this.orders) {
+      if(order.orderStatus === "DELIVERED") {
         return true;
       }
     }
@@ -71,9 +81,6 @@ export class UserProfileComponent implements OnInit {
       }
     )
   }
-
-}
-
-
   
 
+}

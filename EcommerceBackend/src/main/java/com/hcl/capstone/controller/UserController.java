@@ -33,9 +33,15 @@ public class UserController {
     }
     
     @PutMapping("/user/update/{id}")
-	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id){
-		
-		User result = userService.updateUser(user, id);
+	public ResponseEntity<User> updateUser(Authentication authentication, @RequestBody User user, @PathVariable long id){
+    	User currentUser = userService.getCurrentLoggedInUser(authentication);
+    	User result;
+    	
+    	if(currentUser.getUserId() == id) {
+    		result = userService.updateUser(user, id);
+    	} else {
+    		result = null;
+    	}
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -44,4 +44,8 @@ export class CartService {
     return this.http.delete(this.PATH_OF_API + "/user/delete-order-item/" + id);
   }
 
+  public getAllOrderForCurrentUser(){
+    return this.http.get(this.PATH_OF_API + "/user/get-order");
+  }
+
 }

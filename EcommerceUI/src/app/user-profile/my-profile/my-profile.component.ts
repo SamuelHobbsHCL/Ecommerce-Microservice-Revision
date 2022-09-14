@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { AddressService } from 'src/app/service/address.service';
+import { UpdateService } from 'src/app/service/self-update.service';
+import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/user';
 import Swal from 'sweetalert2';
-import { AddressService } from '../service/address.service';
-import { CartService } from '../service/cart.service';
-import { UpdateService } from '../service/self-update.service';
-import { UserService } from '../service/user.service';
-import { User } from '../user';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-my-profile',
+  templateUrl: './my-profile.component.html',
+  styleUrls: ['./my-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit {
 
-  constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService, private cartService:CartService) { }
+  constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService) { }
 
   user = new User();
   response : any;
   address: any;
   msg = '';
-  orders: any;
 
   ngOnInit(): void {
     this.userService.getCurrentUser()
@@ -34,20 +32,6 @@ export class UserProfileComponent implements OnInit {
         console.log(this.address);
       });
     
-      this.cartService.getAllOrderForCurrentUser()
-      .subscribe((res:any)=>{
-        this.orders = res;
-        console.log(this.orders);
-      });
-    
-  }
-  public hasCurrentOrder() {
-    for(let order of this.orders) {
-      if(order.orderStatus === "COMPLETED") {
-        return true;
-      }
-    }
-    return false;
   }
 
   public userProfileUpdate(newUser: User){
@@ -68,12 +52,13 @@ export class UserProfileComponent implements OnInit {
       error => {
         console.log("Error!");
         this.msg = error.error;
+        Swal.fire(
+          'Error!',
+          'Please check your email or username!',
+          'error'
+        )
       }
     )
   }
 
 }
-
-
-  
-
