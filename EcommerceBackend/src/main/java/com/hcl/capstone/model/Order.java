@@ -37,11 +37,13 @@ public class Order {
 	@Column(name = "ORDER_TOTAL")
 	private double orderTotal;
 
-    @Column(name = "SHIPPING_ADDRESS_ID")
-	private long shippingAddressId;
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "SHIPPING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = true)
+	private Address shippingAddress;
 
-   	@Column(name = "BILLING_ADDRESS_ID")
-	private long billingAddressId;
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "BILLING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = true)
+	private Address billingAddress;
     
     @Column(name = "ORDER_STATUS")
 	private String orderStatus;
@@ -86,20 +88,21 @@ public class Order {
 		this.orderTotal = orderTotal;
 	}
 
-	public long getShippingAddressId() {
-		return shippingAddressId;
+
+	public Address getShippingAddress() {
+		return shippingAddress;
 	}
 
-	public void setShippingAddressId(long shippingAddressId) {
-		this.shippingAddressId = shippingAddressId;
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
-	public long getBillingAddressId() {
-		return billingAddressId;
+	public Address getBillingAddress() {
+		return billingAddress;
 	}
 
-	public void setBillingAddressId(long billingAddressId) {
-		this.billingAddressId = billingAddressId;
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	public String getOrderStatus() {

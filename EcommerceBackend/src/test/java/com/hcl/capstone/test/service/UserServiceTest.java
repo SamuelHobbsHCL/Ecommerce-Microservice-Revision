@@ -32,7 +32,7 @@ public class UserServiceTest {
 	@BeforeAll
 	void init() {
 		MockitoAnnotations.openMocks(this);		
-		user = new User("samhobbs","password","Sam","Hobbs","sam@email.com", 1);
+		user = new User("samhobbs","password","Sam","Hobbs","sam@email.com");
 		user.setUserId(0);
 	}
 	
@@ -44,8 +44,8 @@ public class UserServiceTest {
 	@Test
 	@Order(2)
 	public void getAllUsers() throws Exception {
-		User user2 = new User("benhobbs","password","Ben","Hobbs","ben@email.com", 1);
-		User user3 = new User("nickhobbs","password","Nick","Hobbs","nick@email.com", 1);
+		User user2 = new User("benhobbs","password","Ben","Hobbs","ben@email.com");
+		User user3 = new User("nickhobbs","password","Nick","Hobbs","nick@email.com");
 		List<User> users = Arrays.asList(user,user2,user3);
 		
 		when(userRepository.findAll()).thenReturn(users);

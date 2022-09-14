@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.capstone.dto.OrderInfo;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.User;
@@ -50,9 +52,10 @@ public class OrderController {
 	}
 
 	@PostMapping(value = "/user/check-out")
-	public String checkOut(Authentication authentication)
+	public String checkOut(Authentication authentication,
+			@RequestBody OrderInfo orderInfo)
 			throws MessagingException {
-		return orderService.checkOut(authentication);
+		return orderService.checkOut(orderInfo,authentication);
 	}
 
 	@DeleteMapping(value = "/user/delete-all-order-items")

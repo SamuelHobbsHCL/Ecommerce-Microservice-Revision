@@ -16,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hcl.capstone.model.enumeration.AuthProvider;
 
 @Entity
@@ -52,24 +51,19 @@ public class User {
 		joinColumns = @JoinColumn(name = "USER_ID"),
 		inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Roles> roles;
-	
-	@Column(name="ADDRESS_ID")
-	private long addressId;
-	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;
 	
 	public User(){}
 	
-	public User(String userName, String password, String firstName, String lastName, String email, long addressId) {
+	public User(String userName, String password, String firstName, String lastName, String email) {
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
-		this.addressId = addressId;
-		
+		this.email = email;		
 	}
 	
 	public long getUserId() {
@@ -135,14 +129,4 @@ public class User {
 	public void setAuthProvider(AuthProvider authProvider) {
 		this.authProvider = authProvider;
 	}
-
-	public long getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
-	}
-
-
 }
