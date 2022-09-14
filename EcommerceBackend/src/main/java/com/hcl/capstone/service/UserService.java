@@ -129,15 +129,19 @@ public class UserService {
 				newUser.setEmail(email);
 				newUser.setUserName(email);
 				newUser.setAuthProvider(AuthProvider.OKTA);
-				String firstName = ((Jwt) principal).getClaimAsString("firstName");
-				String lastName = ((Jwt) principal).getClaimAsString("lastName");
-				newUser.setFirstName(firstName);
-				newUser.setLastName(lastName);
+				if (principal instanceof Authentication) {
+					String firstName = ((Jwt) principal).getClaimAsString("firstName");
+					String lastName = ((Jwt) principal).getClaimAsString("lastName");
+					newUser.setFirstName(firstName);
+					newUser.setLastName(lastName);
+				}
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				String encodedPassword = passwordEncoder.encode(newUser.getEmail() + newUser.getFirstName());
 				newUser.setPassword(encodedPassword);
 
-				List<String> groups = ((Jwt) principal).getClaimAsStringList("groups");
+				if (principal instanceof Authentication) {
+					List<String> groups = ((Jwt) principal).getClaimAsStringList("groups");
+				
 
 				Set<Roles> userRoles = new HashSet<>();
 
@@ -158,6 +162,7 @@ public class UserService {
 				usersRepository.save(newUser);
 
 				sendRegistrationConfirmationEmail(newUser);
+			}
 			}
 
 			return getUserbyEmail(email);
