@@ -22,7 +22,6 @@ import com.hcl.capstone.model.enumeration.AuthProvider;
 @Entity
 @Table(name = "USERS")
 public class User {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "USER_ID")
@@ -57,7 +56,6 @@ public class User {
 	@Column(name="ADDRESS_ID")
 	private long addressId;
 	
-	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;

@@ -30,6 +30,10 @@ public class OrderService {
 	@Autowired private UserService userService;
 	@Autowired private ProductService productService;
 		
+	public List<Order> getAllOrders() {
+		return orderRepository.findAll();
+	}
+
 	public List<Order> getAllOrderByUser(User user) {
 		return orderRepository.findByUser(user);
 	}

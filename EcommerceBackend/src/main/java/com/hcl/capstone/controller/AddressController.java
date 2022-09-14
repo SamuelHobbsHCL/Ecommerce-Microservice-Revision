@@ -16,8 +16,7 @@ public class AddressController {
 	
 	@GetMapping("/user/getUserAddress")
     public Address getUserAddress(Authentication authentication) {
-		Address address = addressService.getUserAddress(authentication);
-    	return address;
+    	return addressService.getUserAddress(authentication);
     }
 
 }

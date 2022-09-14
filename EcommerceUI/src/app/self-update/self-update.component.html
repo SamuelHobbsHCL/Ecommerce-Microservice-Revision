@@ -1,17 +1,17 @@
 <div>
-  <h1>Hello {{user.firstName}} {{user.lastName}}</h1>
-  <h1>Account Management for User {{user.userid}}</h1>
+    <h1>Hello {{user.firstName}} {{user.lastName}}</h1>
+    <h1>Account Management for User {{user.userId}}</h1>
     <form>
-      <label for="uname">Username : </label>
-      <input type="text" id="uname" name="uname" [(ngModel)]="user.userName"><br><br>
-      <label for="fname">First name : </label>
-      <input type="text" id="fname" name="fname" [(ngModel)]="user.firstName"><br><br>
-      <label for="lname">Last name : </label>
-      <input type="text" id="lname" name="lname" [(ngModel)]="user.lastName"><br><br>
-      <label for="email">Email : </label>
-      <input type="text" id="email" name="email" [(ngModel)]="user.email"><br><br>
-      <label for="password">Password : </label>
-      <input type="text" id="password" name="password" [(ngModel)]="user.password"><br><br>
-      <button (click)="userSelfUpdate(user.userid,user)">Update</button>
+        <label for="uname">Username : </label>
+        <input type="text" id="uname" name="uname" [(ngModel)]="user.userName"><br><br>
+        <label for="fname">First name : </label>
+        <input type="text" id="fname" name="fname" [(ngModel)]="user.firstName"><br><br>
+        <label for="lname">Last name : </label>
+        <input type="text" id="lname" name="lname" [(ngModel)]="user.lastName"><br><br>
+        <label for="email">Email : </label>
+        <input type="text" id="email" name="email" [(ngModel)]="user.email"><br><br>
+        <label for="password">Password : </label>
+        <input type="text" id="password" name="password" [(ngModel)]="user.password"><br><br>
+        <button (click)="userSelfUpdate(user.userId,user)">Update</button>
     </form>
 </div>

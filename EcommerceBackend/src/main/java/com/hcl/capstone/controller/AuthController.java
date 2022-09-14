@@ -3,7 +3,6 @@ package com.hcl.capstone.controller;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User addUser(@RequestBody User user) throws AddressException, MessagingException, IOException {
+	public User addUser(@RequestBody User user) throws MessagingException, IOException {
 		return userService.registerUser(user);
 	}
 }

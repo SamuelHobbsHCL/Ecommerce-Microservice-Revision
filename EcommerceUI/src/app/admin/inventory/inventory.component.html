@@ -4,11 +4,11 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-xs-5">
-                        <h2>Product <b>Management</b></h2>
+                        <h2>Product <strong>Management</strong></h2>
                     </div>
                     <div class="col-xs-7">
 
-                        <a routerLink="./add" class="btn btn-primary" style="float: right;"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                        <a routerLink="./add" class="btn btn-primary" style="float: right;"><em class="material-icons">&#xE147;</em> <span>Add New Product</span></a>
 
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                         <td><img src="{{product.productImage}}" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE3C9;</i></a>
-                            <a type="button" (click)="deleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
+                            <a type="button" (click)="deleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>{{productList?.length}}</b> out of <b>{{productList?.length}}</b> entries</div>
+                <div class="hint-text">Showing <strong>{{productList?.length}}</strong> out of <strong>{{productList?.length}}</strong> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
                     <li class="page-item"><a href="#" class="page-link">1</a></li>

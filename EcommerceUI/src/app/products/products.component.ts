@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { data } from 'jquery';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { Product } from '../common/product';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table'
 
 @Component({
   selector: 'app-products',
@@ -78,6 +77,8 @@ export class ProductsComponent implements OnInit {
     });
     return this.selectedProduct;
   }
+
+
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
