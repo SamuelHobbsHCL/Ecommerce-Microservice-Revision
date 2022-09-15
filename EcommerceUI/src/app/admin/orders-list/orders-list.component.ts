@@ -20,4 +20,11 @@ export class OrdersListComponent implements OnInit {
       console.log(this.orderList);
     });
   }
+
+  navigateToUsers() {
+    this._router.navigate(['admin']);
+  } 
+  navigateToInventory() {
+    this._router.navigate(['/inventory'])
+  }
 }
