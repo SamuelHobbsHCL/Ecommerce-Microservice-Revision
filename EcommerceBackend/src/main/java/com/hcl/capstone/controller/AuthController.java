@@ -31,7 +31,6 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public AuthResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
-
 		return tokenProvider.createToken(loginRequest);
 	}
 	

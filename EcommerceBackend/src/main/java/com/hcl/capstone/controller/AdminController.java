@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.model.Order;
+import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.service.ProductService;
 import com.hcl.capstone.service.UserService;
 import com.hcl.capstone.service.OrderService;
@@ -34,7 +35,6 @@ public class AdminController {
 	@Autowired
 	private ProductService productsService;
 	
-	//
 	@Autowired
 	private OrderService orderService;
 

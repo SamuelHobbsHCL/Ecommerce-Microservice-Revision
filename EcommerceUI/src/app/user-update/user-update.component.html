@@ -10,7 +10,7 @@
         <label for="email">Email : </label>
         <input type="text" id="email" name="email" [(ngModel)]="user.email"><br><br>
         <label for="password">Password : </label>
-        <input type="text" id="password" name="password" [(ngModel)]="user.password"><br><br>
+        <input type="text" id="password" name="password" [(ngModel)]="user.password"><br><br>{{user.password}}
         <button (click)="userUpdate(getUrl(),user)">Update</button>
       </form>
 </div>

@@ -27,6 +27,7 @@ import { OrdersListComponent } from './admin/orders-list/orders-list.component';
 import { UserProfileSecurityComponent } from './user-profile/user-profile-security/user-profile-security.component';
 import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
+import { OrderDetailsComponent } from './admin/order-details/order-details.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'user-profile-security', component: UserProfileSecurityComponent},
   {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent},
+  {path: 'orders-list/:id', component: OrderDetailsComponent},
 ];
 
 @NgModule({

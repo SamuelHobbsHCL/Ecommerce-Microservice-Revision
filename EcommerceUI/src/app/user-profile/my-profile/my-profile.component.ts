@@ -24,12 +24,14 @@ export class MyProfileComponent implements OnInit {
     .subscribe((res: any)=>{
       this.user = res;
       console.log(this.user);
+      console.log(this.user.password);
     });
 
     this.addressService.getUserAddress()
       .subscribe((res: any)=>{
         this.address = res;
         console.log(this.address);
+        console.log(this.user.password);
       });
     
   }
