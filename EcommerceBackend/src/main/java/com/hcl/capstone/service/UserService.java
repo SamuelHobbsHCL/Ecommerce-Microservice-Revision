@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.dto.PasswordDTO;
 import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Roles;
 import com.hcl.capstone.model.User;
@@ -52,6 +53,8 @@ public class UserService {
 		userRoles.add(role);
 
 		user.setRoles(userRoles);
+		//Setting default address. User can change in their profile page
+		user.setAddressId(1);
 
 		sendRegistrationConfirmationEmail(user);
 
@@ -163,6 +166,23 @@ public class UserService {
 
 	public User getUserbyEmail(String email) {
 		return usersRepository.findByEmail(email);
+	}
+	
+	//update user password
+	public boolean updateUserPassword(PasswordDTO passwordDTO, Authentication authentication ) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();	
+		
+		User user = getCurrentLoggedInUser(authentication);
+		
+		if(passwordEncoder.matches(passwordDTO.getCurrentPassword(), user.getPassword())) {
+			String encodedNewPassword = passwordEncoder.encode(passwordDTO.getNewPassword());
+			user.setPassword(encodedNewPassword);
+			usersRepository.save(user);
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

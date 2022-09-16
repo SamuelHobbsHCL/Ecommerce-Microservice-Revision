@@ -21,6 +21,11 @@
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
+                    <div>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input class="btn btn-primary" type="file">
+                        </form>
+                    </div>
                     <button class="btn btn-primary" type="button">Upload new image</button>
                 </div>
             </div>
@@ -53,7 +58,7 @@
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email" placeholder="Enter your email address" [(ngModel)]="user.email" value="{{user.email}}">
+                            <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email" placeholder="Enter your email address" [(ngModel)]="user.email" value="{{user.email}}" style="background: #f2f2f2f2;" readonly disabled>
                         </div>
                         <hr class="mt-5">
                         <h4 class="heading-small text-muted mb-4">CONTACT INFORMATION</h4>

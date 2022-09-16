@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpStatusCode } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { OKTA_AUTH } from "@okta/okta-angular";
@@ -28,13 +28,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(req).pipe(
             catchError(
-                (err:HttpErrorResponse) => {
+                (err: HttpErrorResponse) => {
                     console.log(err.status);
                     if(err.status === 401) {
                         this.router.navigate(['/login']);
                     } else if (err.status === 403) {
                         this.router.navigate(['/forbidden']);
-                    }
+                    } else if (err.status === 200) {
+                        return throwError("OK");
+                    } 
+
                     return throwError("Something is wrong");
                 }
             )

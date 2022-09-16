@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService) { }
+  constructor(private updateService:UpdateService, private userService:UserService, private addressService:AddressService) { }
 
   user = new User();
   response : any;
@@ -37,7 +37,7 @@ export class MyProfileComponent implements OnInit {
   public userProfileUpdate(newUser: User){
     console.log(this.user.userId);
 
-    this.service.updateSelf(this.user.userId, newUser).subscribe(
+    this.updateService.updateSelf(this.user.userId, newUser).subscribe(
       data => {
         Swal.fire(
           'Success!',
