@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.PasswordDTO;
+import com.hcl.capstone.global.RoleName;
 import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Roles;
 import com.hcl.capstone.model.User;
@@ -28,17 +29,17 @@ import com.hcl.capstone.security.CustomUserDetails;
 public class UserService {
 
 	@Autowired
-	private UserRepository usersRepository;
+	private UserRepository userRepository;
 
 	@Autowired
 	private RoleRepository roleRepository;
 
 	public User getUserById(long id) {
-		return usersRepository.findById(id);
+		return userRepository.findById(id);
 	}
 
 	public List<User> getAllUsers() {
-		return usersRepository.findAll();
+		return userRepository.findAll();
 	}
 
 	public User registerUser(User user) throws AddressException, MessagingException, IOException {
@@ -48,7 +49,7 @@ public class UserService {
 		user.setPassword(encodedPassword);
 		user.setAuthProvider(AuthProvider.LOCAL);
 
-		Roles role = roleRepository.findByName("USER");
+		Roles role = roleRepository.findByName(RoleName.USER);
 		Set<Roles> userRoles = new HashSet<>();
 		userRoles.add(role);
 
@@ -58,7 +59,7 @@ public class UserService {
 
 		sendRegistrationConfirmationEmail(user);
 
-		return usersRepository.save(user);
+		return userRepository.save(user);
 	}
 
 	private void sendRegistrationConfirmationEmail(User user) {
@@ -73,23 +74,37 @@ public class UserService {
 	}
 
 	public void deleteUserById(long id) {
-		usersRepository.deleteById(id);
+		userRepository.deleteById(id);
 	}
 
 	public User updateUser(User user, long id) {
-		Optional<User> userRepo = Optional.ofNullable(usersRepository.findById(id));
+		Optional<User> userRepo = Optional.ofNullable(userRepository.findById(id));
 
 		if (!userRepo.isPresent()) {
 			return null;
 		}
+		
+		user.setUserId(id);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
 
-		usersRepository.save(user);
+		user.setPassword(encodedPassword);
+		user.setAuthProvider(AuthProvider.LOCAL);
+		
+		Roles role = roleRepository.findByName(RoleName.USER);
+		Set<Roles> userRoles = new HashSet<>();
+		userRoles.add(role);
 
-		return usersRepository.findById(id);
+		user.setRoles(userRoles);
+
+		userRepository.save(user);
+
+		return userRepository.findById(id);
 	}
 
 	public User getUserbyEmailAndPassword(String email, String password) {
-		return usersRepository.findByEmailAndPassword(email, password);
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 
 	public User getCurrentLoggedInUser(Authentication authentication) {
@@ -102,49 +117,8 @@ public class UserService {
 		if (principal != null) {
 			if (principal instanceof Jwt) {
 				email = ((Jwt) principal).getSubject();
-
 			} else {
 				email = ((CustomUserDetails) principal).getUsername();
-			}
-
-			User user = getUserbyEmail(email);
-
-			if (user == null) {
-				System.out.print("Could not find user by email. Registering user in database.");
-
-				User newUser = new User();
-				newUser.setEmail(email);
-				newUser.setUserName(email);
-				newUser.setAuthProvider(AuthProvider.OKTA);
-				String firstName = ((Jwt) principal).getClaimAsString("firstName");
-				String lastName = ((Jwt) principal).getClaimAsString("lastName");
-				newUser.setFirstName(firstName);
-				newUser.setLastName(lastName);
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				String encodedPassword = passwordEncoder.encode(newUser.getEmail() + newUser.getFirstName());
-				newUser.setPassword(encodedPassword);
-
-				List<String> groups = ((Jwt) principal).getClaimAsStringList("groups");
-
-				Set<Roles> userRoles = new HashSet<>();
-
-				for (String groupItem : groups) {
-					if (groupItem.equals("admins")) {
-						Roles role = roleRepository.findByName("ADMIN");
-						userRoles.add(role);
-					}
-
-					if (groupItem.equals("users")) {
-						Roles role = roleRepository.findByName("USER");
-						userRoles.add(role);
-					}
-				}
-
-				newUser.setRoles(userRoles);
-
-				usersRepository.save(newUser);
-
-				sendRegistrationConfirmationEmail(newUser);
 			}
 
 			return getUserbyEmail(email);
@@ -154,18 +128,12 @@ public class UserService {
 		}
 	}
 
-	public void updateAuthProvider(User user, AuthProvider type) {
-		if (!user.getAuthProvider().equals(type)) {
-			usersRepository.updateAuthProvider(user.getUserId(), type);
-		}
-	}
-
 	public User getUserbyUserName(String userName) {
-		return usersRepository.findByUserName(userName);
+		return userRepository.findByUserName(userName);
 	}
 
 	public User getUserbyEmail(String email) {
-		return usersRepository.findByEmail(email);
+		return userRepository.findByEmail(email);
 	}
 	
 	//update user password

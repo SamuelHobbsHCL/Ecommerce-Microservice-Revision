@@ -1,12 +1,16 @@
 package com.hcl.capstone.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.global.OrderStatus;
+import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.Product;
@@ -16,30 +20,60 @@ import com.hcl.capstone.repository.OrderRepository;
 import com.hcl.capstone.repository.ProductRepository;
 
 @Service
-public class OrderService {
-	
-	@Autowired
-	private OrderItemRepository orderItemRepository;
-	
-	@Autowired
-	private OrderRepository orderRepository;
-	
-	@Autowired
-	private ProductRepository productsRepository;
-	
-	@Autowired
-	private UserService usersService;
-	
-	public List<OrderItem> listCartItems(User user) {
-		return orderItemRepository.findByUser(user);
+public class OrderService {	
+	@Autowired private OrderItemRepository orderItemRepository;
+	@Autowired private OrderRepository orderRepository;
+	@Autowired private ProductRepository productsRepository;
+	@Autowired private UserService userService;
+	@Autowired private ProductService productService;
+		
+	public List<Order> getAllOrders() {
+		return orderRepository.findAll();
 	}
-	
+
 	public List<Order> getAllOrderByUser(User user) {
 		return orderRepository.findByUser(user);
 	}
 	
 	public List<OrderItem> getAllOrderItemsByUserAndOrder(User user, Order order) {
 		return orderItemRepository.findByUserAndOrder(user, order);
+	}
+	
+	public List<OrderItem> addProductToCart(long productId, int quantity, Authentication authentication) {
+		User user = userService.getCurrentLoggedInUser(authentication);
+
+		List<Order> orders = getAllOrderByUser(user);
+
+		long orderId = -1;
+
+		for (Order order : orders) {
+			if (order.getOrderStatus().equals(OrderStatus.IN_PROGRESS)) {
+				orderId = order.getOrderId();
+			}
+		}
+
+		Order order = getOrderDetail(orderId);
+
+		if (order == null) {
+			order = new Order();
+			Date date = new Date();
+			order.setOrderDate(date);
+			order.setOrderStatus(OrderStatus.IN_PROGRESS);
+			order.setUser(user);
+			order.setBillingAddressId(1);
+			order.setShippingAddressId(1);
+			saveOrder(order);
+		}
+
+		addProduct(productId, quantity, user, order);
+
+		double orderTotal = getOrderTotal(user, order);
+		order.setOrderTotal(orderTotal);
+
+		updateOrder(order);
+
+		return getAllOrderItemsByUserAndOrder(user, order);
+		
 	}
 	
 	public void addProduct(long productId, int quantity, User user, Order order) {
@@ -61,6 +95,50 @@ public class OrderService {
 		}
 		
 		orderItemRepository.save(orderItem);
+	}
+	
+	public String checkOut(Authentication authentication)
+			throws MessagingException {
+		User userCheckout = userService.getCurrentLoggedInUser(authentication);
+		if (userCheckout != null) {
+
+			Order orderCheckout = getOrderInProgress(authentication);
+
+			if (orderCheckout.getOrderStatus().equals(OrderStatus.IN_PROGRESS)) {
+				List<OrderItem> itemsCheckout = getAllOrderItemsByUserAndOrder(userCheckout,
+						orderCheckout);
+
+				for (OrderItem itemCheckout : itemsCheckout) {
+					Product productCheckout = itemCheckout.getProduct();
+
+					if (itemCheckout.getQuantity() <= productCheckout.getProductStock()) {
+						int currentStock = productCheckout.getProductStock() - itemCheckout.getQuantity();
+						productCheckout.setProductStock(currentStock);
+					} else {
+						itemCheckout.setQuantity(productCheckout.getProductStock());
+						productCheckout.setProductStock(0);
+					}
+
+					productService.saveProduct(productCheckout);
+				}
+
+				double orderTotal = getOrderTotal(userCheckout, orderCheckout);
+				orderCheckout.setOrderTotal(orderTotal);
+				orderCheckout.setOrderStatus(OrderStatus.COMPLETED);
+				orderCheckout.setOrderDate(new Date());
+				saveOrder(orderCheckout);
+
+				Mail mailer = new Mail();
+				mailer.sendCheckoutConfirmation(userCheckout, orderCheckout, itemsCheckout);
+
+				return "Your order is successfully completed. Thank you for your purchase!";
+			} else {
+				return "Your order is already checkout. Please enter another order!";
+			}
+		} else {
+			return "Not logged in";
+		}
+		
 	}
 	
 	public double getOrderTotal(User user, Order order) {
@@ -87,7 +165,7 @@ public class OrderService {
 		Optional<Order> orderRepo = orderRepository.findById(orderId);
 		
 		if(!orderRepo.isPresent()) {
-			return null;
+			return Optional.empty();
 		}
 		
 		order.setOrderId(orderId);
@@ -95,36 +173,7 @@ public class OrderService {
 		
 		return orderRepository.findById(orderId);
 	}
-	
-	
-	public double getCartAmount(List<OrderItem> cartList) {
-		double totalCartAmount = 0f;
-		double singleCartAmount = 0f;
-		int availableQuantity = 0;
 		
-		for(OrderItem cart : cartList) {
-			long productId = cart.getProduct().getProductId();
-			Optional<Product> product = Optional.ofNullable(productsRepository.findById(productId));
-			if(product.isPresent()) {
-				Product currentProduct = product.get();
-				if(currentProduct.getProductStock() < cart.getQuantity()) {
-					singleCartAmount = currentProduct.getUnitPrice() * currentProduct.getProductStock();
-					cart.setQuantity(currentProduct.getProductStock());
-				} else {
-					singleCartAmount = cart.getQuantity() * currentProduct.getUnitPrice();
-					availableQuantity = currentProduct.getProductStock() - cart.getQuantity();
-				}
-				
-				totalCartAmount += singleCartAmount;
-				currentProduct.setProductStock(availableQuantity);
-				availableQuantity = 0;
-				productsRepository.save(currentProduct);
-				
-			}
-		}
-		return totalCartAmount;
-	}
-	
 	public Order saveOrder(Order order) {
 		return orderRepository.save(order);
 	}
@@ -141,19 +190,24 @@ public class OrderService {
 		}
 	}
 	
-	public void deleteOrderItemById(long orderItemId) {
+	public void deleteOrderItemById(long orderItemId, Authentication authentication) {
 		orderItemRepository.deleteById(orderItemId);
-	}
+		Order order = getOrderInProgress(authentication);
+		User user = userService.getCurrentLoggedInUser(authentication);
+		double orderTotal = getOrderTotal(user, order);
+		order.setOrderTotal(orderTotal);
+		updateOrder(order);
+	}	
 	
 	public Order getOrderInProgress(Authentication authentication) {
-		User user = usersService.getCurrentLoggedInUser(authentication);
+		User user = userService.getCurrentLoggedInUser(authentication);
 
 		List<Order> orders = getAllOrderByUser(user);
 
 		Order orderInProgress = null;
 
 		for (Order order : orders) {
-			if (order.getOrderStatus().equals("In Progress")) {
+			if (order.getOrderStatus().equals(OrderStatus.IN_PROGRESS)) {
 				orderInProgress = order;
 			}
 		}

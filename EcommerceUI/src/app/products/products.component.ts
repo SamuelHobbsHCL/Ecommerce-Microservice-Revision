@@ -78,6 +78,8 @@ export class ProductsComponent implements OnInit {
     return this.selectedProduct;
   }
 
+
+
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
       Swal.fire(

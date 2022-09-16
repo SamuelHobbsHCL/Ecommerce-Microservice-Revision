@@ -105,7 +105,7 @@ export class CheckoutComponent implements OnInit {
           .then((result) =>{
             if(result.error){
               //inform the customer there was am error
-              alert('There was an error: ${result.error.message}');
+              alert(`There was an error: ${result.error.message}`);
             } else {
               //call REST API via the CheckoutService
               this.cartService.checkOut().subscribe(data => {

@@ -22,7 +22,6 @@ import com.hcl.capstone.model.enumeration.AuthProvider;
 @Entity
 @Table(name = "USERS")
 public class User {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "USER_ID")

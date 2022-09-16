@@ -12,7 +12,7 @@ export class UpdateService {
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   PATH_OF_API = environment.apiUrl;
-
+  
   constructor(private http : HttpClient) { }
 
   public updateSelf(id : any, userInfo:User) {
