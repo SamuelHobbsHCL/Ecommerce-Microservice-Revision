@@ -9,6 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
+    name: Build Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +30,7 @@ jobs:
           path: '${{ github.workspace }}/EcommerceBackend/target/*.jar'
 
   sonar-scan:
-    name: Build
+    name: Sonar Scan Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
