@@ -77,23 +77,4 @@ export class CartComponent implements OnInit {
       window.location.reload();
     });
   }
-
-  checkout() {
-    this.cartService.checkOut().subscribe(data => {
-      console.log(data);
-    })
-
-    Swal.fire(
-      'Success!',
-      'You have successfully checked out!',
-      'success'
-    ).then(function(){
-      window.location.reload();
-    })
-
-    this.router.navigate(['/']);
-
- 
-
-  }
 }

@@ -110,7 +110,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (61,32,'2022-08-30',60.00,1,1,'COMPLETED'),(62,32,'2022-08-31',1129.00,1,1,'COMPLETED'),(63,49,'2022-08-30',1760.00,1,1,'COMPLETED'),(64,49,'2022-08-30',4550.99,1,1,'COMPLETED'),(65,57,'2022-08-30',1820.00,1,1,'COMPLETED'),(66,58,'2022-08-31',2772.99,1,1,'COMPLETED'),(67,49,'2022-08-31',3421.99,1,1,'COMPLETED'),(68,49,'2022-08-31',6901.98,1,1,'COMPLETED'),(69,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(70,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(71,49,'2022-08-31',2907.00,1,1,'COMPLETED'),(72,49,'2022-09-01',3421.99,1,1,'COMPLETED'),(73,58,'2022-09-01',3901.99,1,1,'COMPLETED'),(74,49,'2022-09-01',1358.99,1,1,'COMPLETED'),(75,58,'2022-09-01',1129.00,1,1,'COMPLETED'),(76,58,'2022-09-01',3901.99,1,1,'COMPLETED'),(77,49,'2022-09-01',3901.99,1,1,'COMPLETED'),(78,49,'2022-09-02',4070.99,1,1,'COMPLETED'),(79,58,'2022-09-01',7803.98,1,1,'COMPLETED'),(80,49,'2022-09-02',1463.30,1,1,'COMPLETED'),(81,58,'2022-09-02',2772.99,1,1,'COMPLETED'),(82,49,'2022-09-06',4205.00,1,1,'COMPLETED'),(83,49,'2022-09-06',3421.99,1,1,'COMPLETED'),(84,58,'2022-09-06',2772.99,1,1,'COMPLETED'),(85,58,'2022-09-06',2772.99,1,1,'In Progress'),(86,49,'2022-09-07',3421.99,1,1,'COMPLETED'),(87,49,'2022-09-08',10343.97,1,1,'COMPLETED'),(88,49,'2022-09-08',4300.98,1,1,'COMPLETED'),(89,49,'2022-09-08',9495.96,1,1,'COMPLETED'),(90,49,'2022-09-08',3965.31,1,1,'COMPLETED'),(91,32,'2022-09-08',563.32,1,1,'COMPLETED'),(92,32,'2022-09-08',4128.99,1,1,'COMPLETED'),(93,32,'2022-09-08',0.00,1,1,'COMPLETED'),(94,32,'2022-09-08',1778.00,1,1,'COMPLETED'),(95,32,'2022-09-08',0.00,1,1,'COMPLETED'),(96,32,'2022-09-08',6194.98,1,1,'COMPLETED'),(97,32,'2022-09-08',0.00,1,1,'In Progress');
+INSERT INTO `orders` VALUES (61,32,'2022-08-30',60.00,1,1,'COMPLETED'),(62,32,'2022-08-31',1129.00,1,1,'COMPLETED'),(63,49,'2022-08-30',1760.00,1,1,'COMPLETED'),(64,49,'2022-08-30',4550.99,1,1,'COMPLETED'),(65,57,'2022-08-30',1820.00,1,1,'COMPLETED'),(66,58,'2022-08-31',2772.99,1,1,'COMPLETED'),(67,49,'2022-08-31',3421.99,1,1,'COMPLETED'),(68,49,'2022-08-31',6901.98,1,1,'COMPLETED'),(69,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(70,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(71,49,'2022-08-31',2907.00,1,1,'COMPLETED'),(72,49,'2022-09-01',3421.99,1,1,'COMPLETED'),(73,58,'2022-09-01',3901.99,1,1,'COMPLETED'),(74,49,'2022-09-01',1358.99,1,1,'COMPLETED'),(75,58,'2022-09-01',1129.00,1,1,'COMPLETED'),(76,58,'2022-09-01',3901.99,1,1,'COMPLETED'),(77,49,'2022-09-01',3901.99,1,1,'COMPLETED'),(78,49,'2022-09-02',4070.99,1,1,'COMPLETED'),(79,58,'2022-09-01',7803.98,1,1,'COMPLETED'),(80,49,'2022-09-02',1463.30,1,1,'COMPLETED'),(81,58,'2022-09-02',2772.99,1,1,'COMPLETED'),(82,49,'2022-09-06',4205.00,1,1,'COMPLETED'),(83,49,'2022-09-06',3421.99,1,1,'COMPLETED'),(84,58,'2022-09-06',2772.99,1,1,'COMPLETED'),(85,58,'2022-09-06',2772.99,1,1,'In Progress'),(86,49,'2022-09-07',3421.99,1,1,'COMPLETED'),(87,49,'2022-09-08',10343.97,1,1,'COMPLETED'),(88,49,'2022-09-08',4300.98,1,1,'COMPLETED'),(89,49,'2022-09-08',9495.96,1,1,'COMPLETED'),(90,49,'2022-09-08',3965.31,1,1,'COMPLETED'),(91,32,'2022-09-08',563.32,1,1,'COMPLETED'),(92,32,'2022-09-08',4128.99,1,1,'COMPLETED'),(93,32,'2022-09-08',0.00,1,1,'COMPLETED'),(94,32,'2022-09-08',1778.00,1,1,'COMPLETED'),(95,32,'2022-09-08',0.00,1,1,'COMPLETED'),(96,32,'2022-09-08',6194.98,1,1,'COMPLETED');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,13 +211,10 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `auth_provider` varchar(15) DEFAULT NULL,
-  `address_id` bigint DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name_UNIQUE` (`user_name`),
   UNIQUE KEY `iduser_UNIQUE` (`user_id`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  KEY `address_fk_idx` (`address_id`),
-  CONSTRAINT `address_fk` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -227,7 +224,17 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (32,'admin','$2a$10$CAS6iCORONH12sWOyzeX9eolj.vv63lG18sZhgu/LCcSMo2En5PDO','Admin','Admin','admin@gmail.com','LOCAL',2),(33,'boss','$2a$10$ERIORYKMjnrX8KEmabKVxuTmiK3k44oAP7saio8XAmrEKka7x49oi','Boss','Boss','boss@gmail.com','LOCAL',1),(49,'user','$2a$10$h8kqjRSZ6rw/KF2RjU3lCOA7VY8nHFUzrvufJ1TplPSGvae8NNoDy','User','User','user@gmail.com','LOCAL',5),(50,'tyler','$2a$10$/r5C9Ol5dRHolfjpJMlOTOJO/orVRjEAWZTFhv/MvnVLJl6r9OSly','Tyler','Tyhlker','werwer@gmail.com','LOCAL',3),(52,'test222','$2a$10$oBUYEJnscbtjwDxXirDF5u8ZQql6Fm4azu8d2IP1abBdYCcmyUduC','Test','Test','test22@gmail.com','LOCAL',4),(57,'alicetest@gmail.com','$2a$10$xbYv8bM201Sr86.HvMPDY.TxG7c/azN9sLWo4FfJLY.VYHth4pQ6e','Alice','Test','alicetest@gmail.com','OKTA',2),(58,'huong.nguyen@hcl.com','$2a$10$UlCBexMRg.qW6LlV2fju0u/xq3JKNib4GX1IALqGJ1gln8jzcAG6u','Alice Huong','Nguyen','huong.nguyen@hcl.com','OKTA',1),(60,'testnewuser','$2a$10$azXcVuQK76LdqYQLyzv3UepflSFRAgnNPUk23Lqp3sADKQUoXQKc6','Test New','Hello','test@gmail.com','LOCAL',2),(61,'d','$2a$10$dyf8E6yLRkB7Kr2hf1v.Oe2HqDIY3rzhqfJnabDk3ogmZP4Tb4212','d','d','d@gmail.com','LOCAL',3),(64,'testuser2','$2a$10$Ru2b9uzcbrMHgkujAhW76OU.oP2grN24mjX6.wtfCg459Qe.G6lCO','Test','UserTest','test223@gmail.com','LOCAL',2);
+INSERT INTO `users` VALUES 
+	(32,'admin','$2a$10$CAS6iCORONH12sWOyzeX9eolj.vv63lG18sZhgu/LCcSMo2En5PDO','Admin','Admin','admin@gmail.com','LOCAL'),
+    (33,'boss','$2a$10$ERIORYKMjnrX8KEmabKVxuTmiK3k44oAP7saio8XAmrEKka7x49oi','Boss','Boss','boss@gmail.com','LOCAL'),
+    (49,'user','$2a$10$h8kqjRSZ6rw/KF2RjU3lCOA7VY8nHFUzrvufJ1TplPSGvae8NNoDy','User','User','user@gmail.com','LOCAL'),
+	(50,'tyler','$2a$10$/r5C9Ol5dRHolfjpJMlOTOJO/orVRjEAWZTFhv/MvnVLJl6r9OSly','Tyler','Tyhlker','werwer@gmail.com','LOCAL'),
+    (52,'test222','$2a$10$oBUYEJnscbtjwDxXirDF5u8ZQql6Fm4azu8d2IP1abBdYCcmyUduC','Test','Test','test22@gmail.com','LOCAL'),
+    (57,'alicetest@gmail.com','$2a$10$xbYv8bM201Sr86.HvMPDY.TxG7c/azN9sLWo4FfJLY.VYHth4pQ6e','Alice','Test','alicetest@gmail.com','OKTA'),
+    (58,'huong.nguyen@hcl.com','$2a$10$UlCBexMRg.qW6LlV2fju0u/xq3JKNib4GX1IALqGJ1gln8jzcAG6u','Alice Huong','Nguyen','huong.nguyen@hcl.com','OKTA'),
+    (60,'testnewuser','$2a$10$azXcVuQK76LdqYQLyzv3UepflSFRAgnNPUk23Lqp3sADKQUoXQKc6','Test New','Hello','test@gmail.com','LOCAL'),
+    (61,'d','$2a$10$dyf8E6yLRkB7Kr2hf1v.Oe2HqDIY3rzhqfJnabDk3ogmZP4Tb4212','d','d','d@gmail.com','LOCAL'),
+    (64,'testuser2','$2a$10$Ru2b9uzcbrMHgkujAhW76OU.oP2grN24mjX6.wtfCg459Qe.G6lCO','Test','UserTest','test223@gmail.com','LOCAL');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
