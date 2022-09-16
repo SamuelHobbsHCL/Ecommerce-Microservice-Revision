@@ -58,11 +58,6 @@ export class CheckoutComponent implements OnInit {
       })
   }
 
-  log(){
-    console.log(this.orderInfo);
-    console.log(this.shippingAddress);
-  }
-
   setupStripePaymentForm() {
     
     //get a handle to stripe elements
@@ -115,7 +110,7 @@ export class CheckoutComponent implements OnInit {
               alert(`There was an error: ${result.error.message}`);
             } else {
               this.orderInfo.shippingAddress = this.shippingAddress;
-              if (true) { /* TODO replace boolean w/check */                
+              if (true) { /* TODO replace boolean w/check */      
                 this.orderInfo.billingAddress = this.shippingAddress;
               } else {
                 this.orderInfo.billingAddress = this.billingAddress;
