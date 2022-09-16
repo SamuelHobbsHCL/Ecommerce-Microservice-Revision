@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.capstone.dto.AddressDTO;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.service.AddressService;
 
@@ -22,8 +23,8 @@ public class AddressController {
     }
 	
 	@PutMapping("/user/update-address")
-	public Address updateAddress(Authentication authentication, @RequestBody Address newAddress) {
-		return addressService.updateAddress(authentication, newAddress);
+	public Address updateAddress(Authentication authentication, @RequestBody AddressDTO addressDTO) {
+		return addressService.updateAddress(authentication, addressDTO);
 
 	}
 

@@ -1,4 +1,4 @@
-export class Address{
+export class AddressDTO{
     street! : string;
     unit! : string;
     city!: string;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'src/app/address';
+import { AddressDTO } from 'src/app/addressDTO';
 import { AddressService } from 'src/app/service/address.service';
 import { CloudinaryService } from 'src/app/service/cloudinary.service';
 import { UpdateService } from 'src/app/service/self-update.service';
@@ -19,8 +19,8 @@ export class MyProfileComponent implements OnInit {
 
   user = new User();
   response : any;
-  address = new Address();
-  newAddress = new Address();
+  address = new AddressDTO();
+  newAddress = new AddressDTO();
   widget: any;
   updateImageDTO = new UpdateImageDTO();
 
@@ -117,7 +117,7 @@ export class MyProfileComponent implements OnInit {
     )
   }
 
-  public userUpdateAddress(newAddress : Address){
+  public userUpdateAddress(newAddress : AddressDTO){
     console.log(this.newAddress);
     this.addressService.updateUserAddress(newAddress).subscribe(
       (data) => {

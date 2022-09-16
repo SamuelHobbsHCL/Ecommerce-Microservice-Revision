@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.dto.AddressDTO;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.repository.AddressRepository;
@@ -28,7 +29,16 @@ public class AddressService {
 		return addressRepository.findById(user.getAddressId());
 	}
 	
-	public Address updateAddress(Authentication authentication, Address newAddress) {
+	public Address updateAddress(Authentication authentication, AddressDTO addressDTO) {
+		
+		Address newAddress = new Address();
+		
+		newAddress.setStreet(addressDTO.getStreet());
+		newAddress.setUnit(addressDTO.getUnit());
+		newAddress.setCity(addressDTO.getCity());
+		newAddress.setState(addressDTO.getState());
+		newAddress.setZipcode(addressDTO.getZipcode());
+		newAddress.setCountry(addressDTO.getCountry());
 		
 		Address savedAddress = addressRepository.save(newAddress);
 		
