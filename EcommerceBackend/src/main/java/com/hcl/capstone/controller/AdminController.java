@@ -53,11 +53,6 @@ public class AdminController {
 		return productsService.getAllProducts();
 	}
 	
-	@GetMapping(value = "/admin/get-order/{orderId}")
-	public Order getOrderById(@PathVariable("orderId") long orderId) {
-		return orderService.getOrderDetail(orderId);
-	}
-	
 	@GetMapping("/admin/orders")
 	public List<Order> getAllOrders(){
 		return orderService.getAllOrders();

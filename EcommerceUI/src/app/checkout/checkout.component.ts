@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { Address } from '../common/address';
+import { OrderInfo } from '../common/orderInfo';
 import { PaymentInfo } from '../common/payment-info';
 import { AddressService } from '../service/address.service';
 import { CartService } from '../service/cart.service';
@@ -21,6 +23,10 @@ export class CheckoutComponent implements OnInit {
   order : any = null;
   orderItems: any[] = [];
 
+  orderInfo: OrderInfo = new OrderInfo();
+  shippingAddress: Address = new Address();
+  billingAddress: Address = new Address();
+
   //Initialize Stripe API
   stripe = Stripe(environment.stripePublishableKey);
 
@@ -31,11 +37,8 @@ export class CheckoutComponent implements OnInit {
   constructor(private userService:UserService, private cartService:CartService, private addressService:AddressService, private router: Router, private checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
-
       //setup Stripe payment form
       this.setupStripePaymentForm();
-
-
 
       this.userService.getCurrentUser()
       .subscribe((res: any)=>{
@@ -45,15 +48,14 @@ export class CheckoutComponent implements OnInit {
       this.cartService.getOrderByUserId().subscribe(data => {
         this.order = data;
         this.orderItems = data.cartItems;
-
       });
 
-      this.addressService.getUserAddress()
-      .subscribe((res: any)=>{
-        this.address = res;
-        console.log(this.address);
-      });
-    
+      // If user has existing address, prepopulate fields
+      this.addressService.getUserAddress().subscribe(data => {
+        if (data !== null) {
+          this.shippingAddress = data;
+        }
+      })
   }
 
   setupStripePaymentForm() {
@@ -107,8 +109,15 @@ export class CheckoutComponent implements OnInit {
               //inform the customer there was am error
               alert(`There was an error: ${result.error.message}`);
             } else {
+              this.orderInfo.shippingAddress = this.shippingAddress;
+              if (true) { /* TODO replace boolean w/check */      
+                this.orderInfo.billingAddress = this.shippingAddress;
+              } else {
+                this.orderInfo.billingAddress = this.billingAddress;
+              }
+              console.log(this.orderInfo);
               //call REST API via the CheckoutService
-              this.cartService.checkOut().subscribe(data => {
+              this.cartService.checkOut(this.orderInfo).subscribe(data => {
                 console.log(data);
               })
 
@@ -126,13 +135,5 @@ export class CheckoutComponent implements OnInit {
         }
       )
     }
-
-    
-
-    
-
- 
-
   }
-
 }

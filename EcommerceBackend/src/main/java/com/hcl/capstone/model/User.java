@@ -14,9 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hcl.capstone.dto.AddressDto;
 import com.hcl.capstone.model.enumeration.AuthProvider;
 
 @Entity
@@ -41,6 +42,13 @@ public class User {
 	
 	@Column(name="EMAIL", nullable=false, length=255)
 	private String email;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = true)
+	private Address address;
+	
+	@Column(name = "PROFILE_IMAGE")
+	private String profileImage;
 
 	@ManyToMany(cascade = {
 			CascadeType.DETACH,
@@ -52,24 +60,19 @@ public class User {
 		joinColumns = @JoinColumn(name = "USER_ID"),
 		inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Roles> roles;
-	
-	@Column(name="ADDRESS_ID")
-	private long addressId;
-	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(name="AUTH_PROVIDER", length = 15)
 	private AuthProvider authProvider;
 	
 	public User(){}
 	
-	public User(String userName, String password, String firstName, String lastName, String email, long addressId) {
+	public User(String userName, String password, String firstName, String lastName, String email) {
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
-		this.addressId = addressId;
-		
+		this.email = email;		
 	}
 	
 	public long getUserId() {
@@ -136,13 +139,28 @@ public class User {
 		this.authProvider = authProvider;
 	}
 
-	public long getAddressId() {
-		return addressId;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public void setAddressByDto(AddressDto addressDto) {
+		if (this.address == null)
+			this.address = new Address(addressDto);
+		else
+			this.address.setData(addressDto);
 	}
 
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	
 
 }

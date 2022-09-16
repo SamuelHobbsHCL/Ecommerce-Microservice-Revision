@@ -15,8 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.dto.AddressDto;
+import com.hcl.capstone.dto.PasswordDto;
 import com.hcl.capstone.global.RoleName;
 import com.hcl.capstone.mailer.Mail;
+import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Roles;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.model.enumeration.AuthProvider;
@@ -53,6 +56,8 @@ public class UserService {
 		userRoles.add(role);
 
 		user.setRoles(userRoles);
+		// Default address is null, may be set in their profile page
+		user.setAddress(null);
 
 		sendRegistrationConfirmationEmail(user);
 
@@ -70,8 +75,32 @@ public class UserService {
 		}
 	}
 
+	public boolean deleteUser(Authentication authentication) {
+		User currentUser = getCurrentLoggedInUser(authentication);
+		
+		if(currentUser != null) {
+			userRepository.deleteById(currentUser.getUserId());
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
 	public void deleteUserById(long id) {
 		userRepository.deleteById(id);
+	}
+	
+	
+	public boolean updateImage(Authentication authentication, String imageUrl) {
+		User currentUser = getCurrentLoggedInUser(authentication);
+		if(currentUser != null) {
+			currentUser.setProfileImage(imageUrl);
+			userRepository.save(currentUser);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public User updateUser(User user, long id) {
@@ -131,6 +160,36 @@ public class UserService {
 
 	public User getUserbyEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	public Address getUserAddress(Authentication authentication) {		
+		User user = getCurrentLoggedInUser(authentication);	
+		return user.getAddress();
+	}
+	
+	public Address updateAddress(Authentication authentication, AddressDto addressDTO) {				
+		User currentUser = getCurrentLoggedInUser(authentication);
+		currentUser.setAddressByDto(addressDTO);
+		
+		userRepository.save(currentUser);
+		
+		return currentUser.getAddress();
+	}
+	//update user password
+	public boolean updateUserPassword(PasswordDto passwordDTO, Authentication authentication) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();	
+		
+		User user = getCurrentLoggedInUser(authentication);
+		
+		if(passwordEncoder.matches(passwordDTO.getCurrentPassword(), user.getPassword())) {
+			String encodedNewPassword = passwordEncoder.encode(passwordDTO.getNewPassword());
+			user.setPassword(encodedNewPassword);
+			userRepository.save(user);
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

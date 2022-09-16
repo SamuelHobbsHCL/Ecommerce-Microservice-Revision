@@ -48,7 +48,7 @@ public class AuthControllerTest {
     
     @BeforeAll
 	public void init() {
-    	user = new User("samhobbs","password","Sam","Hobbs","sam@email.com", 1); 
+    	user = new User("samhobbs","password","Sam","Hobbs","sam@email.com"); 
 		MockitoAnnotations.openMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
 	}

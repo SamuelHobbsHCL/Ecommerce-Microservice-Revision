@@ -20,17 +20,16 @@ export class HeaderComponent implements OnInit {
   public totalItem : number = 0;
 
   public isAuthenticated$!: Observable<boolean>;
+  public isDatabaseLoggedIn : boolean;
+  public isLoggedIn : boolean;
 
   constructor(private cartService : CartService, 
-    private http:HttpClient,
-    private userService: UserService, 
-    private userAuthService: UserAuthService, 
-    private router : Router, 
-    private oktaAuthStateService: OktaAuthStateService, 
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
+    private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
-    this.checkAuthenticated(); 
+    this.isAuthenticated$  = this.userAuthService.checkAuthenticated(); 
+    this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
+    this.isLoggedIn = this.userAuthService.isLoggedIn();
 
     const userRoles: any = JSON.stringify(this.userAuthService.getRoles());
     let isAdmin = false;
@@ -39,39 +38,19 @@ export class HeaderComponent implements OnInit {
         isAdmin = true;
       }
     }
-    console.log("isLoggedIn: " + this.isLoggedIn());
+    console.log("isLoggedIn: " + this.isLoggedIn);
     console.log("isAdmin: " + isAdmin);
+    console.log("okta login: " + this.isAuthenticated$)
 
-    if(this.isLoggedIn() && !isAdmin){
+    if(this.isLoggedIn && !isAdmin){
       this.cartService.getOrderByUserId().subscribe(data => {
         this.totalItem = data.cartItems.length;
       })
     }
   }
 
-  checkAuthenticated() {
-    this.isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
-      filter((s: AuthState) => !!s),
-      map((s: AuthState) => s.isAuthenticated ?? false)
-    );
-  }
-  
-  public isLoggedIn() {
-    return this.userAuthService.isLoggedIn() ;
-  }
-
-  public isDatabaseLoggedIn() {
-    if(this.userAuthService.getDatabaseLogin() === "true") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public logout() {
-    this.userAuthService.clear();
-    this.router.navigate(['/']);
-    window.location.reload();
+    this.userAuthService.logout();
   }
  
 }

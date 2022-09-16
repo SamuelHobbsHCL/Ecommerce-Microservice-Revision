@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.dto.OrderInfo;
 import com.hcl.capstone.global.OrderStatus;
 import com.hcl.capstone.mailer.Mail;
+import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.Product;
@@ -60,8 +62,9 @@ public class OrderService {
 			order.setOrderDate(date);
 			order.setOrderStatus(OrderStatus.IN_PROGRESS);
 			order.setUser(user);
-			order.setBillingAddressId(1);
-			order.setShippingAddressId(1);
+			// Billing & shipping address are not set until checkout
+			order.setBillingAddress(null);
+			order.setShippingAddress(null);
 			saveOrder(order);
 		}
 
@@ -97,7 +100,7 @@ public class OrderService {
 		orderItemRepository.save(orderItem);
 	}
 	
-	public String checkOut(Authentication authentication)
+	public String checkOut(OrderInfo orderInfo, Authentication authentication)
 			throws MessagingException {
 		User userCheckout = userService.getCurrentLoggedInUser(authentication);
 		if (userCheckout != null) {
@@ -126,6 +129,9 @@ public class OrderService {
 				orderCheckout.setOrderTotal(orderTotal);
 				orderCheckout.setOrderStatus(OrderStatus.COMPLETED);
 				orderCheckout.setOrderDate(new Date());
+				// Set billing & shipping address
+				orderCheckout.setShippingAddress(new Address(orderInfo.getShippingAddress()));
+				orderCheckout.setBillingAddress(new Address(orderInfo.getBillingAddress()));
 				saveOrder(orderCheckout);
 
 				Mail mailer = new Mail();
