@@ -21,8 +21,8 @@ export class UserProfileSecurityComponent implements OnInit {
 
 
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private userAuthService: UserAuthService) {
-    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(this.isAuthenticated$);
-    
+    this.isAuthenticated$ = this.userAuthService.checkAuthenticated();
+
     this.form = fb.group({
       current_password: ['', [Validators.required]],
       password: ['', [Validators.required]],

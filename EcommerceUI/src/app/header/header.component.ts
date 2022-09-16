@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
-    this.isAuthenticated$  = this.userAuthService.checkAuthenticated(this.isAuthenticated$); 
+    this.isAuthenticated$  = this.userAuthService.checkAuthenticated(); 
     this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
     this.isLoggedIn = this.userAuthService.isLoggedIn();
 

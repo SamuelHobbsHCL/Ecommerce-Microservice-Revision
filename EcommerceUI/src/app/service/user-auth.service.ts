@@ -50,8 +50,8 @@ export class UserAuthService {
     return localStorage.getItem('databaseLogin') as string;
   }
 
-  public checkAuthenticated(isAuthenticated$ : any) {
-    isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
+  public checkAuthenticated() {
+    let isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
       filter((s: AuthState) => !!s),
       map((s: AuthState) => s.isAuthenticated ?? false)
     );

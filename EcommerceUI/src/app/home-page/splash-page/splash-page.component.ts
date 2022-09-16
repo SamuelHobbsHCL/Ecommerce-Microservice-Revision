@@ -25,7 +25,7 @@ export class SplashPageComponent implements OnInit {
    ) { }
 
   ngOnInit(): void {
-    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(this.isAuthenticated$); 
+    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(); 
     this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
     this.isLoggedIn = this.userAuthService.isLoggedIn();
   }
