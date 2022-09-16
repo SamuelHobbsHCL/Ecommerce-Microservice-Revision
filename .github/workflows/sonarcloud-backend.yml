@@ -9,7 +9,28 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    name: Build
+    name: Build Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Build with Maven
+        run: |
+          cd EcommerceBackend
+          mvn clean install
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: capstone
+          path: '${{ github.workspace }}/EcommerceBackend/target/*.jar'
+
+  sonar-scan:
+    name: Sonar Scan Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
