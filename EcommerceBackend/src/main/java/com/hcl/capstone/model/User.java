@@ -41,6 +41,9 @@ public class User {
 	
 	@Column(name="EMAIL", nullable=false, length=255)
 	private String email;
+	
+	@Column(name = "PROFILE_IMAGE")
+	private String profileImage;
 
 	@ManyToMany(cascade = {
 			CascadeType.DETACH,
@@ -144,5 +147,14 @@ public class User {
 		this.addressId = addressId;
 	}
 
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	
 
 }

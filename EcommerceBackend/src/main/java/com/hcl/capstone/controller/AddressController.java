@@ -3,6 +3,8 @@ package com.hcl.capstone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.model.Address;
@@ -18,5 +20,11 @@ public class AddressController {
     public Address getUserAddress(Authentication authentication) {
     	return addressService.getUserAddress(authentication);
     }
+	
+	@PutMapping("/user/update-address")
+	public Address updateAddress(Authentication authentication, @RequestBody Address newAddress) {
+		return addressService.updateAddress(authentication, newAddress);
+
+	}
 
 }

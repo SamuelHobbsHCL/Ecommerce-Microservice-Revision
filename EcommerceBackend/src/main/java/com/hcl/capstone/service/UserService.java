@@ -73,8 +73,32 @@ public class UserService {
 		}
 	}
 
+	public boolean deleteUser(Authentication authentication) {
+		User currentUser = getCurrentLoggedInUser(authentication);
+		
+		if(currentUser != null) {
+			userRepository.deleteById(currentUser.getUserId());
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
 	public void deleteUserById(long id) {
 		userRepository.deleteById(id);
+	}
+	
+	
+	public boolean updateImage(Authentication authentication, String imageUrl) {
+		User currentUser = getCurrentLoggedInUser(authentication);
+		if(currentUser != null) {
+			currentUser.setProfileImage(imageUrl);
+			userRepository.save(currentUser);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public User updateUser(User user, long id) {

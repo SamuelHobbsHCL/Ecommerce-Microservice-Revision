@@ -37,7 +37,13 @@
                                 <div class="col-lg-3 order-lg-2">
                                     <div class="card-profile-image">
                                         <a href="/user-profile">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" alt="profile image" class="rounded-circle">
+                                            <ng-container *ngIf="user.profileImage !== null, else defaultImage">
+                                                <img src="{{user.profileImage}}" alt="profile image" class="rounded-circle">
+                                            </ng-container>
+                                            <ng-template #defaultImage>
+                                                <img src="../../assets/images/defaultProfileImage.png" alt="profile image" class="rounded-circle">
+                                            </ng-template>
+
                                         </a>
                                     </div>
                                 </div>

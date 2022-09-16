@@ -14,4 +14,8 @@ export class AddressService {
   public getUserAddress() : Observable<any> {
     return this.httpClient.get<any>(this.PATH_OF_API + "/user/getUserAddress");
   }
+
+  public updateUserAddress(address : any) : Observable<any> {
+    return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-address", address);
+  }
 }

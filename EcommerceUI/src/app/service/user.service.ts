@@ -4,6 +4,7 @@ import { UserAuthService } from './user-auth.service';
 import {map} from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UpdateImageDTO } from '../UpdateImageDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,11 @@ export class UserService {
 
   public deleteCurrentUser() : Observable<any>{
     return this.httpClient.delete<any>(this.PATH_OF_API + "/user/delete-user");
+  }
+
+  public updateUserImage(updateImageDTO : UpdateImageDTO) : Observable<any>{
+    console.log(updateImageDTO);
+    console.log("update user image");
+    return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-profile-image", updateImageDTO);
   }
 }

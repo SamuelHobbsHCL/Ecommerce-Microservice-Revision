@@ -1,5 +1,6 @@
 package com.hcl.capstone.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.dto.PasswordDTO;
+import com.hcl.capstone.dto.UpdateImageDTO;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.service.UserService;
 
@@ -57,7 +59,7 @@ public class UserController {
     public ResponseEntity<String> updatePassword(Authentication authentication, @RequestBody PasswordDTO passwordDTO){
     	boolean result = userService.updateUserPassword(passwordDTO, authentication);
     	if(result == false) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			String res = "Your password has been updated successfully";
 			return new ResponseEntity<>(res, HttpStatus.OK);
@@ -65,10 +67,29 @@ public class UserController {
 
     }
     
+    @PutMapping("/user/update-profile-image")
+    public ResponseEntity<String> updateImage(Authentication authentication, @RequestBody UpdateImageDTO updateImageDTO) {
+    	if(StringUtils.isNotEmpty(updateImageDTO.getImageUrl())) {
+
+    		userService.updateImage(authentication, updateImageDTO.getImageUrl());
+    		
+    		return new ResponseEntity<>("Image saved successfully", HttpStatus.OK);
+    		
+    	} else {
+    		return new ResponseEntity<>("Please provide image url", HttpStatus.BAD_REQUEST);
+    	}
+		
+    }
+    
 	@DeleteMapping("/user/delete-user")
-	public void deleteCurrentUser(Authentication authentication) {
-		User currentUser = userService.getCurrentLoggedInUser(authentication);
-		userService.deleteUserById(currentUser.getUserId());
+	public ResponseEntity<String> deleteCurrentUser(Authentication authentication) {
+		
+		boolean result = userService.deleteUser(authentication);
+		if(result == true) {
+			return new ResponseEntity<>("Successfully deleted account!", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Fail to delete. Please try again!", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
-}
+} 

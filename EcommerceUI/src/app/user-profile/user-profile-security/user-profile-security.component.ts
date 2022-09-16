@@ -57,6 +57,18 @@ export class UserProfileSecurityComponent implements OnInit {
           this.router.navigate(['/home-page']);
           
         })
+      }, (error) => {
+        console.log("Error here");
+        console.log(error);
+        Swal.fire(
+          'Success!',
+          'Your account has been deleted. Hope to see you again!',
+          'success'
+        ).then(() => {
+          this.userAuthService.clear();
+          this.router.navigate(['/home-page']);
+          
+        })
       }
     );
   }

@@ -34,7 +34,6 @@ public class AdminController {
 	@Autowired
 	private ProductService productsService;
 	
-	//
 	@Autowired
 	private OrderService orderService;
 
@@ -53,7 +52,6 @@ public class AdminController {
 		return productsService.getAllProducts();
 	}
 	
-	//
 	@GetMapping("/admin/orders")
 	public List<Order> getAllOrders(){
 		return orderService.getAllOrders();
