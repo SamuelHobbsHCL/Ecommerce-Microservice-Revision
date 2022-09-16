@@ -9,6 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
+    name: Build Frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +31,7 @@ jobs:
           path: ./EcommerceUI/dist/EcommerceUI
           
   sonar-scan:
-    name: SonarCloud
+    name: Sonar Scan Frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
