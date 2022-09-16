@@ -1,11 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
+import { OktaAuth, AuthState } from '@okta/okta-auth-js';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
 
-  constructor() { }
+  constructor(
+    private router : Router, 
+    private oktaAuthStateService: OktaAuthStateService, 
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
 
   public setRoles(roles:[]) {
     localStorage.setItem('roles', JSON.stringify(roles));
@@ -43,4 +50,26 @@ export class UserAuthService {
     return localStorage.getItem('databaseLogin') as string;
   }
 
+  public checkAuthenticated(isAuthenticated$ : any) {
+    isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
+      filter((s: AuthState) => !!s),
+      map((s: AuthState) => s.isAuthenticated ?? false)
+    );
+
+    return isAuthenticated$;
+  }
+
+  public isDatabaseLoggedIn() {
+    if(this.getDatabaseLogin() === "true") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public logout() {
+    this.clear();
+    this.router.navigate(['/']);
+    window.location.reload();
+  }
 }

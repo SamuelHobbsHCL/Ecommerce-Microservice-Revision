@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ConfirmedValidator } from 'src/app/confirmed.validator';
 import { PasswordDTO } from 'src/app/passwordDTO';
 import { UserAuthService } from 'src/app/service/user-auth.service';
@@ -16,9 +17,12 @@ export class UserProfileSecurityComponent implements OnInit {
   
   form: FormGroup = new FormGroup({});
   passwordDTO = new PasswordDTO();
+  public isAuthenticated$!: Observable<boolean>;
 
 
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private userAuthService: UserAuthService) {
+    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(this.isAuthenticated$);
+    
     this.form = fb.group({
       current_password: ['', [Validators.required]],
       password: ['', [Validators.required]],

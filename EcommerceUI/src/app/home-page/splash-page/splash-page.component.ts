@@ -17,43 +17,21 @@ import { UserService } from 'src/app/service/user.service';
 export class SplashPageComponent implements OnInit {
 
   public isAuthenticated$!: Observable<boolean>;
+  public isDatabaseLoggedIn : boolean;
+  public isLoggedIn : boolean;
 
-  constructor(private cartService : CartService, 
-    private http:HttpClient,
-    private userService: UserService, 
+  constructor(  
     private userAuthService: UserAuthService, 
-    private router : Router, 
-    private oktaAuthStateService: OktaAuthStateService, 
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
+   ) { }
 
   ngOnInit(): void {
-    this.checkAuthenticated(); 
-  }
-
-  checkAuthenticated() {
-    this.isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
-      filter((s: AuthState) => !!s),
-      map((s: AuthState) => s.isAuthenticated ?? false)
-    );
-  }
-
-
-  public isLoggedIn() {
-    return this.userAuthService.isLoggedIn() ;
-  }
-
-  public isDatabaseLoggedIn() {
-    if(this.userAuthService.getDatabaseLogin() === "true") {
-      return true;
-    } else {
-      return false;
-    }
+    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(this.isAuthenticated$); 
+    this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
+    this.isLoggedIn = this.userAuthService.isLoggedIn();
   }
 
   public logout() {
-    this.userAuthService.clear();
-    this.router.navigate(['/']);
-    window.location.reload();
+    this.userAuthService.logout();
   }
 
 }

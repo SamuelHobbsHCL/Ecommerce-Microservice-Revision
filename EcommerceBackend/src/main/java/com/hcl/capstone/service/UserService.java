@@ -145,7 +145,7 @@ public class UserService {
 		if(passwordEncoder.matches(passwordDTO.getCurrentPassword(), user.getPassword())) {
 			String encodedNewPassword = passwordEncoder.encode(passwordDTO.getNewPassword());
 			user.setPassword(encodedNewPassword);
-			usersRepository.save(user);
+			userRepository.save(user);
 			return true;
 		} else {
 			return false;

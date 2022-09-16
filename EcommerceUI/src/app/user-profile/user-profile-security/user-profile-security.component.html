@@ -11,40 +11,42 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <!-- Change password card-->
-            <div class="card mb-4">
-                <div class="card-header">Change Password</div>
-                <div class="card-body">
-                    <form [formGroup]="form" (ngSubmit)="submit()">
-                        <!-- Form Group (current password)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="current_password">Current Password</label>
-                            <input formControlName="current_password" class="form-control" id="current_password" type="password" placeholder="Enter current password" [(ngModel)]="passwordDTO.currentPassword">
-                            <div *ngIf="f.current_password.touched && f.current_password.invalid" class="alert alert-danger">
-                                <div *ngIf="f.current_password.errors?.required">Current Password is required.</div>
+            <ng-container *ngIf="(isAuthenticated$  | async) === false">
+                <div class="card mb-4">
+                    <div class="card-header">Change Password</div>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="submit()">
+                            <!-- Form Group (current password)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="current_password">Current Password</label>
+                                <input formControlName="current_password" class="form-control" id="current_password" type="password" placeholder="Enter current password" [(ngModel)]="passwordDTO.currentPassword">
+                                <div *ngIf="f.current_password.touched && f.current_password.invalid" class="alert alert-danger">
+                                    <div *ngIf="f.current_password.errors?.required">Current Password is required.</div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Form Group (new password)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="password">New Password</label>
-                            <input formControlName="password" class="form-control" id="password" type="password" placeholder="Enter new password">
-                            <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
-                                <div *ngIf="f.password.errors?.required">New Password is required.</div>
-                            </div>
+                            <!-- Form Group (new password)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="password">New Password</label>
+                                <input formControlName="password" class="form-control" id="password" type="password" placeholder="Enter new password">
+                                <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+                                    <div *ngIf="f.password.errors?.required">New Password is required.</div>
+                                </div>
 
-                        </div>
-                        <!-- Form Group (confirm password)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="confirm_password">Confirm Password</label>
-                            <input formControlName="confirm_password" class="form-control" id="confirm_password" type="password" placeholder="Confirm new password" [(ngModel)]="passwordDTO.newPassword">
-                            <div *ngIf="f.confirm_password.touched && f.confirm_password.invalid" class="alert alert-danger">
-                                <div *ngIf="f.confirm_password.errors?.required">Password is required.</div>
-                                <div *ngIf="f.confirm_password.errors?.confirmedValidator">New Password and Confirm Password must be match.</div>
                             </div>
-                        </div>
-                        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Save</button>
-                    </form>
+                            <!-- Form Group (confirm password)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="confirm_password">Confirm Password</label>
+                                <input formControlName="confirm_password" class="form-control" id="confirm_password" type="password" placeholder="Confirm new password" [(ngModel)]="passwordDTO.newPassword">
+                                <div *ngIf="f.confirm_password.touched && f.confirm_password.invalid" class="alert alert-danger">
+                                    <div *ngIf="f.confirm_password.errors?.required">Password is required.</div>
+                                    <div *ngIf="f.confirm_password.errors?.confirmedValidator">New Password and Confirm Password must be match.</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Save</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
 
             <!-- Delete account card-->
             <div class="card mb-4">

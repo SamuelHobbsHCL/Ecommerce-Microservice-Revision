@@ -24,7 +24,7 @@
                           </button>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <ng-container *ngIf="!isLoggedIn()">
+                            <ng-container *ngIf="!isLoggedIn">
                                 <li><a class="dropdown-item" href="/login">Sign in</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -32,7 +32,7 @@
                                 <li><a class="dropdown-item" href="/registration">Sign up</a></li>
 
                             </ng-container>
-                            <ng-container *ngIf="isDatabaseLoggedIn()">
+                            <ng-container *ngIf="isDatabaseLoggedIn">
                                 <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
