@@ -29,7 +29,7 @@
                                         <td>{{order.billingAddressId}}</td>
                                         <td>{{order.orderStatus}}</td>
                                         <td>
-                                            <a href="orders-lists/{{order.orderId}}" class="settings" title="Settings" data-toggle="tooltip"><em
+                                            <a type="button" (click)="navigateToOrder(order.orderId)"  class="settings" title="Settings" data-toggle="tooltip"><em
                                                     class="material-icons">&#xe8f4;</em></a>
                                         </td>
                                     </tr>

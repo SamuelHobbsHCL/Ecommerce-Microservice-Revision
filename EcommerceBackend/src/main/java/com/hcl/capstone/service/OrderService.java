@@ -154,7 +154,6 @@ public class OrderService {
 		return total;
 	}
 	
-		
 	public Order getOrderDetail(long orderId) {
 		Optional<Order> order = orderRepository.findById(orderId); 
 		return order.isPresent() ? order.get() : null;

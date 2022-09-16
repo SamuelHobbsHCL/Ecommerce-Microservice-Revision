@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
 
 @Component({
@@ -8,17 +9,19 @@ import { OrderService } from 'src/app/service/order.service';
   styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent implements OnInit {
+  id: string;
+  private sub: any;
+  orderItems: any;
 
-  constructor(private orderService : OrderService, private _router: Router) { }
-
-  public product: any;
+  constructor(private cartService : CartService, private _router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.orderService.getOrderDetail()
-    .subscribe(res => {
-      this.product = res;
-      console.log(this.product);
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id']; 
+      this.orderItems = this.cartService.getOrderItemsByOrderId(this.id);
     });
+
+    
   }
 
 
