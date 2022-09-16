@@ -40,6 +40,9 @@ public class User {
 	
 	@Column(name="EMAIL", nullable=false, length=255)
 	private String email;
+	
+	@Column(name = "PROFILE_IMAGE")
+	private String profileImage;
 
 	@ManyToMany(cascade = {
 			CascadeType.DETACH,
@@ -129,4 +132,23 @@ public class User {
 	public void setAuthProvider(AuthProvider authProvider) {
 		this.authProvider = authProvider;
 	}
+
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	
+
 }
