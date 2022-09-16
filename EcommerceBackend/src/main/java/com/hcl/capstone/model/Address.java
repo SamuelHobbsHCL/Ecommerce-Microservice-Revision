@@ -46,6 +46,14 @@ public class Address {
 		setCountry(address.getCountry());
 		setZipcode(address.getZipcode());
 	}
+	public void setData(AddressDto address) {
+		setStreet(address.getStreet());
+		setUnit(address.getUnit());
+		setCity(address.getCity());
+		setState(address.getState());
+		setCountry(address.getCountry());
+		setZipcode(address.getZipcode());
+	}
 	public long getAddressId() {
 		return addressId;
 	}

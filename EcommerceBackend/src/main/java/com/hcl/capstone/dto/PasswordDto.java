@@ -1,6 +1,6 @@
 package com.hcl.capstone.dto;
 
-public class PasswordDTO {
+public class PasswordDto {
 	
 	private String currentPassword;
 	

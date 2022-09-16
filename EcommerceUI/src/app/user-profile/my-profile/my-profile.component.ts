@@ -33,9 +33,8 @@ export class MyProfileComponent implements OnInit {
 
     this.addressService.getUserAddress()
       .subscribe((res: any)=>{
-        this.address = res;
+        this.setUpNewAddress(res);
         console.log(this.address);
-        this.setUpNewAdress();
     });
 
     this.cloudinary.createUploadWidget(
@@ -83,7 +82,17 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  setUpNewAdress() {
+  setUpNewAddress(res: any) {
+    if (res === null) { /* If user doesn't have address */
+      this.address.city =  "";
+      // this.newAddress.unit = null;
+      this.address.street = "";
+      this.address.state = "";
+      this.address.zipcode = "";
+      this.address.country = "";
+    } else {
+      this.address = res;
+    }
     this.newAddress.city = this.address.city;
     this.newAddress.unit = this.address.unit;
     this.newAddress.street = this.address.street;

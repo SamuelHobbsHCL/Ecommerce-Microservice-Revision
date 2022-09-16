@@ -1,6 +1,6 @@
 package com.hcl.capstone.dto;
 
-public class UpdateImageDTO {
+public class UpdateImageDto {
 
 	String imageUrl;
 

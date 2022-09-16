@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.capstone.dto.PasswordDTO;
-import com.hcl.capstone.dto.UpdateImageDTO;
+import com.hcl.capstone.dto.AddressDto;
+import com.hcl.capstone.dto.PasswordDto;
+import com.hcl.capstone.dto.UpdateImageDto;
+import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.service.UserService;
 
@@ -21,8 +23,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
-public class UserController {
-	
+public class UserController {	
 	@Autowired
 	private UserService userService;
 	
@@ -54,9 +55,20 @@ public class UserController {
 		}
 	}
     
+	
+	@GetMapping("/user/getUserAddress")
+    public Address getUserAddress(Authentication authentication) {
+    	return userService.getUserAddress(authentication);
+    }
+	
+	@PutMapping("/user/update-address")
+	public Address updateAddress(Authentication authentication, @RequestBody AddressDto addressDTO) {
+		return userService.updateAddress(authentication, addressDTO);
+	}
+    
     //update user password
     @PutMapping("/user/update-password")
-    public ResponseEntity<String> updatePassword(Authentication authentication, @RequestBody PasswordDTO passwordDTO){
+    public ResponseEntity<String> updatePassword(Authentication authentication, @RequestBody PasswordDto passwordDTO){
     	boolean result = userService.updateUserPassword(passwordDTO, authentication);
     	if(result == false) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,7 +80,7 @@ public class UserController {
     }
     
     @PutMapping("/user/update-profile-image")
-    public ResponseEntity<String> updateImage(Authentication authentication, @RequestBody UpdateImageDTO updateImageDTO) {
+    public ResponseEntity<String> updateImage(Authentication authentication, @RequestBody UpdateImageDto updateImageDTO) {
     	if(StringUtils.isNotEmpty(updateImageDTO.getImageUrl())) {
 
     		userService.updateImage(authentication, updateImageDTO.getImageUrl());

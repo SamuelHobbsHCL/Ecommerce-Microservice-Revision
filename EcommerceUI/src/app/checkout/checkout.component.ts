@@ -49,6 +49,13 @@ export class CheckoutComponent implements OnInit {
         this.order = data;
         this.orderItems = data.cartItems;
       });
+
+      // If user has existing address, prepopulate fields
+      this.addressService.getUserAddress().subscribe(data => {
+        if (data !== null) {
+          this.shippingAddress = data;
+        }
+      })
   }
 
   log(){
