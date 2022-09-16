@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.hcl.capstone.dto.AddressDto;
+
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -34,7 +36,24 @@ public class Address {
 	@Column(name = "ZIPCODE", nullable=false, length=255)
 	private String zipcode;
 	
+	public Address() {}
 	
+	public Address(AddressDto address) {
+		setStreet(address.getStreet());
+		setUnit(address.getUnit());
+		setCity(address.getCity());
+		setState(address.getState());
+		setCountry(address.getCountry());
+		setZipcode(address.getZipcode());
+	}
+	public void setData(AddressDto address) {
+		setStreet(address.getStreet());
+		setUnit(address.getUnit());
+		setCity(address.getCity());
+		setState(address.getState());
+		setCountry(address.getCountry());
+		setZipcode(address.getZipcode());
+	}
 	public long getAddressId() {
 		return addressId;
 	}

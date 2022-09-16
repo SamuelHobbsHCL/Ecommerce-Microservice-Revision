@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.26, for macos11 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ecommerce
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.30
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -90,8 +90,8 @@ CREATE TABLE `orders` (
   `user_id` bigint NOT NULL,
   `order_date` date NOT NULL,
   `order_total` decimal(9,2) NOT NULL,
-  `shipping_address_id` bigint NOT NULL,
-  `billing_address_id` bigint NOT NULL,
+  `shipping_address_id` bigint DEFAULT NULL,
+  `billing_address_id` bigint DEFAULT NULL,
   `order_status` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`,`user_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`),
@@ -112,6 +112,32 @@ LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` VALUES (61,32,'2022-08-30',60.00,1,1,'COMPLETED'),(62,32,'2022-08-31',1129.00,1,1,'COMPLETED'),(63,49,'2022-08-30',1760.00,1,1,'COMPLETED'),(64,49,'2022-08-30',4550.99,1,1,'COMPLETED'),(65,57,'2022-08-30',1820.00,1,1,'COMPLETED'),(66,58,'2022-08-31',2772.99,1,1,'SHIPPED'),(67,49,'2022-08-31',3421.99,1,1,'COMPLETED'),(68,49,'2022-08-31',6901.98,1,1,'COMPLETED'),(69,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(70,49,'2022-08-31',2772.99,1,1,'COMPLETED'),(71,49,'2022-08-31',2907.00,1,1,'COMPLETED'),(72,49,'2022-09-01',3421.99,1,1,'COMPLETED'),(73,58,'2022-09-01',3901.99,1,1,'COMPLETED'),(74,49,'2022-09-01',1358.99,1,1,'COMPLETED'),(75,58,'2022-09-01',1129.00,1,1,'DELIVERED'),(76,58,'2022-09-01',3901.99,1,1,'DELIVERED'),(77,49,'2022-09-01',3901.99,1,1,'COMPLETED'),(78,49,'2022-09-02',4070.99,1,1,'COMPLETED'),(79,58,'2022-09-01',7803.98,1,1,'DELIVERED'),(80,49,'2022-09-02',1463.30,1,1,'COMPLETED'),(82,49,'2022-09-06',4205.00,1,1,'COMPLETED'),(83,49,'2022-09-06',3421.99,1,1,'COMPLETED'),(85,58,'2022-09-06',2772.99,1,1,'In Progress'),(86,49,'2022-09-07',3421.99,1,1,'COMPLETED'),(87,49,'2022-09-08',10343.97,1,1,'COMPLETED'),(88,49,'2022-09-08',4300.98,1,1,'COMPLETED'),(89,49,'2022-09-08',9495.96,1,1,'COMPLETED'),(90,49,'2022-09-08',3965.31,1,1,'COMPLETED'),(91,32,'2022-09-08',563.32,1,1,'COMPLETED'),(92,32,'2022-09-08',4128.99,1,1,'COMPLETED'),(93,32,'2022-09-08',0.00,1,1,'COMPLETED'),(94,32,'2022-09-08',1778.00,1,1,'COMPLETED'),(95,32,'2022-09-08',0.00,1,1,'COMPLETED'),(96,32,'2022-09-08',6194.98,1,1,'COMPLETED'),(97,32,'2022-09-08',0.00,1,1,'In Progress'),(98,49,'2022-09-08',3421.99,1,1,'COMPLETED'),(99,49,'2022-09-12',5545.98,1,1,'COMPLETED'),(100,49,'2022-09-13',2907.00,1,1,'In Progress'),(101,64,'2022-09-13',3901.99,1,1,'DELIVERED'),(102,64,'2022-09-14',4550.99,1,1,'DELIVERED'),(103,64,'2022-09-14',2772.99,1,1,'DELIVERED'),(104,64,'2022-09-16',5545.98,1,1,'COMPLETED');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders_cart_items`
+--
+
+DROP TABLE IF EXISTS `orders_cart_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders_cart_items` (
+  `order_order_id` bigint NOT NULL,
+  `cart_items_id` bigint NOT NULL,
+  UNIQUE KEY `UK_6b1c8smsiwmstkr6gisj0o4np` (`cart_items_id`),
+  KEY `FKs8m1h7ff8t2l37t0x6d33x3pf` (`order_order_id`),
+  CONSTRAINT `FKm6lhs8klm10wrdbrl01uxws9` FOREIGN KEY (`cart_items_id`) REFERENCES `order_items` (`id`),
+  CONSTRAINT `FKs8m1h7ff8t2l37t0x6d33x3pf` FOREIGN KEY (`order_order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders_cart_items`
+--
+
+LOCK TABLES `orders_cart_items` WRITE;
+/*!40000 ALTER TABLE `orders_cart_items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders_cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -192,7 +218,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (1,32),(1,33),(2,32),(2,49),(2,50),(2,52),(2,57),(2,58),(2,60),(2,61),(2,64),(3,33);
+INSERT INTO `user_roles` VALUES (1,32),(1,33),(2,32),(2,49),(2,50),(2,52),(2,57),(2,58),(2,60),(2,61),(2,64),(2,71),(3,33);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 

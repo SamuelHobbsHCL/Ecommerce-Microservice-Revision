@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Address } from '../common/address';
+import { OrderInfo } from '../common/orderInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +34,11 @@ export class CartService {
     return this.http.get<any>(this.PATH_OF_API + "/user/get-order-items/" + orderId);
   }
 
-  public checkOut() {
-    return this.http.post<any>(this.PATH_OF_API + "/user/check-out", null);
+  // public checkOut(shippingAddress: Address, billingAddress: Address) {
+  //  return this.http.post<any>(this.PATH_OF_API + "/user/check-out", [{ shippingAddress },{ billingAddress }]);
+  // }
+  public checkOut(orderInfo: OrderInfo) {
+    return this.http.post<any>(this.PATH_OF_API + "/user/check-out", orderInfo);
   }
 
   public deleteAllOrderItemsByOrder() {
