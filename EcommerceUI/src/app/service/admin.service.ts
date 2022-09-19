@@ -49,4 +49,8 @@ export class AdminService {
   public updateProduct(product : any) {
     return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
   }
+
+  public updateOrder(order: any){
+    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + order.orderId, order);
+  }
 }

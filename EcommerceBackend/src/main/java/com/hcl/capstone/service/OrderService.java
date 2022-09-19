@@ -73,7 +73,7 @@ public class OrderService {
 		double orderTotal = getOrderTotal(user, order);
 		order.setOrderTotal(orderTotal);
 
-		updateOrder(order);
+		updateOrder(order, order.getOrderId());
 
 		return getAllOrderItemsByUserAndOrder(user, order);
 		
@@ -159,24 +159,22 @@ public class OrderService {
 		
 		return total;
 	}
-	
+	   
 	public Order getOrderDetail(long orderId) {
-		Optional<Order> order = orderRepository.findById(orderId); 
-		return order.isPresent() ? order.get() : null;
+		return orderRepository.findById(orderId);
 	}
 	
-	public Optional<Order> updateOrder(Order order) {
-		long orderId = order.getOrderId();
-		Optional<Order> orderRepo = orderRepository.findById(orderId);
+	public Order updateOrder(Order order, long id) {
+		Optional <Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
 		
 		if(!orderRepo.isPresent()) {
-			return Optional.empty();
+			return null;
 		}
 		
-		order.setOrderId(orderId);
+		order.setOrderId(id);
 		orderRepository.save(order);
 		
-		return orderRepository.findById(orderId);
+		return orderRepository.findById(id);
 	}
 		
 	public Order saveOrder(Order order) {
@@ -201,7 +199,7 @@ public class OrderService {
 		User user = userService.getCurrentLoggedInUser(authentication);
 		double orderTotal = getOrderTotal(user, order);
 		order.setOrderTotal(orderTotal);
-		updateOrder(order);
+		updateOrder(order, orderItemId);
 	}	
 	
 	public Order getOrderInProgress(Authentication authentication) {

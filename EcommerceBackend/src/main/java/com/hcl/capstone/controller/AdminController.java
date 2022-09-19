@@ -1,6 +1,7 @@
 package com.hcl.capstone.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,6 +75,12 @@ public class AdminController {
 		return userService.getUserById(id);
 	}
 	
+	@GetMapping("/admin/order/{id}")
+	public Order getOrderById(@PathVariable(value = "id") long id){
+		return orderService.getOrderDetail(id);
+	}
+	
+	
 	@PutMapping("/admin/user/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id){
 		
@@ -87,9 +94,21 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable int id){
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable long id){
 		
 		Product result = productsService.updateProduct(product, id);
+		
+		if(result == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping("/admin/order/update/{id}")
+	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
+		
+		Order result = orderService.updateOrder(order, id);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
