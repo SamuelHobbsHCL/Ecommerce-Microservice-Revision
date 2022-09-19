@@ -598,7 +598,6 @@ textarea.form-control {
     border: 1px solid transparent;
     border-radius: .375rem;
     position: relative;
-    transition: all .15s ease;
     letter-spacing: .025em;
     text-transform: none;
     will-change: transform;
