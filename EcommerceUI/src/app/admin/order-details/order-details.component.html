@@ -1,1 +1,50 @@
-<p>order-details works!</p>
+<ng-container *ngIf="order.orderStatus !=='DELIVERED' && order.orderStatus !=='In Progress'">
+    <h4>Order ID: {{order.orderId}}</h4>
+    <article class="card ">
+        <div class="card-body row ">
+            <div class="col ">
+            <select name="orderStatus" id="orderStatus">
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="SHIPPED">SHIPPED</option>
+                <option value="DELIVERED">DELIVERED</option>
+            </select></div>
+            <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
+            <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
+            <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
+            <div class="col "> <strong>Update Order</strong> <button type = "button" class = "btn btn-light" style = "float: right;" (click) = "updateOrder()">Update Order</button> </div>
+        </div>
+    </article>
+    <div class="track ">
+        <ng-container *ngIf="order.orderStatus==='COMPLETED' ">
+            <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
+            <div class="step "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
+            <div class="step "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
+        </ng-container>
+
+        <ng-container *ngIf="order.orderStatus==='SHIPPED' ">
+            <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
+            <div class="step active "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
+            <div class="step "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
+        </ng-container>
+
+        <ng-container *ngIf="order.orderStatus==='DELIVERED' ">
+            <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
+            <div class="step active "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
+            <div class="step active "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
+        </ng-container>
+
+    </div>
+    <hr>
+    <ul class="row ">
+        <li class="col-md-6 " *ngFor="let item of order.cartItems ">
+            <figure class="itemside mb-3 ">
+                <div class="aside "><img src="{{item.product.productImage}}" alt="product image" class="img-sm border "></div>
+                <figcaption class="info align-self-center ">
+                    <div class="title "><strong>{{item.product.productName}}</strong></div><span class="text-muted ">${{item.product.unitPrice}}</span>
+                </figcaption>
+            </figure>
+        </li>
+
+    </ul>
+    <hr>
+</ng-container>

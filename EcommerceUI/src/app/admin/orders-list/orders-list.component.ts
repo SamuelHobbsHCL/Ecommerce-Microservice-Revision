@@ -27,7 +27,7 @@ export class OrdersListComponent implements OnInit {
   navigateToInventory() {
     this._router.navigate(['/inventory'])
   }
-  navigateToOrder(order : any) {
-    this._router.navigate(['/orders-list', order.orderId])
+  navigateToOrder(id : any) {
+    this._router.navigate(['/orders-list', id])
   }
 }
