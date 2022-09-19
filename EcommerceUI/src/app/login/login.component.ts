@@ -72,8 +72,6 @@ export class LoginComponent implements OnInit {
 
         const role = response.user.roles[0].roleName;
         const roleList = response.user.roles;
-        //console.log(roleList);
-        //console.log(role);
        
         let isAdmin = false;
 

@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UpdateService } from '../service/self-update.service';
-import { UserAuthService } from '../service/user-auth.service';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
 
