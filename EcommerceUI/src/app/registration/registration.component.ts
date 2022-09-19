@@ -38,9 +38,7 @@ export class RegistrationComponent implements OnInit {
           'Error!',
           'Error! Please check username and/or email!',
           'error'
-        ).then(() =>{
-        
-        })
+        )
         this.msg="Registration successful!";
         this._router.navigate(['/login']);
       }

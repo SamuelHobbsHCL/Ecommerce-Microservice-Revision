@@ -28,11 +28,12 @@ export class LoginComponent implements OnInit {
   msg = '';
 
   public isAuthenticated$!: Observable<boolean>;
+  public isDatabaseLoggedIn : boolean;
+  public isLoggedIn : boolean;
 
   public name$!: Observable<string>;
 
   constructor(
-    private http:HttpClient,
     private userService: UserService, 
     private userAuthService: UserAuthService, 
     private router : Router, 
@@ -40,29 +41,12 @@ export class LoginComponent implements OnInit {
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
 
   ngOnInit(): void {
-    this.checkAuthenticated();
+    this.isAuthenticated$ = this.userAuthService.checkAuthenticated(); 
+    this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
+    this.isLoggedIn = this.userAuthService.isLoggedIn();
     this.getUserDetails();
     console.log(window.location.origin);
     
-  }
-
-  public isLoggedIn() {
-    return this.userAuthService.isLoggedIn();
-  }
-
-  public isDatabaseLoggedIn() {
-    if(this.userAuthService.getDatabaseLogin() === "true") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkAuthenticated() {
-    this.isAuthenticated$ = this.oktaAuthStateService.authState$.pipe(
-      filter((s: AuthState) => !!s),
-      map((s: AuthState) => s.isAuthenticated ?? false)
-    );
   }
 
   getUserDetails(){
@@ -120,10 +104,9 @@ export class LoginComponent implements OnInit {
     await this.oktaAuth.signOut();
     this.userAuthService.clear();
   }
+
   public logout() {
-    this.userAuthService.clear();
-    this.router.navigate(['/']);
-    window.location.reload();
+    this.userAuthService.logout();
   }
 
 }

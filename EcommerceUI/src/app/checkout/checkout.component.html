@@ -3,16 +3,20 @@
         <div class="col-xl-10">
             <div class="card shadow-lg ">
                 <div class="row p-2 mt-3 justify-content-between mx-sm-2">
-
-
                 </div>
                 <div class="row  mx-auto justify-content-center text-center">
                     <div class="col-12 mt-3 ">
                         <nav aria-label="breadcrumb" class="second ">
                             <ol class="breadcrumb indigo lighten-6 first  ">
-                                <li class="breadcrumb-item font-weight-bold "><a class="black-text text-uppercase " href="/products"><span class="mr-md-3 mr-1">BACK TO SHOP</span></a><i class="fa fa-angle-double-right " aria-hidden="true"></i></li>
-                                <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase" href="/cart"><span class="mr-md-3 mr-1">SHOPPING BAG</span></a><i class="fa fa-angle-double-right text-uppercase " aria-hidden="true"></i></li>
-                                <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase active-2" href="/check-out"><span class="mr-md-3 mr-1">CHECKOUT</span></a></li>
+                                <li class="breadcrumb-item font-weight-bold "><a class="black-text text-uppercase "
+                                        href="/products"><span class="mr-md-3 mr-1">BACK TO SHOP</span></a><i
+                                        class="fa fa-angle-double-right " aria-hidden="true"></i></li>
+                                <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase"
+                                        href="/cart"><span class="mr-md-3 mr-1">SHOPPING BAG</span></a><i
+                                        class="fa fa-angle-double-right text-uppercase " aria-hidden="true"></i></li>
+                                <li class="breadcrumb-item font-weight-bold"><a
+                                        class="black-text text-uppercase active-2" href="/check-out"><span
+                                            class="mr-md-3 mr-1">CHECKOUT</span></a></li>
                             </ol>
                         </nav>
                     </div>
@@ -34,94 +38,100 @@
                                             <div class="row g-3">
                                                 <div class="col-sm-6">
                                                     <label for="firstName" class="form-label">First name</label>
-                                                    <input type="text" class="form-control" id="firstName" placeholder="" value="{{user.firstName}}" readonly>
+                                                    <input type="text" class="form-control" id="firstName"
+                                                        placeholder="" value="{{user.firstName}}" readonly>
 
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                     <label for="lastName" class="form-label">Last name</label>
-                                                    <input type="text" class="form-control" id="lastName" placeholder="" value="{{user.lastName}}" readonly>
+                                                    <input type="text" class="form-control" id="lastName" placeholder=""
+                                                        value="{{user.lastName}}" readonly>
 
                                                 </div>
 
                                                 <div class="col-12">
                                                     <label for="email" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{user.email}}" readonly>
+                                                    <input type="email" class="form-control" id="email"
+                                                        placeholder="you@example.com" value="{{user.email}}" readonly>
 
                                                 </div>
 
                                                 <div class="col-12">
                                                     <label for="address" class="form-label">Address</label>
-                                                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" value="{{address.street}}" required>
+                                                    <input type="text" class="form-control" id="address"
+                                                        placeholder="1234 Main St" [(ngModel)]="shippingAddress.street"
+                                                        name="street" required>
                                                     <div class="invalid-feedback">
                                                         Please enter your shipping address.
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" value="{{address.unit}}">
+                                                    <label for="address2" class="form-label">Address 2 <span
+                                                            class="text-muted">(Optional)</span></label>
+                                                    <input type="text" class="form-control" id="address2"
+                                                        placeholder="Apartment or suite"
+                                                        [(ngModel)]="shippingAddress.unit" name="unit">
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <label for="city" class="form-label">City</label>
-                                                    <input type="text" class="form-control" id="city" placeholder="" value="{{address.city}}" required>
+                                                    <input type="text" class="form-control" id="city" placeholder=""
+                                                        [(ngModel)]="shippingAddress.city" name="city" required>
                                                     <div class="invalid-feedback">
                                                         City required.
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="col-md-4">
                                                     <label for="state" class="form-label">State</label>
-                                                    <select class="form-select" id="state" required>
-                                                <option value="{{address.state}}" selected>{{address.state}}</option>
-                                                <option>Alabama</option>
-                                                <option>Alaska</option>
-                                                <option>Arizona</option>
-                                                <option>California</option>
-                                                <option>Florida</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
-                                               
-                                              </select>
+                                                    <select class="form-select" id="state"
+                                                        [(ngModel)]="shippingAddress.state" name="state" required>
+                                                        <option value="{{shippingAddress.state}}" selected>
+                                                            {{shippingAddress.state}}</option>
+                                                        <option>Alabama</option>
+                                                        <option>Alaska</option>
+                                                        <option>Arizona</option>
+                                                        <option>California</option>
+                                                        <option>Florida</option>
+                                                        <option>Texas</option>
+                                                        <option>Washington</option>
+
+                                                    </select>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid state.
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-3">
                                                     <label for="zip" class="form-label">Zip Code</label>
-                                                    <input type="text" class="form-control" id="zip" placeholder="" value="{{address.zipcode}}" required>
+                                                    <input type="text" class="form-control" id="zip" placeholder=""
+                                                        [(ngModel)]="shippingAddress.zipcode" name="zipcode" required>
                                                     <div class="invalid-feedback">
                                                         Zip code required.
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-5">
                                                     <label for="country" class="form-label">Country</label>
-                                                    <select class="form-select" id="country" required>
-                                                <option value="{{address.country}}" selected>{{address.country}}</option>
-                                                <option>United States</option>
-                                              </select>
+                                                    <select class="form-select" [(ngModel)]="shippingAddress.country"
+                                                        name="country" id="country" required>
+                                                        <option value="{{shippingAddress.country}}" selected>
+                                                            {{shippingAddress.country}}</option>
+                                                        <option>United States</option>
+                                                    </select>
                                                     <div class="invalid-feedback">
                                                         Please select a valid country.
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <hr class="my-4">
-
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="same-address" checked>
-                                                <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+                                                <input type="checkbox" class="form-check-input" id="same-address"
+                                                    checked>
+                                                <label class="form-check-label" for="same-address">Shipping address is
+                                                    the same as my billing address</label>
                                             </div>
-
-
                                             <hr class="my-4">
-
-
                                             <p class="card-text text-muted mt-4  space">PAYMENT DETAILS</p>
 
                                             <!-- Stripe Elements Credit Card Section-->
@@ -135,43 +145,39 @@
                                                 </div>
 
                                                 <!-- Used to display form errors -->
-                                                <div id="card-errors" class="displayError.textContent!== '': 'alert alert-danger mt-1'">
+                                                <div id="card-errors"
+                                                    class="displayError.textContent!== '': 'alert alert-danger mt-1'">
 
                                                 </div>
                                             </div>
-
-
-
-
-
-
                                             <hr class="my-4">
-
-                                            <button class="w-100 btn btn-primary mb-4 btn-lg" type="submit" (click)="checkout()">PLACE YOUR ORDER</button>
+                                            <button class="w-100 btn btn-primary mb-4 btn-lg" type="submit"
+                                                (click)="checkout()">PLACE YOUR ORDER</button>
                                         </form>
                                     </div>
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="card border-0 ">
                             <div class="card-header card-2">
-                                <p class="card-text text-muted mt-md-4  mb-2 space">YOUR ORDER <a href="/cart"><span class=" small text-muted ml-2 cursor-pointer">EDIT SHOPPING BAG</span></a> </p>
+                                <p class="card-text text-muted mt-md-4  mb-2 space">YOUR ORDER <a href="/cart"><span
+                                            class=" small text-muted ml-2 cursor-pointer">EDIT SHOPPING BAG</span></a>
+                                </p>
                                 <hr class="my-2">
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row  justify-content-between" *ngFor="let item of orderItems">
                                     <div class="col-auto col-md-4">
                                         <div class="media flex-column flex-sm-row">
-                                            <img class=" img-fluid" src="{{item.product.productImage}}" alt="product image" width="62" height="62">
+                                            <img class=" img-fluid" src="{{item.product.productImage}}"
+                                                alt="product image" width="62" height="62">
                                             <div class="media-body  my-auto">
                                                 <div class="row ">
                                                     <div class="col-auto">
-                                                        <p class="mb-0"><strong>{{item.product.productName}}</strong></p>
+                                                        <p class="mb-0"><strong>{{item.product.productName}}</strong>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
