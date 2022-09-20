@@ -2,12 +2,14 @@
     <h4>Order ID: {{order.orderId}}</h4>
     <article class="card ">
         <div class="card-body row ">
-            <div class="col ">
-            <select name="orderStatus" id="orderStatus">
-                <option value="COMPLETED">COMPLETED</option>
-                <option value="SHIPPED">SHIPPED</option>
-                <option value="DELIVERED">DELIVERED</option>
-            </select></div>
+            <div class="col">
+                    <select #status (change)="onSelected(status.value)">
+                        <option default>Update Order Status</option>
+                        <option>COMPLETED</option>
+                        <option>SHIPPED</option>
+                        <option>DELIVERED</option>
+                    </select>
+                </div>
             <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
             <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
             <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
@@ -30,8 +32,9 @@
         <ng-container *ngIf="order.orderStatus==='DELIVERED' ">
             <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
             <div class="step active "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
-            <div class="step active "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
+            <div class="step "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
         </ng-container>
+        
 
     </div>
     <hr>

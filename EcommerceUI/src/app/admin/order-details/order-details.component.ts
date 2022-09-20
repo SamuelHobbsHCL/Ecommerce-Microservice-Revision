@@ -11,8 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent implements OnInit {
-  orderStatus :any;
-  orderText :any;
+  updateStatus :any;
   id: string;
   private sub: any;
   order : any;
@@ -32,15 +31,17 @@ export class OrderDetailsComponent implements OnInit {
     }
     
     );
+    console.log(this.order);
     return this.order;
   }
 
+  onSelected(value:string): void {
+		this.updateStatus = value;
+	}
+
   public updateOrder() {
-    this.orderStatus = document.getElementById("orderStatus");
-    this.orderText = this.orderStatus.options[this.orderStatus.selectedIndex].text;
-    this.order.orderStatus = this.orderText;
-    console.log(this.order);
-    this.adminService.updateOrder(this.order).subscribe(data => {
+    this.order.orderStatus = this.updateStatus;
+    this.adminService.updateOrder(this.id, this.order).subscribe(data => {
       Swal.fire(
         'Success',
         'Order has been updated!',

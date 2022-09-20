@@ -103,7 +103,7 @@ public class Mail {
 	}
 
 	
-	public void sendUpdateEmail(User user, Order order, List<OrderItem> orderItems) throws  MessagingException {
+	public void sendUpdateEmail(User user, Order order) throws  MessagingException {
 		Message msg = new MimeMessage(setSession(setProperties()));
 
 		msg.setSentDate(new Date());
@@ -122,40 +122,6 @@ public class Mail {
 		builder.append("</br>");
 		builder.append("Your Order is now on the way to you! Thank you for shopping with us!");
 		builder.append("</br>");
-		builder.append("Order Detail");
-		builder.append("</br>");
-		builder.append("</br>");
-		builder.append("<table>");
-		builder.append("<tr>");
-		builder.append("<th>Product Name</th>");
-		builder.append("<th>Quantity</th>");
-		builder.append("<th>Price</th>");
-		builder.append("<th>Total</th>");
-		builder.append("</tr>");
-		
-		for(OrderItem orderItem : orderItems) {
-			builder.append("<tr>");
-			builder.append("<td>");
-			builder.append(orderItem.getProduct().getProductName());
-			builder.append("</td>");
-			
-			builder.append("<td>");
-			builder.append(orderItem.getQuantity());
-			builder.append("</td>");
-			
-			builder.append("<td>");
-			builder.append("$" + orderItem.getProduct().getUnitPrice());
-			builder.append("</td>");
-			
-			builder.append("<td>");
-			builder.append("$"+ orderItem.getProduct().getUnitPrice() * orderItem.getQuantity());
-			builder.append("</td>");
-			builder.append("</tr>");
-		}
-		
-		
-		builder.append("</table>");
-		
 		builder.append("</br>");
 		builder.append("Order Total: $" + order.getOrderTotal());
 		builder.append("</br>");

@@ -57,8 +57,8 @@ export class AdminService {
     return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
   }
 
-  public updateOrder(order : any){
-    console.log(order);
-    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + order.orderId, order);
+  public updateOrder(id : any, order : any){
+    console.log(order.orderStatus);
+    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + id, order);
   }
 }

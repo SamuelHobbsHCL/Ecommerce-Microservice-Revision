@@ -108,7 +108,7 @@ public class AdminController {
 	@PutMapping("/admin/order/update/{id}")
 	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
 		
-		Order result = orderService.updateOrder(order, id);
+		Order result = orderService.updateOrderStatus(order, id);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

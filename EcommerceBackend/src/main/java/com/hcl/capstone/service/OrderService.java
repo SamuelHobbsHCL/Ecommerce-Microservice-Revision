@@ -73,7 +73,7 @@ public class OrderService {
 		double orderTotal = getOrderTotal(user, order);
 		order.setOrderTotal(orderTotal);
 
-		updateOrder(order, order.getOrderId());
+		updateOrder(order);
 
 		return getAllOrderItemsByUserAndOrder(user, order);
 		
@@ -161,18 +161,33 @@ public class OrderService {
 	}
 	   
 	public Order getOrderDetail(long orderId) {
-		return orderRepository.findById(orderId);
+		Order order = orderRepository.findById(orderId); 
+		return order != null ? order : null;
 	}
 	
-	public Order updateOrder(Order order, long id) {
-		Optional <Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
+	public Order updateOrder(Order order) {
+		long orderId = order.getOrderId();
+		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(orderId));
 		
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		order.setOrderId(id);
+		
+		order.setOrderId(orderId);
 		orderRepository.save(order);
 		
+		return orderRepository.findById(orderId);
+	}
+	
+	public Order updateOrderStatus(Order order, long id) {
+		
+		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
+		
+		if(!orderRepo.isPresent()) {
+			return null;
+		}
+		orderRepository.updateOrderStatus(order.getOrderStatus(), id);
+
 		return orderRepository.findById(id);
 	}
 		
@@ -198,7 +213,7 @@ public class OrderService {
 		User user = userService.getCurrentLoggedInUser(authentication);
 		double orderTotal = getOrderTotal(user, order);
 		order.setOrderTotal(orderTotal);
-		updateOrder(order, orderItemId);
+		updateOrder(order);
 	}	
 	
 	public Order getOrderInProgress(Authentication authentication) {
