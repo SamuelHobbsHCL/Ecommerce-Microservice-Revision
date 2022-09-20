@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpStatusCode } from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { OKTA_AUTH } from "@okta/okta-angular";
