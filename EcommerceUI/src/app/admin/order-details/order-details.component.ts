@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
 import Swal from 'sweetalert2';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-order-details',
