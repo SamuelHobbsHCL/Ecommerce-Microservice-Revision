@@ -53,6 +53,10 @@ export class UserService {
     return this.httpClient.get<any>(this.PATH_OF_API + "/user/getCurrentUser");
   }
 
+  public getUserById(id: number) : Observable<any> {
+    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/user/" + id);
+  }
+
   public updatePassword(passwordDTO) : Observable<any>{
     return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-password", passwordDTO);
   }

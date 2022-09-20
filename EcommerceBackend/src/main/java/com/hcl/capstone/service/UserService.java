@@ -167,6 +167,14 @@ public class UserService {
 		return user.getAddress();
 	}
 	
+	public Address getUserAddress(long id) {
+		User user = getUserById(id);
+		if (user != null)
+			return user.getAddress();
+		else
+			return null;
+	}
+	
 	public Address updateAddress(Authentication authentication, AddressDto addressDTO) {				
 		User currentUser = getCurrentLoggedInUser(authentication);
 		currentUser.setAddressByDto(addressDTO);
@@ -175,6 +183,16 @@ public class UserService {
 		
 		return currentUser.getAddress();
 	}
+	
+	public Address updateAddress(long userId, AddressDto addressDTO) {
+		User user = getUserById(userId);
+		if (user == null)
+			return null;
+		user.setAddressByDto(addressDTO);
+		userRepository.save(user);
+		return user.getAddress();
+	}
+	
 	//update user password
 	public boolean updateUserPassword(PasswordDto passwordDTO, Authentication authentication) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();	
