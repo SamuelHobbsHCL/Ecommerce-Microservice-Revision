@@ -16,7 +16,15 @@ export class AddressService {
     return this.httpClient.get<any>(this.PATH_OF_API + "/user/getUserAddress");
   }
 
+  public getAddressById(userId: number) : Observable<any> {
+    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/address/" + userId);
+  }
+
   public updateUserAddress(addressDTO : AddressDTO) : Observable<any> {
     return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-address", addressDTO);
+  }
+
+  public updateAddressById(userId: number, addressDTO : AddressDTO) : Observable<any> {
+    return this.httpClient.put<any>(this.PATH_OF_API + "/admin/update-address/" + userId, addressDTO);
   }
 }
