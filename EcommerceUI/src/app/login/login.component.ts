@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
@@ -72,8 +71,6 @@ export class LoginComponent implements OnInit {
 
         const role = response.user.roles[0].roleName;
         const roleList = response.user.roles;
-        //console.log(roleList);
-        //console.log(role);
        
         let isAdmin = false;
 

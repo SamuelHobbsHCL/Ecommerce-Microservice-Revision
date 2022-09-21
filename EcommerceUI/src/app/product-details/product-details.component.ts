@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../common/product';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
@@ -32,7 +31,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
     
     );
-    //console.log(this.selectedProduct);
     return this.product;
   }
 
@@ -43,7 +41,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
-      //console.log(data);
       Swal.fire(
         'Success!',
         'Product added to cart!',

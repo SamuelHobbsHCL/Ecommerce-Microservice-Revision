@@ -36,7 +36,7 @@ public class AuthControllerTest {
     @Mock TokenProvider tokenProvider;
     @InjectMocks private AuthController authController;
     User user;
-    
+
     //Taken from https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
     public static String jsonString(Object obj) {
         try {
@@ -45,7 +45,7 @@ public class AuthControllerTest {
             throw new RuntimeException(e);
         }
     }
-    
+
     @BeforeAll
 	public void init() {
     	user = new User("samhobbs","password","Sam","Hobbs","sam@email.com"); 
@@ -56,7 +56,7 @@ public class AuthControllerTest {
     // Register user
     @Test
     @Order(1)
-    public void registerUser() throws Exception {       
+    public void registerUser() throws Exception {
         when(userService.registerUser(ArgumentMatchers.any())).thenReturn(user);
 
         mockMvc.perform(post("/auth/signup")
@@ -70,19 +70,19 @@ public class AuthControllerTest {
     }
 
     // Getting token from logging in
-	/*
-	 * @Test
-	 * 
-	 * @Order(2) public void authenticateUser() throws Exception { LoginRequest
-	 * loginRequest = new LoginRequest("sam@email.com","password"); AuthResponse
-	 * authResponse = new AuthResponse(user,"SAMPLE_TOKEN");
-	 * when(tokenProvider.createToken(loginRequest)).thenReturn(authResponse);
-	 * 
-	 * mockMvc.perform(post("/auth/login") .content(jsonString(loginRequest))
-	 * .contentType(MediaType.APPLICATION_JSON) .accept(MediaType.APPLICATION_JSON))
-	 * .andDo(print()) .andExpect(status().isOk())
-	 * .andExpect(jsonPath("$.user",Matchers.equalTo(user))) // TODO match user just
-	 * created .andExpect(jsonPath("$.jwtToken",Matchers.equalTo("SAMPLE_TOKEN")))
-	 * .andReturn(); }
-	 */
+    /*
+     * @Test
+     * 
+     * @Order(2) public void authenticateUser() throws Exception { LoginRequest
+     * loginRequest = new LoginRequest("sam@email.com","password"); AuthResponse
+     * authResponse = new AuthResponse(user,"SAMPLE_TOKEN");
+     * when(tokenProvider.createToken(loginRequest)).thenReturn(authResponse);
+     * 
+     * mockMvc.perform(post("/auth/login") .content(jsonString(loginRequest))
+     * .contentType(MediaType.APPLICATION_JSON) .accept(MediaType.APPLICATION_JSON))
+     * .andDo(print()) .andExpect(status().isOk())
+     * .andExpect(jsonPath("$.user",Matchers.equalTo(user))) // TODO match user just
+     * created .andExpect(jsonPath("$.jwtToken",Matchers.equalTo("SAMPLE_TOKEN")))
+     * .andReturn(); }
+     */
 }

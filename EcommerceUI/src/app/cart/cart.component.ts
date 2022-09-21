@@ -34,7 +34,6 @@ export class CartComponent implements OnInit {
 
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
-      //console.log(data);
       Swal.fire(
         'Success!',
         'Product added to cart!',

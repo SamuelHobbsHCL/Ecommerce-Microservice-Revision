@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Order } from '../common/order';
-import {catchError, map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 
