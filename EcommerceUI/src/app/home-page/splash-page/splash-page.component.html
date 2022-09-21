@@ -1,73 +1,69 @@
-<div>
-    <section class="view intro-2">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
+<section class="view intro">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid nav-bar">
 
-                <div class="logo">
-                    <a href="/home-page">
-                        <img src="../../../assets/images/logo.png" alt="logo" class="logo_size" />
-                    </a>
-                </div>
-                <div class="d-flex align-items-center right-element">
-                    <div class="nav-item dropdown-center">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="logo">
+                <a href="/home-page">
+                    <img src="../../../assets/images/logo.png" alt="logo" class="logo_size" />
+                </a>
+            </div>
+            <div class="d-flex align-items-center right-element">
+                <div class="nav-item dropdown-center">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             MY ACCOUNT
                           </button>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <ng-container *ngIf="!isLoggedIn">
-                                <li><a class="dropdown-item" href="/login">Sign in</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/registration">Sign up</a></li>
+                        <ng-container *ngIf="!isLoggedIn">
+                            <li><a class="dropdown-item" href="/login">Sign in</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/registration">Sign up</a></li>
 
-                            </ng-container>
-                            <ng-container *ngIf="isDatabaseLoggedIn">
-                                <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/login">Sign out</a></li>
+                        </ng-container>
+                        <ng-container *ngIf="isDatabaseLoggedIn">
+                            <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/login">Sign out</a></li>
 
-                            </ng-container>
-                            <!-- If log in with Okta -->
-                            <ng-container *ngIf="(isAuthenticated$  | async) === true">
-                                <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/login">Sign out from Okta</a></li>
-                            </ng-container>
-                        </ul>
-                    </div>
+                        </ng-container>
+                        <!-- If log in with Okta -->
+                        <ng-container *ngIf="(isAuthenticated$  | async) === true">
+                            <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/login">Sign out from Okta</a></li>
+                        </ng-container>
+                    </ul>
                 </div>
             </div>
-        </nav>
-
-        <div class="nav-bar">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home-page">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">PRODUCTS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">ABOUT US</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">CONTACT</a>
-                </li>
-            </ul>
         </div>
+    </nav>
 
-        <div class="button-wrapper">
-            <div class="splash-button">
-                <a class="splash-text" href="/products">Shop Now</a>
-            </div>
+    <div class="nav-bar">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/home-page">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/products">PRODUCTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">CONTACT</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="button-wrapper">
+        <div class="splash-button">
+            <a class="splash-text" href="/products">Shop Now</a>
         </div>
-
-
-    </section>
-</div>
+    </div>
+</section>

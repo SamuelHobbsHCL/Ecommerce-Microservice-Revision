@@ -1,10 +1,11 @@
-.intro-2 {
+.intro {
     background: url("../../../assets/images/splash-background.jpg")no-repeat;
     background-size: cover;
 }
 
 .navbar {
     box-shadow: none;
+    padding-top: 1.5em;
 }
 
 .logo {
@@ -18,11 +19,11 @@
 }
 
 .right-element {
-    margin-right: 50px;
+    padding-right: 6em;
 }
 
 .nav-bar {
-    margin-top: 0px;
+    margin-top: 1em;
 }
 
 .nav-link {
@@ -57,7 +58,6 @@
 
 .view {
     height: 100vh !important;
-    padding: 50px;
 }
 
 @media (max-width: 768px) {
@@ -79,6 +79,23 @@
     .full-height header,
     .full-height header .view {
         height: 1020px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .right-element {
+        padding-right: 6em;
+    }
+    .nav-bar {
+        margin-top: 1em;
+    }
+    .intro {
+        background: url("../../../assets/images/splash-background.jpg")no-repeat;
+        background-size: cover;
+    }
+    .navbar {
+        box-shadow: none;
+        padding-top: 1.5em;
     }
 }
 
