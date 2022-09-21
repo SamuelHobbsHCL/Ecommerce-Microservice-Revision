@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.OrderInfo;
+import com.hcl.capstone.dto.OrderDto;
 import com.hcl.capstone.global.OrderStatus;
 import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Address;
@@ -159,25 +160,36 @@ public class OrderService {
 		
 		return total;
 	}
-	
-		
+	   
 	public Order getOrderDetail(long orderId) {
-		Optional<Order> order = orderRepository.findById(orderId); 
-		return order.isPresent() ? order.get() : null;
+		Order order = orderRepository.findById(orderId); 
+		return order != null ? order : null;
 	}
 	
-	public Optional<Order> updateOrder(Order order) {
+	public Order updateOrder(Order order) {
 		long orderId = order.getOrderId();
-		Optional<Order> orderRepo = orderRepository.findById(orderId);
+		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(orderId));
 		
 		if(!orderRepo.isPresent()) {
-			return Optional.empty();
+			return null;
 		}
 		
 		order.setOrderId(orderId);
 		orderRepository.save(order);
 		
 		return orderRepository.findById(orderId);
+	}
+	
+	public Order updateOrderStatus(OrderDto OrderStatusDTO, long id) {
+		
+		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
+		
+		if(!orderRepo.isPresent()) {
+			return null;
+		}
+		orderRepository.updateOrderStatus(OrderStatusDTO.getStatus(), id);
+
+		return orderRepository.findById(id);
 	}
 		
 	public Order saveOrder(Order order) {

@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.repository.ProductRepository;
 
@@ -33,15 +34,14 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
-	public Product updateProduct(Product product, long id) {
+	public Product updateProduct(ProductDto productDTO, long id) {
 		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(id));
 		
 		if(!productRepo.isPresent()) {
 			return null;
 		}
-		
-		product.setProductId(id);
-		productRepository.save(product);
+		Product update = new Product(productDTO);
+		productRepository.save(update);
 		
 		return productRepository.findById(id);
 	}
