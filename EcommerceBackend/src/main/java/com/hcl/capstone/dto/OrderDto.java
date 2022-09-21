@@ -6,55 +6,43 @@ import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.User;
 
 public class OrderDto {
-
+	
+	private long id;
 	String status;
 	AddressDto shippingAddress;
 	AddressDto billingAddress;
-	private long orderId;
-	private User user;
-	private List<OrderItem> cartItems;
-	private Date orderDate;
-	private double orderTotal;
-	private String orderStatus;
-
-	public long getOrderId() {
-		return orderId;
+	private User dtoUser;
+	private List<OrderItem> dtoCartItems;
+	private Date dtoDate;
+	private double dtoTotal;
+	private String dtoStatus;
+	
+	public OrderDto(String status) {
+		this.status = status;
 	}
 
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
+	public String getDtoStatus() {
+		return dtoStatus;
 	}
 
-	public User getUser() {
-		return user;
+	public void setDtoStatus(String dtoStatus) {
+		this.dtoStatus = dtoStatus;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public long getId() {
+		return id;
 	}
 
-	public List<OrderItem> getCartItems() {
-		return cartItems;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setCartItems(List<OrderItem> cartItems) {
-		this.cartItems = cartItems;
+	public String getStatus() {
+		return status;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public double getOrderTotal() {
-		return orderTotal;
-	}
-
-	public void setOrderTotal(double orderTotal) {
-		this.orderTotal = orderTotal;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public AddressDto getShippingAddress() {
@@ -73,23 +61,36 @@ public class OrderDto {
 		this.billingAddress = billingAddress;
 	}
 
-	public String getOrderStatus() {
-		return orderStatus;
+	public User getDtoUser() {
+		return dtoUser;
 	}
 
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
+	public void setDtoUser(User dtoUser) {
+		this.dtoUser = dtoUser;
 	}
 
-	public OrderDto(String status) {
-		this.status = status;
+	public List<OrderItem> getDtoCartItems() {
+		return dtoCartItems;
 	}
 
-	public String getStatus() {
-		return status;
+	public void setDtoCartItems(List<OrderItem> dtoCartItems) {
+		this.dtoCartItems = dtoCartItems;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public Date getDtoDate() {
+		return dtoDate;
 	}
+
+	public void setDtoDate(Date dtoDate) {
+		this.dtoDate = dtoDate;
+	}
+
+	public double getDtoTotal() {
+		return dtoTotal;
+	}
+
+	public void setDtoTotal(double dtoTotal) {
+		this.dtoTotal = dtoTotal;
+	}
+
 }

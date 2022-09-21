@@ -1,72 +1,67 @@
 package com.hcl.capstone.dto;
 
 public class ProductDto {
-	private String productName;
-
-	private double unitPrice;
-
-	private int productStock;
-
-	private String productImage;
-
-	private String productDescription;
-
+	private String dtoName;
+	private double dtoPrice;
+	private int dtoStock;
+	private String dtoImage;
+	private String dtoDescription;
 	long id;
 
 	public ProductDto(String productName, double unitPrice, int productStock, String productImage,
 			String productDescription) {
-		this.productName = productName;
-		this.unitPrice = unitPrice;
-		this.productStock = productStock;
-		this.productImage = productImage;
-		this.productDescription = productDescription;
+		this.dtoName = productName;
+		this.dtoPrice = unitPrice;
+		this.dtoStock = productStock;
+		this.dtoImage = productImage;
+		this.dtoDescription = productDescription;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getDtoName() {
+		return dtoName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setDtoName(String productName) {
+		this.dtoName = productName;
 	}
 
-	public double getUnitPrice() {
-		return unitPrice;
+	public double getDtoPrice() {
+		return dtoPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setDtoPrice(double unitPrice) {
+		this.dtoPrice = unitPrice;
 	}
 
-	public int getProductStock() {
-		return productStock;
+	public int getDtoStock() {
+		return dtoStock;
 	}
 
-	public void setProductStock(int productStock) {
-		this.productStock = productStock;
+	public void setDtoStock(int productStock) {
+		this.dtoStock = productStock;
 	}
 
-	public String getProductImage() {
-		return productImage;
+	public String getDtoImage() {
+		return dtoImage;
 	}
 
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
+	public void setDtoImage(String productImage) {
+		this.dtoImage = productImage;
 	}
 
-	public String getProductDescription() {
-		return productDescription;
+	public String getDtoDescription() {
+		return dtoDescription;
 	}
 
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
+	public void setDtoDescription(String productDescription) {
+		this.dtoDescription = productDescription;
 	}
 
-	public void setProductId(long id) {
+	public void setDtoId(long id) {
 		this.id = id;
 	}
 
-	public Long getProductId() {
+	public Long getDtoId() {
 		return id;
 	}
 }
