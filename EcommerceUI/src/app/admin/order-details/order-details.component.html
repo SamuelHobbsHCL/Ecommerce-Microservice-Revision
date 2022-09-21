@@ -5,7 +5,7 @@
         <div class="card-body row ">
             <div class="col">
                 <strong>Update Order Status:</strong>
-                    <select class="form-control selectpicker" id="status" name="status" required="true" #status (change)="onSelected(status.value)" >
+                    <select required="required" class="form-control selectpicker" id="status" name="status"  #status (change)="onSelected(status.value)" >
                         <option value="" disabled selected>Update Order Delivery Status</option>
                         <option value="COMPLETED" >COMPLETED</option>
                         <option value="SHIPPED" >SHIPPED</option>
@@ -15,7 +15,7 @@
             <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
             <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
             <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
-            <div class="col "> <strong></strong> <button type = "button" class = "btn btn-primary" style = "float: right;" (click) = "updateOrder()">Update Order</button> </div>
+            <div class="col "> <button data-toggle="dropdown" type = "button" class = "btn btn-primary" style = "float: right;" (click) = "updateOrder()">Update Order</button> </div>
            
         </div>
         

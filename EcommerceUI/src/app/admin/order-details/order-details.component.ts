@@ -5,6 +5,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
 import Swal from 'sweetalert2';
 import { NgModel } from '@angular/forms';
+import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
 
 @Component({
   selector: 'app-order-details',
@@ -42,15 +43,24 @@ export class OrderDetailsComponent implements OnInit {
 
   updateOrder() {
     console.log(this.updateStatus)
-    this.order.orderStatus = this.updateStatus;
-    this.adminService.updateOrder(this.id, this.order).subscribe(data => {
+    if(this.updateStatus == null || this.updateStatus == this.order.orderStatus){
       Swal.fire(
-        'Success',
-        'Order has been updated!',
-        'success'
+        'Error!',
+        'Please pick a valid order status',
+        'error'
       )
-      window.location.reload();
-    })
+    }else{
+      this.order.orderStatus = this.updateStatus;
+      this.adminService.updateOrder(this.id, this.order).subscribe(data => {
+        Swal.fire(
+          'Success',
+          'Order has been updated!',
+          'success'
+        )
+        window.location.reload();
+      })
+    }
+    
   }
 
   goBack(){
