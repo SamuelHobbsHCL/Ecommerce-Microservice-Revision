@@ -40,7 +40,8 @@ export class OrderDetailsComponent implements OnInit {
 		this.updateStatus = value;
 	}
 
-  public updateOrder() {
+  updateOrder() {
+    console.log(this.updateStatus)
     this.order.orderStatus = this.updateStatus;
     this.adminService.updateOrder(this.id, this.order).subscribe(data => {
       Swal.fire(
@@ -50,6 +51,10 @@ export class OrderDetailsComponent implements OnInit {
       )
       window.location.reload();
     })
+  }
+
+  goBack(){
+    this._router.navigate(['/orders-list'])
   }
 
 

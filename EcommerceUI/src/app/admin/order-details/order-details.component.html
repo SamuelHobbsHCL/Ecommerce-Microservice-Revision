@@ -1,10 +1,12 @@
-
+<button type = "button" class = "btn btn-primary" (click) = "goBack()">Back</button>
     <h4>Order ID: {{order.orderId}}</h4>
+
     <article class="card ">
         <div class="card-body row ">
             <div class="col">
                 <strong>Update Order Status:</strong>
-                    <select class="form-control" required #status (change)="onSelected(status.value)" >
+                    <select class="form-control selectpicker" id="status" name="status" required="true" #status (change)="onSelected(status.value)" >
+                        <option value="" disabled selected>Update Order Delivery Status</option>
                         <option value="COMPLETED" >COMPLETED</option>
                         <option value="SHIPPED" >SHIPPED</option>
                         <option value="DELIVERED" >DELIVERED</option>
@@ -14,13 +16,15 @@
             <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
             <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
             <div class="col "> <strong></strong> <button type = "button" class = "btn btn-primary" style = "float: right;" (click) = "updateOrder()">Update Order</button> </div>
+           
         </div>
+        
     </article>
     <div class="track ">
         <ng-container *ngIf="order.orderStatus==='DELIVERED' ">
             <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
             <div class="step active "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
-            <div class="step "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
+            <div class="step active"> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
         </ng-container>
         <ng-container *ngIf="order.orderStatus==='SHIPPED' ">
             <div class="step active "> <span class="icon "> <em class="fa fa-check "></em> </span> <span class="text ">Order confirmed</span> </div>
@@ -32,13 +36,10 @@
             <div class="step "> <span class="icon "> <em class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
             <div class="step "> <span class="icon "> <em class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
         </ng-container>
-
-        
-
-        
         
 
     </div>
+    
     <hr>
     <ul class="row ">
         <li class="col-md-6 " *ngFor="let item of order.cartItems ">
@@ -49,6 +50,9 @@
                 </figcaption>
             </figure>
         </li>
-
+        
     </ul>
+    
     <hr>
+    
+    
