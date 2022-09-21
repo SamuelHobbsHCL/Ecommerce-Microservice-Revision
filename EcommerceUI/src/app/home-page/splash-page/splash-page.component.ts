@@ -12,6 +12,7 @@ export class SplashPageComponent implements OnInit {
   public isAuthenticated$!: Observable<boolean>;
   public isDatabaseLoggedIn : boolean;
   public isLoggedIn : boolean;
+  public isAdmin : boolean;
 
   constructor(  
     private userAuthService: UserAuthService, 
@@ -21,6 +22,7 @@ export class SplashPageComponent implements OnInit {
     this.isAuthenticated$ = this.userAuthService.checkAuthenticated(); 
     this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
     this.isLoggedIn = this.userAuthService.isLoggedIn();
+    this.isAdmin = this.userAuthService.isAdmin();
   }
 
   public logout() {

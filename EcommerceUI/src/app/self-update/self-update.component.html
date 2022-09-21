@@ -2,6 +2,10 @@
     <h1>Hello {{user.firstName}} {{user.lastName}}</h1>
     <h1>Account Management for User {{user.userId}}</h1>
     <form>
+        <div class="mb-3">
+            <label class="small mb-1" for="inputUsername">Username: </label>
+                <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Enter your username" [(ngModel)]="user.userName" value="{{user.userName}}">
+        </div>
         <label for="uname">Username : </label>
         <input type="text" id="uname" name="uname" [(ngModel)]="user.userName"><br><br>
         <label for="fname">First name : </label>
