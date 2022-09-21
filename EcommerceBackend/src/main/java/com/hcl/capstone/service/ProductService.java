@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Product;
+import com.hcl.capstone.model.User;
 import com.hcl.capstone.repository.ProductRepository;
 
 @Service
@@ -41,6 +43,7 @@ public class ProductService {
 			return null;
 		}
 		Product update = new Product(productDTO);
+		update.setProductId(id);
 		productRepository.save(update);
 		
 		return productRepository.findById(id);
@@ -54,6 +57,18 @@ public class ProductService {
 	
 	public List<Product> searchProducts(String searchStr) {
 		return productRepository.findAllByProductNameContaining(searchStr);
+	}
+
+	public boolean updateProductImage(ProductDto productDTO, String imageUrl) {
+		Optional<Product> product = productRepository.findById(productDTO.getDtoId());
+		if(!product.isPresent()) {
+			return false;
+		} else {
+			Product update = new Product(productDTO);
+			productRepository.save(update);
+			return true;
+		}
+		
 	}
 
 }
