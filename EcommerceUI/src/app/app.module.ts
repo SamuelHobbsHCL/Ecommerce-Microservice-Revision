@@ -44,6 +44,7 @@ import { UserProfileSecurityComponent } from './user-profile/user-profile-securi
 import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
+import { OrderDetailsComponent } from './admin/order-details/order-details.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -84,7 +85,8 @@ const oktaAuth = new OktaAuth({
     UserProfileComponent,
     UserProfileSecurityComponent,
     UserProfileOrderHistoryComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.hcl.capstone.dto.ProductDto;
+
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
@@ -44,6 +46,14 @@ public class Product {
 		return productId;
 	}
 
+	public Product(ProductDto productDTO) {
+		this.productName = productDTO.getDtoName();
+		this.unitPrice = productDTO.getDtoPrice();
+		this.productStock = productDTO.getDtoStock();
+		this.productImage = productDTO.getDtoImage();
+		this.productDescription = productDTO.getDtoDescription();
+	}
+	
 	public void setProductId(long productId) {
 		this.productId = productId;
 	}

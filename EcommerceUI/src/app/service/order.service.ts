@@ -19,7 +19,7 @@ export class OrderService {
   constructor(private http : HttpClient) { }
 
   getOrderDetail(){
-    return this.http.get<any>("http://localhost:8080//user/get-order")
+    return this.http.get<any>("http://localhost:8080/user/get-order")
     .pipe(map((res:any)=>{
       return res;
     }))

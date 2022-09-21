@@ -29,6 +29,7 @@ export class MyProfileComponent implements OnInit {
     .subscribe((res: any)=>{
       this.user = res;
       console.log(this.user);
+      console.log(this.user.password);
     });
 
     this.addressService.getUserAddress()

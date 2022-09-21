@@ -1,6 +1,7 @@
 package com.hcl.capstone.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.dto.AddressDto;
+import com.hcl.capstone.dto.OrderDto;
+import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Order;
+import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.service.ProductService;
 import com.hcl.capstone.service.UserService;
 import com.hcl.capstone.service.OrderService;
@@ -75,6 +79,11 @@ public class AdminController {
 		return userService.getUserById(id);
 	}
 	
+	@GetMapping("/admin/order/{id}")
+	public Order getOrderById(@PathVariable(value = "id") long id){
+		return orderService.getOrderDetail(id);
+	}
+	
 	@GetMapping("/admin/address/{userId}")
 	public Address getAddressById(@PathVariable long userId) {
 		return userService.getUserAddress(userId);
@@ -98,9 +107,21 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable int id){
+	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO, @PathVariable long id){
 		
-		Product result = productsService.updateProduct(product, id);
+		Product result = productsService.updateProduct(productDTO, id);
+		
+		if(result == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping("/admin/order/update/{id}")
+	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto OrderStatusDTO, @PathVariable long id){
+		
+		Order result = orderService.updateOrderStatus(OrderStatusDTO, id);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
