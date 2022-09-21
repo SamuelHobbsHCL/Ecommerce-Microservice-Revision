@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
+import com.hcl.capstone.dto.AddressDto;
+import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.service.ProductService;
@@ -80,6 +82,15 @@ public class AdminController {
 		return orderService.getOrderDetail(id);
 	}
 	
+	@GetMapping("/admin/address/{userId}")
+	public Address getAddressById(@PathVariable long userId) {
+		return userService.getUserAddress(userId);
+	}
+	
+	@PutMapping("/admin/update-address/{userId}")
+	public Address updateAddress(@PathVariable long userId, @RequestBody AddressDto addressDTO) {
+		return userService.updateAddress(userId, addressDTO);
+	}
 	
 	@PutMapping("/admin/user/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id){

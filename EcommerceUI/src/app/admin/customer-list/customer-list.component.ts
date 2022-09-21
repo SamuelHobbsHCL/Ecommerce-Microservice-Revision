@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/service/admin.service';
-import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-customer-list',

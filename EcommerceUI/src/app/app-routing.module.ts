@@ -1,5 +1,3 @@
-
-import { Component } from '@angular/core';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
@@ -7,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ApiService } from './service/api.service';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
