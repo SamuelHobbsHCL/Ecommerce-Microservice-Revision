@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.dto.AddressDto;
+import com.hcl.capstone.dto.OrderDto;
+import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
@@ -105,9 +107,9 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable long id){
+	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO, @PathVariable long id){
 		
-		Product result = productsService.updateProduct(product, id);
+		Product result = productsService.updateProduct(productDTO, id);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -117,9 +119,9 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/order/update/{id}")
-	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
+	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto OrderStatusDTO, @PathVariable long id){
 		
-		Order result = orderService.updateOrderStatus(order, id);
+		Order result = orderService.updateOrderStatus(OrderStatusDTO, id);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

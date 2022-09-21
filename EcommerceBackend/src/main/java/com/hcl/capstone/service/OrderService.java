@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.OrderInfo;
+import com.hcl.capstone.dto.OrderDto;
 import com.hcl.capstone.global.OrderStatus;
 import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Address;
@@ -179,14 +180,14 @@ public class OrderService {
 		return orderRepository.findById(orderId);
 	}
 	
-	public Order updateOrderStatus(Order order, long id) {
+	public Order updateOrderStatus(OrderDto OrderStatusDTO, long id) {
 		
 		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
 		
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		orderRepository.updateOrderStatus(order.getOrderStatus(), id);
+		orderRepository.updateOrderStatus(OrderStatusDTO.getStatus(), id);
 
 		return orderRepository.findById(id);
 	}
