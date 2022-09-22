@@ -2,11 +2,12 @@
 
 export interface Order {
     orderId:number;
-    user:any;
-    orderDate:any;
-    orderTotal:number;
     shippingAddressId:number;
     billingAddressId:number;
+    user:any;
+    orderItems: any;
+    orderDate:any;
+    orderTotal:number;
     orderStatus:string;
 
 }

@@ -187,7 +187,8 @@ public class OrderService {
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		orderRepository.updateOrderStatus(OrderStatusDTO.getStatus(), id);
+		System.out.println("The new order status is " + OrderStatusDTO.getDtoStatus());
+		orderRepository.updateOrderStatus(OrderStatusDTO.getDtoStatus(), id);
 
 		return orderRepository.findById(id);
 	}
@@ -221,7 +222,7 @@ public class OrderService {
 		User user = userService.getCurrentLoggedInUser(authentication);
 
 		List<Order> orders = getAllOrderByUser(user);
-
+		
 		Order orderInProgress = null;
 
 		for (Order order : orders) {
@@ -229,7 +230,7 @@ public class OrderService {
 				orderInProgress = order;
 			}
 		}
-		
+		System.out.print(orderInProgress);
 		return orderInProgress;
 	}
 }
