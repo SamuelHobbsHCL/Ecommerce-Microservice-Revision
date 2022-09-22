@@ -101,7 +101,8 @@ public class Mail {
 
 		Transport.send(msg);
 	}
-
+	
+	
 	private Session setSession(Properties props) {
 		return Session.getInstance(props, new javax.mail.Authenticator() {
 			@Override

@@ -33,11 +33,18 @@ export class AdminService {
       }))
   }
 
+  public getOrderById(id : any){
+    return this.http.get<any>(this.PATH_OF_API + "/admin/order/" + id)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
   public deleteUser(id : any) {
     return this.http.delete(this.PATH_OF_API + "/admin/delete-user/" + id);
   }
 
-  public addProduct(product: Product) : Observable<any> {
+  public addProduct(product : Product) : Observable<any> {
     return this.http.post<any>(this.PATH_OF_API + "/inventory/add/", product, {
     });
   }
@@ -48,5 +55,10 @@ export class AdminService {
 
   public updateProduct(product : any) {
     return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
+  }
+
+  public updateOrder(id : any, order : any){
+    console.log(order.orderStatus);
+    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + id, order);
   }
 }

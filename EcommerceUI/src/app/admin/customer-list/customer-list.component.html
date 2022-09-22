@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             <a href="/update/{{user.userId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
-                            <a (click)="deleteUser(user.userId)" class="delete" title="Delete" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
+                            <a type="button" (click)="ifdeleteUser(user.userId)" class="delete" title="Delete" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
                 </tbody>
@@ -51,4 +51,5 @@
             </div>
         </div>
     </div>
+
 </div>

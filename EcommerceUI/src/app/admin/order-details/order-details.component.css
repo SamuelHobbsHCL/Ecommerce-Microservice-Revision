@@ -100,10 +100,6 @@ hr {
     overflow: visible;
     box-sizing: content-box;
     height: 0;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border: 0;
-    border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
 h1,
@@ -113,15 +109,11 @@ h5,
 h6 {
     margin-top: 0;
     margin-bottom: .5rem;
-    font-family: 'Open Sans', serif
 }
 
 p {
     margin-top: 0;
     margin-bottom: 1rem;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.7;
 }
 
 address {
@@ -177,8 +169,6 @@ a:not([href]):not([tabindex]):focus {
 code {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     font-size: 1em;
-    word-break: break-word;
-    color: #f3a4b5;
 }
 
 img {
@@ -220,6 +210,10 @@ textarea {
 button,
 input {
     overflow: visible;
+}
+
+button {
+    text-transform: none;
 }
 
 button,
@@ -343,6 +337,19 @@ h6,
     line-height: 1.5;
 }
 
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+code {
+    font-size: 87.5%;
+    word-break: break-word;
+    color: #f3a4b5;
+}
+
 a>code {
     color: inherit;
 }
@@ -353,8 +360,6 @@ a>code {
     margin-left: auto;
     padding-right: 15px;
     padding-left: 15px;
-    margin-top: 50px;
-    margin-bottom: 50px
 }
 
 @media (min-width: 576px) {
@@ -504,7 +509,6 @@ a>code {
 @media screen and (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
-        font-size: .875rem;
     }
 }
 
@@ -596,10 +600,6 @@ textarea.form-control {
     white-space: nowrap;
     border: 1px solid transparent;
     border-radius: .375rem;
-    position: relative;
-    letter-spacing: .025em;
-    text-transform: none;
-    will-change: transform;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -743,7 +743,6 @@ textarea.form-control {
 
 .dropdown {
     position: relative;
-    display: inline-block;
 }
 
 .dropdown-menu {
@@ -830,10 +829,6 @@ textarea.form-control {
     padding: .5rem 1.5rem;
     white-space: nowrap;
     color: #8898aa;
-    font-weight: 700;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    text-transform: uppercase;
 }
 
 .input-group {
@@ -842,9 +837,6 @@ textarea.form-control {
     width: 100%;
     flex-wrap: wrap;
     align-items: stretch;
-    transition: all .15s ease;
-    border-radius: .375rem;
-    box-shadow: none;
 }
 
 .input-group>.form-control {
@@ -874,7 +866,6 @@ textarea.form-control {
 
 .input-group-prepend {
     display: flex;
-    margin-right: -1px;
 }
 
 .input-group-prepend .btn {
@@ -887,6 +878,10 @@ textarea.form-control {
 .input-group-prepend .input-group-text+.input-group-text,
 .input-group-prepend .input-group-text+.btn {
     margin-left: -1px;
+}
+
+.input-group-prepend {
+    margin-right: -1px;
 }
 
 .input-group-text {
@@ -903,7 +898,6 @@ textarea.form-control {
     border-radius: .375rem;
     background-color: #fff;
     align-items: center;
-    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
 }
 
 .input-group-text input[type='radio'],
@@ -936,7 +930,6 @@ textarea.form-control {
 .nav-link {
     display: block;
     padding: .25rem .75rem;
-    color: #525f7f;
 }
 
 .nav-link:hover,
@@ -1019,12 +1012,7 @@ textarea.form-control {
 
 .card {
     position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
@@ -1072,7 +1060,6 @@ textarea.form-control {
     border-radius: .375rem;
     background-color: #e9ecef;
     box-shadow: inset 0 .1rem .1rem rgba(0, 0, 0, .1);
-    margin-bottom: 1rem;
 }
 
 .media {
@@ -1115,6 +1102,10 @@ a.bg-white:focus,
 button.bg-white:hover,
 button.bg-white:focus {
     background-color: #e6e6e6 !important;
+}
+
+.bg-white {
+    background-color: #fff !important;
 }
 
 .border-0 {
@@ -1303,6 +1294,10 @@ button.bg-white:focus {
     color: #fff !important;
 }
 
+.text-white {
+    color: #fff !important;
+}
+
 a.text-white:hover,
 a.text-white:focus {
     color: #e6e6e6 !important;
@@ -1356,6 +1351,17 @@ main {
     overflow: hidden;
 }
 
+.bg-white {
+    background-color: #fff !important;
+}
+
+a.bg-white:hover,
+a.bg-white:focus,
+button.bg-white:hover,
+button.bg-white:focus {
+    background-color: #e6e6e6 !important;
+}
+
 .bg-gradient-default {
     background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
 }
@@ -1400,7 +1406,7 @@ main {
     opacity: .8 !important;
 }
 
-.opacity-9 {
+.opacity-8 {
     opacity: .9 !important;
 }
 
@@ -1419,6 +1425,15 @@ main {
 
 .text-sm {
     font-size: .875rem !important;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+a.text-white:hover,
+a.text-white:focus {
+    color: #e6e6e6 !important;
 }
 
 .avatar {
@@ -1444,6 +1459,15 @@ main {
     height: 36px;
 }
 
+.btn {
+    font-size: .875rem;
+    position: relative;
+    transition: all .15s ease;
+    letter-spacing: .025em;
+    text-transform: none;
+    will-change: transform;
+}
+
 .btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
@@ -1464,6 +1488,10 @@ main {
 .input-group .btn {
     margin-right: 0;
     transform: translateY(0);
+}
+
+.btn-sm {
+    font-size: .75rem;
 }
 
 [class*='btn-outline-'] {
@@ -1534,6 +1562,14 @@ main {
     }
 }
 
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-menu {
+    min-width: 12rem;
+}
+
 .dropdown-menu .dropdown-item {
     font-size: .875rem;
     padding: .5rem 1rem;
@@ -1543,6 +1579,15 @@ main {
     font-size: 1rem;
     margin-right: 1rem;
     vertical-align: -17%;
+}
+
+.dropdown-header {
+    font-size: .625rem;
+    font-weight: 700;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    text-transform: uppercase;
+    color: #f6f9fc;
 }
 
 .dropdown-menu a.media>div:first-child {
@@ -1579,6 +1624,10 @@ main {
     font-size: .875rem;
     font-weight: 600;
     color: #525f7f;
+}
+
+.form-control {
+    font-size: .875rem;
 }
 
 .form-control:focus:-ms-input-placeholder {
@@ -1619,6 +1668,12 @@ textarea[resize='horizontal'] {
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 
+.input-group {
+    transition: all .15s ease;
+    border-radius: .375rem;
+    box-shadow: none;
+}
+
 .input-group .form-control {
     box-shadow: none;
 }
@@ -1635,6 +1690,10 @@ textarea[resize='horizontal'] {
 
 .input-group .form-control:focus {
     box-shadow: none;
+}
+
+.input-group-text {
+    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
 }
 
 .input-group-alternative {
@@ -1671,6 +1730,64 @@ textarea[resize='horizontal'] {
     position: relative;
 }
 
+.input-group {
+    transition: all .15s ease;
+    border-radius: .375rem;
+    box-shadow: none;
+}
+
+.input-group .form-control {
+    box-shadow: none;
+}
+
+.input-group .form-control:not(:first-child) {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.input-group .form-control:not(:last-child) {
+    padding-right: 0;
+    border-right: 0;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+}
+
+.input-group-text {
+    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
+}
+
+.input-group-alternative {
+    transition: box-shadow .15s ease;
+    border: 0;
+    box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
+}
+
+.input-group-alternative .form-control,
+.input-group-alternative .input-group-text {
+    border: 0;
+    box-shadow: none;
+}
+
+.focused .input-group-alternative {
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08) !important;
+}
+
+.focused .input-group {
+    box-shadow: none;
+}
+
+.focused .input-group-text {
+    color: #8898aa;
+    border-color: rgba(50, 151, 211, .25);
+    background-color: #fff;
+}
+
+.focused .form-control {
+    border-color: rgba(50, 151, 211, .25);
+}
+
 .mask {
     position: absolute;
     top: 0;
@@ -1684,6 +1801,10 @@ textarea[resize='horizontal'] {
     .mask {
         transition: none;
     }
+}
+
+.nav-link {
+    color: #525f7f;
 }
 
 .nav-link:hover {
@@ -1820,6 +1941,21 @@ textarea[resize='horizontal'] {
     }
 }
 
+.progress {
+    overflow: hidden;
+    height: 8px;
+    margin-bottom: 1rem;
+    border-radius: .25rem;
+    background-color: #e9ecef;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
 .description {
     font-size: .875rem;
 }
@@ -1855,6 +1991,44 @@ textarea[resize='horizontal'] {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+body {
+    background-color: #eeeeee;
+    font-family: 'Open Sans', serif
+}
+
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.10rem
+}
+
+.card-header:first-child {
+    border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+}
+
 .track {
     position: relative;
     background-color: #ddd;
@@ -1949,6 +2123,11 @@ ul.row-sm {
     display: block;
     margin-bottom: 5px;
     color: #212529
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem
 }
 
 .btn-warning {

@@ -28,4 +28,17 @@ export class CustomerListComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  public ifdeleteUser(id : any) {
+    console.log(id);
+    var answer = window.confirm("Delete user?");
+    if (answer) {
+      this.adminService.deleteUser(parseInt(id)).subscribe(data => {
+        window.location.reload();
+      });
+    }
+    else {
+      //some code
+    }
+  }
 }

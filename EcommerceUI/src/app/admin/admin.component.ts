@@ -13,6 +13,9 @@ export class AdminComponent implements OnInit {
   navigateToInventory() {
     this._router.navigate(['/inventory'])
   }
+  navigateToOrders() {
+    this._router.navigate(['/orders-list'])
+  }
 
   ngOnInit(): void {
   }

@@ -1,19 +1,21 @@
 <div class="container">
-    <div class="searchbar">
-        <form (ngSubmit)="search(searchStr.value)">
-            <input id="searchStr" #searchStr name="searchStr" type="text" placeholder="Search...">
-            <button type="submit">Submit</button>
-        </form>
-        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
-            [length]="searchedProducts.length" [pageIndex]="currentPage" (page)="handlePage($event)">
-        </mat-paginator>
+    <div class="row justify-content-around mt-3">
+        <div class="col-6 form-inline">
+            <input type="search" class="form-control" id="searchStr" #searchStr name="searchStr" type="text" placeholder="Search...">
+            <button type="button" class="btn btn-outline-primary" (click)="search(searchStr.value)">Search</button>
+        </div>
+        <div class="col-6">
+            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="searchedProducts.length" [pageIndex]="currentPage" (page)="handlePage($event)">
+            </mat-paginator>
+        </div>
     </div>
+
     <div class="row">
         <ng-container *ngFor="let item of productList">
-            <div (click)="onSelect(item)" class="card col-md-3">
+            <div class="card col-md-3">
                 <img src="{{item.productImage}}" alt="">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
-                    {{item.productName}}</h5>
+                <h3 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
+                    {{item.productName}}</h3>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
                     {{item.productDescription}}</p>
                 <p><strong>Price:</strong> ${{item.unitPrice}}</p>
