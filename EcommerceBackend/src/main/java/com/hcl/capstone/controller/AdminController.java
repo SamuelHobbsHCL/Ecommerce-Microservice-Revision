@@ -1,7 +1,6 @@
 package com.hcl.capstone.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,6 @@ import com.hcl.capstone.dto.OrderDto;
 import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Order;
-import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.service.ProductService;
 import com.hcl.capstone.service.UserService;
 import com.hcl.capstone.service.OrderService;
@@ -119,10 +117,8 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/order/update/{id}")
-	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto OrderStatusDTO, @PathVariable long id){
-		
-		Order result = orderService.updateOrderStatus(OrderStatusDTO, id);
-		
+	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto orderDTO, @PathVariable long id){
+		Order result = orderService.updateOrderStatus(orderDTO, id);
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {

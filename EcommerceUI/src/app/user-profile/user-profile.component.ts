@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
   }
   public hasCurrentOrder() {
     for(let order of this.orders) {
-      if(order.orderStatus === "COMPLETED") {
+      if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
         return true;
       }
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { CartService } from 'src/app/service/cart.service';
+import { OrderDto } from 'src/app/common/orderDto';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,6 +15,7 @@ export class OrderDetailsComponent implements OnInit {
   id: string;
   private sub: any;
   order : any;
+  orderUpdate = new OrderDto();
 
   constructor(private adminService : AdminService,private route: ActivatedRoute) { }
 
@@ -30,7 +32,6 @@ export class OrderDetailsComponent implements OnInit {
     }
     
     );
-    console.log(this.order);
     return this.order;
   }
 
@@ -39,7 +40,8 @@ export class OrderDetailsComponent implements OnInit {
 	}
 
   updateOrder() {
-    console.log(this.updateStatus)
+    console.log(this.orderUpdate)
+    this.setDto(this.order);
     if(this.updateStatus == null || this.updateStatus == this.order.orderStatus){
       Swal.fire(
         'Error!',
@@ -47,8 +49,7 @@ export class OrderDetailsComponent implements OnInit {
         'error'
       )
     }else{
-      this.order.orderStatus = this.updateStatus;
-      this.adminService.updateOrder(this.id, this.order).subscribe(data => {
+      this.adminService.updateOrder(this.id, this.orderUpdate).subscribe(data => {
         Swal.fire(
           'Success',
           'Order has been updated!',
@@ -60,4 +61,7 @@ export class OrderDetailsComponent implements OnInit {
     
   }
 
+  setDto(order: any): void{
+    this.orderUpdate.dtoStatus = this.updateStatus;
+  }
 }

@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../common/product';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../service/admin.service';
+import { CloudinaryService } from 'src/app/service/cloudinary.service';
+import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -14,11 +16,12 @@ export class UpdateProductComponent implements OnInit {
   id: string;
   private sub: any;
   curProduct: any;
+  widget : any;
 
   product = new Product();
+  updateImageDTO = new UpdateImageDTO();
 
-
-  constructor(private adminService : AdminService, private route: ActivatedRoute, private _router : Router, private apiService : ApiService) { }
+  constructor(private adminService : AdminService, private cloudinary: CloudinaryService, private route: ActivatedRoute, private _router : Router, private apiService : ApiService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -39,6 +42,41 @@ export class UpdateProductComponent implements OnInit {
     }
     
     );
+    this.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dwnb2nqcu',
+        uploadPreset: 'ysvn2muf'
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log('Done! Here is the image info: ', result.info);
+          this.updateImageDTO.imageUrl = result.info.url;
+          this.apiService.updateProductImage(this.product.productId ,this.updateImageDTO).subscribe(
+            (data) => {
+              
+          }, (error) => {
+            if(error == "OK") {
+              Swal.fire(
+                'Success!',
+                'Your profile image has been updated!',
+                'success'
+              ).then(function(){
+                window.location.reload();
+              })
+            } else {
+              Swal.fire(
+                'Error!',
+                'Image upload error!',
+                'error'
+              )
+
+            }
+          }
+          )
+           
+        }
+      }
+    ).subscribe(widget => this.widget = widget);
     
     console.log(this.curProduct);
     return this.curProduct;
@@ -54,5 +92,12 @@ export class UpdateProductComponent implements OnInit {
       )
       window.location.reload();
     })
+  }
+
+  openWidget(){
+    if(this.widget){
+      console.log('open');
+      this.widget.open();
+    }
   }
 }
