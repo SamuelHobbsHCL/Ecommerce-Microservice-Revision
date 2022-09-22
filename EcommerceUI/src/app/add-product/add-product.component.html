@@ -1,41 +1,69 @@
-<div>
-    <h1>Add Products</h1>
-    <form>
-        <div *ngIf="productName.errors && (productName.invalid && productName.touched)">
-          <small class="text-danger" [class.d-none]="productName.valid || productName.untouched">Product Name is required!</small>
-        </div>
-        <label for="productName">Product Name : </label>
-        <input type="text" id="productName" name="productName" [(ngModel)]="product.productName" required #productName="ngModel" [class.is-invalid]="productName.invalid && productName.touched"><br><br>
-        
-        <div *ngIf="unitPrice.errors && (unitPrice.invalid && unitPrice.touched)">
-          <small class="text-danger" [class.d-none]="unitPrice.valid || unitPrice.untouched">Unit Price is required!</small>
-        </div>
-        <label for="unitPrice">Unit Price : </label>
-        <input type="text" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice" required #unitPrice="ngModel" [class.is-invalid]="unitPrice.invalid && unitPrice.touched"><br><br>
-        
+<div class="row">
+  <div class="col-xl-4">
+    <!-- Product picture card-->
+    <div class="card mb-4 mb-xl-0">
+      <div class="card-header">Product Picture</div>
+      <div class="card-body text-center">
+        <!-- Product picture image-->
+        <ng-container *ngIf="product.productImage, else defaultImage">
+          <img class="img-account-profile rounded-circle mb-2" src="{{product.productImage}}" alt="product image">
+        </ng-container>
+        <ng-template #defaultImage>
+          <img class="img-account-profile rounded-circle mb-2" src="../../../assets/images/defaultProfileImage.png"
+            alt="product image">
+        </ng-template>
 
-        <div *ngIf="productImage.errors && (productImage.invalid && productImage.touched)">
-          <small class="text-danger" [class.d-none]="productImage.valid || productImage.untouched">Image link is required!</small>
-        </div>
-        <label for="productImage">Product Image : </label>
-        <input type="text" id="productImage" name="productImage" [(ngModel)]="product.productImage" required #productImage="ngModel" [class.is-invalid]="productImage.invalid && productImage.touched"><br><br>
-        
+        <!-- Product picture help block-->
+        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
-        <div *ngIf="productDescription.errors && (productDescription.invalid && productDescription.touched)">
-          <small class="text-danger" [class.d-none]="productDescription.valid || productDescription.untouched">Product Description is required!</small>
-        </div>
-        <label for="productDescription">Product Description : </label>
-        <input type="text" id="productDescription" name="productDescription" [(ngModel)]="product.productDescription" required #productDescription="ngModel" [class.is-invalid]="productDescription.invalid && productDescription.touched"><br><br>
-        
+        <!-- Product picture upload button-->
+        <button (click)="openWidget()" class="btn btn-primary">Upload Image</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-8">
+    <!-- Product details card-->
+    <div class="card mb-4">
+      <div class="card-header">Product ID: {{product.productId}}</div>
+      <div class="card-body">
+        <form>
+          <h4 class="heading-small text-muted mb-4">PRODUCT INFORMATION</h4>
+          <!-- Form Group (product name)-->
+          <div class="mb-3">
+            <label class="small mb-1" for="inputProductName">Product Name</label>
+            <input class="form-control" id="inputProductName" name="inputProductName" type="text"
+              placeholder="Enter product name" [(ngModel)]="product.productName" value="{{product.productName}}">
+          </div>
+          <!-- Form Group (Product Description)-->
+          <div class="mb-3">
+            <label class="small mb-1" for="inputProductDescription">Product Description</label>
+            <input class="form-control" id="inputProductDescription" name="inputProductDescription" type="text"
+              placeholder="Enter product description" [(ngModel)]="product.productDescription"
+              value="{{product.productDescription}}">
+          </div>
+          <!-- Form Row-->
+          <div class="row gx-3 mb-3">
+            <!-- Form Group (Product Stock)-->
+            <div class="col-md-6">
+              <label class="small mb-1" for="inputProductStock">Product Stock</label>
+              <input class="form-control" id="inputProductStock" name="inputProductStock" type="number"
+                placeholder="Enter the product stock" [(ngModel)]="product.productStock"
+                value="{{product.productStock}}">
+            </div>
+            <!-- Form Group (Unit Price)-->
+            <div class="col-md-6">
+              <label class="small mb-1" for="inputUnitPrice">Unit Price</label>
+              <input class="form-control" id="inputUnitPrice" name="inputUnitPrice" type="text"
+                placeholder="Enter the unit price" [(ngModel)]="product.unitPrice" value="{{product.unitPrice}}">
+            </div>
+          </div>
 
-        <div *ngIf="productStock.errors && (productStock.invalid && productStock.touched)">
-          <small class="text-danger" [class.d-none]="productStock.valid || productStock.untouched">Product Stock is required!</small>
-        </div>
-        <label for="productStock">Product Stock : </label>
-        <input type="text" id="productStock" name="productStock" [(ngModel)]="product.productStock" required #productStock="ngModel" [class.is-invalid]="productStock.invalid && productStock.touched"><br><br>
-        
-
-        <button (click)="addProduct(product)">Add Product</button>
-      </form>
-      <a href="./inventory" type="button">Go Back</a>
+          <!-- Save changes button-->
+          <button class="btn btn-primary mt-4" (click)="addProduct(product)" type="button">Add Product</button>
+          <button type="button" class="btn btn-light" style="float: right;" (click)="navigateToInventory()">Product
+            Management</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
