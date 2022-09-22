@@ -77,6 +77,7 @@ export class UpdateProductComponent implements OnInit {
         }
       }
     ).subscribe(widget => this.widget = widget);
+    
     console.log(this.curProduct);
     return this.curProduct;
   }
@@ -104,7 +105,7 @@ export class UpdateProductComponent implements OnInit {
   openWidget(){
     if(this.widget){
       console.log('open');
-      this.widget.open;
+      this.widget.open();
     }
   }
 }
