@@ -59,13 +59,13 @@ public class ProductService {
 		return productRepository.findAllByProductNameContaining(searchStr);
 	}
 
-	public boolean updateProductImage(ProductDto productDTO, String imageUrl) {
-		Optional<Product> product = productRepository.findById(productDTO.getDtoId());
-		if(!product.isPresent()) {
+	public boolean updateProductImage(long productId, String imageUrl) {
+		Product product = productRepository.findById(productId);
+		if(product == null) {
 			return false;
 		} else {
-			Product update = new Product(productDTO);
-			productRepository.save(update);
+			product.setProductImage(imageUrl);
+			productRepository.save(product);
 			return true;
 		}
 		

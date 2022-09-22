@@ -61,11 +61,11 @@ public class ProductController {
 		return productService.searchProducts(searchStr);
 	}
 	
-	@PutMapping("/api/update-product-image")
-    public ResponseEntity<String> updateImage(@RequestBody UpdateImageDto updateImageDTO, @RequestBody ProductDto productDTO) {
+	@PutMapping("/api/update-product-image/{id}")
+    public ResponseEntity<String> updateImage(@RequestBody UpdateImageDto updateImageDTO, @PathVariable long id) {
     	if(StringUtils.isNotEmpty(updateImageDTO.getImageUrl())) {
 
-    		productService.updateProductImage(productDTO, updateImageDTO.getImageUrl());
+    		productService.updateProductImage(id, updateImageDTO.getImageUrl());
     		
     		return new ResponseEntity<>("Image saved successfully", HttpStatus.OK);
     		

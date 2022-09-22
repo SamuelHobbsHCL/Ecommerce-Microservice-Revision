@@ -51,10 +51,10 @@ export class ApiService {
     return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search", { params: {searchStr} });
   }
 
-  public updateProductImage(product : any, updateImageDTO : UpdateImageDTO) : Observable<any>{
+  public updateProductImage(productId : string, updateImageDTO : UpdateImageDTO) : Observable<any>{
     console.log(updateImageDTO);
     console.log("update product image");
-    return this.http.put<any>(this.PATH_OF_API + "/api/update-product-image", updateImageDTO, product);
+    return this.http.put<any>(this.PATH_OF_API + "/api/update-product-image/" + productId, updateImageDTO);
   }
 
   throwError(error: any) {

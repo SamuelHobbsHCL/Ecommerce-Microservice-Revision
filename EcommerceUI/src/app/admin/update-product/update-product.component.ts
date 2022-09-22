@@ -51,7 +51,7 @@ export class UpdateProductComponent implements OnInit {
         if (!error && result && result.event === "success") {
           console.log('Done! Here is the image info: ', result.info);
           this.updateImageDTO.imageUrl = result.info.url;
-          this.apiService.updateProductImage(this.product ,this.updateImageDTO).subscribe(
+          this.apiService.updateProductImage(this.product.productId ,this.updateImageDTO).subscribe(
             (data) => {
               
           }, (error) => {
