@@ -44,6 +44,7 @@ export class AddProductComponent implements OnInit {
           'Product Added!',
           'success'
         )
+        this.navigateToInventory();
       },
       error => {
         console.log("Error!");
