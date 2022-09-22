@@ -58,7 +58,6 @@ export class UserUpdateComponent implements OnInit {
   setUpNewAddress(res: any) {
     if (res === null) { /* If user doesn't have address */
       this.address.city =  "";
-      // this.newAddress.unit = null;
       this.address.street = "";
       this.address.state = "";
       this.address.zipcode = "";
