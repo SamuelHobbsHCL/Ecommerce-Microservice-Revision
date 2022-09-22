@@ -125,11 +125,12 @@ public class OrderService {
 
 					productService.saveProduct(productCheckout);
 				}
-
+				System.out.println("The current order status is " + orderCheckout.getOrderStatus() );
 				double orderTotal = getOrderTotal(userCheckout, orderCheckout);
 				orderCheckout.setOrderTotal(orderTotal);
 				orderCheckout.setOrderStatus(OrderStatus.COMPLETED);
 				orderCheckout.setOrderDate(new Date());
+				System.out.println("The current order status is now " + orderCheckout.getOrderStatus() );
 				// Set billing & shipping address
 				orderCheckout.setShippingAddress(new Address(orderInfo.getShippingAddress()));
 				orderCheckout.setBillingAddress(new Address(orderInfo.getBillingAddress()));

@@ -37,11 +37,11 @@ public class Order {
 	@Column(name = "ORDER_TOTAL")
 	private double orderTotal;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SHIPPING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = true)
 	private Address shippingAddress;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BILLING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = true)
 	private Address billingAddress;
     
