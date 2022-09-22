@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { environment } from 'src/environments/environment';
+import { OrderDto } from '../common/orderDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -57,8 +58,8 @@ export class AdminService {
     return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
   }
 
-  public updateOrder(id : any, order : any){
-    console.log(order.orderStatus);
-    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + id, order);
+  public updateOrder(id : any, orderDTO : OrderDto){
+    console.log(orderDTO.dtoStatus);
+    return this.http.put(this.PATH_OF_API + "/admin/order/update/" + id, orderDTO);
   }
 }

@@ -125,11 +125,12 @@ public class OrderService {
 
 					productService.saveProduct(productCheckout);
 				}
-
+				System.out.println("The current order status is " + orderCheckout.getOrderStatus() );
 				double orderTotal = getOrderTotal(userCheckout, orderCheckout);
 				orderCheckout.setOrderTotal(orderTotal);
 				orderCheckout.setOrderStatus(OrderStatus.COMPLETED);
 				orderCheckout.setOrderDate(new Date());
+				System.out.println("The current order status is now " + orderCheckout.getOrderStatus() );
 				// Set billing & shipping address
 				orderCheckout.setShippingAddress(new Address(orderInfo.getShippingAddress()));
 				orderCheckout.setBillingAddress(new Address(orderInfo.getBillingAddress()));
@@ -187,7 +188,7 @@ public class OrderService {
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		orderRepository.updateOrderStatus(OrderStatusDTO.getStatus(), id);
+		orderRepository.updateOrderStatus(OrderStatusDTO.getDtoStatus(), id);
 
 		return orderRepository.findById(id);
 	}
@@ -221,7 +222,7 @@ public class OrderService {
 		User user = userService.getCurrentLoggedInUser(authentication);
 
 		List<Order> orders = getAllOrderByUser(user);
-
+		
 		Order orderInProgress = null;
 
 		for (Order order : orders) {
@@ -229,7 +230,7 @@ public class OrderService {
 				orderInProgress = order;
 			}
 		}
-		
+		System.out.print(orderInProgress);
 		return orderInProgress;
 	}
 }

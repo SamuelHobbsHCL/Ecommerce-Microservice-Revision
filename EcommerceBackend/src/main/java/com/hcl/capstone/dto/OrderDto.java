@@ -6,20 +6,34 @@ import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.User;
 
 public class OrderDto {
-	
+
 	private long id;
-	String status;
-	AddressDto shippingAddress;
-	AddressDto billingAddress;
+	private AddressDto shippingAddress;
+	private AddressDto billingAddress;
 	private User dtoUser;
 	private List<OrderItem> dtoCartItems;
 	private Date dtoDate;
 	private double dtoTotal;
 	private String dtoStatus;
-	
-	public OrderDto(String status) {
-		this.status = status;
+
+	public OrderDto(AddressDto shippingAddress, AddressDto billingAddress, User dtoUser,
+			List<OrderItem> dtoCartItems, Date dtoDate, double dtoTotal, String dtoStatus) {
+		super();
+		this.shippingAddress = shippingAddress;
+		this.billingAddress = billingAddress;
+		this.dtoUser = dtoUser;
+		this.dtoCartItems = dtoCartItems;
+		this.dtoDate = dtoDate;
+		this.dtoTotal = dtoTotal;
+		this.dtoStatus = dtoStatus;
 	}
+	
+	public OrderDto(String dtoStatus) {
+		super();
+		this.dtoStatus = dtoStatus;
+	}
+	
+	
 
 	public String getDtoStatus() {
 		return dtoStatus;
@@ -35,14 +49,6 @@ public class OrderDto {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public AddressDto getShippingAddress() {
