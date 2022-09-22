@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth, AuthState } from '@okta/okta-auth-js';
-import { contains } from 'jquery';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable({

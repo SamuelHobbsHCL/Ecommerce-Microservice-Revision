@@ -1544,15 +1544,6 @@ main {
     vertical-align: -17%;
 }
 
-.dropdown-header {
-    font-size: .625rem;
-    font-weight: 700;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    text-transform: uppercase;
-    color: #f6f9fc;
-}
-
 .dropdown-menu a.media>div:first-child {
     line-height: 1;
 }

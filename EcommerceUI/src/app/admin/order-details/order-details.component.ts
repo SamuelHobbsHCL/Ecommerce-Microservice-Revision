@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { CartService } from 'src/app/service/cart.service';
-import { OrderService } from 'src/app/service/order.service';
 import { OrderDto } from 'src/app/common/orderDto';
 import Swal from 'sweetalert2';
-import { NgModel } from '@angular/forms';
-import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
+
 
 @Component({
   selector: 'app-order-details',
