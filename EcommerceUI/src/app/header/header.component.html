@@ -58,6 +58,11 @@
                         <li><a class="dropdown-item" href="/registration">Sign up</a></li>
                     </ng-container>
                     <ng-container *ngIf="isDatabaseLoggedIn">
+                        <ng-container *ngIf="isAdmin">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="/admin">Admin Panel</a>
+                            </li>
+                        </ng-container>
                         <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">

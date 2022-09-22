@@ -25,6 +25,7 @@ import { UserProfileSecurityComponent } from './user-profile/user-profile-securi
 import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
+import { CustomerListComponent } from './admin/customer-list/customer-list.component';
 
 
 const routes: Routes = [
@@ -36,25 +37,29 @@ const routes: Routes = [
   {path: 'loginSuccess', component: LoginSuccessComponent},
   {path: 'registration',component: RegistrationComponent},
   {path: 'forbidden',component: ForbiddenComponent},
-  {path: 'admin',component: AdminComponent},
+  {path: 'admin', redirectTo: '/admin/user-management', pathMatch: 'full'},
+  {path: 'admin', component: AdminComponent, children:[
+    {path: 'inventory-management', component: InventoryComponent},
+    {path: 'inventory-management/add-product', component:AddProductComponent},
+    {path: 'inventory-management/update-product/:id', component: UpdateProductComponent},
+    {path: 'user-management', component: CustomerListComponent},
+    {path: 'user-management/update-user/:userid', component: UserUpdateComponent},
+    {path: 'order-management',component: OrdersListComponent},
+    {path: 'order-management/view-order/:id', component: OrderDetailsComponent}
+  ]},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'product-details/:id', component: ProductDetailsComponent},
-  {path: 'inventory', component: InventoryComponent},
-  {path: 'inventory/add', component:AddProductComponent},
-  {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'updateproduct/:id', component: UpdateProductComponent},
   {path: 'self-update', component: SelfUpdateComponent},
   {path: 'check-out', component: CheckoutComponent},
   {path: 'user-profile', component: UserProfileComponent},
   {path: 'self-update/:userid', component: SelfUpdateComponent},
   {path: 'orders',component: OrdersComponent},
-  {path: 'orders-list',component: OrdersListComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'user-profile-security', component: UserProfileSecurityComponent},
   {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent},
-  {path: 'orders-list/:id', component: OrderDetailsComponent},
+
 ];
 
 @NgModule({

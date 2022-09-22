@@ -72,7 +72,7 @@ export class UserAuthService {
     console.log(this.getRoles());
     var x =0;
     this.getRoles().forEach(function(item){
-      if(item['roleName']=='ADMIN'){
+      if(item['roleName']==='ADMIN'){
         console.log("IS an ADMIN");
         x=1;
       }

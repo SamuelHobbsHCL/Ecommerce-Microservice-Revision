@@ -44,14 +44,6 @@ export class UpdateProductComponent implements OnInit {
     return this.curProduct;
   }
 
-  navigateToInventory() {
-    this._router.navigate(['/inventory'])
-  }
-
-  navigateToUpdateProduct() {
-    this._router.navigate(['/updateproduct'])
-  }
-
   public updateProduct(product:any) {
     console.log(product);
     this.adminService.updateProduct(product).subscribe(data => {

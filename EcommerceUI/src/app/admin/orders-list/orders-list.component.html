@@ -8,12 +8,12 @@
                             <thead>
                                 <tr>
                                     <th id="Order Id">Order ID</th>
-                                    <th id="User ID">User ID</th>
+                                    <th id="User ID">Customer</th>
                                     <th id="Order Date">Order Date</th>
                                     <th id="Total">Total</th>
                                     <th id="Shipping Address">Shipping Address</th>
                                     <th id="Billing Address">Billing Address</th>
-                                    <th id="Status" >Status</th>
+                                    <th id="Status">Status</th>
                                     <td>
                                     </td>
                                 </tr>
@@ -22,14 +22,14 @@
                                 <ng-container *ngFor="let order of orderList">
                                     <tr>
                                         <td>{{order.orderId}}</td>
-                                        <td>{{order.user.userId}}</td>
-                                        <td>{{order.orderDate}}</td>
-                                        <td>{{order.orderTotal}}</td>
+                                        <td>{{order.user.firstName}} {{order.user.lastName}}</td>
+                                        <td>{{order.orderDate | date:'MM-dd-yyyy'}}</td>
+                                        <td>${{order.orderTotal}}</td>
                                         <td>{{order.shippingAddressId}}</td>
                                         <td>{{order.billingAddressId}}</td>
                                         <td>{{order.orderStatus}}</td>
                                         <td>
-                                            <a type="button" (click)="navigateToOrder(order.orderId)"  class="settings" title="Settings" data-toggle="tooltip"><em
+                                            <a type="button" href="/admin/order-management/view-order/{{order.orderId}}" class="settings" title="Settings" data-toggle="tooltip"><em
                                                     class="material-icons">&#xe8f4;</em></a>
                                         </td>
                                     </tr>
@@ -39,7 +39,5 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        <button type = "button" class = "btn btn-light" style = "float: right;" (click) = "navigateToInventory()">Product Management</button>
-        <button type = "button" class = "btn btn-light" style = "float: right;" (click) = "navigateToUsers()">User Management</button>

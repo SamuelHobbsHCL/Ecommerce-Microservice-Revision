@@ -46,6 +46,12 @@ import { MyProfileComponent } from './user-profile/my-profile/my-profile.compone
 import { CloudinaryModule } from '@cloudinary/ng';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 
 const oktaAuth = new OktaAuth({
@@ -101,7 +107,13 @@ const oktaAuth = new OktaAuth({
     BrowserAnimationsModule,
     MatPaginatorModule,
     CloudinaryModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [
     AuthGuard,

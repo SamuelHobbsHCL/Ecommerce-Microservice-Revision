@@ -82,7 +82,7 @@
     }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
     .right-element {
         padding-right: 6em;
     }
@@ -96,6 +96,26 @@
     .navbar {
         box-shadow: none;
         padding-top: 1.5em;
+    }
+}
+
+@media (min-width: 1441px) {
+    .right-element {
+        padding-right: 6em;
+    }
+    .nav-bar {
+        margin-top: 3em;
+    }
+    .intro {
+        background: url("../../../assets/images/splash-background.jpg")no-repeat;
+        background-size: contain;
+    }
+    .navbar {
+        box-shadow: none;
+        padding-top: 2em;
+    }
+    .view {
+        height: 75vh !important;
     }
 }
 

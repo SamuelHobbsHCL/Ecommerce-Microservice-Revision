@@ -23,6 +23,11 @@
 
                         </ng-container>
                         <ng-container *ngIf="isDatabaseLoggedIn">
+                            <ng-container *ngIf="isAdmin">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="/admin">Admin Panel</a>
+                                </li>
+                            </ng-container>
                             <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -52,11 +57,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/products">PRODUCTS</a>
             </li>
-                <ng-container *ngIf="isAdmin">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">ADMIN</a>
-                    </li>
-                </ng-container>
             <li class="nav-item">
                 <a class="nav-link" href="/about">ABOUT US</a>
             </li>

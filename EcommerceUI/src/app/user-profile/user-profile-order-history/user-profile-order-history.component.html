@@ -31,7 +31,7 @@
                             <h4>Order ID: {{order.orderId}}</h4>
                             <article class="card ">
                                 <div class="card-body row ">
-                                    <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}</div>
+                                    <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate | date:'MM-dd-yyyy'}}</div>
                                     <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}</div>
                                     <div class="col "> <strong>Total:</strong> <br>${{order.orderTotal}}</div>
 

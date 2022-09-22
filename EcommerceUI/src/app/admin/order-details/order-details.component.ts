@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { CartService } from 'src/app/service/cart.service';
-import { OrderService } from 'src/app/service/order.service';
 import Swal from 'sweetalert2';
-import { NgModel } from '@angular/forms';
-import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
 
 @Component({
   selector: 'app-order-details',
@@ -18,7 +15,7 @@ export class OrderDetailsComponent implements OnInit {
   private sub: any;
   order : any;
 
-  constructor(private cartService : CartService, private adminService : AdminService, private _router: Router,private route: ActivatedRoute) { }
+  constructor(private adminService : AdminService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -62,10 +59,5 @@ export class OrderDetailsComponent implements OnInit {
     }
     
   }
-
-  goBack(){
-    this._router.navigate(['/orders-list'])
-  }
-
 
 }

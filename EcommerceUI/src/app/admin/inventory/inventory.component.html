@@ -31,10 +31,10 @@
                         <td>{{product.productName}}</td>
                         <td>${{product.unitPrice}}</td>
                         <td>{{product.productStock}}</td>
-                        <td><img src="{{product.productImage}}" alt= "product image" style="width: 120px;" /></td>
+                        <td><img src="{{product.productImage}}" alt="product image" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <a type="button" (click)="navigateToUpdateProduct(product)" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
+                            <a type="button" href="/admin/inventory-management/update-product/{{product.productId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
                             <a type="button" (click)="deleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-light" (click)="navigateToUsers()">User Management</button>
     <br/>
     <br/>
 </div>

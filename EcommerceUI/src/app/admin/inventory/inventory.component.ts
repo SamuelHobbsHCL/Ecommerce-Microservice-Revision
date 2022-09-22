@@ -10,17 +10,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class InventoryComponent implements OnInit {
   public productList: any;
 
-  constructor(private adminService : AdminService, private _router: Router) { }
-
-  navigateToUsers() {
-    this._router.navigate(['admin']);
-  }
-  navigateToTest() {
-    this._router.navigate(['test'])
-  }
-  navigateToUpdateProduct(product : any) {
-    this._router.navigate(['/updateproduct', product.productId])
-  }
+  constructor(private adminService : AdminService) { }
 
   ngOnInit(): void {
     this.adminService.getAllProducts()

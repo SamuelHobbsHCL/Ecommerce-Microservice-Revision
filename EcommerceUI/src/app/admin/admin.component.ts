@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { UserService } from '../service/user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-admin',
@@ -8,16 +9,23 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  user = new User();
+  hasProfileImage = false;
 
-  navigateToInventory() {
-    this._router.navigate(['/inventory'])
-  }
-  navigateToOrders() {
-    this._router.navigate(['/orders-list'])
-  }
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+    this.userService.getCurrentUser()
+    .subscribe((res: any)=>{
+      this.user = res;
+      console.log(this.user);
+    });
+
+    if(this.user.profileImage !== null || this.user.profileImage !== '') {
+      this.hasProfileImage = true;
+    } else {
+      this.hasProfileImage = false;
+    }
   }
 
 }

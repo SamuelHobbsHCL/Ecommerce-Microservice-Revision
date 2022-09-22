@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService, private cartService:CartService) { }
 
   user = new User();
+  hasProfileImage = false;
   response : any;
   address: any;
   msg = '';
@@ -39,6 +40,12 @@ export class UserProfileComponent implements OnInit {
         this.orders = res;
         console.log(this.orders);
       });
+
+      if(this.user.profileImage !== null || this.user.profileImage !== '') {
+        this.hasProfileImage = true;
+      } else {
+        this.hasProfileImage = false;
+      }
     
   }
   public hasCurrentOrder() {
