@@ -31,12 +31,14 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public AuthResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
+		System.out.print(loginRequest.getEmail() + " " + loginRequest.getPassword());
 		return tokenProvider.createToken(loginRequest);
 	}
 	
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User addUser(@RequestBody User user) throws MessagingException, IOException {
+		
 		return userService.registerUser(user);
 	}
 }

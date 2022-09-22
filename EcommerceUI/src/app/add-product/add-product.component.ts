@@ -15,6 +15,7 @@ export class AddProductComponent implements OnInit {
   constructor(private _service : AdminService) { }
 
   ngOnInit(): void {
+    
   }
 
   addProduct(product : Product){

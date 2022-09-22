@@ -70,4 +70,6 @@ export class UserService {
     console.log("update user image");
     return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-profile-image", updateImageDTO);
   }
+
+ 
 }
