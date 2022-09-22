@@ -188,7 +188,6 @@ public class OrderService {
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		System.out.println("The new order status is " + OrderStatusDTO.getDtoStatus());
 		orderRepository.updateOrderStatus(OrderStatusDTO.getDtoStatus(), id);
 
 		return orderRepository.findById(id);

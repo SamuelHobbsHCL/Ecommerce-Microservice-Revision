@@ -118,7 +118,6 @@ public class AdminController {
 	
 	@PutMapping("/admin/order/update/{id}")
 	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto orderDTO, @PathVariable long id){
-		System.out.println("OrderDTO is " + orderDTO.getDtoStatus());
 		Order result = orderService.updateOrderStatus(orderDTO, id);
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
