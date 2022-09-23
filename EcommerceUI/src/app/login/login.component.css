@@ -1,12 +1,3 @@
-body {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background: linear-gradient(90deg, #5b86e5 0%, #3ed1dc 91%);
-}
-
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -134,12 +125,17 @@ input {
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: linear-gradient(90deg, #5b86e5 0%, #3ed1dc 91%);
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.7;
     color: #fff;
-    background: linear-gradient(90deg, #5b86e5 0%, #3ed1dc 91%);
     overflow-x: hidden
 }
 
