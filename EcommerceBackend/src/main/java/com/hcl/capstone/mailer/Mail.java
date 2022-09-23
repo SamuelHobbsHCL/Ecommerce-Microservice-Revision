@@ -11,10 +11,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 import com.hcl.capstone.model.Order;
 import com.hcl.capstone.model.OrderItem;
 import com.hcl.capstone.model.User;
+import com.hcl.capstone.global.OrderStatus;
 
 public class Mail {
 
@@ -40,11 +42,11 @@ public class Mail {
 		Transport.send(msg);
 	}
 	
-	public void sendCheckoutConfirmation(User user, Order order, List<OrderItem> orderItems) throws  MessagingException {
+	public void sendConfirmationEmail(User user, Order order, List<OrderItem> orderItems) throws  MessagingException {
 		Message msg = new MimeMessage(setSession(setProperties()));
 
 		msg.setSentDate(new Date());
-		msg.setSubject("Order Confirmation");
+		msg.setSubject("Order " + order.getOrderStatus());
 
 		msg.setFrom(new InternetAddress(EMAIL, false));
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
@@ -55,7 +57,13 @@ public class Mail {
 		builder.append("Hello " + user.getFirstName());
 		builder.append("</br>");
 		builder.append("</br>");
-		builder.append("<b>Order Confirmation</b>");
+		if(order.getOrderStatus() != "COMPLETED") {
+			builder.append("<b>Order Update!</b>");
+			builder.append("</br>");
+			builder.append("<b>Your order has been " + order.getOrderStatus() + "!</b>");
+		}else {
+			builder.append("<b>Order Confirmation</b>");
+		}
 		builder.append("</br>");
 		builder.append("Order Detail");
 		builder.append("</br>");
@@ -98,7 +106,6 @@ public class Mail {
 		builder.append("Thank you for your purchase!");
 
 		msg.setContent(builder.toString(), "text/html");
-
 		Transport.send(msg);
 	}
 	

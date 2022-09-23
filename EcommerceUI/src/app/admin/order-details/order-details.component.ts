@@ -61,6 +61,13 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   setDto(order: any): void{
-    this.orderUpdate.dtoStatus = this.updateStatus;
+    this.orderUpdate.dtoStatus = this.updateStatus; //status
+    this.orderUpdate.billingAddress = this.order.billingAddress; //billing
+    this.orderUpdate.shippingAddress = this.order.shippingAddress; //shipping
+    this.orderUpdate.dtoDate = this.order.orderDate; //date
+    this.orderUpdate.dtoTotal = this.order.orderTotal; //total
+    this.orderUpdate.dtoUser = this.order.user; //user
+    this.orderUpdate.id = this.order.orderId; //id
+    this.orderUpdate.dtoCartItems = this.order.cartItems; //order items
   }
 }
