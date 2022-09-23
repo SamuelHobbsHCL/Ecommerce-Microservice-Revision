@@ -137,7 +137,7 @@ public class OrderService {
 				saveOrder(orderCheckout);
 
 				Mail mailer = new Mail();
-				mailer.sendCheckoutConfirmation(userCheckout, orderCheckout, itemsCheckout);
+				mailer.sendConfirmationEmail(userCheckout, orderCheckout, itemsCheckout);
 
 				return "Your order is successfully completed. Thank you for your purchase!";
 			} else {
@@ -169,6 +169,7 @@ public class OrderService {
 	
 	public Order updateOrder(Order order) {
 		long orderId = order.getOrderId();
+		
 		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(orderId));
 		
 		if(!orderRepo.isPresent()) {
@@ -176,20 +177,27 @@ public class OrderService {
 		}
 		
 		order.setOrderId(orderId);
+		
 		orderRepository.save(order);
+		
+		
 		
 		return orderRepository.findById(orderId);
 	}
 	
-	public Order updateOrderStatus(OrderDto OrderStatusDTO, long id) {
-		
+	public Order updateOrderStatus(OrderDto orderStatusDTO, long id) throws MessagingException {
 		Optional<Order> orderRepo = Optional.ofNullable(orderRepository.findById(id));
 		
 		if(!orderRepo.isPresent()) {
 			return null;
 		}
-		orderRepository.updateOrderStatus(OrderStatusDTO.getDtoStatus(), id);
-
+		
+		orderRepository.updateOrderStatus(orderStatusDTO.getDtoStatus(), id);
+		Order order = orderRepository.findById(id);
+		order.setOrderStatus(orderStatusDTO.getDtoStatus());
+		Mail mailer = new Mail();
+		mailer.sendConfirmationEmail(orderStatusDTO.getDtoUser(), order, orderStatusDTO.getDtoCartItems());
+		
 		return orderRepository.findById(id);
 	}
 		

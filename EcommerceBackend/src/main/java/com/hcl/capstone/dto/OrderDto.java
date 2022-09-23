@@ -33,8 +33,6 @@ public class OrderDto {
 		this.dtoStatus = dtoStatus;
 	}
 	
-	
-
 	public String getDtoStatus() {
 		return dtoStatus;
 	}

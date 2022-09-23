@@ -2,6 +2,8 @@ package com.hcl.capstone.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -117,7 +119,7 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/order/update/{id}")
-	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto orderDTO, @PathVariable long id){
+	public ResponseEntity<Order> updateOrder(@RequestBody OrderDto orderDTO, @PathVariable long id) throws MessagingException{
 		Order result = orderService.updateOrderStatus(orderDTO, id);
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
