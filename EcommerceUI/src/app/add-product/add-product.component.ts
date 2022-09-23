@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../common/product';
 import Swal from 'sweetalert2';
 import { AdminService } from '../service/admin.service';
+import { CloudinaryService } from '../service/cloudinary.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -11,11 +13,24 @@ import { AdminService } from '../service/admin.service';
 export class AddProductComponent implements OnInit {
 
   product = new Product();
+  widget: any;
 
-  constructor(private _service : AdminService) { }
+  constructor(private _service : AdminService, private cloudinary: CloudinaryService, private _router : Router) { }
 
   ngOnInit(): void {
-    
+    this.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dwnb2nqcu',
+        uploadPreset: 'ysvn2muf'
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {          
+          this.product.productImage = result.info.url;
+        } else {
+          console.error('Upload failed.');
+        }
+      }
+    ).subscribe(widget => this.widget = widget);    
   }
 
   addProduct(product : Product){
@@ -29,6 +44,7 @@ export class AddProductComponent implements OnInit {
           'Product Added!',
           'success'
         )
+        this.navigateToInventory();
       },
       error => {
         console.log("Error!");
@@ -41,6 +57,20 @@ export class AddProductComponent implements OnInit {
         })
       }
     )
+  }
+  
+  navigateToInventory() {
+    this._router.navigate(['/inventory'])
+  }
 
+  navigateToUpdateProduct() {
+    this._router.navigate(['/updateproduct'])
+  }
+  
+  openWidget(){
+    if(this.widget){
+      console.log('open');
+      this.widget.open();
+    }
   }
 }

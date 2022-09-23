@@ -35,14 +35,16 @@
                         <td>{{product.productDescription}}</td>
                         <td>
                             <a type="button" href="/admin/inventory-management/update-product/{{product.productId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
-                            <a type="button" (click)="deleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
+                            <a type="button" (click)="ifDeleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <strong>{{productList?.length}}</strong> out of <strong>{{productList?.length}}</strong> entries</div>
-                <ul class="pagination">
+                <div class="hint-text">Showing <strong>{{productList?.length}}</strong> out of
+                    <strong>{{productList?.length}}</strong> entries
+                </div>
+                <!-- <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
                     <li class="page-item"><a href="#" class="page-link">1</a></li>
                     <li class="page-item"><a href="#" class="page-link">2</a></li>
@@ -50,10 +52,8 @@
                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
-    <br/>
-    <br/>
 </div>
