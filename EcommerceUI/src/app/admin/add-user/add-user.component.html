@@ -1,0 +1,48 @@
+<p>add-user works!</p>
+<div class="center-wrap">
+    <div class="section text-center">
+        <h4 class="mb-4 pb-3 sign-in">Registration</h4>
+        <form class="mx-1 mx-md-4" #registrationForm="ngForm" (ngSubmit)="registerUser()">
+            <div class="form-group">
+                <input type="text" name="userName" class="form-style" placeholder="User Name" [(ngModel)]="registrationUser.userName" required #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched" id="userName" autocomplete="off">
+                <em class="input-icon fa fa-address-card"></em>
+                <div>
+                    <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">Username is required!</small>
+                </div>
+            </div>
+
+
+            <div class="form-group mt-2">
+                <input type="text" name="firstName" class="form-style" [(ngModel)]="registrationUser.firstName" required #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" placeholder="First Name" id="firstName" autocomplete="off">
+                <div>
+                    <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">First Name is required!</small>
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="text" name="lastName" class="form-style" [(ngModel)]="registrationUser.lastName" required #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" placeholder="Last Name" id="lastName" autocomplete="off">
+                <div>
+                    <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">Last Name is required!</small>
+                </div>
+            </div>
+
+            <div class="form-group mt-2"> <input type="email" name="email" class="form-style" [(ngModel)]="registrationUser.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+                    placeholder="Email" id="logemail" autocomplete="off">
+                
+                <div *ngIf="email.errors && (email.invalid && email.touched)">
+                    <small class="text-danger" *ngIf="email.errors.required">Email is required!</small>
+                    <small class="text-danger" *ngIf="email.errors.pattern">Email is not valid!</small>
+                </div>
+            </div>
+
+            <div class="form-group mt-2"> <input type="password" name="password" class="form-style" [(ngModel)]="registrationUser.password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Password"
+                    id="logpass" autocomplete="off">
+                
+                <div>
+                    <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required!</small>
+                </div>
+
+            </div> <button [disabled]="registrationForm.form.invalid" type="submit" class="mt-4 btn btn-primary btn-lg">Register</button>
+        </form>
+    </div>
+</div>
