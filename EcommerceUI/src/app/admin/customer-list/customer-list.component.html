@@ -21,18 +21,29 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Auth Provider</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of userList; let i = index">
-                        <td><img class="profile-image" src="{{user.profileImage}}" alt="profile image"></td>
+                        <td>
+                            <ng-container *ngIf="user.profileImage, else defaultImage">
+                                <img src="{{user.profileImage}}" alt="profile image" class="profile-image">
+                            </ng-container>
+                            <ng-template #defaultImage>
+                                <img src="../../../assets/images/defaultProfileImage.png" alt="profile image" class="profile-image">
+                            </ng-template>
+                        </td>
                         <td>{{user.userId}}</td>
                         <td>{{user.firstName}}</td>
                         <td>{{user.lastName}}</td>
                         <td>{{user.email}}</td>
                         <td>
                             <span *ngFor="let role of user.roles">{{role.roleName}}<br/></span>
+                        </td>
+                        <td>
+                            {{user.authProvider}}
                         </td>
                         <td>
                             <a href="/admin/user-management/update-user/{{user.userId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
