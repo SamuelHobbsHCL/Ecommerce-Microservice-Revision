@@ -23,6 +23,10 @@ export class AppComponent {
     '/admin/user-management/update-user/',
     '/admin/order-management',
     '/admin/order-management/view-order/:id',
+    '/login',
+    '/registration',
+    '/auth/login',
+    '/auth/registration'
   ];
   hideHeaderList = [
     '/admin',
@@ -38,7 +42,9 @@ export class AppComponent {
     '/loginSuccess',
     '/home-page',
     '/forbidden',
-    '/registration'
+    '/registration',
+    '/auth/login',
+    '/auth/registration'
   ]
 
   constructor(public router : Router) {

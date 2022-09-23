@@ -4,7 +4,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-xs-5">
-                        <h2>User <strong>Management</strong></h2>
+                        <h2>Users <strong>Management</strong></h2>
                     </div>
                     <div class="col-xs-7">
                         <a href="#" class="btn btn-primary"><em class="material-icons">&#xE147;</em> <span>Add New User</span></a>
@@ -15,18 +15,22 @@
             <table class="table table-striped table-hover" aria-label="User Management">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Date Created</th>
+                        <th>Profile Image</th>
+                        <th>User ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of userList; let i = index">
-                        <td>{{i+1}}</td>
+                        <td><img class="profile-image" src="{{user.profileImage}}"></td>
+                        <td>{{user.userId}}</td>
                         <td>{{user.firstName}}</td>
                         <td>{{user.lastName}}</td>
+                        <td>{{user.email}}</td>
                         <td>
                             <span *ngFor="let role of user.roles">{{role.roleName}}<br/></span>
                         </td>

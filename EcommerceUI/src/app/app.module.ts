@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { ProductsComponent } from './products/products.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +28,6 @@ import { SplashPageComponent } from './home-page/splash-page/splash-page.compone
 import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
-import { SelfUpdateComponent } from './self-update/self-update.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
@@ -64,7 +62,6 @@ const oktaAuth = new OktaAuth({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent,
     LoginSuccessComponent,
     ProductsComponent,
     HeaderComponent,
@@ -81,7 +78,6 @@ const oktaAuth = new OktaAuth({
     FooterComponent,
     ProductDetailsComponent,
     UserUpdateComponent,
-    SelfUpdateComponent,
     AboutUsComponent,
     ContactComponent,
     AddProductComponent,
