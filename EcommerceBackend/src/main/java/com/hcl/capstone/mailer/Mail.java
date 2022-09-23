@@ -57,7 +57,7 @@ public class Mail {
 		builder.append("Hello " + user.getFirstName());
 		builder.append("</br>");
 		builder.append("</br>");
-		if(order.getOrderStatus() != "COMPLETED") {
+		if(order.getOrderStatus().equals(OrderStatus.COMPLETED)) {
 			builder.append("<b>Order Update!</b>");
 			builder.append("</br>");
 			builder.append("<b>Your order has been " + order.getOrderStatus() + "!</b>");
