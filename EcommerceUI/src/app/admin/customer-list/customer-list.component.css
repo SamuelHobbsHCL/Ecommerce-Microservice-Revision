@@ -185,3 +185,9 @@ table.table .avatar {
     margin-top: 10px;
     font-size: 13px;
 }
+
+.profile-image {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}

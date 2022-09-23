@@ -4,12 +4,11 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-xs-5">
-                        <h2>Product <strong>Management</strong></h2>
+                        <h2>Inventory <strong>Management</strong></h2>
                     </div>
                     <div class="col-xs-7">
 
-                        <a routerLink="./add" class="btn btn-primary" style="float: right;"><em
-                                class="material-icons">&#xE147;</em> <span>Add New Product</span></a>
+                        <a routerLink="/admin/inventory-management/add-product" class="btn btn-primary" style="float: right;"><em class="material-icons">&#xE147;</em> <span>Add New Product</span></a>
 
                     </div>
                 </div>
@@ -17,12 +16,12 @@
             <table class="table table-striped table-hover" aria-label="Product Management">
                 <thead>
                     <tr>
-                        <th>Product Id</th>
-                        <th>Product Name</th>
-                        <th>Unit Price</th>
-                        <th>Product Stock</th>
-                        <th>Product Image</th>
-                        <th>Product Description</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock Quantity</th>
+                        <th>Image</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -35,14 +34,8 @@
                         <td><img src="{{product.productImage}}" alt="product image" style="width: 120px;" /></td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <button (click)="navigateToUpdateProduct(product)" class="settings" title="Settings"
-                                data-toggle="tooltip">
-                                <em class="material-icons">&#xE3C9;</em>
-                            </button>
-                            <button (click)="ifDeleteProduct(product.productId)" class="delete" title="Delete Product"
-                                data-toggle="tooltip">
-                                <em class="material-icons">&#xE5C9;</em>
-                            </button>
+                            <a type="button" href="/admin/inventory-management/update-product/{{product.productId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
+                            <a type="button" (click)="ifDeleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
                 </tbody>
@@ -51,19 +44,8 @@
                 <div class="hint-text">Showing <strong>{{productList?.length}}</strong> out of
                     <strong>{{productList?.length}}</strong> entries
                 </div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-light" (click)="navigateToUsers()">User Management</button>
-    <br />
-    <br />
 </div>

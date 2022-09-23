@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { ProductsComponent } from './products/products.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +28,6 @@ import { SplashPageComponent } from './home-page/splash-page/splash-page.compone
 import { FooterComponent } from './footer/footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
-import { SelfUpdateComponent } from './self-update/self-update.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
@@ -43,8 +41,16 @@ import { OrdersListComponent } from './admin/orders-list/orders-list.component';
 import { UserProfileSecurityComponent } from './user-profile/user-profile-security/user-profile-security.component';
 import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
-import {CloudinaryModule} from '@cloudinary/ng';
+import { CloudinaryModule } from '@cloudinary/ng';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-06861319.okta.com/oauth2/default',
@@ -56,7 +62,6 @@ const oktaAuth = new OktaAuth({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent,
     LoginSuccessComponent,
     ProductsComponent,
     HeaderComponent,
@@ -73,7 +78,6 @@ const oktaAuth = new OktaAuth({
     FooterComponent,
     ProductDetailsComponent,
     UserUpdateComponent,
-    SelfUpdateComponent,
     AboutUsComponent,
     ContactComponent,
     AddProductComponent,
@@ -98,7 +102,14 @@ const oktaAuth = new OktaAuth({
     OktaAuthModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    CloudinaryModule
+    CloudinaryModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [
     AuthGuard,

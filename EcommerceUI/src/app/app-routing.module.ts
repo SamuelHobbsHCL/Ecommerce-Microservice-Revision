@@ -4,14 +4,12 @@ import { LoginSuccessComponent } from './login-success/login-success.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OktaCallbackComponent } from '@okta/okta-angular';
 import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { SelfUpdateComponent } from './self-update/self-update.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -25,6 +23,7 @@ import { UserProfileSecurityComponent } from './user-profile/user-profile-securi
 import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-order-history/user-profile-order-history.component';
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
+import { CustomerListComponent } from './admin/customer-list/customer-list.component';
 
 
 const routes: Routes = [
@@ -32,29 +31,31 @@ const routes: Routes = [
   {path: 'home-page', component: HomePageComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'auth/:method', component: LoginComponent},
   {path: 'loginSuccess', component: LoginSuccessComponent},
-  {path: 'registration',component: RegistrationComponent},
+  // {path: 'auth/:method',component: LoginComponent},
   {path: 'forbidden',component: ForbiddenComponent},
-  {path: 'admin',component: AdminComponent},
+  {path: 'admin', redirectTo: '/admin/user-management', pathMatch: 'full'},
+  {path: 'admin', component: AdminComponent, children:[
+    {path: 'inventory-management', component: InventoryComponent},
+    {path: 'inventory-management/add-product', component:AddProductComponent},
+    {path: 'inventory-management/update-product/:id', component: UpdateProductComponent},
+    {path: 'user-management', component: CustomerListComponent},
+    {path: 'user-management/update-user/:userid', component: UserUpdateComponent},
+    {path: 'order-management',component: OrdersListComponent},
+    {path: 'order-management/view-order/:id', component: OrderDetailsComponent}
+  ]},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'product-details/:id', component: ProductDetailsComponent},
-  {path: 'inventory', component: InventoryComponent},
-  {path: 'inventory/add', component:AddProductComponent},
-  {path: 'update/:userid', component: UserUpdateComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'updateproduct/:id', component: UpdateProductComponent},
-  {path: 'self-update', component: SelfUpdateComponent},
   {path: 'check-out', component: CheckoutComponent},
   {path: 'user-profile', component: UserProfileComponent},
-  {path: 'self-update/:userid', component: SelfUpdateComponent},
   {path: 'orders',component: OrdersComponent},
-  {path: 'orders-list',component: OrdersListComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'user-profile-security', component: UserProfileSecurityComponent},
   {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent},
-  {path: 'orders-list/:id', component: OrderDetailsComponent},
+
 ];
 
 @NgModule({

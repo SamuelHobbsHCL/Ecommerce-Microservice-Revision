@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
-import { CartService } from 'src/app/service/cart.service';
-import { OrderService } from 'src/app/service/order.service';
 import { OrderDto } from 'src/app/common/orderDto';
 import Swal from 'sweetalert2';
-import { NgModel } from '@angular/forms';
-import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
 
 @Component({
   selector: 'app-order-details',
@@ -20,7 +16,7 @@ export class OrderDetailsComponent implements OnInit {
   order : any;
   orderUpdate = new OrderDto();
 
-  constructor(private cartService : CartService, private adminService : AdminService, private _router: Router,private route: ActivatedRoute) { }
+  constructor(private adminService : AdminService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -67,9 +63,4 @@ export class OrderDetailsComponent implements OnInit {
   setDto(order: any): void{
     this.orderUpdate.dtoStatus = this.updateStatus;
   }
-  goBack(){
-    this._router.navigate(['/orders-list'])
-  }
-
-
 }

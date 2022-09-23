@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   public isAuthenticated$!: Observable<boolean>;
   public isDatabaseLoggedIn : boolean;
   public isLoggedIn : boolean;
-  public isAdmin: boolean;
+  public isAdmin : boolean;
 
   constructor(private cartService : CartService, 
     private userAuthService: UserAuthService) { }

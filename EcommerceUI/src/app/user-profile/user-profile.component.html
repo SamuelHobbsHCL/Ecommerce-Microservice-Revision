@@ -1,10 +1,10 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders justify-content-center">
-        <a class="nav-link active" href="/user-profile" target="__blank">Overview</a>
-        <a class="nav-link" href="/my-profile" target="__blank">My Profile</a>
-        <a class="nav-link" href="/user-profile-order-history" target="__blank">My Orders</a>
-        <a class="nav-link" href="/user-profile-security" target="__blank">Security</a>
+        <a class="nav-link active" href="/user-profile">Overview</a>
+        <a class="nav-link" href="/my-profile">My Profile</a>
+        <a class="nav-link" href="/user-profile-order-history">My Orders</a>
+        <a class="nav-link" href="/user-profile-security">Security</a>
 
     </nav>
     <hr class="mt-0 mb-4">
@@ -22,8 +22,7 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-10">
                             <h1 class="display-2 text-white">Hello {{user.firstName}}!</h1>
-                            <p class="text-white mt-0 mb-5">This is your profile page. You can see your order progress
-                                and manage your profile.</p>
+                            <p class="text-white mt-0 mb-5">This is your profile page. You can see your order progress and manage your profile.</p>
 
                         </div>
                     </div>
@@ -38,13 +37,11 @@
                                 <div class="col-lg-3 order-lg-2">
                                     <div class="card-profile-image">
                                         <a href="/user-profile">
-                                            <ng-container *ngIf="user.profileImage !== null, else defaultImage">
-                                                <img src="{{user.profileImage}}" alt="profile image"
-                                                    class="rounded-circle">
+                                            <ng-container *ngIf="hasProfileImage, else defaultImage">
+                                                <img src="{{user.profileImage}}" alt="profile image" class="rounded-circle">
                                             </ng-container>
                                             <ng-template #defaultImage>
-                                                <img src="../../assets/images/defaultProfileImage.png"
-                                                    alt="profile image" class="rounded-circle">
+                                                <img src="../../assets/images/defaultProfileImage.png" alt="profile image" class="rounded-circle">
                                             </ng-template>
 
                                         </a>
@@ -101,12 +98,11 @@
 
                             <div class="card-body">
                                 <ng-container *ngFor="let order of orders ">
-                                    <ng-container
-                                        *ngIf="order.orderStatus !=='DELIVERED' && order.orderStatus !=='In Progress'">
+                                    <ng-container *ngIf="order.orderStatus !=='DELIVERED' && order.orderStatus !=='In Progress'">
                                         <h4>Order ID: {{order.orderId}}</h4>
                                         <article class="card ">
                                             <div class="card-body row ">
-                                                <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate}}
+                                                <div class="col "> <strong>Order Date:</strong> <br>{{order.orderDate | date:'MM-dd-yyyy'}}
                                                 </div>
                                                 <div class="col "> <strong>Status:</strong> <br>{{order.orderStatus}}
                                                 </div>
@@ -131,8 +127,7 @@
                                                             class="fa fa-check "></em> </span> <span class="text ">Order
                                                         confirmed</span> </div>
                                                 <div class="step active "> <span class="icon "> <em
-                                                            class="fa fa-user "></em> </span> <span
-                                                        class="text ">Shipped</span> </div>
+                                                            class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
                                                 <div class="step "> <span class="icon "> <em class="fa fa-truck "></em>
                                                     </span> <span class="text ">Delivered</span> </div>
                                             </ng-container>
@@ -142,11 +137,9 @@
                                                             class="fa fa-check "></em> </span> <span class="text ">Order
                                                         confirmed</span> </div>
                                                 <div class="step active "> <span class="icon "> <em
-                                                            class="fa fa-user "></em> </span> <span
-                                                        class="text ">Shipped</span> </div>
+                                                            class="fa fa-user "></em> </span> <span class="text ">Shipped</span> </div>
                                                 <div class="step active "> <span class="icon "> <em
-                                                            class="fa fa-truck "></em> </span> <span
-                                                        class="text ">Delivered</span> </div>
+                                                            class="fa fa-truck "></em> </span> <span class="text ">Delivered</span> </div>
                                             </ng-container>
 
                                         </div>
@@ -154,12 +147,10 @@
                                         <ul class="row ">
                                             <li class="col-md-6 " *ngFor="let item of order.cartItems ">
                                                 <figure class="itemside mb-3 ">
-                                                    <div class="aside "><img src="{{item.product.productImage}}"
-                                                            alt="product image" class="img-sm border "></div>
+                                                    <div class="aside "><img src="{{item.product.productImage}}" alt="product image" class="img-sm border "></div>
                                                     <figcaption class="info align-self-center ">
                                                         <div class="title ">
-                                                            <strong>{{item.product.productName}}</strong></div><span
-                                                            class="text-muted ">${{item.product.unitPrice}}</span>
+                                                            <strong>{{item.product.productName}}</strong></div><span class="text-muted ">${{item.product.unitPrice}}</span>
                                                     </figcaption>
                                                 </figure>
                                             </li>

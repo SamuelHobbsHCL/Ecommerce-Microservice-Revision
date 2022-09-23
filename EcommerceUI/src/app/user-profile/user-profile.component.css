@@ -113,7 +113,6 @@ h5,
 h6 {
     margin-top: 0;
     margin-bottom: .5rem;
-    background-color: #eeeeee;
     font-family: 'Open Sans', serif
 }
 
@@ -1856,7 +1855,6 @@ textarea[resize='horizontal'] {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
 .track {
     position: relative;
     background-color: #ddd;
