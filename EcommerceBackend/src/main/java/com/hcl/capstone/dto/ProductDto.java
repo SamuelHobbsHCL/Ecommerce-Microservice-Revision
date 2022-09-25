@@ -1,11 +1,18 @@
 package com.hcl.capstone.dto;
 
+import java.util.Set;
+
+import com.hcl.capstone.model.Category;
+
 public class ProductDto {
 	private String dtoName;
 	private double dtoPrice;
 	private int dtoStock;
+	private int dtoStockThreshold;
 	private String dtoImage;
 	private String dtoDescription;
+	private Set<Category> categories;
+
 	long id;
 
 	public ProductDto(String productName, double unitPrice, int productStock, String productImage,
@@ -64,4 +71,22 @@ public class ProductDto {
 	public Long getDtoId() {
 		return id;
 	}
+
+	public int getDtoStockThreshold() {
+		return dtoStockThreshold;
+	}
+
+	public void setDtoStockThreshold(int dtoStockThreshold) {
+		this.dtoStockThreshold = dtoStockThreshold;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	
+	
 }

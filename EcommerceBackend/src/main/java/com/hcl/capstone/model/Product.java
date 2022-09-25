@@ -1,10 +1,17 @@
 package com.hcl.capstone.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.hcl.capstone.dto.ProductDto;
@@ -33,6 +40,18 @@ public class Product {
 
 	@Column(name = "PRODUCT_DESCRIPTION")
 	private String productDescription;
+	
+	@Column(name = "STOCK_THRESHOLD")
+	private int stockThreshold;
+	
+	@ManyToMany(cascade = {
+			
+            CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinTable(
+		name = "PRODUCT_CATEGORIES",
+		joinColumns = @JoinColumn(name = "PRODUCT_ID"),
+		inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+	private Set<Category> categories;
 
 	public Product(String productName, double unitPrice, int productStock, String productImage, String productDescription){
 		this.productName = productName;
@@ -52,6 +71,8 @@ public class Product {
 		this.productStock = productDTO.getDtoStock();
 		this.productImage = productDTO.getDtoImage();
 		this.productDescription = productDTO.getDtoDescription();
+		this.stockThreshold = productDTO.getDtoStockThreshold();
+		this.categories = productDTO.getCategories();
 	}
 	
 	public void setProductId(long productId) {
@@ -98,4 +119,20 @@ public class Product {
 		this.productDescription = productDescription;
 	}
 
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public int getStockThreshold() {
+		return stockThreshold;
+	}
+
+	public void setStockThreshold(int stockThreshold) {
+		this.stockThreshold = stockThreshold;
+	}
+	
 }

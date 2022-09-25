@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { AdminService } from '../../service/admin.service';
 import { CloudinaryService } from 'src/app/service/cloudinary.service';
 import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
+import { trueColor } from '@cloudinary/url-gen/qualifiers/colorSpace';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -15,33 +16,52 @@ export class UpdateProductComponent implements OnInit {
 
   id: string;
   private sub: any;
-  curProduct: any;
-  widget : any;
+  widget: any;
 
   product = new Product();
   updateImageDTO = new UpdateImageDTO();
 
-  constructor(private adminService : AdminService, private cloudinary: CloudinaryService, private route: ActivatedRoute, private _router : Router, private apiService : ApiService) { }
+  categories: any[] = [];
+
+  categoryList = [
+    {
+      categoryId: 1,
+      categoryName: "TV"
+    },
+    {
+      categoryId: 2,
+      categoryName: "Laptop"
+    },
+    {
+      categoryId: 3,
+      categoryName: "Phone"
+    },
+    {
+      categoryId: 4,
+      categoryName: "Video Game"
+    }
+  ]
+
+  constructor(private adminService: AdminService, private cloudinary: CloudinaryService, private route: ActivatedRoute, private _router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; 
-      this.curProduct = this.apiService.getProductById(this.id);
+      this.id = params['id'];
     });
+
     this.apiService.getProductById(this.id).subscribe((data) => {
-    this.curProduct = data;
-    this.product.productId = this.curProduct.productId;
-    this.product.productName = this.curProduct.productName;
-    this.product.unitPrice = this.curProduct.unitPrice;
-    this.product.productDescription = this.curProduct.productDescription;
-    this.product.productImage = this.curProduct.productImage;
-    this.product.productStock = this.curProduct.productStock;
+      this.product = data;
+
+      console.log(this.product);
+      console.log(this.product.categories);
+
 
     }, (error: any) => {
       console.log("Unable to find product");
     }
-    
+
     );
+
     this.cloudinary.createUploadWidget(
       {
         cloudName: 'dwnb2nqcu',
@@ -51,53 +71,74 @@ export class UpdateProductComponent implements OnInit {
         if (!error && result && result.event === "success") {
           console.log('Done! Here is the image info: ', result.info);
           this.updateImageDTO.imageUrl = result.info.url;
-          this.apiService.updateProductImage(this.product.productId ,this.updateImageDTO).subscribe(
+          this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
             (data) => {
-              
-          }, (error) => {
-            if(error == "OK") {
-              Swal.fire(
-                'Success!',
-                'Your profile image has been updated!',
-                'success'
-              ).then(function(){
-                window.location.reload();
-              })
-            } else {
-              Swal.fire(
-                'Error!',
-                'Image upload error!',
-                'error'
-              )
 
+            }, (error) => {
+              if (error == "OK") {
+                Swal.fire(
+                  'Success!',
+                  'Your profile image has been updated!',
+                  'success'
+                ).then(function () {
+                  window.location.reload();
+                })
+              } else {
+                Swal.fire(
+                  'Error!',
+                  'Image upload error!',
+                  'error'
+                )
+
+              }
             }
-          }
           )
-           
+
         }
       }
     ).subscribe(widget => this.widget = widget);
-    
-    console.log(this.curProduct);
-    return this.curProduct;
+
   }
 
-  public updateProduct(product:any) {
+  public updateProduct(product: any) {
     console.log(product);
+    console.log(this.categories);
+    if(this.categories !== null || this.categories !== undefined) {
+      product.categories = this.categories;
+    } 
     this.adminService.updateProduct(product).subscribe(data => {
       Swal.fire(
         'Success',
         'Product has been updated',
         'success'
       )
-      window.location.reload();
+      this._router.navigate(['/admin/inventory-management']);
     })
   }
 
-  openWidget(){
-    if(this.widget){
+  openWidget() {
+    if (this.widget) {
       console.log('open');
       this.widget.open();
     }
+  }
+
+  onCheckboxChange(option, event) {
+    if (event.target.checked) {
+
+      let category = {
+        "categoryId": option.categoryId,
+        "categoryName": option.categoryName,
+      }
+
+      this.categories.push(category);
+    } else {
+      for (var i = 0; i < this.categoryList.length; i++) {
+        if (this.categories[i] == option.id) {
+          this.categories.splice(i, 1);
+        }
+      }
+    }
+    console.log(this.categories);
   }
 }
