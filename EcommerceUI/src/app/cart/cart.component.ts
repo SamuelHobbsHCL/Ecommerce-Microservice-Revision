@@ -38,8 +38,8 @@ export class CartComponent implements OnInit {
         'Success!',
         'Product added to cart!',
         'success'
-      ).then(function(){
-        window.location.reload();
+      ).then(() => {
+        this.ngOnInit();
       })
     });
   }
@@ -47,15 +47,26 @@ export class CartComponent implements OnInit {
   increaseQuantity(item: any) {
    console.log(item);
    console.log(item.product.productId);
-   this.cartService.addtoCart(item.product, 1).subscribe(data=> {
-    window.location.reload();
-   });
+   console.log(item.quantity);
+   if(item.quantity < item.product.productStock) {
+    this.cartService.addtoCart(item.product, 1).subscribe(data=> {
+      this.ngOnInit();
+    });
+    } else {
+      Swal.fire(
+        'Attention!',
+        'You have reached product stock limit!',
+        'info'
+      ).then(() =>{
+        this.ngOnInit();
+      })
+    }
   }
   decreaseQuantity(item: any) {
     console.log(item);
     if(item.quantity >1){
     this.cartService.addtoCart(item.product, -1).subscribe(data=> {
-      window.location.reload();
+      this.ngOnInit();
    });
   }
   }

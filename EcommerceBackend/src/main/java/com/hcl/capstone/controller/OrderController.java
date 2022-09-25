@@ -5,6 +5,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,7 @@ public class OrderController {
 	}
 
 	@PostMapping(value = "/user/check-out")
-	public String checkOut(Authentication authentication,
+	public ResponseEntity<String> checkOut(Authentication authentication,
 			@RequestBody OrderInfo orderInfo)
 			throws MessagingException {
 		return orderService.checkOut(orderInfo,authentication);
