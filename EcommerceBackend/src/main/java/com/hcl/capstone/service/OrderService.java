@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -101,7 +103,7 @@ public class OrderService {
 		orderItemRepository.save(orderItem);
 	}
 	
-	public String checkOut(OrderInfo orderInfo, Authentication authentication)
+	public ResponseEntity<String> checkOut(OrderInfo orderInfo, Authentication authentication)
 			throws MessagingException {
 		User userCheckout = userService.getCurrentLoggedInUser(authentication);
 		if (userCheckout != null) {
@@ -119,8 +121,7 @@ public class OrderService {
 						int currentStock = productCheckout.getProductStock() - itemCheckout.getQuantity();
 						productCheckout.setProductStock(currentStock);
 					} else {
-						itemCheckout.setQuantity(productCheckout.getProductStock());
-						productCheckout.setProductStock(0);
+						return new ResponseEntity<>("Invalid order quantity!", HttpStatus.BAD_REQUEST);
 					}
 
 					productService.saveProduct(productCheckout);
@@ -139,14 +140,14 @@ public class OrderService {
 				Mail mailer = new Mail();
 				mailer.sendConfirmationEmail(userCheckout, orderCheckout, itemsCheckout);
 
-				return "Your order is successfully completed. Thank you for your purchase!";
+				return new ResponseEntity<>("Your order is successfully completed. Thank you for your purchase!", HttpStatus.OK);
 			} else {
-				return "Your order is already checkout. Please enter another order!";
+				return new ResponseEntity<>("Your order is already checkout. Please enter another order!", HttpStatus.OK);
+
 			}
 		} else {
-			return "Not logged in";
+			return new ResponseEntity<>("Not logged in!", HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 	
 	public double getOrderTotal(User user, Order order) {
