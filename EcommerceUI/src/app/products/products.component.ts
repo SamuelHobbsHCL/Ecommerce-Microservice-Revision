@@ -22,6 +22,29 @@ export class ProductsComponent implements OnInit {
 
   public pageSize = 10;
   public currentPage = 0;
+  public filteredList : any[] = [];
+  public allProductList : Product[];
+
+  categories : any[] = [];
+
+  categoryList = [
+    {
+      categoryId: 1,
+      categoryName: "TV"
+    },
+    {
+      categoryId: 2,
+      categoryName: "Laptop"
+    },
+    {
+      categoryId: 3,
+      categoryName: "Phone"
+    },
+    {
+      categoryId: 4,
+      categoryName: "Video Game"
+    }
+  ]
 
   constructor(protected api : ApiService, private cartService : CartService, private _router : Router) { }
   
@@ -58,6 +81,7 @@ export class ProductsComponent implements OnInit {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = (this.currentPage + 1) * this.pageSize;
     this.productList = this.searchedProducts.slice(startIndex,endIndex);
+    this.allProductList = this.searchedProducts.slice(startIndex,endIndex);
   }
 
   selectedProduct: any;
@@ -76,8 +100,6 @@ export class ProductsComponent implements OnInit {
     return this.selectedProduct;
   }
 
-
-
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
       Swal.fire(
@@ -93,5 +115,37 @@ export class ProductsComponent implements OnInit {
   search(searchStr: string){
     this.searchStr = searchStr;
     this.getProducts();
+  }
+
+  onCheckboxChange(option, event) {
+    if(event.target.checked) {
+      this.allProductList.forEach((product) => {
+        product.categories.forEach((element) => {
+          if(element.categoryId === option.categoryId) {
+            this.filteredList.push(product);
+          }
+        })
+      })
+
+      this.productList = this.filteredList;
+
+    } else {
+      console.log(this.filteredList);
+
+      this.filteredList.forEach((product) => {
+        product.categories.forEach((element) => {
+          let index = -1;
+          console.log(element.categoryId);
+          console.log(option.categoryId);
+          if(element.categoryId === option.categoryId) {
+            index = this.filteredList.indexOf(product);
+          }
+          console.log("splice" + this.filteredList.splice(index, 1));
+        })
+      })
+
+      this.productList = this.filteredList;
+
+    }
   }
 }
