@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -10,17 +9,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class InventoryComponent implements OnInit {
   public productList: any;
 
-  constructor(private adminService : AdminService, private _router: Router) { }
-
-  navigateToUsers() {
-    this._router.navigate(['admin']);
-  }
-  navigateToTest() {
-    this._router.navigate(['test'])
-  }
-  navigateToUpdateProduct(product : any) {
-    this._router.navigate(['/updateproduct', product.productId])
-  }
+  constructor(private adminService : AdminService) { }
 
   ngOnInit(): void {
     this.adminService.getAllProducts()
@@ -30,10 +19,12 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  public deleteProduct(productId : any) {
-    console.log(productId);
-    this.adminService.deleteProduct(parseInt(productId)).subscribe(data => {
-      window.location.reload();
-    });
+  public ifDeleteProduct(productId: any) {
+    var answer = window.confirm("Delete product?");
+    if (answer) {
+      this.adminService.deleteProduct(parseInt(productId)).subscribe(data => {
+        window.location.reload();
+      });
+    }
   }
 }

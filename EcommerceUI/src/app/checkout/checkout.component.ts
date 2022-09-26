@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -17,6 +18,8 @@ import { User } from '../user';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  color: ThemePalette = 'accent';
+  showSpinner = false;
   user = new User();
   address : any;
   public grandTotal !: number;
@@ -99,6 +102,7 @@ export class CheckoutComponent implements OnInit {
     if(this.displayError.textContent === ""){
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
+          this.showSpinner = true;
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret, {
             payment_method: {
               card: this.cardElement
@@ -108,6 +112,7 @@ export class CheckoutComponent implements OnInit {
             if(result.error){
               //inform the customer there was am error
               alert(`There was an error: ${result.error.message}`);
+              this.showSpinner = false;
             } else {
               this.orderInfo.shippingAddress = this.shippingAddress;
               if (true) { /* TODO replace boolean w/check */      
@@ -128,6 +133,8 @@ export class CheckoutComponent implements OnInit {
               ).then(function(){
                 window.location.reload();
               })
+
+              this.showSpinner = false;
           
               this.router.navigate(['/']);
             }

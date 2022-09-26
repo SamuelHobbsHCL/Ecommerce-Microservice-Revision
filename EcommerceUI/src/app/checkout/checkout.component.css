@@ -128,3 +128,22 @@ p {
     color: #42A5F5;
     font-size: medium;
 }
+
+.dark-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.spinner {
+    border-radius: 10px;
+    height: 70px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+}

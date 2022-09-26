@@ -21,12 +21,6 @@ export class OrdersListComponent implements OnInit {
     });
   }
 
-  navigateToUsers() {
-    this._router.navigate(['admin']);
-  } 
-  navigateToInventory() {
-    this._router.navigate(['/inventory'])
-  }
   navigateToOrder(id : any) {
     this._router.navigate(['/orders-list', id])
   }

@@ -116,13 +116,16 @@ public class UserService {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 
 		user.setPassword(encodedPassword);
-		user.setAuthProvider(AuthProvider.LOCAL);
-		
-		Roles role = roleRepository.findByName(RoleName.USER);
-		Set<Roles> userRoles = new HashSet<>();
-		userRoles.add(role);
-
-		user.setRoles(userRoles);
+		user.setAuthProvider(user.getAuthProvider());
+		if(user.getRoles() == null) {
+			Roles role = roleRepository.findByName(RoleName.USER);
+			Set<Roles> userRoles = new HashSet<>();
+			userRoles.add(role);
+	
+			user.setRoles(userRoles);
+		} else {
+			user.setRoles(user.getRoles());
+		}
 
 		userRepository.save(user);
 

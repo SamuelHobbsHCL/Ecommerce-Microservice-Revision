@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AddressDTO } from '../addressDTO';
 import { AddressService } from '../service/address.service';
@@ -13,7 +14,7 @@ import { User } from '../user';
 })
 export class UserUpdateComponent implements OnInit {
   [x: string]: any;
-  constructor(private updateService:UpdateService, private userService:UserService, private addressService:AddressService) { }
+  constructor(private updateService:UpdateService, private userService:UserService, private addressService:AddressService, private activatedRoute : ActivatedRoute) { }
 
   id : number;
   user = new User();
@@ -23,17 +24,25 @@ export class UserUpdateComponent implements OnInit {
   msg = '';
 
   ngOnInit(): void {
-    this.id = parseInt(this.getUrl());
+    let userid = this.activatedRoute.snapshot.params["userid"];
+    console.log("userid " + userid);
+    this.id = userid;
+    console.log(this.id);
+    console.log(this.user);
 
     this.userService.getUserById(this.id)
-    .subscribe((res: any)=>{
-      this.user = res;
+    .subscribe((data)=>{
+      this.user = data;
+      console.log("response" + data);
     });
 
     this.addressService.getAddressById(this.id)
     .subscribe((res: any)=>{
       this.setUpNewAddress(res);
     });
+
+    
+    
   }
 
   public getUrl(){

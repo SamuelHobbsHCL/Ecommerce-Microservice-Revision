@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   public isAuthenticated$!: Observable<boolean>;
   public isDatabaseLoggedIn : boolean;
   public isLoggedIn : boolean;
+  public isAdmin : boolean;
 
   constructor(private cartService : CartService, 
     private userAuthService: UserAuthService) { }
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     this.isAuthenticated$  = this.userAuthService.checkAuthenticated(); 
     this.isDatabaseLoggedIn = this.userAuthService.isDatabaseLoggedIn();
     this.isLoggedIn = this.userAuthService.isLoggedIn();
+    this.isAdmin = this.userAuthService.isAdmin();
 
     const userRoles: any = JSON.stringify(this.userAuthService.getRoles());
     let isAdmin = false;
