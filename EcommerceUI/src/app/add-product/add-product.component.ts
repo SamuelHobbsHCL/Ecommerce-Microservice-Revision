@@ -24,9 +24,9 @@ export class AddProductComponent implements OnInit {
         uploadPreset: 'ysvn2muf'
       },
       (error, result) => {
-        if (!error && result && result.event === "success") {          
+        if (result && result.event === "success") {          
           this.product.productImage = result.info.url;
-        } else {
+        } else if (error) {
           console.error('Upload failed.');
         }
       }
@@ -60,7 +60,7 @@ export class AddProductComponent implements OnInit {
   }
   
   navigateToInventory() {
-    this._router.navigate(['/inventory'])
+    this._router.navigate(['/admin/inventory-management'])
   }
 
   navigateToUpdateProduct() {
