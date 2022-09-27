@@ -111,11 +111,6 @@ public class UserService {
 		}
 		
 		user.setUserId(id);
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-
-		user.setPassword(encodedPassword);
 		user.setAuthProvider(user.getAuthProvider());
 		if(user.getRoles() == null) {
 			Roles role = roleRepository.findByName(RoleName.USER);

@@ -100,13 +100,7 @@ export class AddProductComponent implements OnInit {
           this.categories.splice(index,1)
         }
       })
-
-  //     for(var i=0 ; i < this.categoryList.length; i++) {
-  //       if(this.categories[i] === option.id) {
-  //         this.categories.splice(i,1);
-  //     }
-  //  }
- }
- console.log(this.categories);
-}
+    }
+    console.log(this.categories);
+  }
 }
