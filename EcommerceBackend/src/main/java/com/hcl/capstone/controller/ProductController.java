@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.dto.UpdateImageDto;
+import com.hcl.capstone.model.Category;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.service.ProductService;
 
@@ -49,6 +50,11 @@ public class ProductController {
 	public List<Product> searchProducts(@RequestParam String searchStr) {
 		// Returns all matching results
 		return productService.searchProducts(searchStr);
+	}
+	
+	@GetMapping("/api/product/categories")
+	public List<Category> getProductCategories() {
+		return productService.getAllCategories();
 	}
 	
 	@PutMapping("/api/update-product-image/{id}")

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { AdminService } from '../service/admin.service';
 import { CloudinaryService } from '../service/cloudinary.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-add-product',
@@ -17,28 +18,16 @@ export class AddProductComponent implements OnInit {
 
   categories : any[] = [];
 
-  categoryList = [
-    {
-      id: 1,
-      value: "TV"
-    },
-    {
-      id: 2,
-      value: "Laptop"
-    },
-    {
-      id: 3,
-      value: "Phone"
-    },
-    {
-      id: 4,
-      value: "Video Game"
-    }
-  ]
+  categoryList : any[];
 
-  constructor(private _service : AdminService, private cloudinary: CloudinaryService, private _router : Router) { }
+  constructor(private apiService : ApiService, private _service : AdminService, private cloudinary: CloudinaryService, private _router : Router) { }
 
   ngOnInit(): void {
+    this.apiService.getCategories().subscribe((data) => {
+      this.categoryList = data;
+      console.log(this.categoryList);
+    })
+
     this.cloudinary.createUploadWidget(
       {
         cloudName: 'dwnb2nqcu',
@@ -95,20 +84,28 @@ export class AddProductComponent implements OnInit {
   }
 
   onCheckboxChange(option, event) {
+    console.log(option);
     if(event.target.checked) {
 
       let category = {
-        "categoryId" : option.id,
-        "categoryName" : option.value,
+        "categoryId" : option.categoryId,
+        "categoryName" : option.categoryName,
       }
 
       this.categories.push(category);
     } else {
-    for(var i=0 ; i < this.categoryList.length; i++) {
-      if(this.categories[i] == option.id) {
-        this.categories.splice(i,1);
-     }
-   }
+      this.categories.forEach((category) => {
+        if(category.categoryId === option.categoryId) {
+          let index = this.categories.indexOf(category);
+          this.categories.splice(index,1)
+        }
+      })
+
+  //     for(var i=0 ; i < this.categoryList.length; i++) {
+  //       if(this.categories[i] === option.id) {
+  //         this.categories.splice(i,1);
+  //     }
+  //  }
  }
  console.log(this.categories);
 }

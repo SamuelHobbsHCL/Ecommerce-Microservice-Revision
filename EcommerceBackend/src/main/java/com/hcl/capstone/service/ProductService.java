@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.ProductDto;
+import com.hcl.capstone.model.Category;
 import com.hcl.capstone.model.Product;
+import com.hcl.capstone.repository.CategoryRepository;
 import com.hcl.capstone.repository.ProductRepository;
 
 @Service
@@ -17,6 +19,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	public Product saveProduct(Product product) {
 		return productRepository.save(product);
@@ -52,6 +57,10 @@ public class ProductService {
 		Pageable pageable = PageRequest.of(index, count);
 		// Returns top <count> results starting from <index>
 		return productRepository.findAllByProductNameContaining(searchStr,pageable);
+	}
+	
+	public List<Category> getAllCategories() {
+		return categoryRepository.findAll();
 	}
 	
 	public List<Product> searchProducts(String searchStr) {

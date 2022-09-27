@@ -59,6 +59,10 @@ export class ApiService {
     return this.http.put<any>(this.PATH_OF_API + "/api/update-product-image/" + productId, updateImageDTO);
   }
 
+  public getCategories(): Observable<any> {
+    return this.http.get<any>(this.PATH_OF_API + "/api/product/categories");
+  }
+
   throwError(error: any) {
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');

@@ -30,38 +30,37 @@ export class ProductsComponent implements OnInit {
 
   categories : any[] = [];
 
-  categoryList = [
-    {
-      categoryId: 0,
-      categoryName: "All",
-      active: false
-    },
-    {
-      categoryId: 1,
-      categoryName: "TV",
-      active: false
-    },
-    {
-      categoryId: 2,
-      categoryName: "Laptop",
-      active: false
-    },
-    {
-      categoryId: 3,
-      categoryName: "Phone",
-      active: false
-    },
-    {
-      categoryId: 4,
-      categoryName: "Video Game",
-      active: false
-    }
-  ]
+  categoryList: any[];
 
   constructor(protected api : ApiService, private cartService : CartService, private _router : Router) { }
   
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.api.getCategories().subscribe((data) => {
+      this.categoryList = data;
+      console.log(this.categoryList);
+
+      //Add all category for side bar
+      const allCategory = {
+        categoryId: 0,
+        categoryName: "All"
+      }
+
+      this.categoryList.push(allCategory);
+      this.categoryList.sort(this.sortById());
+    })
     this.getProducts();
+  }
+
+  //sort by ID to make the "All" category on top
+  sortById() {
+    return function(a,b) {
+      if(a['categoryId'] > b['categoryId'])
+        return 1;
+      else if(a['categoryId'] < b['categoryId'])
+        return -1;
+
+      return 0;
+    }
   }
 
   public handlePage(event: PageEvent) {

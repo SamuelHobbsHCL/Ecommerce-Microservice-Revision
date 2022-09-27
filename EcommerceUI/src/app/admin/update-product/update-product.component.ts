@@ -23,28 +23,16 @@ export class UpdateProductComponent implements OnInit {
 
   categories: any[] = [];
 
-  categoryList = [
-    {
-      categoryId: 1,
-      categoryName: "TV"
-    },
-    {
-      categoryId: 2,
-      categoryName: "Laptop"
-    },
-    {
-      categoryId: 3,
-      categoryName: "Phone"
-    },
-    {
-      categoryId: 4,
-      categoryName: "Video Game"
-    }
-  ]
+  categoryList: any[];
 
   constructor(private adminService: AdminService, private cloudinary: CloudinaryService, private route: ActivatedRoute, private _router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
+    this.apiService.getCategories().subscribe((data) => {
+      this.categoryList = data;
+      console.log(this.categoryList);
+    })
+
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -129,11 +117,12 @@ export class UpdateProductComponent implements OnInit {
 
       this.categories.push(category);
     } else {
-      for (var i = 0; i < this.categoryList.length; i++) {
-        if (this.categories[i] == option.id) {
-          this.categories.splice(i, 1);
+      this.categories.forEach((category) => {
+        if(category.categoryId === option.categoryId) {
+          let index = this.categories.indexOf(category);
+          this.categories.splice(index,1)
         }
-      }
+      })
     }
     console.log(this.categories);
   }
