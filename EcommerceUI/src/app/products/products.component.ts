@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -22,11 +23,44 @@ export class ProductsComponent implements OnInit {
 
   public pageSize = 10;
   public currentPage = 0;
+  public filteredList : Product[] = [];
+  public allProductList : Product[];
+
+  toggle: boolean = false;
+
+  categories : any[] = [];
+
+  categoryList: any[];
 
   constructor(protected api : ApiService, private cartService : CartService, private _router : Router) { }
   
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.api.getCategories().subscribe((data) => {
+      this.categoryList = data;
+      console.log(this.categoryList);
+
+      //Add all category for side bar
+      const allCategory = {
+        categoryId: 0,
+        categoryName: "All"
+      }
+
+      this.categoryList.push(allCategory);
+      this.categoryList.sort(this.sortById());
+    })
     this.getProducts();
+  }
+
+  //sort by ID to make the "All" category on top
+  sortById() {
+    return function(a,b) {
+      if(a['categoryId'] > b['categoryId'])
+        return 1;
+      else if(a['categoryId'] < b['categoryId'])
+        return -1;
+
+      return 0;
+    }
   }
 
   public handlePage(event: PageEvent) {
@@ -42,6 +76,7 @@ export class ProductsComponent implements OnInit {
       this.api.getProduct()
         .subscribe(res => {
           this.searchedProducts = res;
+          this.allProductList = res;
           this.pageIterator();
       });
     } else {
@@ -57,7 +92,7 @@ export class ProductsComponent implements OnInit {
   private pageIterator() {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = (this.currentPage + 1) * this.pageSize;
-    this.productList = this.searchedProducts.slice(startIndex,endIndex);
+    this.productList = this.searchedProducts.slice(startIndex,endIndex);   
   }
 
   selectedProduct: any;
@@ -76,8 +111,6 @@ export class ProductsComponent implements OnInit {
     return this.selectedProduct;
   }
 
-
-
   addtocart(item: any){
     this.cartService.addtoCart(item, 1).subscribe(data => {
       Swal.fire(
@@ -93,5 +126,38 @@ export class ProductsComponent implements OnInit {
   search(searchStr: string){
     this.searchStr = searchStr;
     this.getProducts();
+  }
+
+  filter(option) {
+    //set link active on click
+    this.categoryList.forEach((item) => {
+      if(item.categoryName === option.categoryName) {
+        item.active = true;
+      } else {
+        item.active = false;
+      }
+    })
+
+    //create new filter list if category matches option
+    this.allProductList.forEach((product) => {
+      product.categories.forEach((category) => {
+        if(category.categoryName === option.categoryName) {
+          this.filteredList.push(product);
+        }
+      })
+    })
+
+    this.searchedProducts = this.filteredList;
+    this.productList = this.filteredList;
+ 
+    //reset filter list
+    this.filteredList = [];
+
+    //reset product list if category is "All"
+    if(option.categoryName === "All") {
+      this.searchedProducts = this.allProductList;
+      this.productList = this.allProductList;
+    }
+
   }
 }

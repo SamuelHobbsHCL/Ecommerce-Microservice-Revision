@@ -2,11 +2,11 @@
 <div class="vertical-nav bg-white" id="sidebar">
     <div class="py-4 px-3 mb-4 bg-light">
         <div class="media d-flex align-items-center">
-            <ng-container *ngIf="hasProfileImage, else defaultImage">
+            <ng-container *ngIf="user.profileImage, else defaultImage">
                 <img src="{{user.profileImage}}" alt="profile image" width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
             </ng-container>
             <ng-template #defaultImage>
-                <img src="../../assets/images/defaultProfileImage.png" alt="profile image" width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+                <img src="../../assets/images/defaultProfileImage.png" alt="default profile image" width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
             </ng-template>
 
             <div class="media-body">

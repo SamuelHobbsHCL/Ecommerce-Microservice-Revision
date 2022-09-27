@@ -46,7 +46,7 @@ export class AdminService {
   }
 
   public addProduct(product : Product) : Observable<any> {
-    return this.http.post<any>(this.PATH_OF_API + "/inventory/add/", product, {
+    return this.http.post<any>(this.PATH_OF_API + "/admin/add-product/", product, {
     });
   }
   
@@ -55,7 +55,7 @@ export class AdminService {
   }
 
   public updateProduct(product : any) {
-    return this.http.put(this.PATH_OF_API + "/admin/product/" + product.productId, product);
+    return this.http.put(this.PATH_OF_API + "/admin/product", product);
   }
 
   public updateOrder(id : any, orderDTO : OrderDto){

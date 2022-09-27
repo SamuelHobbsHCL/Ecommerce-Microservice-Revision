@@ -106,10 +106,10 @@ public class AdminController {
 		}
 	}
 	
-	@PutMapping("/admin/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO, @PathVariable long id){
+	@PutMapping("/admin/product")
+	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO){
 		
-		Product result = productsService.updateProduct(productDTO, id);
+		Product result = productsService.updateProduct(productDTO);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -9,13 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.capstone.dto.UpdateImageDto;
+import com.hcl.capstone.model.Category;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.service.ProductService;
 
@@ -46,16 +46,15 @@ public class ProductController {
 		return productService.searchProducts(searchStr, index, count);
 	}
 
-	@PostMapping("/inventory/add")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public Product addProduct(@RequestBody Product product){
-		return productService.saveProduct(product);
-	}
-
 	@GetMapping("/api/product/search")
 	public List<Product> searchProducts(@RequestParam String searchStr) {
 		// Returns all matching results
 		return productService.searchProducts(searchStr);
+	}
+	
+	@GetMapping("/api/product/categories")
+	public List<Category> getProductCategories() {
+		return productService.getAllCategories();
 	}
 	
 	@PutMapping("/api/update-product-image/{id}")
