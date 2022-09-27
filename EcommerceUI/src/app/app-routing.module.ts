@@ -24,6 +24,7 @@ import { UserProfileOrderHistoryComponent } from './user-profile/user-profile-or
 import { MyProfileComponent } from './user-profile/my-profile/my-profile.component';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
 import { CustomerListComponent } from './admin/customer-list/customer-list.component';
+import { AddUserComponent } from './admin/add-user/add-user.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
     {path: 'user-management', component: CustomerListComponent},
     {path: 'user-management/update-user/:userid', component: UserUpdateComponent},
     {path: 'order-management',component: OrdersListComponent},
-    {path: 'order-management/view-order/:id', component: OrderDetailsComponent}
+    {path: 'order-management/view-order/:id', component: OrderDetailsComponent},
+    {path: 'add-user', component: AddUserComponent}
   ]},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'product-details/:id', component: ProductDetailsComponent},
@@ -54,7 +56,8 @@ const routes: Routes = [
   {path: 'orders',component: OrdersComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'user-profile-security', component: UserProfileSecurityComponent},
-  {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent},
+  {path: 'user-profile-order-history', component: UserProfileOrderHistoryComponent}
+ 
 
 ];
 
