@@ -107,9 +107,9 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/product")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO){
 		
-		Product result = productsService.updateProduct(product);
+		Product result = productsService.updateProduct(productDTO);
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

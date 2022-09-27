@@ -52,10 +52,6 @@ export class UpdateProductComponent implements OnInit {
     this.apiService.getProductById(this.id).subscribe((data) => {
       this.product = data;
 
-      console.log(this.product);
-      console.log(this.product.categories);
-
-
     }, (error: any) => {
       console.log("Unable to find product");
     }
@@ -102,8 +98,8 @@ export class UpdateProductComponent implements OnInit {
 
   public updateProduct(product: any) {
     console.log(product);
-    console.log(this.categories);
-    if(this.categories !== null || this.categories !== undefined) {
+
+    if(this.categories !== null && this.categories !== undefined && this.categories.length !== 0) {
       product.categories = this.categories;
     } 
     this.adminService.updateProduct(product).subscribe(data => {

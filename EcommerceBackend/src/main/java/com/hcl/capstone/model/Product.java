@@ -53,10 +53,11 @@ public class Product {
 		inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
 	private Set<Category> categories;
 
-	public Product(String productName, double unitPrice, int productStock, String productImage, String productDescription){
+	public Product(String productName, double unitPrice, int productStock, int stockThreshold, String productImage, String productDescription){
 		this.productName = productName;
 		this.unitPrice = unitPrice;
 		this.productStock = productStock;
+		this.stockThreshold = stockThreshold;
 		this.productImage = productImage;
 		this.productDescription = productDescription;
 	}
@@ -66,12 +67,13 @@ public class Product {
 	}
 
 	public Product(ProductDto productDTO) {
-		this.productName = productDTO.getDtoName();
-		this.unitPrice = productDTO.getDtoPrice();
-		this.productStock = productDTO.getDtoStock();
-		this.productImage = productDTO.getDtoImage();
-		this.productDescription = productDTO.getDtoDescription();
-		this.stockThreshold = productDTO.getDtoStockThreshold();
+		this.productId = productDTO.getProductId();
+		this.productName = productDTO.getProductName();
+		this.unitPrice = productDTO.getUnitPrice();
+		this.productStock = productDTO.getProductStock();
+		this.productImage = productDTO.getProductImage();
+		this.productDescription = productDTO.getProductDescription();
+		this.stockThreshold = productDTO.getStockThreshold();
 		this.categories = productDTO.getCategories();
 	}
 	

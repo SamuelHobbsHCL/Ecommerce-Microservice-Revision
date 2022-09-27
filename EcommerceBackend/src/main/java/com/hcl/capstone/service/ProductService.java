@@ -34,16 +34,18 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
-	public Product updateProduct(Product product) {
-		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(product.getProductId()));
+	public Product updateProduct(ProductDto productDTO) {
+		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductId()));
 		
 		if(!productRepo.isPresent()) {
 			return null;
 		}
 		
-		productRepository.save(product);
+		Product update = new Product(productDTO);
 		
-		return productRepository.findById(product.getProductId());
+		productRepository.save(update);
+		
+		return productRepository.findById(productDTO.getProductId());
 	}
 	
 	public List<Product> searchProducts(String searchStr, int index, int count) {

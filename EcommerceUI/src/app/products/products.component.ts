@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -22,27 +23,38 @@ export class ProductsComponent implements OnInit {
 
   public pageSize = 10;
   public currentPage = 0;
-  public filteredList : any[] = [];
+  public filteredList : Product[] = [];
   public allProductList : Product[];
+
+  toggle: boolean = false;
 
   categories : any[] = [];
 
   categoryList = [
     {
+      categoryId: 0,
+      categoryName: "All",
+      active: false
+    },
+    {
       categoryId: 1,
-      categoryName: "TV"
+      categoryName: "TV",
+      active: false
     },
     {
       categoryId: 2,
-      categoryName: "Laptop"
+      categoryName: "Laptop",
+      active: false
     },
     {
       categoryId: 3,
-      categoryName: "Phone"
+      categoryName: "Phone",
+      active: false
     },
     {
       categoryId: 4,
-      categoryName: "Video Game"
+      categoryName: "Video Game",
+      active: false
     }
   ]
 
@@ -65,6 +77,7 @@ export class ProductsComponent implements OnInit {
       this.api.getProduct()
         .subscribe(res => {
           this.searchedProducts = res;
+          this.allProductList = res;
           this.pageIterator();
       });
     } else {
@@ -80,8 +93,7 @@ export class ProductsComponent implements OnInit {
   private pageIterator() {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = (this.currentPage + 1) * this.pageSize;
-    this.productList = this.searchedProducts.slice(startIndex,endIndex);
-    this.allProductList = this.searchedProducts.slice(startIndex,endIndex);
+    this.productList = this.searchedProducts.slice(startIndex,endIndex);   
   }
 
   selectedProduct: any;
@@ -117,35 +129,36 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  onCheckboxChange(option, event) {
-    if(event.target.checked) {
-      this.allProductList.forEach((product) => {
-        product.categories.forEach((element) => {
-          if(element.categoryId === option.categoryId) {
-            this.filteredList.push(product);
-          }
-        })
+  filter(option) {
+    //set link active on click
+    this.categoryList.forEach((item) => {
+      if(item.categoryName === option.categoryName) {
+        item.active = true;
+      } else {
+        item.active = false;
+      }
+    })
+
+    //create new filter list if category matches option
+    this.allProductList.forEach((product) => {
+      product.categories.forEach((category) => {
+        if(category.categoryName === option.categoryName) {
+          this.filteredList.push(product);
+        }
       })
+    })
 
-      this.productList = this.filteredList;
+    this.searchedProducts = this.filteredList;
+    this.productList = this.filteredList;
+ 
+    //reset filter list
+    this.filteredList = [];
 
-    } else {
-      console.log(this.filteredList);
-
-      this.filteredList.forEach((product) => {
-        product.categories.forEach((element) => {
-          let index = -1;
-          console.log(element.categoryId);
-          console.log(option.categoryId);
-          if(element.categoryId === option.categoryId) {
-            index = this.filteredList.indexOf(product);
-          }
-          console.log("splice" + this.filteredList.splice(index, 1));
-        })
-      })
-
-      this.productList = this.filteredList;
-
+    //reset product list if category is "All"
+    if(option.categoryName === "All") {
+      this.searchedProducts = this.allProductList;
+      this.productList = this.allProductList;
     }
+
   }
 }

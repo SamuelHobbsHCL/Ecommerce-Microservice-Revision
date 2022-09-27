@@ -2,13 +2,12 @@
     <h3>CATEGORIES</h3>
     <div class="checklist categories">
         <div class="form-check" *ngFor="let category of categoryList">
-            <input class="form-check-input" type="checkbox" value="{{category.categoryId}}" (change)="onCheckboxChange(category,$event)">
-            <label class="form-check-label" for="flexCheckDefault">{{category.categoryName}}</label>
+            <a [ngClass]="{'active': category.active, '': !category.active}" class="side-nav" (click)="filter(category)">
+                <label class="form-check-label" for="flexCheckDefault">{{category.categoryName}}</label>
+            </a>
         </div>
     </div>
 
-    <h3>PRICE RANGE</h3>
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/price-range.png" alt="" />
 </div>
 
 <div class="container">
@@ -18,7 +17,7 @@
             <button type="button" class="btn btn-outline-primary" (click)="search(searchStr.value)">Search</button>
         </div>
         <div class="col-6">
-            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="searchedProducts.length" [pageIndex]="currentPage" (page)="handlePage($event)">
+            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="searchedProducts?.length" [pageIndex]="currentPage" (page)="handlePage($event)">
             </mat-paginator>
         </div>
     </div>

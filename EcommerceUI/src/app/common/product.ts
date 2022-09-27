@@ -6,6 +6,6 @@ export class Product {
     stockThreshold: number;
     productImage: string;
     productDescription: string;
-    categories: any;
+    categories: any[];
 
 }
