@@ -5,89 +5,90 @@ import java.util.Set;
 import com.hcl.capstone.model.Category;
 
 public class ProductDto {
-	private long productId;
-	private String productName;
-	private double unitPrice;
-	private int productStock;
-	private int stockThreshold;
-	private String productImage;
-	private String productDescription;
-	private Set<Category> categories;
+	private long productIdDto;
+	private String productNameDto;
+	private double unitPriceDto;
+	private int productStockDto;
+	private int stockThresholdDto;
+	private String productImageDto;
+	private String productDescriptionDto;
+	private Set<Category> categoriesDto;
 
 	public ProductDto(long productId, String productName, double unitPrice, int productStock, int stockThreshold,
 			String productImage, String productDescription, Set<Category> categories) {
-		this.productId = productId;
-		this.productName = productName;
-		this.unitPrice = unitPrice;
-		this.productStock = productStock;
-		this.stockThreshold = stockThreshold;
-		this.productImage = productImage;
-		this.productDescription = productDescription;
-		this.categories = categories;
+		this.productIdDto = productId;
+		this.productNameDto = productName;
+		this.unitPriceDto = unitPrice;
+		this.productStockDto = productStock;
+		this.stockThresholdDto = stockThreshold;
+		this.productImageDto = productImage;
+		this.productDescriptionDto = productDescription;
+		this.categoriesDto = categories;
 	}
 
-	public long getProductId() {
-		return productId;
+	public long getProductIdDto() {
+		return productIdDto;
 	}
 
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProductIdDto(long productIdDto) {
+		this.productIdDto = productIdDto;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getProductNameDto() {
+		return productNameDto;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setProductNameDto(String productNameDto) {
+		this.productNameDto = productNameDto;
 	}
 
-	public double getUnitPrice() {
-		return unitPrice;
+	public double getUnitPriceDto() {
+		return unitPriceDto;
 	}
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setUnitPriceDto(double unitPriceDto) {
+		this.unitPriceDto = unitPriceDto;
 	}
 
-	public int getProductStock() {
-		return productStock;
+	public int getProductStockDto() {
+		return productStockDto;
 	}
 
-	public void setProductStock(int productStock) {
-		this.productStock = productStock;
+	public void setProductStockDto(int productStockDto) {
+		this.productStockDto = productStockDto;
 	}
 
-	public int getStockThreshold() {
-		return stockThreshold;
+	public int getStockThresholdDto() {
+		return stockThresholdDto;
 	}
 
-	public void setStockThreshold(int stockThreshold) {
-		this.stockThreshold = stockThreshold;
+	public void setStockThresholdDto(int stockThresholdDto) {
+		this.stockThresholdDto = stockThresholdDto;
 	}
 
-	public String getProductImage() {
-		return productImage;
+	public String getProductImageDto() {
+		return productImageDto;
 	}
 
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
+	public void setProductImageDto(String productImageDto) {
+		this.productImageDto = productImageDto;
 	}
 
-	public String getProductDescription() {
-		return productDescription;
+	public String getProductDescriptionDto() {
+		return productDescriptionDto;
 	}
 
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
+	public void setProductDescriptionDto(String productDescriptionDto) {
+		this.productDescriptionDto = productDescriptionDto;
 	}
 
-	public Set<Category> getCategories() {
-		return categories;
+	public Set<Category> getCategoriesDto() {
+		return categoriesDto;
 	}
 
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
+	public void setCategoriesDto(Set<Category> categoriesDto) {
+		this.categoriesDto = categoriesDto;
 	}
+
 
 }

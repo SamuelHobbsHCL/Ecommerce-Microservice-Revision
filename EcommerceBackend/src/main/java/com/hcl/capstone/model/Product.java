@@ -67,14 +67,14 @@ public class Product {
 	}
 
 	public Product(ProductDto productDTO) {
-		this.productId = productDTO.getProductId();
-		this.productName = productDTO.getProductName();
-		this.unitPrice = productDTO.getUnitPrice();
-		this.productStock = productDTO.getProductStock();
-		this.productImage = productDTO.getProductImage();
-		this.productDescription = productDTO.getProductDescription();
-		this.stockThreshold = productDTO.getStockThreshold();
-		this.categories = productDTO.getCategories();
+		this.productId = productDTO.getProductIdDto();
+		this.productName = productDTO.getProductNameDto();
+		this.unitPrice = productDTO.getUnitPriceDto();
+		this.productStock = productDTO.getProductStockDto();
+		this.productImage = productDTO.getProductImageDto();
+		this.productDescription = productDTO.getProductDescriptionDto();
+		this.stockThreshold = productDTO.getStockThresholdDto();
+		this.categories = productDTO.getCategoriesDto();
 	}
 	
 	public void setProductId(long productId) {

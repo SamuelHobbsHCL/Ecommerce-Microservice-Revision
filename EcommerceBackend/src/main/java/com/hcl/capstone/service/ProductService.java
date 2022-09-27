@@ -35,7 +35,7 @@ public class ProductService {
 	}
 	
 	public Product updateProduct(ProductDto productDTO) {
-		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductId()));
+		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductIdDto()));
 		
 		if(!productRepo.isPresent()) {
 			return null;
@@ -45,7 +45,7 @@ public class ProductService {
 		
 		productRepository.save(update);
 		
-		return productRepository.findById(productDTO.getProductId());
+		return productRepository.findById(productDTO.getProductIdDto());
 	}
 	
 	public List<Product> searchProducts(String searchStr, int index, int count) {
