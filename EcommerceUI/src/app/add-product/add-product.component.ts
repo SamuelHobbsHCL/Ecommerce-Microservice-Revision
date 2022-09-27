@@ -45,9 +45,9 @@ export class AddProductComponent implements OnInit {
         uploadPreset: 'ysvn2muf'
       },
       (error, result) => {
-        if (!error && result && result.event === "success") {          
+        if (result && result.event === "success") {          
           this.product.productImage = result.info.url;
-        } else {
+        } else if (error) {
           console.error('Upload failed.');
         }
       }
