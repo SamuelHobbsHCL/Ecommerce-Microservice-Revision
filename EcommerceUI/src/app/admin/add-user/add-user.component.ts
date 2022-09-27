@@ -12,35 +12,36 @@ import Swal from 'sweetalert2';
 export class AddUserComponent implements OnInit {
   msg = '';
   registrationUser = new User();
-  constructor(private router : Router, private _service : RegistrationService) { }
+  constructor(private router: Router, private _service: RegistrationService) { }
 
   ngOnInit(): void {
+    //nothing to init
   }
-  registerUser(){
+  registerUser() {
     this._service.registerUser(this.registrationUser).subscribe(
       data => {
         console.log("Response received!");
-       
+
         Swal.fire(
-          'Success!',
-          'User Successfully Registered !',
+          'Completed',
+          'User Successfully Created !',
           'success'
-        ).then(() =>{
+        ).then(() => {
           this.router.navigate(['/admin']).then(
-            ()=> {
+            () => {
               window.location.reload();
             }
           );
         })
       },
-      error => {
+      err => {
         console.log("Error!");
         Swal.fire(
-          'Error!',
-          'Error! Please check username and/or email!',
+          'Failure',
+          'Error! Please check username information',
           'error'
         )
-        this.msg="Registration successful!";
+        this.msg = "User Account Creation successful!";
       }
     )
 
