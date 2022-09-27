@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { testImports } from 'src/app/global/test.global';
 
 import { InventoryComponent } from './inventory.component';
 
@@ -8,7 +9,8 @@ describe('InventoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InventoryComponent ]
+      declarations: [ InventoryComponent ],
+      imports: testImports
     })
     .compileComponents();
   });

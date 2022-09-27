@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MyProfileComponent } from './my-profile.component';
+import { oktaProvider, testImports } from 'src/app/global/test.global';
 
 describe('MyProfileComponent', () => {
   let component: MyProfileComponent;
@@ -8,8 +9,9 @@ describe('MyProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      //imports: [ HttpClientTestingModule ],
-      declarations: [ MyProfileComponent ]
+      imports: testImports,
+      declarations: [ MyProfileComponent ],
+      providers: oktaProvider
     })
     .compileComponents();
   });

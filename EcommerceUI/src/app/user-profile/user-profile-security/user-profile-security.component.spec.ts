@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { oktaProvider, testImports } from 'src/app/global/test.global';
 
 import { UserProfileSecurityComponent } from './user-profile-security.component';
 
@@ -10,7 +11,8 @@ describe('UserProfileSecurityComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ UserProfileSecurityComponent ],
-      imports: [ HttpClientTestingModule ]
+      imports: testImports,
+      providers: oktaProvider
     })
     .compileComponents();
   });

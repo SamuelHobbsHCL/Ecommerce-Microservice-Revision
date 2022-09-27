@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { oktaProvider, testImports } from '../global/test.global';
 
 import { CheckoutComponent } from './checkout.component';
 
@@ -8,7 +9,9 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckoutComponent ]
+      declarations: [ CheckoutComponent ],
+      imports: testImports,
+      providers: oktaProvider
     })
     .compileComponents();
   });

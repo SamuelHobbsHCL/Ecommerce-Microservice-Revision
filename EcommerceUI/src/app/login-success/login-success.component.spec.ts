@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { oktaProvider, testImports } from '../global/test.global';
 
 import { LoginSuccessComponent } from './login-success.component';
 
@@ -8,7 +9,9 @@ describe('LoginSuccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginSuccessComponent ]
+      declarations: [ LoginSuccessComponent ],
+      imports: testImports,
+      providers: oktaProvider
     })
     .compileComponents();
   });

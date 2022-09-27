@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { oktaProvider, testImports } from 'src/app/global/test.global';
 
 import { SplashPageComponent } from './splash-page.component';
 
@@ -8,7 +9,9 @@ describe('SplashPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SplashPageComponent ]
+      declarations: [ SplashPageComponent ],
+      imports: testImports,
+      providers: oktaProvider
     })
     .compileComponents();
   });

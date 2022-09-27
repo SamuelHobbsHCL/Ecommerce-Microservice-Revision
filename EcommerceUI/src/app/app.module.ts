@@ -20,7 +20,6 @@ import { AdminComponent } from './admin/admin.component';
 import { CustomerListComponent } from './admin/customer-list/customer-list.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { OktaAuthModule, OktaAuthStateService, OKTA_CONFIG } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NewProductsComponent } from './home-page/new-products/new-products.component';
 import { OurCollectionsComponent } from './home-page/our-collections/our-collections.component';
@@ -59,14 +58,7 @@ import { CloudinaryService } from './service/cloudinary.service';
 import { OrderService } from './service/order.service';
 import { RegistrationService } from './service/registration.service';
 import { UserAuthService } from './service/user-auth.service';
-import { Router } from '@okta/okta-signin-widget/types/packages/@okta/courage-dist/types';
-
-
-const oktaAuth = new OktaAuth({
-  issuer: 'https://dev-06861319.okta.com/oauth2/default',
-  clientId: '0oa6b7ee0wwOnJzuz5d7',
-  redirectUri: window.location.origin + '/login/callback'
-});
+import { oktaAuth } from './global/okta.auth';
 
 @NgModule({
   declarations: [
