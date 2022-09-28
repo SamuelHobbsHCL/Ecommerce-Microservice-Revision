@@ -28,8 +28,8 @@ export class LoginSuccessComponent implements OnInit {
     this.userAuthService.setRoles(oktaToken.accessToken.claims.groups);
     this.userAuthService.setToken(this.oktaAuth.getAccessToken()!);
 
-    console.log(this.userAuthService.getRoles());
-    console.log(this.userAuthService.getToken());
+    //console.log(this.userAuthService.getRoles());
+    //console.log(this.userAuthService.getToken());
     console.log("Saved token and roles to local storage");
   }
 

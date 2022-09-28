@@ -15,7 +15,7 @@ export class UpdateService {
   constructor(private http : HttpClient) { }
 
   public updateUser(id : any, userInfo:User) {
-    console.log(id);
+    //console.log(id);
     return this.http.put(this.PATH_OF_API+"/admin/user/"+id,userInfo);
   }
 }

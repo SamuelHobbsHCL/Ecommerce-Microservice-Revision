@@ -48,7 +48,7 @@ export class AppComponent {
   constructor(public router : Router) {
     this.router.events.subscribe((event: any) => {
       if(event instanceof NavigationEnd) {
-        console.log(event.url);
+        //console.log(event.url);
         if(this.hideHeaderList.includes(event.url) || event.url.match('/admin')) {
           this.hideHeader = true;
         }
