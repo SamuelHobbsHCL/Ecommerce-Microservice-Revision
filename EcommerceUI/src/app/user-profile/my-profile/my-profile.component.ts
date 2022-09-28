@@ -83,6 +83,32 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
+  deletePic() {
+    this.updateImageDTO.imageUrl = "../../../assets/images/defaultProfileImage.png";
+    this.userService.updateUserImage(this.updateImageDTO).subscribe(
+      (data) => {
+        
+    }, (error) => {
+      if(error == "OK") {
+        Swal.fire(
+          'Success!',
+          'Your profile image has been deleted!',
+          'success'
+        ).then(function(){
+          window.location.reload();
+        })
+      }else {
+        console.log(error);
+        Swal.fire(
+          'Error!',
+          'Image delete error!',
+          'error'
+        )
+
+      }
+    });
+  }
+
   setUpNewAddress(res: any) {
     if (res === null) { /* If user doesn't have address */
       this.address.city =  "";

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/service/admin.service';
+import { UserAuthService } from 'src/app/service/user-auth.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -8,8 +10,10 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class CustomerListComponent implements OnInit {
   public userList : any;
+  public admin : any;
+  public isAdmin : boolean;
 
-  constructor(private adminService : AdminService) { 
+  constructor(private adminService : AdminService, private userService : UserService, private userAuthService: UserAuthService) { 
 
   }
 
@@ -19,6 +23,12 @@ export class CustomerListComponent implements OnInit {
       this.userList = res;
       console.log(this.userList);
       console.log(this.userList.roles);
+    });
+    this.isAdmin = this.userAuthService.isAdmin();
+    this.userService.getCurrentUser()
+    .subscribe(res => {
+      this.admin = res;
+      console.log(this.admin);
     });
   }
 
@@ -39,6 +49,16 @@ export class CustomerListComponent implements OnInit {
     }
     else {
       //some code
+    }
+  }
+
+  public ifSame(id : any) {
+    console.log(this.admin["userId"]);
+    if(id != this.admin["userId"]){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 }

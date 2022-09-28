@@ -46,8 +46,10 @@
                             {{user.authProvider}}
                         </td>
                         <td>
-                            <a href="/admin/user-management/update-user/{{user.userId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
-                            <a type="button" (click)="ifdeleteUser(user.userId)" class="delete" title="Delete" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
+                            <ng-container *ngIf="ifSame(user.userId)">
+                                <a href="/admin/user-management/update-user/{{user.userId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
+                                <a type="button" (click)="ifdeleteUser(user.userId)" class="delete" title="Delete" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
+                            </ng-container>
                         </td>
                     </tr>
                 </tbody>
