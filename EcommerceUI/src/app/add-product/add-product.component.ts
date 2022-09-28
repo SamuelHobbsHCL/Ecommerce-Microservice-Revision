@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { AdminService } from '../service/admin.service';
 import { CloudinaryService } from '../service/cloudinary.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-add-product',
@@ -15,9 +16,18 @@ export class AddProductComponent implements OnInit {
   product = new Product();
   widget: any;
 
-  constructor(private _service : AdminService, private cloudinary: CloudinaryService, private _router : Router) { }
+  categories : any[] = [];
+
+  categoryList : any[];
+
+  constructor(private apiService : ApiService, private _service : AdminService, private cloudinary: CloudinaryService, private _router : Router) { }
 
   ngOnInit(): void {
+    this.apiService.getCategories().subscribe((data) => {
+      this.categoryList = data;
+      console.log(this.categoryList);
+    })
+
     this.cloudinary.createUploadWidget(
       {
         cloudName: 'dwnb2nqcu',
@@ -34,6 +44,9 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct(product : Product){
+    this.product.categories = this.categories;
+    this.product.unitPrice = +product.unitPrice;
+    console.log(this.product);
     this._service.addProduct(this.product).subscribe(
       data => {
         console.log(product);
@@ -63,14 +76,31 @@ export class AddProductComponent implements OnInit {
     this._router.navigate(['/admin/inventory-management'])
   }
 
-  navigateToUpdateProduct() {
-    this._router.navigate(['/updateproduct'])
-  }
-  
   openWidget(){
     if(this.widget){
       console.log('open');
       this.widget.open();
     }
+  }
+
+  onCheckboxChange(option, event) {
+    console.log(option);
+    if(event.target.checked) {
+
+      let category = {
+        "categoryId" : option.categoryId,
+        "categoryName" : option.categoryName,
+      }
+
+      this.categories.push(category);
+    } else {
+      this.categories.forEach((category) => {
+        if(category.categoryId === option.categoryId) {
+          let index = this.categories.indexOf(category);
+          this.categories.splice(index,1)
+        }
+      })
+    }
+    console.log(this.categories);
   }
 }

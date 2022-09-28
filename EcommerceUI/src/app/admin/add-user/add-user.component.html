@@ -1,0 +1,79 @@
+<div class="col-xl-8">
+    <div class="card mb-4">
+                <form class="mx-1 mx-md-4" #registrationForm="ngForm" (ngSubmit)="registerUser()">
+                    <h4 class="heading-small text-muted mb-4">USER CREATION</h4>
+                    <!-- Form Group (Emaile)-->
+                    <div class="card mb-3">
+
+                        <div class="mb-3">
+                            <label class="small mb-1" for="email">Email</label>
+                            <input type="email" name="email" class="form-control" [(ngModel)]="registrationUser.email"
+                                required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel"
+                                [class.is-invalid]="email.invalid && email.touched" placeholder="Email" id="logemail"
+                                autocomplete="off">
+
+                            <div *ngIf="email.errors && (email.invalid && email.touched)">
+                                <small class="text-danger" *ngIf="email.errors.required">Email is required!</small>
+                                <small class="text-danger" *ngIf="email.errors.pattern">Email is not valid!</small>
+                            </div>
+                        </div>
+
+                        <!-- Form Group (Username)-->
+                        <div class="mb-3">
+                        <label class="small mb-1" for="userName">Username</label>
+                        <input type="text" name="userName" class="form-control" placeholder="User Name"
+                            [(ngModel)]="registrationUser.userName" required #userName="ngModel"
+                            [class.is-invalid]="userName.invalid && userName.touched" id="userName" autocomplete="off">
+                        <div>
+                            <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">Username is
+                                required!</small>
+                        </div>
+                    </div><!-- Form Group (Password)-->
+                    <div class="mb-3">
+                        <label class="small mb-1" for="password">Password</label>
+                        <input type="password" name="password" class="form-control"
+                            [(ngModel)]="registrationUser.password" required #password="ngModel"
+                            [class.is-invalid]="password.invalid && password.touched" placeholder="Password"
+                            id="logpass" autocomplete="off">
+                        <div>
+                            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is
+                                required!</small>
+                        </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="mb-3">
+                        <!-- Form Group (First Name)-->
+                            <label class="small mb-1" for="firstName">First Name</label>
+                            <input type="text" name="firstName" class="form-control"
+                                [(ngModel)]="registrationUser.firstName" required #firstName="ngModel"
+                                [class.is-invalid]="firstName.invalid && firstName.touched" placeholder="First Name"
+                                id="firstName" autocomplete="off">
+                            <div>
+                                <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">First
+                                    Name is
+                                    required!</small>
+                            </div>
+                        </div>
+                        <!-- Form Group (Last Name)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUnitPrice">Last Name</label>
+                            <input type="text" name="lastName" class="form-control"
+                                [(ngModel)]="registrationUser.lastName" required #lastName="ngModel"
+                                [class.is-invalid]="lastName.invalid && lastName.touched" placeholder="Last Name"
+                                id="lastName" autocomplete="off">
+                            <div>
+                                <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">Last
+                                    Name is
+                                    required!</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                        <!-- Save changes button-->
+                        <button [disabled]="registrationForm.form.invalid" type="submit"
+                            class="mt-4 btn btn-primary btn-lg">Register</button>
+                </form>
+            </div>
+        </div>

@@ -11,7 +11,6 @@ import { User } from '../user';
 export class AdminComponent implements OnInit {
 
   user = new User();
-  hasProfileImage = false;
 
   constructor(private userService:UserService, private userAuthService: UserAuthService) { }
 
@@ -22,11 +21,6 @@ export class AdminComponent implements OnInit {
       console.log(this.user);
     });
 
-    if(this.user.profileImage !== null || this.user.profileImage !== '') {
-      this.hasProfileImage = true;
-    } else {
-      this.hasProfileImage = false;
-    }
   }
 
   public logout() {

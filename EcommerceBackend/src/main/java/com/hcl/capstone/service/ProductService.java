@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.hcl.capstone.dto.ProductDto;
+import com.hcl.capstone.model.Category;
 import com.hcl.capstone.model.Product;
-import com.hcl.capstone.model.User;
+import com.hcl.capstone.repository.CategoryRepository;
 import com.hcl.capstone.repository.ProductRepository;
 
 @Service
@@ -19,6 +19,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	public Product saveProduct(Product product) {
 		return productRepository.save(product);
@@ -36,23 +39,28 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
-	public Product updateProduct(ProductDto productDTO, long id) {
-		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(id));
+	public Product updateProduct(ProductDto productDTO) {
+		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductIdDto()));
 		
 		if(!productRepo.isPresent()) {
 			return null;
 		}
+		
 		Product update = new Product(productDTO);
-		update.setProductId(id);
+		
 		productRepository.save(update);
 		
-		return productRepository.findById(id);
+		return productRepository.findById(productDTO.getProductIdDto());
 	}
 	
 	public List<Product> searchProducts(String searchStr, int index, int count) {
 		Pageable pageable = PageRequest.of(index, count);
 		// Returns top <count> results starting from <index>
 		return productRepository.findAllByProductNameContaining(searchStr,pageable);
+	}
+	
+	public List<Category> getAllCategories() {
+		return categoryRepository.findAll();
 	}
 	
 	public List<Product> searchProducts(String searchStr) {

@@ -16,7 +16,6 @@ export class UserProfileComponent implements OnInit {
   constructor(private service:UpdateService, private userService:UserService, private addressService:AddressService, private cartService:CartService) { }
 
   user = new User();
-  hasProfileImage = false;
   response : any;
   address: any;
   msg = '';
@@ -39,15 +38,13 @@ export class UserProfileComponent implements OnInit {
       .subscribe((res:any)=>{
         this.orders = res;
         console.log(this.orders);
-      });
-
-      if(this.user.profileImage !== null || this.user.profileImage !== '') {
-        this.hasProfileImage = true;
-      } else {
-        this.hasProfileImage = false;
-      }
-    
+      }); 
   }
+
+  public hasProfileImage() {
+
+  }
+
   public hasCurrentOrder() {
     for(let order of this.orders) {
       if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
@@ -61,7 +58,7 @@ export class UserProfileComponent implements OnInit {
     console.log(this.user.userId);
 
     this.service.updateSelf(this.user.userId, newUser).subscribe(
-      data => {
+      (data) => {
         Swal.fire(
           'Success!',
           'Your profile has been updated!',

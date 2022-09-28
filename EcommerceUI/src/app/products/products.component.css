@@ -39,3 +39,30 @@
     transition: 0.3s ease-in-out;
     transform: scale(1.1);
 }
+
+#sidebar {
+    float: left;
+    background: #fff;
+    width: 275px;
+    padding: 13px 0 0 45px;
+    min-height: 500px;
+    border-right: 1px solid #eee;
+}
+
+#sidebar h3 {
+    color: #262626;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 35px 0 10px 0;
+    letter-spacing: 1px;
+    clear: both;
+}
+
+.side-nav:hover {
+    color: blue;
+}
+
+a.active {
+    color: blue;
+}

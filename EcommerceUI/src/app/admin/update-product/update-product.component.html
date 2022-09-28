@@ -43,14 +43,36 @@
                     <!-- Form Row-->
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (Product Stock)-->
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <label class="small mb-1" for="inputProductStock">Product Stock</label>
                             <input class="form-control" id="inputProductStock" name="inputProductStock" type="number" placeholder="Enter the product stock" [(ngModel)]="product.productStock" value="{{product.productStock}}">
                         </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="small mb-1" for="inputProductStock">Stock Threshold</label>
+                            <input class="form-control" id="inputProductStock" name="inputStockThreshold" type="number" placeholder="Enter the stock threshold" [(ngModel)]="product.stockThreshold" value="{{product.stockThreshold}}">
+                        </div>
                         <!-- Form Group (Unit Price)-->
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <label class="small mb-1" for="inputUnitPrice">Unit Price</label>
                             <input class="form-control" id="inputUnitPrice" name="inputUnitPrice" type="text" placeholder="Enter the unit price" [(ngModel)]="product.unitPrice" value="{{product.unitPrice}}">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="small mb-1" for="inputUnitPrice">Current Category</label>
+                            <div>
+                                <ul>
+                                    <li *ngFor="let item of product.categories">{{item.categoryName}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputProductStock">New Category</label>
+                            <div class="form-check" *ngFor="let category of categoryList">
+                                <input class="form-check-input" type="checkbox" value="{{category.categoryId}}" (change)="onCheckboxChange(category,$event)">
+                                <label class="form-check-label" for="flexCheckDefault">{{category.categoryName}}</label>
+                            </div>
                         </div>
                     </div>
 

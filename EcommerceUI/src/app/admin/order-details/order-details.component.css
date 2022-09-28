@@ -222,10 +222,6 @@ input {
     overflow: visible;
 }
 
-button {
-    text-transform: none;
-}
-
 button,
 html [type='button'],
 [type='reset'],

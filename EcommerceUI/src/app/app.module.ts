@@ -59,6 +59,8 @@ import { OrderService } from './service/order.service';
 import { RegistrationService } from './service/registration.service';
 import { UserAuthService } from './service/user-auth.service';
 import { oktaAuth } from './global/okta.auth';
+import { AddUserComponent } from './admin/add-user/add-user.component';
+
 
 @NgModule({
   declarations: [
@@ -92,7 +94,8 @@ import { oktaAuth } from './global/okta.auth';
     UserProfileSecurityComponent,
     UserProfileOrderHistoryComponent,
     MyProfileComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

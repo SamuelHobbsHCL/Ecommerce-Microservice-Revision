@@ -26,14 +26,14 @@
                 <tbody>
                     <ng-container *ngFor="let order of orderList">
                         <tr>
-                            <td>{{order.orderId}}</td>
-                            <td>{{order.user.firstName}} {{order.user.lastName}}</td>
-                            <td>{{order.orderDate | date:'MM-dd-yyyy'}}</td>
-                            <td>${{order.orderTotal}}</td>
-                            <td>{{order.shippingAddress.street}} {{order.shippingAddress.unit}} {{order.shippingAddress.city}} {{order.shippingAddress.state}} {{order.shippingAddress.zipcode}} {{order.shippingAddress.country}}</td>
-                            <td>{{order.billingAddress.street}} {{order.billingAddress.unit}} {{order.billingAddress.city}} {{order.billingAddress.state}} {{order.billingAddress.zipcode}} {{order.billingAddress.country}}</td>
+                            <td>{{order?.orderId}}</td>
+                            <td>{{order?.user.firstName}} {{order.user.lastName}}</td>
+                            <td>{{order?.orderDate | date:'MM-dd-yyyy'}}</td>
+                            <td>${{order?.orderTotal}}</td>
+                            <td>{{order?.shippingAddress?.street}} {{order.shippingAddress?.unit}} {{order.shippingAddress?.city}} {{order.shippingAddress?.state}} {{order.shippingAddress?.zipcode}} {{order.shippingAddress?.country}}</td>
+                            <td>{{order?.billingAddress?.street}} {{order.billingAddress?.unit}} {{order.billingAddress?.city}} {{order.billingAddress?.state}} {{order.billingAddress?.zipcode}} {{order.billingAddress?.country}}</td>
 
-                            <td>{{order.orderStatus}}</td>
+                            <td>{{order?.orderStatus}}</td>
                             <td>
                                 <a type="button" href="/admin/order-management/view-order/{{order.orderId}}" class="settings" title="Settings" data-toggle="tooltip"><em
                                                     class="material-icons">&#xe8f4;</em></a>
