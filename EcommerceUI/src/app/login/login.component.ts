@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = this.userAuthService.isLoggedIn();
     this.getOktaUserDetails();
     this.getDatabaseUserDetails();
-    console.log(window.location.origin);
-    console.log(this.name$);
+    //console.log(window.location.origin);
+    //console.log(this.name$);
 
     let method = this.activatedRoute.snapshot.params["method"];
-    console.log(method);
+    console.log("Landed on login page");
     if(method == 'registration') {
       this.isRegistration = true;
     }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(
       data => {
         this.currentUser = data;
-        console.log(data);
+        console.log("Finding user details");
       }
     )
 
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    console.log(this.user);
+    console.log("User login detected");
 
     let authRequest : any = {
       "email": this.user.email,
@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
         let isAdmin = false;
 
         for(let item in roleList) {
-          console.log(roleList[item].roleName);
+          console.log("Finding user permissions");
           if(roleList[item].roleName === "ADMIN"){
             isAdmin = true;
           }

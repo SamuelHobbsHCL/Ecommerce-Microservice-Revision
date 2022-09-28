@@ -120,11 +120,9 @@ export class CheckoutComponent implements OnInit {
               } else {
                 this.orderInfo.billingAddress = this.billingAddress;
               }
-              console.log(this.orderInfo);
               //call REST API via the CheckoutService
-              this.cartService.checkOut(this.orderInfo).subscribe(data => {
-                console.log(data);
-              })
+              console.log("Attempting checkout...");
+             
 
               Swal.fire(
                 'Success!',

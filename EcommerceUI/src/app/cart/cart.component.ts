@@ -27,8 +27,7 @@ export class CartComponent implements OnInit {
       this.order = data;
       this.orderItems = data.cartItems;
   
-      console.log(this.order);
-      console.log(this.orderItems);
+      console.log("Order and items found");
     })
   }
 
@@ -45,9 +44,7 @@ export class CartComponent implements OnInit {
   }
 
   increaseQuantity(item: any) {
-   console.log(item);
-   console.log(item.product.productId);
-   console.log(item.quantity);
+   console.log("Attempting quantity change");
    if(item.quantity < item.product.productStock) {
     this.cartService.addtoCart(item.product, 1).subscribe(data=> {
       this.ngOnInit();
@@ -63,7 +60,7 @@ export class CartComponent implements OnInit {
     }
   }
   decreaseQuantity(item: any) {
-    console.log(item);
+    console.log("Lowering count...");
     if(item.quantity >1){
     this.cartService.addtoCart(item.product, -1).subscribe(data=> {
       this.ngOnInit();
@@ -74,8 +71,7 @@ export class CartComponent implements OnInit {
   removeItem(item: any){    
     console.log("clicked remove item");
     this.cartService.deleteOrderItemById(item).subscribe(data => {
-      console.log(data);
-      console.log(this.order);
+      console.log("Attempting to remove item....");
       window.location.reload();
 
     });
@@ -83,7 +79,7 @@ export class CartComponent implements OnInit {
   emptycart(){
     console.log("clicked empty cart");
     this.cartService.deleteAllOrderItemsByOrder().subscribe(data => {
-      console.log(data);
+      console.log("Attemting to delete items");
       window.location.reload();
     });
   }
