@@ -46,8 +46,7 @@ export class UpdateProductComponent implements OnInit {
 
     );
 
-    if (this.cloudinary !== undefined) {
-      this.cloudinary.createUploadWidget(
+    this.cloudinary.createUploadWidget(
         {
           cloudName: 'dwnb2nqcu',
           uploadPreset: 'ysvn2muf'
@@ -82,7 +81,6 @@ export class UpdateProductComponent implements OnInit {
           }
         }
       ).subscribe(widget => this.widget = widget);
-    }
   }
 
   public updateProduct(product: any) {

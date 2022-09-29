@@ -38,8 +38,7 @@ export class MyProfileComponent implements OnInit {
         console.log(this.address);
     });
 
-    if (this.cloudinary !== undefined) {
-      this.cloudinary.createUploadWidget(
+    this.cloudinary.createUploadWidget(
         {
           cloudName: 'dwnb2nqcu',
           uploadPreset: 'ysvn2muf'
@@ -74,8 +73,6 @@ export class MyProfileComponent implements OnInit {
           }
         }
       ).subscribe(widget => this.widget = widget);
-    }
-
   }
 
   openWidget() {

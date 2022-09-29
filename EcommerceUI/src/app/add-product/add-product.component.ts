@@ -28,7 +28,6 @@ export class AddProductComponent implements OnInit {
       console.log(this.categoryList);
     })
 
-    if (this.cloudinary !== undefined) {
       this.cloudinary.createUploadWidget(
         {
           cloudName: 'dwnb2nqcu',
@@ -42,7 +41,6 @@ export class AddProductComponent implements OnInit {
           }
         }
       ).subscribe(widget => this.widget = widget);
-    }    
   }
 
   addProduct(product : Product){
