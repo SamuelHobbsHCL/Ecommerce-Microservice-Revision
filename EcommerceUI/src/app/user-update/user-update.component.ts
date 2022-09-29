@@ -25,15 +25,13 @@ export class UserUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     let userid = this.activatedRoute.snapshot.params["userid"];
-    console.log("userid " + userid);
     this.id = userid;
-    console.log(this.id);
-    console.log(this.user);
+    
 
     this.userService.getUserById(this.id)
     .subscribe((data)=>{
       this.user = data;
-      console.log("response" + data);
+      console.log("Finding user");
     });
 
     this.addressService.getAddressById(this.id)
@@ -83,7 +81,6 @@ export class UserUpdateComponent implements OnInit {
   }
 
   public userProfileUpdate(user: User){
-    console.log(this.user.userId);
 
     this.updateService.updateUser(this.user.userId, user).subscribe(
       (data) => {
@@ -109,7 +106,7 @@ export class UserUpdateComponent implements OnInit {
 
   // Vague which is which?
   public userUpdateAddress(newAddress : AddressDTO){
-    console.log(this.newAddress);
+    console.log("New address found");
     this.addressService.updateAddressById(this.id, newAddress).subscribe(
       (data) => {
         Swal.fire(

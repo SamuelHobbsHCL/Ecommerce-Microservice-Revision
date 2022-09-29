@@ -27,9 +27,6 @@ export class LoginSuccessComponent implements OnInit {
     let oktaToken = JSON.parse(localStorage.getItem('okta-token-storage')!);
     this.userAuthService.setRoles(oktaToken.accessToken.claims.groups);
     this.userAuthService.setToken(this.oktaAuth.getAccessToken()!);
-
-    console.log(this.userAuthService.getRoles());
-    console.log(this.userAuthService.getToken());
     console.log("Saved token and roles to local storage");
   }
 

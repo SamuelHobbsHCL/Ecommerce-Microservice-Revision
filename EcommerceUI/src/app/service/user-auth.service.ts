@@ -68,7 +68,7 @@ export class UserAuthService {
   }
 
   public isAdmin(){
-    console.log(this.getRoles());
+    //console.log(this.getRoles());
     var x =0;
     if(this.getRoles() !== null) {
     this.getRoles().forEach(function(item){

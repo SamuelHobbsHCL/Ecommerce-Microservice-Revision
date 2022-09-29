@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
     this.userService.getCurrentUser()
     .subscribe((res: any)=>{
       this.user = res;
-      console.log(this.user);
+      console.log("User account found");
     });
 
   }

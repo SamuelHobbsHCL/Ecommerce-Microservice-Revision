@@ -15,7 +15,7 @@ export class InventoryComponent implements OnInit {
     this.adminService.getAllProducts()
     .subscribe(res => {
       this.productList = res;
-      console.log(this.productList);
+      console.log("Product list found");
     });
   }
 

@@ -25,19 +25,19 @@ export class UserProfileComponent implements OnInit {
     this.userService.getCurrentUser()
     .subscribe((res: any)=>{
       this.user = res;
-      console.log(this.user);
+      console.log("Finding user");
     });
 
     this.addressService.getUserAddress()
       .subscribe((res: any)=>{
         this.address = res;
-        console.log(this.address);
+        console.log("Finding address");
       });
     
       this.cartService.getAllOrderForCurrentUser()
       .subscribe((res:any)=>{
         this.orders = res;
-        console.log(this.orders);
+        console.log("Finding orders");
       }); 
   }
 
@@ -55,7 +55,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   public userProfileUpdate(newUser: User){
-    console.log(this.user.userId);
 
     this.service.updateSelf(this.user.userId, newUser).subscribe(
       (data) => {
