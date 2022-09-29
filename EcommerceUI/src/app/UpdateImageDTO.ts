@@ -1,5 +1,5 @@
 export class UpdateImageDTO{
-    imageUrl! : string | null;
+    imageUrl! : string;
     
     constructor(){}
 }

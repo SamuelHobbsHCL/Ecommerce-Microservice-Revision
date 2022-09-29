@@ -9,6 +9,7 @@ import { PaymentInfo } from '../common/payment-info';
 import { AddressService } from '../service/address.service';
 import { CartService } from '../service/cart.service';
 import { CheckoutService } from '../service/checkout.service';
+import { StateService } from '../service/state.service';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
 
@@ -36,8 +37,9 @@ export class CheckoutComponent implements OnInit {
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any = "";
+  public states:any;
 
-  constructor(private userService:UserService, private cartService:CartService, private addressService:AddressService, private router: Router, private checkoutService: CheckoutService) { }
+  constructor(private stateService:StateService, private userService:UserService, private cartService:CartService, private addressService:AddressService, private router: Router, private checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
       //setup Stripe payment form
@@ -58,7 +60,9 @@ export class CheckoutComponent implements OnInit {
         if (data !== null) {
           this.shippingAddress = data;
         }
-      })
+      });
+
+      this.states=this.stateService.getStatesList();
   }
 
   setupStripePaymentForm() {
