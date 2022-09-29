@@ -74,11 +74,12 @@ export class UpdateProductComponent implements OnInit {
                   'error'
                 )
               }
-            )
+            }
 
-          }
+          )
         }
-      ).subscribe(widget => this.widget = widget);
+      }
+    ).subscribe(widget => this.widget = widget);
   }
 
   public updateProduct(product: any) {
