@@ -25,43 +25,48 @@ export class UserProfileOrderHistoryComponent implements OnInit {
     this.userService.getCurrentUser()
     .subscribe((res: any)=>{
       this.user = res;
-      console.log(this.user);
+      console.log("Finding user");
     });
 
     this.addressService.getUserAddress()
       .subscribe((res: any)=>{
         this.address = res;
-        console.log(this.address);
+        console.log("Finding address");
       });
     
       this.cartService.getAllOrderForCurrentUser()
       .subscribe((res:any)=>{
         this.orders = res;
-        console.log(this.orders);
+        console.log("Finding orders");
       });
     
   }
 
   public hasCurrentOrder() {
-    for(let order of this.orders) {
-      if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
-        return true;
+    // Must be array to be iterable
+    if (Array.isArray(this.orders)){
+      for(let order of this.orders) {
+        if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
+          return true;
+        }
       }
     }
     return false;
   }
 
   public hasPurchaseHistory() {
-    for(let order of this.orders) {
-      if(order.orderStatus === "DELIVERED") {
-        return true;
+    // Must be array to be iterable
+    if (Array.isArray(this.orders)){
+      for(let order of this.orders) {
+        if(order.orderStatus === "DELIVERED") {
+          return true;
+        }
       }
     }
     return false;
   }
 
   public userProfileUpdate(newUser: User){
-    console.log(this.user.userId);
 
     this.service.updateSelf(this.user.userId, newUser).subscribe(
       data => {

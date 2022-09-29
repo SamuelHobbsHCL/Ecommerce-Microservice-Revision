@@ -17,7 +17,7 @@ export class NewProductsComponent implements OnInit {
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
-      console.log(this.productList);
+      console.log("Product list found");
     });
   }
 

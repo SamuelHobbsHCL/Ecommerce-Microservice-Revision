@@ -30,7 +30,7 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit() {
     this.apiService.getCategories().subscribe((data) => {
       this.categoryList = data;
-      console.log(this.categoryList);
+      console.log("Fetching categories");
     })
 
     this.sub = this.route.params.subscribe(params => {
@@ -53,7 +53,7 @@ export class UpdateProductComponent implements OnInit {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log('Done! Here is the image info: ', result.info);
+          console.log("Image uploading");
           this.updateImageDTO.imageUrl = result.info.url;
           this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
             (data) => {
@@ -73,19 +73,17 @@ export class UpdateProductComponent implements OnInit {
                   'Image upload error!',
                   'error'
                 )
-
               }
             }
-          )
 
+          )
         }
       }
     ).subscribe(widget => this.widget = widget);
-
   }
 
   public updateProduct(product: any) {
-    console.log(product);
+    console.log("Product update request sent");
 
     if(this.categories !== null && this.categories !== undefined && this.categories.length !== 0) {
       product.categories = this.categories;
@@ -124,6 +122,6 @@ export class UpdateProductComponent implements OnInit {
         }
       })
     }
-    console.log(this.categories);
+    console.log("Changed category");
   }
 }

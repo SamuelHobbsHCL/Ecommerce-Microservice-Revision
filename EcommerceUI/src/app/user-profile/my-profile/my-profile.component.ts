@@ -30,14 +30,13 @@ export class MyProfileComponent implements OnInit {
     this.userService.getCurrentUser()
     .subscribe((res: any)=>{
       this.user = res;
-      console.log(this.user);
-      console.log(this.user.password);
+      console.log("Finding user");
     });
 
     this.addressService.getUserAddress()
       .subscribe((res: any)=>{
         this.setUpNewAddress(res);
-        console.log(this.address);
+        console.log("Finding address");
     });
 
     this.states=this.stateService.getStatesList();
@@ -49,12 +48,13 @@ export class MyProfileComponent implements OnInit {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log('Done! Here is the image info: ', result.info);
+          console.log("Uploading image....");
           this.updateImageDTO.imageUrl = result.info.url;
           this.userService.updateUserImage(this.updateImageDTO).subscribe(
             (data) => {
               
           }, (error) => {
+            console.log("Done!");
             if(error == "OK") {
               Swal.fire(
                 'Success!',
@@ -70,14 +70,13 @@ export class MyProfileComponent implements OnInit {
                 'error'
               )
 
+              }
             }
+            )
+            
           }
-          )
-           
         }
-      }
-    ).subscribe(widget => this.widget = widget);
-
+      ).subscribe(widget => this.widget = widget);
   }
 
   openWidget() {
@@ -132,7 +131,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   public userProfileUpdate(newUser: User){
-    console.log(this.user.userId);
 
     this.updateService.updateSelf(this.user.userId, newUser).subscribe(
       (data) => {
@@ -157,7 +155,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   public userUpdateAddress(newAddress : AddressDTO){
-    console.log(this.newAddress);
     this.addressService.updateUserAddress(newAddress).subscribe(
       (data) => {
         Swal.fire(

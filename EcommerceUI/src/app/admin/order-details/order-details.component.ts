@@ -39,8 +39,7 @@ export class OrderDetailsComponent implements OnInit {
 	}
 
   updateOrder() {
-    console.log(this.orderUpdate)
-    this.setDto(this.order);
+    console.log("Order update request sent")
     if(this.updateStatus == null || this.updateStatus == this.order.orderStatus){
       Swal.fire(
         'Error!',

@@ -37,7 +37,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getCategories().subscribe((data) => {
       this.categoryList = data;
-      console.log(this.categoryList);
 
       //Add all category for side bar
       const allCategory = {
@@ -70,7 +69,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getProducts(): void {
-    console.log(this.searchStr);
+    console.log("getting products");
     // If searchStr is not present, search all products; else, search matching products
     if (this.searchStr == undefined || this.searchStr == "") {
       this.api.getProduct()
@@ -83,6 +82,7 @@ export class ProductsComponent implements OnInit {
       // TODO add pagination
       this.api.getSearchResult(this.searchStr)
         .subscribe(res => {
+          console.log("Searching....");
           this.searchedProducts = res;
           this.pageIterator();
         });

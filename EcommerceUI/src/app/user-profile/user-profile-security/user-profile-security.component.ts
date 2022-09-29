@@ -40,7 +40,7 @@ export class UserProfileSecurityComponent implements OnInit {
   }
    
   submit(){
-    console.log(this.form.value);
+    console.log("Form submitted");
     this.userUpdatePassword();
 
   }
