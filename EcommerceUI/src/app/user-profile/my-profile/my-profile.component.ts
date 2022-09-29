@@ -93,14 +93,7 @@ export class MyProfileComponent implements OnInit {
         
     }, (error) => {
       if(error == "OK") {
-        Swal.fire(
-          'Profile picture deleted'
-        ).then(function(){
-          window.location.reload();
-        })
-      }else {
-        console.log(error);
-
+        window.location.reload();
       }
     });
   }
