@@ -28,19 +28,19 @@ export class AddProductComponent implements OnInit {
       console.log("Connecting to category listings....");
     })
 
-    this.cloudinary.createUploadWidget(
-      {
-        cloudName: 'dwnb2nqcu',
-        uploadPreset: 'ysvn2muf'
-      },
-      (error, result) => {
-        if (result && result.event === "success") {          
-          this.product.productImage = result.info.url;
-        } else if (error) {
-          console.error('Upload failed.');
+      this.cloudinary.createUploadWidget(
+        {
+          cloudName: 'dwnb2nqcu',
+          uploadPreset: 'ysvn2muf'
+        },
+        (error, result) => {
+          if (result && result.event === "success") {          
+            this.product.productImage = result.info.url;
+          } else if (error) {
+            console.error('Upload failed.');
+          }
         }
-      }
-    ).subscribe(widget => this.widget = widget);    
+      ).subscribe(widget => this.widget = widget);
   }
 
   addProduct(product : Product){

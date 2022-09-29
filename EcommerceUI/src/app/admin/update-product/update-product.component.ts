@@ -73,15 +73,13 @@ export class UpdateProductComponent implements OnInit {
                   'Image upload error!',
                   'error'
                 )
-
               }
             }
-          )
 
+          )
         }
       }
     ).subscribe(widget => this.widget = widget);
-
   }
 
   public updateProduct(product: any) {

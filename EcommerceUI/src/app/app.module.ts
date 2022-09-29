@@ -1,4 +1,4 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,8 +19,7 @@ import { UserService } from './service/user.service';
 import { AdminComponent } from './admin/admin.component';
 import { CustomerListComponent } from './admin/customer-list/customer-list.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
-import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js';
+import { OktaAuthModule, OktaAuthStateService, OKTA_CONFIG } from '@okta/okta-angular';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NewProductsComponent } from './home-page/new-products/new-products.component';
 import { OurCollectionsComponent } from './home-page/our-collections/our-collections.component';
@@ -50,14 +49,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { UpdateService } from './service/user-update.service';
+import { AddressService } from './service/address.service';
+import { AdminService } from './service/admin.service';
+import { ApiService } from './service/api.service';
+import { CheckoutService } from './service/checkout.service';
+import { CloudinaryService } from './service/cloudinary.service';
+import { OrderService } from './service/order.service';
+import { RegistrationService } from './service/registration.service';
+import { UserAuthService } from './service/user-auth.service';
+import { oktaAuth } from './global/okta.auth';
 import { AddUserComponent } from './admin/add-user/add-user.component';
 
-
-const oktaAuth = new OktaAuth({
-  issuer: 'https://dev-06861319.okta.com/oauth2/default',
-  clientId: '0oa6b7ee0wwOnJzuz5d7',
-  redirectUri: window.location.origin + '/login/callback'
-});
 
 @NgModule({
   declarations: [
@@ -120,8 +123,19 @@ const oktaAuth = new OktaAuth({
       useClass: AuthInterceptor,
       multi: true
     },
+    AddressService,
+    AdminService,
+    ApiService,
     CartService,
+    CheckoutService,
+    CloudinaryService,
+    HttpClient,
+    OktaAuthStateService,
+    OrderService,
+    RegistrationService,
     UserService,
+    UserAuthService,
+    UpdateService,
     { provide: OKTA_CONFIG, useValue: { oktaAuth } }
   ],
   bootstrap: [AppComponent]

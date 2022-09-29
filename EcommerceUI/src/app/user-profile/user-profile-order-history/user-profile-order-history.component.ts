@@ -43,18 +43,24 @@ export class UserProfileOrderHistoryComponent implements OnInit {
   }
 
   public hasCurrentOrder() {
-    for(let order of this.orders) {
-      if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
-        return true;
+    // Must be array to be iterable
+    if (Array.isArray(this.orders)){
+      for(let order of this.orders) {
+        if(order.orderStatus === "COMPLETED" || order.orderStatus === "SHIPPED") {
+          return true;
+        }
       }
     }
     return false;
   }
 
   public hasPurchaseHistory() {
-    for(let order of this.orders) {
-      if(order.orderStatus === "DELIVERED") {
-        return true;
+    // Must be array to be iterable
+    if (Array.isArray(this.orders)){
+      for(let order of this.orders) {
+        if(order.orderStatus === "DELIVERED") {
+          return true;
+        }
       }
     }
     return false;
