@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { authState, authStateSpy } from '../global/auth.state';
 import { oktaProvider, testImports } from '../global/test.global';
 
 import { LoginSuccessComponent } from './login-success.component';
@@ -17,6 +19,7 @@ describe('LoginSuccessComponent', () => {
   });
 
   beforeEach(() => {
+    (Object.getOwnPropertyDescriptor(authStateSpy, 'authState$')?.get as jasmine.Spy).and.returnValue(of({authState}));
     fixture = TestBed.createComponent(LoginSuccessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

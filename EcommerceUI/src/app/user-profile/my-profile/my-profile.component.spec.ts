@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MyProfileComponent } from './my-profile.component';
-import { oktaProvider, testImports } from 'src/app/global/test.global';
+import { oktaAndCloudinaryProvider, oktaProvider, testImports } from 'src/app/global/test.global';
+import { CloudinaryService } from 'src/app/service/cloudinary.service';
 
 describe('MyProfileComponent', () => {
   let component: MyProfileComponent;
@@ -11,7 +12,7 @@ describe('MyProfileComponent', () => {
     await TestBed.configureTestingModule({
       imports: testImports,
       declarations: [ MyProfileComponent ],
-      providers: oktaProvider
+      providers: oktaAndCloudinaryProvider
     })
     .compileComponents();
   });

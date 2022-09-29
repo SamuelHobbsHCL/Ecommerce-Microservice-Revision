@@ -46,42 +46,43 @@ export class UpdateProductComponent implements OnInit {
 
     );
 
-    this.cloudinary.createUploadWidget(
-      {
-        cloudName: 'dwnb2nqcu',
-        uploadPreset: 'ysvn2muf'
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log('Done! Here is the image info: ', result.info);
-          this.updateImageDTO.imageUrl = result.info.url;
-          this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
-            (data) => {
+    if (this.cloudinary !== undefined) {
+      this.cloudinary.createUploadWidget(
+        {
+          cloudName: 'dwnb2nqcu',
+          uploadPreset: 'ysvn2muf'
+        },
+        (error, result) => {
+          if (!error && result && result.event === "success") {
+            console.log('Done! Here is the image info: ', result.info);
+            this.updateImageDTO.imageUrl = result.info.url;
+            this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
+              (data) => {
 
-            }, (error) => {
-              if (error == "OK") {
-                Swal.fire(
-                  'Success!',
-                  'Your profile image has been updated!',
-                  'success'
-                ).then(function () {
-                  window.location.reload();
-                })
-              } else {
-                Swal.fire(
-                  'Error!',
-                  'Image upload error!',
-                  'error'
-                )
+              }, (error) => {
+                if (error == "OK") {
+                  Swal.fire(
+                    'Success!',
+                    'Your profile image has been updated!',
+                    'success'
+                  ).then(function () {
+                    window.location.reload();
+                  })
+                } else {
+                  Swal.fire(
+                    'Error!',
+                    'Image upload error!',
+                    'error'
+                  )
 
+                }
               }
-            }
-          )
+            )
 
+          }
         }
-      }
-    ).subscribe(widget => this.widget = widget);
-
+      ).subscribe(widget => this.widget = widget);
+    }
   }
 
   public updateProduct(product: any) {

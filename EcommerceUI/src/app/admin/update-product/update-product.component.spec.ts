@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { testImports } from 'src/app/global/test.global';
+import { CloudinaryService } from 'src/app/service/cloudinary.service';
 
 import { UpdateProductComponent } from './update-product.component';
 
@@ -10,6 +11,7 @@ describe('UpdateProductComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ UpdateProductComponent ],
+      providers: [ CloudinaryService ],
       imports: testImports
     })
     .compileComponents();

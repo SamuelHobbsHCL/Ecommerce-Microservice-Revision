@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { oktaProvider, testImports } from '../global/test.global';
+import { testImports } from '../global/test.global';
+import { CloudinaryService } from '../service/cloudinary.service';
 
 import { AddProductComponent } from './add-product.component';
 
@@ -10,8 +11,8 @@ describe('AddProductComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AddProductComponent ],
-      imports: testImports,
-      providers: oktaProvider
+      providers: [ CloudinaryService ],
+      imports: testImports
     })
     .compileComponents();
   });
