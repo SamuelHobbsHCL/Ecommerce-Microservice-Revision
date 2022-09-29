@@ -30,8 +30,7 @@ export class CheckoutComponent implements OnInit {
   shippingAddress: Address = new Address();
   billingAddress: Address = new Address();
 
-  //Initialize Stripe API
-  stripe = Stripe(environment.stripePublishableKey);
+  stripe: any;
 
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
@@ -40,25 +39,28 @@ export class CheckoutComponent implements OnInit {
   constructor(private userService:UserService, private cartService:CartService, private addressService:AddressService, private router: Router, private checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
-      //setup Stripe payment form
-      this.setupStripePaymentForm();
+    //Initialize Stripe API
+    this.stripe = Stripe(environment.stripePublishableKey);
 
-      this.userService.getCurrentUser()
+    //setup Stripe payment form
+    this.setupStripePaymentForm();
+
+    this.userService.getCurrentUser()
       .subscribe((res: any)=>{
         this.user = res;
-      });
+    });
 
-      this.cartService.getOrderByUserId().subscribe(data => {
-        this.order = data;
-        this.orderItems = data.cartItems;
-      });
+    this.cartService.getOrderByUserId().subscribe(data => {
+      this.order = data;
+      this.orderItems = data.cartItems;
+    });
 
-      // If user has existing address, prepopulate fields
-      this.addressService.getUserAddress().subscribe(data => {
-        if (data !== null) {
-          this.shippingAddress = data;
-        }
-      })
+    // If user has existing address, prepopulate fields
+    this.addressService.getUserAddress().subscribe(data => {
+      if (data !== null) {
+        this.shippingAddress = data;
+      }
+    });
   }
 
   setupStripePaymentForm() {
@@ -103,6 +105,7 @@ export class CheckoutComponent implements OnInit {
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
           this.showSpinner = true;
+          // Assumes stripe/Stripe is not undefined
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret, {
             payment_method: {
               card: this.cardElement
@@ -120,11 +123,11 @@ export class CheckoutComponent implements OnInit {
               } else {
                 this.orderInfo.billingAddress = this.billingAddress;
               }
-              console.log(this.orderInfo);
               //call REST API via the CheckoutService
               this.cartService.checkOut(this.orderInfo).subscribe(data => {
-                console.log(data);
+                console.log("Attempting Checkout.....");
               })
+             
 
               Swal.fire(
                 'Success!',

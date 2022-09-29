@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit {
     this.order.getOrderDetail()
     .subscribe(res=>{
       this.orderList = res;
-      console.log(this.orderList)
+      console.log("Order list created")
     });
   }
 

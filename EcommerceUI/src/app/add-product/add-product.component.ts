@@ -25,31 +25,31 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getCategories().subscribe((data) => {
       this.categoryList = data;
-      console.log(this.categoryList);
+      console.log("Connecting to category listings....");
     })
 
-    this.cloudinary.createUploadWidget(
-      {
-        cloudName: 'dwnb2nqcu',
-        uploadPreset: 'ysvn2muf'
-      },
-      (error, result) => {
-        if (result && result.event === "success") {          
-          this.product.productImage = result.info.url;
-        } else if (error) {
-          console.error('Upload failed.');
+      this.cloudinary.createUploadWidget(
+        {
+          cloudName: 'dwnb2nqcu',
+          uploadPreset: 'ysvn2muf'
+        },
+        (error, result) => {
+          if (result && result.event === "success") {          
+            this.product.productImage = result.info.url;
+          } else if (error) {
+            console.error('Upload failed.');
+          }
         }
-      }
-    ).subscribe(widget => this.widget = widget);    
+      ).subscribe(widget => this.widget = widget);
   }
 
   addProduct(product : Product){
     this.product.categories = this.categories;
     this.product.unitPrice = +product.unitPrice;
-    console.log(this.product);
+    console.log("Adding a new product.....");
     this._service.addProduct(this.product).subscribe(
       data => {
-        console.log(product);
+        console.log("Product found!");
         console.log("Response received!");
        
         Swal.fire(
@@ -84,7 +84,6 @@ export class AddProductComponent implements OnInit {
   }
 
   onCheckboxChange(option, event) {
-    console.log(option);
     if(event.target.checked) {
 
       let category = {
@@ -101,6 +100,6 @@ export class AddProductComponent implements OnInit {
         }
       })
     }
-    console.log(this.categories);
+    console.log("Categories changed");
   }
 }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { testImports } from 'src/app/global/test.global';
 
 import { AddUserComponent } from './add-user.component';
 
@@ -8,7 +9,8 @@ describe('AddUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddUserComponent ]
+      declarations: [ AddUserComponent ],
+      imports: testImports
     })
     .compileComponents();
   });
