@@ -25,7 +25,6 @@ export class UserUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     let userid = this.activatedRoute.snapshot.params["userid"];
-    //console.log("userid " + userid);
     this.id = userid;
     
 
@@ -82,7 +81,6 @@ export class UserUpdateComponent implements OnInit {
   }
 
   public userProfileUpdate(user: User){
-    //console.log(this.user.userId);
 
     this.updateService.updateUser(this.user.userId, user).subscribe(
       (data) => {

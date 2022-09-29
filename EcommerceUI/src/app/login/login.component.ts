@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = this.userAuthService.isLoggedIn();
     this.getOktaUserDetails();
     this.getDatabaseUserDetails();
-    //console.log(window.location.origin);
-    //console.log(this.name$);
 
     let method = this.activatedRoute.snapshot.params["method"];
     console.log("Landed on login page");

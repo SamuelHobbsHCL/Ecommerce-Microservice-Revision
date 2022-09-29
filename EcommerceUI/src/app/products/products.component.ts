@@ -37,7 +37,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getCategories().subscribe((data) => {
       this.categoryList = data;
-      //console.log(this.categoryList);
 
       //Add all category for side bar
       const allCategory = {

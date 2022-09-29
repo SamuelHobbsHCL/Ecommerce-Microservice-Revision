@@ -102,7 +102,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   public userProfileUpdate(newUser: User){
-    //console.log(this.user.userId);
 
     this.updateService.updateSelf(this.user.userId, newUser).subscribe(
       (data) => {
@@ -127,7 +126,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   public userUpdateAddress(newAddress : AddressDTO){
-    //console.log(this.newAddress);
     this.addressService.updateUserAddress(newAddress).subscribe(
       (data) => {
         Swal.fire(

@@ -55,7 +55,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   public userProfileUpdate(newUser: User){
-    //console.log(this.user.userId);
 
     this.service.updateSelf(this.user.userId, newUser).subscribe(
       (data) => {
