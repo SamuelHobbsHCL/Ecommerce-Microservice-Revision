@@ -30,7 +30,7 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit() {
     this.apiService.getCategories().subscribe((data) => {
       this.categoryList = data;
-      console.log(this.categoryList);
+      console.log("Fetching categories");
     })
 
     this.sub = this.route.params.subscribe(params => {
@@ -47,34 +47,32 @@ export class UpdateProductComponent implements OnInit {
     );
 
     this.cloudinary.createUploadWidget(
-        {
-          cloudName: 'dwnb2nqcu',
-          uploadPreset: 'ysvn2muf'
-        },
-        (error, result) => {
-          if (!error && result && result.event === "success") {
-            console.log('Done! Here is the image info: ', result.info);
-            this.updateImageDTO.imageUrl = result.info.url;
-            this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
-              (data) => {
+      {
+        cloudName: 'dwnb2nqcu',
+        uploadPreset: 'ysvn2muf'
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log("Image uploading");
+          this.updateImageDTO.imageUrl = result.info.url;
+          this.apiService.updateProductImage(this.product.productId, this.updateImageDTO).subscribe(
+            (data) => {
 
-              }, (error) => {
-                if (error == "OK") {
-                  Swal.fire(
-                    'Success!',
-                    'Your profile image has been updated!',
-                    'success'
-                  ).then(function () {
-                    window.location.reload();
-                  })
-                } else {
-                  Swal.fire(
-                    'Error!',
-                    'Image upload error!',
-                    'error'
-                  )
-
-                }
+            }, (error) => {
+              if (error == "OK") {
+                Swal.fire(
+                  'Success!',
+                  'Your profile image has been updated!',
+                  'success'
+                ).then(function () {
+                  window.location.reload();
+                })
+              } else {
+                Swal.fire(
+                  'Error!',
+                  'Image upload error!',
+                  'error'
+                )
               }
             )
 
@@ -84,7 +82,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   public updateProduct(product: any) {
-    console.log(product);
+    console.log("Product update request sent");
 
     if(this.categories !== null && this.categories !== undefined && this.categories.length !== 0) {
       product.categories = this.categories;
@@ -123,6 +121,6 @@ export class UpdateProductComponent implements OnInit {
         }
       })
     }
-    console.log(this.categories);
+    console.log("Changed category");
   }
 }

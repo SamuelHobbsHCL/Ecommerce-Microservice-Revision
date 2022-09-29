@@ -17,8 +17,8 @@ export class CustomerListComponent implements OnInit {
     this.adminService.getAllUsers()
     .subscribe(res => {
       this.userList = res;
-      console.log(this.userList);
-      console.log(this.userList.roles);
+      console.log("User list found");
+      console.log("Roles found");
     });
   }
 

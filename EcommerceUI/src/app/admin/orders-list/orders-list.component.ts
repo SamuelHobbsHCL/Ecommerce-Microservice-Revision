@@ -17,7 +17,7 @@ export class OrdersListComponent implements OnInit {
     this.adminService.getAllOrders()
     .subscribe(res => {
       this.orderList = res;
-      console.log(this.orderList);
+      console.log("Fetching order list");
     });
   }
 
