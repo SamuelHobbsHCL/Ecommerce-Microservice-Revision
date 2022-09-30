@@ -3,10 +3,10 @@ import { Product } from "./product";
 
 export class userReview{
     id :number;
-    dtoUser : User;
-    dtoProduct : Product;
-	dtoScore : number;
-	dtoReview : string;
+    user : User;
+    product : Product;
+	score : number;
+	review : string;
 
     constructor () {
     }

@@ -23,9 +23,13 @@ public class UserReviewService {
 		return userReviewRepository.save(userReview);
 	}
 	
-	public List<UserReview> getProductReviews(long id){
-		return userReviewRepository.findByProductId(id);
+	public List<UserReview> getProductReviews(long productId){
+		return userReviewRepository.findByProduct(productId);
 	}
+	
+	public float getProductReviewAverage(long productId){
+        return userReviewRepository.getAverageScoreByProduct(productId);
+    }
 	
 	public UserReview updateReview(UserReviewDto userReviewDto) {
 		Optional<UserReview> reviewRepo = Optional.ofNullable(userReviewRepository.findById(userReviewDto.getId()));

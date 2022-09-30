@@ -13,10 +13,9 @@ public interface UserReviewRepository extends CrudRepository<UserReview, Long>{
 	public UserReview findById(long id);
 	public List<UserReview> findAll();
 	public void deleteById(long id);
-	public List<UserReview> findByProductId(long id);
-	public List<UserReview> findByUserId(long id);
-	
-	@Query("SELECT AVG(r.score) FROM USER_REVIEW WHERE r.product ?=1")
-	public float getAverageScoreByProduct(long id);
+	public List<UserReview> findByProduct(long productId);
+	public List<UserReview> findByUser(long userId);
+	public float getAverageScoreByProduct(long productId);
 
 }
+ 

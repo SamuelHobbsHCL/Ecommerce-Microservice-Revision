@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Product }from '../common/product';
 import { userReview } from '../common/userReview';
+import { userReviewDto } from '../common/userReviewDto';
 import { UpdateImageDTO } from '../UpdateImageDTO';
 @Injectable({
   providedIn: 'root'
@@ -44,9 +45,14 @@ export class ApiService {
     )
   }
   //retrieve reviews for product based on id
-  public getProductReviews(id : number){
+  public getProductReviews(id : string){
     return this.http.get<userReview>(this.PATH_OF_API + "/api/review/" + id)
     .pipe(map((res:any)=>{return res;}))
+  }
+
+  public submitReview(userReviewDto: userReviewDto){
+    return this.http.put<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
+
   }
 
   // Send page parameters to backend - allow it to handle pagination

@@ -4,6 +4,7 @@ import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
 import {Location} from '@angular/common';
+import { userReview } from '../common/userReview';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   id: string;
   private sub: any;
   product: any = [];
-
+  userReviews: userReview[];
 
   constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location) { }
 
@@ -31,7 +32,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
     
     );
-    return this.product;
+
+    this.api.getProductReviews(this.id).subscribe((data) => {
+      this.userReviews = data;
+
+    }, (error: any) => {
+      console.log("Unable to find product reviews");
+    }
+
+    );
+
   }
 
   goBack(){
