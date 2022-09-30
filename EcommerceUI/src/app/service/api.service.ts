@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Product }from '../common/product';
+import { userReview } from '../common/userReview';
 import { UpdateImageDTO } from '../UpdateImageDTO';
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,11 @@ export class ApiService {
       }),
       catchError(error => this.throwError(error))
     )
+  }
+  //retrieve reviews for product based on id
+  public getProductReviews(id : number){
+    return this.http.get<userReview>(this.PATH_OF_API + "/api/review/" + id)
+    .pipe(map((res:any)=>{return res;}))
   }
 
   // Send page parameters to backend - allow it to handle pagination

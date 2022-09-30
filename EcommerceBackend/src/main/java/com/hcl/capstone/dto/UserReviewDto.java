@@ -7,7 +7,8 @@ public class UserReviewDto {
 	private long id;
 	private User dtoUser;
 	private Product dtoProduct;
-
+	private int dtoScore;
+	private String dtoReview;
 
 	public UserReviewDto(long id, User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
 		super();
@@ -65,7 +66,6 @@ public class UserReviewDto {
 		this.dtoReview = dtoReview;
 	}
 
-	private int dtoScore;
-	private String dtoReview;
+	
 
 }

@@ -12,5 +12,6 @@ public interface UserReviewRepository extends CrudRepository<UserReview, Long>{
 	public UserReview findById(long id);
 	public List<UserReview> findAll();
 	public void deleteById(long id);
+	public List<UserReview> findByProductId(long id);
 
 }
