@@ -30,4 +30,6 @@ public class UserReviewController {
 	public List<UserReview> getProductReviews(long id){
 		return userReviewService.getProductReviews(id);
 	}
+	
+	
 }
