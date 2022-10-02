@@ -15,36 +15,76 @@ import com.hcl.capstone.dto.UserReviewDto;
 @Entity
 @Table(name = "USER_REVIEW")
 public class UserReview {
-    public UserReview(){};
+    
+    public UserReview(UserReviewDto userReviewDto) {
+        super();
+        this.user = userReviewDto.getDtoUser();
+        this.product = userReviewDto.getDtoProduct();
+        this.score = userReviewDto.getDtoScore();
+        this.review = userReviewDto.getDtoReview();
+    }
+    
+    public UserReview() {
+    };
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "REVIEW_ID")
-	private long reviewId;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="USER_ID", referencedColumnName = "USER_ID")
-	private User user;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
-	private Product product;
-	
-	@Column(name="SCORE")
-	private int score;
-	
-	@Column(name="REVIEW")
-	private String review;
-	
-	
-	
-	public UserReview(UserReviewDto userReviewDto) {
-		super();
-		this.user = userReviewDto.getDtoUser();
-		this.product = userReviewDto.getDtoProduct();
-		this.score = userReviewDto.getDtoScore();
-		this.review = userReviewDto.getDtoReview();
-	}
+    public long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(long reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "REVIEW_ID")
+    private long reviewId;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+
+    @Column(name = "SCORE")
+    private int score;
+
+    @Column(name = "REVIEW")
+    private String review;
+
+
 }

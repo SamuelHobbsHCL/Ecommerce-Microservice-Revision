@@ -31,9 +31,8 @@ public class UserReviewController {
 	}
 	
 	@GetMapping("api/review/{id}")
-	public List<UserReview> getProductReviews(@PathVariable long id){
+	public List<UserReview> getProductReviews(@PathVariable(value = "id") long id){
 	    Product product = productRepository.findById(id);
-	    System.out.println(product.getProductName());
 		return userReviewService.getProductReviews(product);
 	}
 	

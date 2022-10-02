@@ -47,12 +47,14 @@ export class ApiService {
   }
   //retrieve reviews for product based on id
   public getProductReviews(id : string): Observable<any>{
-    return this.http.get<any>(this.PATH_OF_API + "/api/review/" + id);
+    return this.http.get<any>(this.PATH_OF_API + "/api/review/" + id)
+    .pipe(map((res:any)=>{
+      return res;
+    }));
   }
 
   public submitReview(userReviewDto: userReviewDto){
-    return this.http.put<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
-
+    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
   }
 
   // Send page parameters to backend - allow it to handle pagination

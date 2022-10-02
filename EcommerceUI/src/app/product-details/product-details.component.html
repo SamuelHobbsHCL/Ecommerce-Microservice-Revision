@@ -24,16 +24,17 @@
 
         </div>
     </div>
-    <div class="col mt-4">
-        <form id="newReview" #newReview = "ngForm" (ngSubmit)="submitReview(newReview.value)">
+    <div class= "col mt-4">
+        <form id="newReview" #newReview="ngForm" (ngSubmit)="submitReview(newReview.value)">
             <div class="pinfo">Rate our product!</div>
 
 
             <div class="form-group">
-                <div class="col-md-4 inputGroupContainer">
+                <div class=" inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-star"></i></span>
-                        <select class="form-control" id="rating">
+                        <select required="required" class="form-control selectpicker" id="status" name="status" #status (change)="onScoreSelected(status.value)">
+                            <option value="" disabled selected>SELECT RATING</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -58,12 +59,14 @@
 
         </form>
     </div>
-    <div class="col mt-4"></div>
+<div class= "col mt-4">
     <div *ngFor="let review of userReviews">
-
-        <h3>{{review.user}}</h3>
-        <h4>Rating: {{review.score}}</h4>
-        <p>{{review.review}}</p>
+        <div class="card">
+            <h3>{{review.user.firstName}}</h3>
+            <h4>Rating: {{review.score}}</h4>
+            <p>{{review.review}}</p>
+        </div>
     </div>
+</div>
 </div>
 <br />

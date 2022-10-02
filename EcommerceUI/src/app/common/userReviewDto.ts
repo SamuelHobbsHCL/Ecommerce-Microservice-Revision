@@ -4,7 +4,7 @@ import { Product } from "./product";
 export class userReviewDto{
     id :number;
     dtoUser : User;
-    dtoProduct : Product;
+    dtoProduct : any;
 	dtoScore : number;
 	dtoReview : string;
 

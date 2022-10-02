@@ -9,29 +9,15 @@ public class UserReviewDto {
 	private Product dtoProduct;
 	private int dtoScore;
 	private String dtoReview;
-
-	public UserReviewDto(long id, User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
-		super();
-		this.id = id;
-		this.dtoUser = dtoUser;
-		this.dtoProduct = dtoProduct;
-		this.dtoScore = dtoScore;
-		this.dtoReview = dtoReview;
-	}
 	
 	public UserReviewDto( User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
         super();
+        this.id = 1;
         this.dtoUser = dtoUser;
         this.dtoProduct = dtoProduct;
         this.dtoScore = dtoScore;
         this.dtoReview = dtoReview;
     }
-	
-	public UserReviewDto(int dtoScore, String dtoReview) {
-		super();
-		this.dtoScore = dtoScore;
-		this.dtoReview = dtoReview;
-	}
 	
 
 	public long getId() {

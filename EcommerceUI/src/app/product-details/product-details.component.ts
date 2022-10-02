@@ -9,6 +9,7 @@ import { userReviewDto } from '../common/userReviewDto';
 import { data } from 'jquery';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
+import { Product } from '../common/product';
 
 @Component({
   selector: 'app-product-details',
@@ -16,13 +17,14 @@ import { User } from '../user';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
-  id: string;
+  id: any;
   private sub: any;
-  product: any = [];
-  userReviews: userReview[];
-  newReview: userReviewDto;
+  product: any;
+  userReviews: any;
+  newReview = new userReviewDto();
   curUser: any;
-
+  curProduct: any;
+  score: any;
   constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location, private user: UserService) { }
 
   ngOnInit() {
@@ -40,9 +42,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     );
 
     this.api.getProductReviews(this.id).subscribe(data => {
-      data.forEach(element => {
-        console.log(element.score);
-      });
+      this.userReviews = data;
       
     }, (error: any) => {
       console.log("Unable to find product reviews");
@@ -71,10 +71,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
    
   }
-
+  onScoreSelected(value:string): void {
+		this.score = value;
+	}
   submitReview(review){
-    this.newReview.dtoProduct = this.product.productId;
-    this.newReview.dtoScore = review.score;
+    console.log(review.text);
+    this.newReview.dtoProduct = this.product;
+    this.newReview.dtoScore = this.score;
     this.newReview.dtoReview = review.text;
     this.curUser = this.user.getCurrentUser;
     this.newReview.dtoUser = this.curUser;
