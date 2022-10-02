@@ -19,6 +19,14 @@ public class UserReviewDto {
 		this.dtoReview = dtoReview;
 	}
 	
+	public UserReviewDto( User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
+        super();
+        this.dtoUser = dtoUser;
+        this.dtoProduct = dtoProduct;
+        this.dtoScore = dtoScore;
+        this.dtoReview = dtoReview;
+    }
+	
 	public UserReviewDto(int dtoScore, String dtoReview) {
 		super();
 		this.dtoScore = dtoScore;

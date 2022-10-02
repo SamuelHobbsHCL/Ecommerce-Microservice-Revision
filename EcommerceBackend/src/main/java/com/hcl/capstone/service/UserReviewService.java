@@ -23,8 +23,8 @@ public class UserReviewService {
 		return userReviewRepository.save(userReview);
 	}
 	
-	public List<UserReview> getProductReviews(long productId){
-		return userReviewRepository.findByProduct(productId);
+	public List<UserReview> getProductReviews(Product product){
+		return userReviewRepository.findByProduct(product);
 	}
 	
 	public float getProductReviewAverage(long productId){

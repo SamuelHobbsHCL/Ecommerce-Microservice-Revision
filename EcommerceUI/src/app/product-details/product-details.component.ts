@@ -5,6 +5,10 @@ import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
 import {Location} from '@angular/common';
 import { userReview } from '../common/userReview';
+import { userReviewDto } from '../common/userReviewDto';
+import { data } from 'jquery';
+import { UserService } from '../service/user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-product-details',
@@ -16,8 +20,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private sub: any;
   product: any = [];
   userReviews: userReview[];
+  newReview: userReviewDto;
+  curUser: any;
 
-  constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location) { }
+  constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location, private user: UserService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -30,12 +36,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }, (error: any) => {
       console.log("Unable to find product");
     }
-    
+
     );
 
-    this.api.getProductReviews(this.id).subscribe((data) => {
-      this.userReviews = data;
-
+    this.api.getProductReviews(this.id).subscribe(data => {
+      data.forEach(element => {
+        console.log(element.score);
+      });
+      
     }, (error: any) => {
       console.log("Unable to find product reviews");
     }
@@ -50,6 +58,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
 
   addtocart(item: any){
+    
     this.cartService.addtoCart(item, 1).subscribe(data => {
       Swal.fire(
         'Success!',
@@ -61,6 +70,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     });
 
    
+  }
+
+  submitReview(review){
+    this.newReview.dtoProduct = this.product.productId;
+    this.newReview.dtoScore = review.score;
+    this.newReview.dtoReview = review.text;
+    this.curUser = this.user.getCurrentUser;
+    this.newReview.dtoUser = this.curUser;
+    this.api.submitReview(this.newReview).subscribe(data =>{
+      Swal.fire(
+        'Completed!',
+        'Review submitted!',
+        'success'
+      ).then(function(){
+        window.location.reload();
+      })
+    });
   }
 
   ngOnDestroy() {

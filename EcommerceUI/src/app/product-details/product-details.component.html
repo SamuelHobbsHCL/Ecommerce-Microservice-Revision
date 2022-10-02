@@ -10,7 +10,7 @@
                 {{category.categoryName}}
             </div>
         </div>
-        <br/>
+        <br />
         <p>{{product.productDescription}}</p>
         <p><strong>Price:</strong> ${{product.unitPrice}}</p>
         <div class="col mt-4">
@@ -23,7 +23,47 @@
             </div>
 
         </div>
+    </div>
+    <div class="col mt-4">
+        <form id="newReview" #newReview = "ngForm" (ngSubmit)="submitReview(newReview.value)">
+            <div class="pinfo">Rate our product!</div>
 
+
+            <div class="form-group">
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-star"></i></span>
+                        <select class="form-control" id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="pinfo">Leave a text reveiw!</div>
+            <div class="form-group">
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                        <textarea class="form-control" id="text" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" click='submitReview(newReview)' class="btn btn-primary">Submit</button>
+
+
+        </form>
+    </div>
+    <div class="col mt-4"></div>
+    <div *ngFor="let review of userReviews">
+
+        <h3>{{review.user}}</h3>
+        <h4>Rating: {{review.score}}</h4>
+        <p>{{review.review}}</p>
     </div>
 </div>
-<br/>
+<br />

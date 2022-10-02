@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -20,7 +21,7 @@ export class ApiService {
 
   product: Product | undefined;
   products: Product[] | undefined;
-  
+  reviews : userReview[] | undefined;
   constructor(private http : HttpClient) { }
 
   public getProduct(){
@@ -45,9 +46,8 @@ export class ApiService {
     )
   }
   //retrieve reviews for product based on id
-  public getProductReviews(id : string){
-    return this.http.get<userReview>(this.PATH_OF_API + "/api/review/" + id)
-    .pipe(map((res:any)=>{return res;}))
+  public getProductReviews(id : string): Observable<any>{
+    return this.http.get<any>(this.PATH_OF_API + "/api/review/" + id);
   }
 
   public submitReview(userReviewDto: userReviewDto){
