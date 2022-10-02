@@ -8,6 +8,7 @@ import { Product }from '../common/product';
 import { userReview } from '../common/userReview';
 import { userReviewDto } from '../common/userReviewDto';
 import { UpdateImageDTO } from '../UpdateImageDTO';
+import { User } from '../user';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,8 +54,11 @@ export class ApiService {
     }));
   }
 
-  public submitReview(userReviewDto: userReviewDto){
-    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
+  public submitReview(newReview:any){
+    console.log(newReview.product);
+    console.log(newReview.score);
+    console.log(newReview.review);
+    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", newReview);
   }
 
   // Send page parameters to backend - allow it to handle pagination

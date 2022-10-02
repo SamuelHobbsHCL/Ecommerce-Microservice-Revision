@@ -1,13 +1,11 @@
 package com.hcl.capstone.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.dto.UserReviewDto;
 import com.hcl.capstone.model.Product;
 import com.hcl.capstone.model.UserReview;
@@ -19,12 +17,12 @@ public class UserReviewService {
 	@Autowired
 	private UserReviewRepository userReviewRepository;
 	
-	public UserReview submitReview(UserReviewDto userReviewDto) {
-		UserReview userReview = new UserReview(userReviewDto);
+	public UserReview submitReview(UserReview userReview) {
 		return userReviewRepository.save(userReview);
 	}
 	
 	public List<UserReview> getProductReviews(Product product){
+	    
 	    return userReviewRepository.findByProduct(product);
 	}
 	

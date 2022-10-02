@@ -2,11 +2,11 @@ import { User } from "../user";
 import { Product } from "./product";
 
 export class userReviewDto{
-    id :number;
+    id :any;
     dtoUser : User;
     dtoProduct : any;
-	dtoScore : number;
-	dtoReview : string;
+	dtoScore : any;
+	dtoReview : any;
 
     constructor () {
     }

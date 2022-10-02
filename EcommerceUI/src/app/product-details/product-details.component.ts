@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { userReview } from '../common/userReview';
 import { userReviewDto } from '../common/userReviewDto';
 import { data } from 'jquery';
@@ -21,15 +21,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private sub: any;
   product: any;
   userReviews: any;
-  newReview = new userReviewDto();
+  newReview = new userReview();
   curUser: any;
   curProduct: any;
   score: any;
-  constructor(private route: ActivatedRoute,private api : ApiService, private cartService : CartService, private _location: Location, private user: UserService) { }
+  reviewText: string;
+  constructor(private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private user: UserService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; 
+      this.id = params['id'];
       this.product = this.api.getProductById(this.id);
     });
     this.api.getProductById(this.id).subscribe((data) => {
@@ -43,7 +44,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     this.api.getProductReviews(this.id).subscribe(data => {
       this.userReviews = data;
-      
+
     }, (error: any) => {
       console.log("Unable to find product reviews");
     }
@@ -52,41 +53,38 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   }
 
-  goBack(){
+  goBack() {
     this._location.back();
   }
 
 
-  addtocart(item: any){
-    
+  addtocart(item: any) {
+
     this.cartService.addtoCart(item, 1).subscribe(data => {
       Swal.fire(
         'Success!',
         'Product added to cart!',
         'success'
-      ).then(function(){
+      ).then(function () {
         window.location.reload();
       })
     });
 
-   
+
   }
-  onScoreSelected(value:string): void {
-		this.score = value;
-	}
-  submitReview(review){
-    console.log(review.text);
-    this.newReview.dtoProduct = this.product;
-    this.newReview.dtoScore = this.score;
-    this.newReview.dtoReview = review.text;
+  submitReview(review) {
+    
     this.curUser = this.user.getCurrentUser;
-    this.newReview.dtoUser = this.curUser;
-    this.api.submitReview(this.newReview).subscribe(data =>{
+    this.newReview.user = this.curUser;
+    this.newReview.product = this.product;
+    this.newReview.score = this.score;
+    this.newReview.review = this.reviewText;
+    this.api.submitReview(this.newReview).subscribe(data => {
       Swal.fire(
         'Completed!',
         'Review submitted!',
         'success'
-      ).then(function(){
+      ).then(function () {
         window.location.reload();
       })
     });

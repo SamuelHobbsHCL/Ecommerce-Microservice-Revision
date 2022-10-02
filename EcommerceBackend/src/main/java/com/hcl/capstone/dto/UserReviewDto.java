@@ -10,9 +10,10 @@ public class UserReviewDto {
 	private int dtoScore;
 	private String dtoReview;
 	
+	UserReviewDto(){}
+	
 	public UserReviewDto( User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
         super();
-        this.id = 1;
         this.dtoUser = dtoUser;
         this.dtoProduct = dtoProduct;
         this.dtoScore = dtoScore;

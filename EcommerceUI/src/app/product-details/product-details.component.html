@@ -24,7 +24,29 @@
 
         </div>
     </div>
-    <div class= "col mt-4">
+    <div class="col mt-4">
+        
+        <div class="container">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <h2>Past Customer Reviews</h2>
+
+                    </div>
+                </div>
+            </div>
+            <table aria-describedby="A table containing all reviews" class="table">
+                <tbody>
+                    <div *ngFor="let item of userReviews">
+                        <tr>
+                            <td>{{item.user.firstName}}</td>
+                            <td>Rating: {{item.score}}</td>
+                            <td>{{item.review}}</td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
         <form id="newReview" #newReview="ngForm" (ngSubmit)="submitReview(newReview.value)">
             <div class="pinfo">Rate our product!</div>
 
@@ -33,7 +55,7 @@
                 <div class=" inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-star"></i></span>
-                        <select required="required" class="form-control selectpicker" id="status" name="status" #status (change)="onScoreSelected(status.value)">
+                        <select required="required" class="form-control selectpicker" id="status" name="status" [(ngModel)]="score">
                             <option value="" disabled selected>SELECT RATING</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -49,24 +71,16 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                        <textarea class="form-control" id="text" rows="3"></textarea>
+                        <input [(ngModel)]="reviewText"type="text" id="review" name="review" minlength="0" maxlength="500" size="80">
                     </div>
                 </div>
             </div>
 
-            <button type="submit" click='submitReview(newReview)' class="btn btn-primary">Submit</button>
+            
 
-
+<button type="submit" click='submitReview(newReview)' class="btn btn-primary">Submit</button>
         </form>
     </div>
-<div class= "col mt-4">
-    <div *ngFor="let review of userReviews">
-        <div class="card">
-            <h3>{{review.user.firstName}}</h3>
-            <h4>Rating: {{review.score}}</h4>
-            <p>{{review.review}}</p>
-        </div>
-    </div>
-</div>
-</div>
-<br />
+
+
+    <br />
