@@ -22,7 +22,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
-@SecurityRequirement(name = "Bearer Authentication")
 public class UserReviewController {
 	@Autowired
 	private UserReviewService userReviewService;
@@ -30,8 +29,13 @@ public class UserReviewController {
 	private ProductRepository productRepository;
 	
 	@PostMapping("api/review")
-	public UserReview createReview(@RequestBody UserReview userReview) {
-		return userReviewService.submitReview(userReview);
+	public UserReview createReview(@RequestBody UserReviewDto userReviewDto) {
+	    System.out.println(userReviewDto.getDtoReview());
+	    System.out.println(userReviewDto.getDtoScore());
+	    System.out.println(userReviewDto.getDtoProduct());
+	    System.out.println(userReviewDto.getDtoUser());
+	    UserReview newReview = new UserReview(userReviewDto);
+		return userReviewService.submitReview(newReview);
 	}
 	
 	@GetMapping("api/review/{id}")

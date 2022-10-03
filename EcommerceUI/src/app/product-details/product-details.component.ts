@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 import { ApiService } from '../service/api.service';
 import { Location } from '@angular/common';
 import { userReview } from '../common/userReview';
-import { userReviewDto } from '../common/userReviewDto';
 import { data } from 'jquery';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
 import { Product } from '../common/product';
+import { newReviewDto } from '../common/newReviewDto';
 
 @Component({
   selector: 'app-product-details',
@@ -20,18 +20,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   id: any;
   private sub: any;
   product: any;
+  newReview = new newReviewDto;
+  productId: any;
   userReviews: any;
-  newReview = new userReview();
   curUser: any;
-  curProduct: any;
-  score: any;
-  reviewText: string;
-  constructor(private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private user: UserService) { }
+  curProduct: Product;
+  score: number;
+  review: string;
+  constructor(private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private userService: UserService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       this.product = this.api.getProductById(this.id);
+      this.productId = this.product;
     });
     this.api.getProductById(this.id).subscribe((data) => {
       this.product = data;
@@ -44,6 +46,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     this.api.getProductReviews(this.id).subscribe(data => {
       this.userReviews = data;
+      data.forEach(review => {
+        console.log(review);
+      });
 
     }, (error: any) => {
       console.log("Unable to find product reviews");
@@ -72,14 +77,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
 
   }
-  submitReview(review) {
-    
-    this.curUser = this.user.getCurrentUser;
-    this.newReview.user = this.curUser;
-    this.newReview.product = this.product;
-    this.newReview.score = this.score;
-    this.newReview.review = this.reviewText;
-    this.api.submitReview(this.newReview).subscribe(data => {
+  submitReview(userReview) {
+    this.curUser = this.userService.getCurrentUser();
+    this.newReview.dtoUser = this.curUser;
+    this.newReview.dtoProduct = this.product;
+    console.log(JSON.stringify(this.newReview));
+    this.api.addUserReview(this.newReview).subscribe(data => {
       Swal.fire(
         'Completed!',
         'Review submitted!',

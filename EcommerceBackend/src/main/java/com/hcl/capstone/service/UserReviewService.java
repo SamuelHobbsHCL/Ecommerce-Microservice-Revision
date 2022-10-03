@@ -37,7 +37,7 @@ public class UserReviewService {
 			return null;
 		}
 		
-		UserReview update = new UserReview(userReviewDto);
+		UserReview update = new UserReview(userReviewDto.getDtoUser(), userReviewDto.getDtoProduct(), userReviewDto.getDtoScore(), userReviewDto.getDtoReview());
 		
 		userReviewRepository.save(update);
 		

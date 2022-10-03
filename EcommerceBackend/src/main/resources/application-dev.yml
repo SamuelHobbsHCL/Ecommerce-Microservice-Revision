@@ -8,7 +8,7 @@ spring:
     allow-bean-definition-overriding: true
     allow-circular-references: true
   jpa:
-    show-sql: false
+    show-sql: true
 okta:
   oauth2:
     issuer: https://dev-06861319.okta.com/oauth2/default

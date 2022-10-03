@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { data } from 'jquery';
+import { data, uniqueSort } from 'jquery';
 import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { newReviewDto } from '../common/newReviewDto';
 import { Product }from '../common/product';
 import { userReview } from '../common/userReview';
-import { userReviewDto } from '../common/userReviewDto';
 import { UpdateImageDTO } from '../UpdateImageDTO';
 import { User } from '../user';
 @Injectable({
@@ -54,11 +54,8 @@ export class ApiService {
     }));
   }
 
-  public submitReview(newReview:any){
-    console.log(newReview.product);
-    console.log(newReview.score);
-    console.log(newReview.review);
-    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", newReview);
+  public addUserReview(userReviewDto:newReviewDto){
+    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
   }
 
   // Send page parameters to backend - allow it to handle pagination

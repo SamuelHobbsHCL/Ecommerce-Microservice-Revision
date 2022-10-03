@@ -1,14 +1,13 @@
 import { User } from "../user";
 import { Product } from "./product";
 
-export class userReviewDto{
-    id :any;
+export class newReviewDto{
     dtoUser : User;
     dtoProduct : any;
 	dtoScore : any;
 	dtoReview : any;
 
-    constructor () {
+    constructor (){
     }
 
 }

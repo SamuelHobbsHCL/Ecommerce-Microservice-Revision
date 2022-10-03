@@ -1,5 +1,6 @@
 package com.hcl.capstone.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,14 @@ import com.hcl.capstone.dto.UserReviewDto;
 @Entity
 @Table(name = "USER_REVIEW")
 public class UserReview {
-    
+    public UserReview() {}
+    public UserReview(User user, Product product, int score, String review) {
+        super();
+        this.user = user;
+        this.product = product;
+        this.score = score;
+        this.review = review;
+    }
     public UserReview(UserReviewDto userReviewDto) {
         super();
         this.user = userReviewDto.getDtoUser();
@@ -24,8 +32,6 @@ public class UserReview {
         this.review = userReviewDto.getDtoReview();
     }
     
-    public UserReview() {
-    };
 
     public long getReviewId() {
         return reviewId;
@@ -71,12 +77,12 @@ public class UserReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REVIEW_ID")
     private long reviewId;
-
-    @ManyToOne
+    
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     private User user;
-
-    @ManyToOne
+    
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
