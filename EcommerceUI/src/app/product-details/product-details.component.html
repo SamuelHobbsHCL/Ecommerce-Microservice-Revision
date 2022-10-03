@@ -36,7 +36,9 @@
                 </div>
             </div>
             <table aria-describedby="A table containing all reviews" class="table">
-                <th></th>
+                <th>
+                    <h2>Average User Rating: {{average}}</h2>
+                </th>
                 <tbody>
                     <div *ngFor="let item of userReviews">
                         <tr>
