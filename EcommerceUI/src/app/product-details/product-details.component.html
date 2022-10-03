@@ -36,6 +36,7 @@
                 </div>
             </div>
             <table aria-describedby="A table containing all reviews" class="table">
+                <th></th>
                 <tbody>
                     <div *ngFor="let item of userReviews">
                         <tr>
@@ -54,7 +55,7 @@
             <div class="form-group">
                 <div class=" inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-star"></i></span>
+                        <span class="input-group-addon"><em class="fa fa-star"></em></span>
                         <select required="required" class="form-control selectpicker" id="inputReviewScore" name="inputReviewScore" [(ngModel)]="newReview.score" #score="ngModel">
                             <option value="" disabled selected>SELECT RATING</option>
                             <option value="1">1</option>
@@ -70,7 +71,7 @@
             <div class="form-group">
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                        <span class="input-group-addon"><em class="fa fa-pencil"></em></span>
                         <input [(ngModel)]="newReview.review"type="text" id="inputReviewText" name="inputReviewText" minlength="0" maxlength="500" size="80" #review="ngModel" placeholder="Enter review here">
                     </div>
                 </div>
