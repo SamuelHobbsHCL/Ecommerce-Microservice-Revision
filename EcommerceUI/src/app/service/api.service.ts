@@ -4,7 +4,7 @@ import { data, uniqueSort } from 'jquery';
 import { Observable } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { newReviewDto } from '../common/newReviewDto';
+import { UserReviewDto } from '../common/UserReviewDto';
 import { Product }from '../common/product';
 import { userReview } from '../common/userReview';
 import { UpdateImageDTO } from '../UpdateImageDTO';
@@ -54,8 +54,14 @@ export class ApiService {
     }));
   }
 
-  public addUserReview(userReviewDto:newReviewDto){
-    return this.http.post<userReview>(this.PATH_OF_API + "/api/review", userReviewDto);
+  public addUserReview(userReviewDto:UserReviewDto){
+
+    return this.http.post<any>(this.PATH_OF_API + "/api/review", userReviewDto);
+  }
+
+  public checkScore(score: number){
+    console.log(score);
+    return this.http.post<any>(this.PATH_OF_API + "/api/review/score", { params: {score} });
   }
 
   // Send page parameters to backend - allow it to handle pagination

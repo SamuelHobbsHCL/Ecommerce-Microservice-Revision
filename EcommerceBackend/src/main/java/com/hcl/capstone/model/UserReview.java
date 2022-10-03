@@ -27,9 +27,9 @@ public class UserReview {
     public UserReview(UserReviewDto userReviewDto) {
         super();
         this.user = userReviewDto.getDtoUser();
-        this.product = userReviewDto.getDtoProduct();
-        this.score = userReviewDto.getDtoScore();
-        this.review = userReviewDto.getDtoReview();
+        this.product = userReviewDto.getProduct();
+        this.score = userReviewDto.getScore();
+        this.review = userReviewDto.getReview();
     }
     
 
@@ -78,11 +78,11 @@ public class UserReview {
     @Column(name = "REVIEW_ID")
     private long reviewId;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "USER_ID")
     private User user;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 

@@ -9,7 +9,7 @@ import { data } from 'jquery';
 import { UserService } from '../service/user.service';
 import { User } from '../user';
 import { Product } from '../common/product';
-import { newReviewDto } from '../common/newReviewDto';
+import { UserReviewDto } from '../common/UserReviewDto';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   id: any;
   private sub: any;
   product: any;
-  newReview = new newReviewDto;
+  newReview = new UserReviewDto;
   productId: any;
   userReviews: any;
   curUser: any;
@@ -77,10 +77,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
 
   }
-  submitReview(userReview) {
-    this.curUser = this.userService.getCurrentUser();
-    this.newReview.dtoUser = this.curUser;
-    this.newReview.dtoProduct = this.product;
+  submitReview(userReviewDto) {
+    this.newReview.product = this.product;
     console.log(JSON.stringify(this.newReview));
     this.api.addUserReview(this.newReview).subscribe(data => {
       Swal.fire(

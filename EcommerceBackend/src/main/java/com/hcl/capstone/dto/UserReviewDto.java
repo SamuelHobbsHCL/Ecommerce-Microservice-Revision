@@ -5,19 +5,20 @@ import com.hcl.capstone.model.Product;
 
 public class UserReviewDto {
 	private long id;
-	private User dtoUser;
-	private Product dtoProduct;
-	private int dtoScore;
-	private String dtoReview;
+	private User user;
+	private Product product;
+	private int score;
+	private String review;
 	
 	UserReviewDto(){}
 	
-	public UserReviewDto( User dtoUser, Product dtoProduct, int dtoScore, String dtoReview) {
+	public UserReviewDto( int score ,String review, Product product) {
         super();
-        this.dtoUser = dtoUser;
-        this.dtoProduct = dtoProduct;
-        this.dtoScore = dtoScore;
-        this.dtoReview = dtoReview;
+        System.out.println("Building a dto");
+        System.out.println("Values are score: " + score + " user: " + user + " Product: " + product + " review: " + review);
+        this.product = product;
+        this.score = score;
+        this.review = review;
     }
 	
 
@@ -30,35 +31,35 @@ public class UserReviewDto {
 	}
 
 	public User getDtoUser() {
-		return dtoUser;
+		return user;
 	}
 
-	public void setDtoUser(User dtoUser) {
-		this.dtoUser = dtoUser;
+	public void setUser(User dtoUser) {
+		this.user = dtoUser;
 	}
 
-	public Product getDtoProduct() {
-		return dtoProduct;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setDtoProduct(Product dtoProduct) {
-		this.dtoProduct = dtoProduct;
+	public void setProduct(Product dtoProduct) {
+		this.product = dtoProduct;
 	}
 
-	public int getDtoScore() {
-		return dtoScore;
+	public int getScore() {
+		return score;
 	}
 
-	public void setDtoScore(int dtoScore) {
-		this.dtoScore = dtoScore;
+	public void setScore(int dtoScore) {
+		this.score = dtoScore;
 	}
 
-	public String getDtoReview() {
-		return dtoReview;
+	public String getReview() {
+		return review;
 	}
 
-	public void setDtoReview(String dtoReview) {
-		this.dtoReview = dtoReview;
+	public void setReview(String dtoReview) {
+		this.review = dtoReview;
 	}
 
 	
