@@ -32,12 +32,7 @@ public class UserReviewController {
 	@PostMapping("/api/review")
 	@ResponseStatus(HttpStatus.CREATED)
 	public UserReview createReview(Authentication authentication, @RequestBody UserReviewDto userReviewDto) {
-	    System.out.println("I am in the review creation??");
-	    System.out.println(userReviewDto.getReview());
-	    System.out.println(userReviewDto.getScore());
-	    System.out.println(userReviewDto.getProduct());
 	    userReviewDto.setUser(userService.getCurrentLoggedInUser(authentication));
-	    System.out.println(userReviewDto.getDtoUser());
 	    UserReview newReview = new UserReview(userReviewDto);
 		return userReviewService.submitReview(newReview);
 	}
@@ -48,5 +43,9 @@ public class UserReviewController {
 		return userReviewService.getProductReviews(product);
 	}
 	
-	
+	@GetMapping("api/review/average/{id}")
+	public double getReviewAverage(@PathVariable(value="id") long id) {
+	    Product product = productRepository.findById(id);
+	    return userReviewService.getProductReviewAverage(product);
+	}
 }

@@ -26,12 +26,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   curUser: any;
   curProduct: Product;
   score: number;
-  total = 0;
+  average: any;
   review: string;
 
-
-  average: string;
-  count = 0;
 
 
   constructor(private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private userService: UserService) { }
@@ -53,17 +50,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     this.api.getProductReviews(this.id).subscribe(data => {
       this.userReviews = data;
-      data.forEach(review => {
-        this.count = this.count + 1;
-        this.total = this.total + review.score;
-      });
-      this.average = (this.total / this.count).toFixed(2);
-      console.log(this.average);
     }, (error: any) => {
       console.log("Unable to find product reviews");
-    }
+    });
 
-    );
+    this.api.getReviewAverage(this.id).subscribe(data => {
+      this.average = data.toPrecision(2);
+    }, (error: any) => {
+      console.log("Unable to find review average");
+    });
 
   }
 

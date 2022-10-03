@@ -55,13 +55,11 @@ export class ApiService {
   }
 
   public addUserReview(userReviewDto:UserReviewDto){
-
     return this.http.post<any>(this.PATH_OF_API + "/api/review", userReviewDto);
   }
 
-  public checkScore(score: number){
-    console.log(score);
-    return this.http.post<any>(this.PATH_OF_API + "/api/review/score", { params: {score} });
+  public getReviewAverage(id: string): Observable<number> {
+    return this.http.get<number>(this.PATH_OF_API+"/api/review/average/"+id);
   }
 
   // Send page parameters to backend - allow it to handle pagination

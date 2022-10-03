@@ -1,5 +1,6 @@
 package com.hcl.capstone.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,15 @@ public class UserReviewService {
 	    return userReviewRepository.findByProduct(product);
 	}
 	
-	public float getProductReviewAverage(long productId){
-        return userReviewRepository.getAverageScoreByProduct(productId);
+	public double getProductReviewAverage(Product product){
+	    double average = 0;
+	    int count = 0;
+	    List<UserReview> userReviews = userReviewRepository.findByProduct(product);
+	    count = userReviews.size();
+	    for(UserReview review : userReviews) {
+	        average = average + review.getScore();
+	    }
+        return average/count;
     }
 	
 	public UserReview updateReview(UserReviewDto userReviewDto) {
