@@ -12,5 +12,4 @@ public class UpdateImageDto {
 		this.imageUrl = imageUrl;
 	}
 	
-	
 }

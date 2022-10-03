@@ -3,6 +3,7 @@ import { AddressDTO } from 'src/app/addressDTO';
 import { AddressService } from 'src/app/service/address.service';
 import { CloudinaryService } from 'src/app/service/cloudinary.service';
 import { UpdateService } from 'src/app/service/self-update.service';
+import { StateService } from 'src/app/service/state.service';
 import { UserService } from 'src/app/service/user.service';
 import { UpdateImageDTO } from 'src/app/UpdateImageDTO';
 import { User } from 'src/app/user';
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor(private updateService:UpdateService, private userService:UserService, private addressService:AddressService, private cloudinary: CloudinaryService) { }
+  constructor(private stateService:StateService, private updateService:UpdateService, private userService:UserService, private addressService:AddressService, private cloudinary: CloudinaryService) { }
 
   user = new User();
   response : any;
@@ -23,6 +24,7 @@ export class MyProfileComponent implements OnInit {
   newAddress = new AddressDTO();
   widget: any;
   updateImageDTO = new UpdateImageDTO();
+  public states:any;
 
   ngOnInit(): void {
     this.userService.getCurrentUser()
@@ -36,6 +38,8 @@ export class MyProfileComponent implements OnInit {
         this.setUpNewAddress(res);
         console.log("Finding address");
     });
+
+    this.states=this.stateService.getStatesList();
 
     this.cloudinary.createUploadWidget(
       {
@@ -80,6 +84,31 @@ export class MyProfileComponent implements OnInit {
       console.log('open')
       this.widget.open();
     }
+  }
+
+  deletePic() {
+    this.updateImageDTO.imageUrl = "../../../assets/images/defaultProfileImage.png";
+    this.userService.updateUserImage(this.updateImageDTO).subscribe(
+      (data) => {
+        }, (error) => {
+      if(error == "OK") {
+        Swal.fire(
+          'Success!',
+          'Your profile image has been deleted!',
+          'success'
+        ).then(function(){
+          window.location.reload();
+        })
+      }else {
+        console.log(error);
+        Swal.fire(
+          'Error!',
+          'Image delete error!',
+          'error'
+        )
+
+      }
+    });
   }
 
   setUpNewAddress(res: any) {

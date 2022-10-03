@@ -7,51 +7,61 @@
                 <h4 class="heading-small text-muted mb-4">USER INFORMATION</h4>
                 <!-- Form Group (username)-->
                 <div class="mb-3">
-                    <label class="small mb-1" for="inputUsername">Username </label>
-                    <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Enter your username" [(ngModel)]="user.userName" value="{{user.userName}}">
+                    <label class="small mb-1" for="inputUsernameUU">Username </label>
+                    <input class="form-control" id="inputUsernameUU" name="inputUsernameUU" type="text"
+                        placeholder="Enter your username" [(ngModel)]="user.userName" value="{{user.userName}}">
                 </div>
                 <!-- Form Row-->
                 <div class="row gx-3 mb-3">
                     <!-- Form Group (first name)-->
                     <div class="col-md-6">
-                        <label class="small mb-1" for="inputFirstName">First name</label>
-                        <input class="form-control" id="inputFirstName" name="inputFirstName" type="text" placeholder="Enter your first name" [(ngModel)]="user.firstName" value="{{user.firstName}}">
+                        <label class="small mb-1" for="inputFirstNameUU">First name</label>
+                        <input class="form-control" id="inputFirstNameUU" name="inputFirstNameUU" type="text"
+                            placeholder="Enter your first name" [(ngModel)]="user.firstName" value="{{user.firstName}}">
                     </div>
                     <!-- Form Group (last name)-->
                     <div class="col-md-6">
                         <label class="small mb-1" for="inputLastNameUU">Last name</label>
-                        <input class="form-control" id="inputLastName" name="inputLastName" type="text" placeholder="Enter your last name" [(ngModel)]="user.lastName" value="{{user.lastName}}">
+                        <input class="form-control" id="inputLastNameUU" name="inputLastNameUU" type="text"
+                            placeholder="Enter your last name" [(ngModel)]="user.lastName" value="{{user.lastName}}">
                     </div>
                 </div>
                 <!-- Form Group (email address)-->
                 <div class="mb-3">
-                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                    <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email" placeholder="Enter your email address" [(ngModel)]="user.email" value="{{user.email}}" style="background: #f2f2f2f2;" readonly disabled>
+                    <label class="small mb-1" for="inputEmailAddressUU">Email address</label>
+                    <input class="form-control" id="inputEmailAddressUU" name="inputEmailAddressUU" type="email"
+                        placeholder="Enter your email address" [(ngModel)]="user.email" value="{{user.email}}"
+                        style="background: #f2f2f2f2;" readonly disabled>
                 </div>
 
                 <!-- Save changes button-->
-                <button class="btn btn-primary mt-4" (click)="userProfileUpdate(user)" type="button">Save changes</button>
+                <button class="btn btn-primary mt-4" (click)="userProfileUpdate(user)" type="button">Save
+                    changes</button>
             </form>
             <hr class="mt-5">
             <h4 class="heading-small text-muted mb-4">CONTACT INFORMATION</h4>
             <form>
                 <div class="mb-3">
                     <label for="address" class="small mb-1">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Street" [(ngModel)]="newAddress.street" value="{{address.street}}" required>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Street"
+                        [(ngModel)]="newAddress.street" value="{{address.street}}" required>
                     <div class="invalid-feedback">
                         Please enter your shipping address.
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="address2" class="small mb-1">Address 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment or suite" [(ngModel)]="newAddress.unit" value="{{address.unit}}">
+                    <label for="address2" class="small mb-1">Address 2 <span
+                            class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="address2" name="address2"
+                        placeholder="Apartment or suite" [(ngModel)]="newAddress.unit" value="{{address.unit}}">
                 </div>
 
                 <div class="row gx-3 mb-3">
                     <div class="col-md-4">
                         <label for="city" class="small mb-1">City</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="City" [(ngModel)]="newAddress.city" value="{{address.city}}" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City"
+                            [(ngModel)]="newAddress.city" value="{{address.city}}" required>
                         <div class="invalid-feedback">
                             City required.
                         </div>
@@ -59,17 +69,12 @@
 
                     <div class="col-md-5">
                         <label for="state" class="small mb-1">State</label>
-                        <select class="form-select select-input" [(ngModel)]="newAddress.state" value="{{address.state}}" id="state" name="state" required>
-              <option selected disabled>State</option>
-              <option>Alabama</option>
-              <option>Alaska</option>
-              <option>Arizona</option>
-              <option>California</option>
-              <option>Florida</option>
-              <option>Texas</option>
-              <option>Washington</option>
+                        <select class="form-select select-input" [(ngModel)]="newAddress.state"
+                            value="{{address.state}}" id="state" name="state" required>
+                            <option selected disabled>State</option>
+                            <option *ngFor="let x of states;">{{x}}</option>
 
-            </select>
+                        </select>
                         <div class="invalid-feedback">
                             Please provide a valid state.
                         </div>
@@ -77,7 +82,8 @@
 
                     <div class="col-md-3">
                         <label for="zip" class="small mb-1">Zip Code</label>
-                        <input type="text" class="form-control" id="zip" name="zip" placeholder="" [(ngModel)]="newAddress.zipcode" value="{{address.zipcode}}" required>
+                        <input type="text" class="form-control" id="zip" name="zip" placeholder=""
+                            [(ngModel)]="newAddress.zipcode" value="{{address.zipcode}}" required>
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
@@ -86,10 +92,11 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="country" class="small mb-1">Country</label>
-                        <select class="form-select select-input" [(ngModel)]="newAddress.country" id="country" name="country" value="{{address.country}}" required>
-              <option selected disabled>Country</option>
-              <option>United States</option>
-            </select>
+                        <select class="form-select select-input" [(ngModel)]="newAddress.country" id="country"
+                            name="country" value="{{address.country}}" required>
+                            <option selected disabled>Country</option>
+                            <option>United States</option>
+                        </select>
                         <div class="invalid-feedback">
                             Please select a valid country.
                         </div>
@@ -98,7 +105,7 @@
 
                 <!-- Save changes button-->
                 <button class="btn btn-primary mt-4" (click)="userUpdateAddress(newAddress)" type="button">Save
-          changes</button>
+                    changes</button>
             </form>
         </div>
     </div>
