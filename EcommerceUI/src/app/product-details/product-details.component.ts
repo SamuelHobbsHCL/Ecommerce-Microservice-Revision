@@ -83,7 +83,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
   submitReview(userReviewDto) {
     this.newReview.product = this.product;
-    console.log(JSON.stringify(this.newReview));
     this.api.addUserReview(this.newReview).subscribe(data => {
       Swal.fire(
         'Completed!',
