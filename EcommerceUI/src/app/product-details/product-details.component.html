@@ -18,70 +18,92 @@
                 <button class="btn btn-primary" (click)=addtocart(product)>Add to cart</button>
 
             </div>
-            <div class="row-md mt-4">
+            <div class="row-md mt-4 mb-4">
                 <button class="btn btn-primary" (click)="goBack()">Back</button>
             </div>
 
         </div>
+
+        <ng-container *ngIf="!alreadyReviewed">
+            <hr/>
+            <form id="reviewForm" #reviewForm="ngForm" (ngSubmit)="submitReview()">
+
+                <h3>Rate our product!</h3>
+                <form [formGroup]="form">
+                    <div class="cont mb-4">
+                        <div class="stars">
+                            <ngx-star-rating [(ngModel)]="newReview.score" formControlName="rating1" [id]="'rating'"></ngx-star-rating>
+                        </div>
+                    </div>
+                </form>
+
+                <h3>Leave a review!</h3>
+                <div class="col-xs-5">
+                    <textarea class="mb-4" [(ngModel)]="newReview.review" type="text" id="inputReviewText" name="inputReviewText" minlength="0" maxlength="500" size="80" #review="ngModel" placeholder="Enter review here"></textarea>
+                </div>
+                <button type="submit" click='submitReview()' class="btn btn-primary mb-4">Submit</button>
+
+            </form>
+        </ng-container>
+
+        <ng-container *ngIf="hasReviews, else noReviews">
+            <hr/>
+            <div class="row">
+                <div class="col-xs-5">
+                    <h2>Past Reviews</h2>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <h4>Average User Rating: {{average}}/5</h4>
+                <div class="cont">
+                    <div class="stars">
+                        <ngx-star-rating [(ngModel)]="average" [id]="'average'" [disabled]="true"></ngx-star-rating>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div *ngFor="let item of userReviews" class="d-flex justify-content-center mb-3">
+                    <div class="card">
+                        <div class="card-body m-3">
+                            <div class="row">
+                                <div class="col-sm-3 justify-content-center align-items-center">
+                                    <div class="row">
+                                        <p><strong>{{item.user.firstName}} {{item.user.lastName}}</strong></p>
+                                    </div>
+                                    <div class="row">
+                                        <img src="{{item.user.profileImage}}" class="rounded-circle profile-image" alt="avatar" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h3>Review:</h3>
+                                    <div class="row" style="min-height:100px">
+                                        <p class="text-muted fw-light">
+                                            {{item.review}}
+                                        </p>
+                                    </div>
+
+                                    <h3>Rating: {{item.score}}</h3>
+                                    <div class="stars">
+                                        <ngx-star-rating [(ngModel)]="item.score" [id]="'average'" [disabled]="true"></ngx-star-rating>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #noReviews>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-5">
+                    <h2>This Product Has Not Yet Been Reviewed</h2>
+                </div>
+            </div>
+        </ng-template>
+
     </div>
-    <div class="col mt-4">
-        
-        <div class="container">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-xs-5">
-                        <h2>Past Customer Reviews</h2>
-
-                    </div>
-                </div>
-            </div>
-            <table aria-describedby="A table containing all reviews" class="table">
-                <th>
-                    <h2>Average User Rating: {{average}}</h2>
-                </th>
-                <tbody>
-                    <div *ngFor="let item of userReviews">
-                        <tr>
-                            <td>{{item.user.firstName}}</td>
-                            <td>Rating: {{item.score}}</td>
-                            <td>{{item.review}}</td>
-                        </tr>
-                    </div>
-                </tbody>
-            </table>
-        </div>
-        <form id="reviewForm" #reviewForm="ngForm" (ngSubmit)="submitReview(newReview)">
-            <div class="pinfo">Rate our product!</div>
-
-
-            <div class="form-group">
-                <div class=" inputGroupContainer">
-                    <div class="input-group">
-                        <select required="required" class="form-control selectpicker" id="inputReviewScore" name="inputReviewScore" [(ngModel)]="newReview.score" #score="ngModel">
-                            <option value="" disabled selected>SELECT RATING</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="pinfo">Leave a reveiw!</div>
-            <div class="form-group">
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <input [(ngModel)]="newReview.review"type="text" id="inputReviewText" name="inputReviewText" minlength="0" maxlength="500" size="80" #review="ngModel" placeholder="Enter review here">
-                    </div>
-                </div>
-            </div>
-
-            
-
-<button type="submit" click='submitReview(newReview)' class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-
-
-    <br />
+</div>

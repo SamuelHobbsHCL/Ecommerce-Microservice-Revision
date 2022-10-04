@@ -10,6 +10,7 @@ import { UserService } from '../service/user.service';
 import { User } from '../user';
 import { Product } from '../common/product';
 import { UserReviewDto } from '../common/UserReviewDto';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
@@ -22,16 +23,17 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   product: any;
   newReview = new UserReviewDto;
   productId: any;
-  userReviews: any;
-  curUser: any;
+  userReviews: any[] = [];
+  curUser: User;
   curProduct: Product;
   score: number;
-  average: any;
+  average: number;
   review: string;
+  public form: FormGroup;
+  alreadyReviewed: boolean = false;
+  hasReviews: boolean = false;
 
-
-
-  constructor(private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private api: ApiService, private cartService: CartService, private _location: Location, private userService: UserService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -39,33 +41,53 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.product = this.api.getProductById(this.id);
       this.productId = this.product;
     });
+
     this.api.getProductById(this.id).subscribe((data) => {
       this.product = data;
 
     }, (error: any) => {
       console.log("Unable to find product");
-    }
+    });
 
-    );
+    this.userService.getCurrentUser().subscribe((data) => {
+      this.curUser = data;
+    })
 
     this.api.getProductReviews(this.id).subscribe(data => {
       this.userReviews = data;
+      this.userReviews.forEach((review) => {
+        if(this.curUser.userId === review.user.userId) {
+          this.alreadyReviewed = true;
+        }
+      })
+ 
+      this.checkReview();
     }, (error: any) => {
       console.log("Unable to find product reviews");
     });
 
     this.api.getReviewAverage(this.id).subscribe(data => {
-      this.average = data.toPrecision(2);
+      this.average = Math.ceil(data);
     }, (error: any) => {
       console.log("Unable to find review average");
     });
 
+    this.form = this.fb.group({
+      rating1: ['', Validators.required]
+    });
+  }
+
+  checkReview() {
+    if(this.userReviews !== null && this.userReviews !== undefined && this.userReviews.length !== 0) {
+      this.hasReviews = true
+    } else {
+      this.hasReviews = false;
+    }
   }
 
   goBack() {
     this._location.back();
   }
-
 
   addtocart(item: any) {
 
@@ -79,9 +101,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       })
     });
 
-
   }
-  submitReview(userReviewDto) {
+  
+  submitReview() {
     this.newReview.product = this.product;
     console.log(JSON.stringify(this.newReview));
     this.api.addUserReview(this.newReview).subscribe(data => {

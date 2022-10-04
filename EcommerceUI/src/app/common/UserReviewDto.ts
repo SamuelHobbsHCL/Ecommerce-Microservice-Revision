@@ -9,7 +9,7 @@ export class UserReviewDto{
 
     constructor (){
         this.product = null;
-        this.score = 5;
+        this.score = 0;
         this.review = "";
     }
 
