@@ -1,45 +1,3 @@
-.card-top {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: .25rem;
-}
-
-.item img {
-    width: 64px;
-}
-
-.item {
-    margin: 0px 15px;
-    text-align: center;
-}
-
-.item a:hover {
-    color: blue;
-}
-
-.card {
-    padding: 20px;
-    margin: 50px;
-}
-
-.card img {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 15px;
-    transition: 0.3s ease-in-out;
-}
-
-.card img:hover {
-    transition: 0.3s ease-in-out;
-    transform: scale(1.1);
-}
-
 .image-size {
     width: 300px;
     height: auto;
@@ -47,4 +5,51 @@
 
 .container {
     text-align: center;
+}
+
+.cont {
+    max-width: auto;
+    text-align: center;
+}
+
+div.stars {
+    width: auto;
+    display: inline-block;
+}
+
+textarea {
+    width: auto;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.profile-image {
+    width: 300px;
+    height: auto;
+}
+
+.review-star {
+    width: 100px;
+    display: inline-block;
+}
+
+::ng-deep label.star {
+    font-size: 15px !important;
+}
+
+::ng-deep label.star:checked {
+    text-shadow: none !important;
+}
+
+::ng-deep label.star:before {
+    text-shadow: none !important;
+}
+
+.card {
+    width: 600px;
 }

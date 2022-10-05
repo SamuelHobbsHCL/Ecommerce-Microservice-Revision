@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hcl.capstone.model.User;
 import com.hcl.capstone.model.enumeration.AuthProvider;
 

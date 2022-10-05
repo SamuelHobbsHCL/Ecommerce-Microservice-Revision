@@ -15,6 +15,7 @@ export class OrderDetailsComponent implements OnInit {
   private sub: any;
   order : any;
   orderUpdate = new OrderDto();
+  score: any;
 
   constructor(private adminService : AdminService,private route: ActivatedRoute) { }
 
@@ -35,7 +36,7 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   onSelected(value:string): void {
-		this.updateStatus = value;
+		this.score = value;
 	}
 
   updateOrder() {
