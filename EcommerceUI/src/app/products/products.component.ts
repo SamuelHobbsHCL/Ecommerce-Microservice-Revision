@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   searchStr: string = "";
   searchKey:string ="";
 
-  public pageSize = 10;
+  public pageSize = 12;
   public currentPage = 0;
   public filteredList : Product[] = [];
   public allProductList : Product[];
@@ -70,8 +70,6 @@ export class ProductsComponent implements OnInit {
     this.pageIterator();
   }
 
-
-
   getScores(productList: any){
     productList.forEach(product => {
       this.productAverage = new productAverage;
@@ -81,15 +79,13 @@ export class ProductsComponent implements OnInit {
     this.getAverages(this.reviewScores);
   }
 
-
-
   getAverages(reviewScores: any){
     reviewScores.forEach(review => {
       this.api.getReviewAverage(review.productId).subscribe(data => {
       if(isNaN(data)){
         review.average = 0;
       } else{
-        review.average = data.toPrecision(2);
+        review.average = Math.ceil(data);
       }
 
     }, (error: any) => {
@@ -97,9 +93,6 @@ export class ProductsComponent implements OnInit {
     });
     });
   }
-
-
-
 
   private getProducts(): void {
     console.log("getting products");

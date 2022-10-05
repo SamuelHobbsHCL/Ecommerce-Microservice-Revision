@@ -29,11 +29,27 @@ textarea {
 }
 
 .profile-image {
-    width: 150px;
+    width: 300px;
     height: auto;
 }
 
 .review-star {
     width: 100px;
     display: inline-block;
+}
+
+::ng-deep label.star {
+    font-size: 15px !important;
+}
+
+::ng-deep label.star:checked {
+    text-shadow: none !important;
+}
+
+::ng-deep label.star:before {
+    text-shadow: none !important;
+}
+
+.card {
+    width: 600px;
 }
