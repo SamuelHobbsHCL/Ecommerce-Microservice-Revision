@@ -212,6 +212,28 @@ CREATE TABLE `products` (
 --
 -- Dumping data for table `products`
 --
+DROP TABLE IF EXISTS `user_review`;
+CREATE TABLE `user_review` (
+  `review_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL,
+  `product_id` BIGINT NOT NULL,
+  `score` INT NOT NULL DEFAULT 5,
+  `review` VARCHAR(2000) NULL DEFAULT 'N/A',
+  PRIMARY KEY (`review_id`),
+  UNIQUE INDEX `review_id_UNIQUE` (`review_id` ASC) VISIBLE,
+  INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
+  INDEX `product_id_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `product_id`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `products` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb3;
+
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;

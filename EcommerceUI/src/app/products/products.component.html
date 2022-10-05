@@ -21,16 +21,33 @@
             </mat-paginator>
         </div>
     </div>
-
     <div class="row">
-        <ng-container *ngFor="let item of productList">
+        <ng-container *ngFor="let item of productList;let i = index">
             <div class="card col-md-3">
                 <img src="{{item.productImage}}" alt="">
                 <h3 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
                     {{item.productName}}</h3>
+
+
+                <ng-container *ngIf="reviewScores[i].average, else noReview">
+                    <div>
+                        <p><strong>Product Rating:</strong> {{reviewScores[i].average}}/5 </p>
+                    </div>
+                    <div class="d-flex justify-content-center mb-2">
+                        <ngx-star-rating [(ngModel)]="reviewScores[i].average" [id]="'average'" [disabled]="true"></ngx-star-rating>
+                    </div>
+                </ng-container>
+                <ng-template #noReview>
+                    <div>
+                        <p><strong>This products has not yet been reviewed</strong></p>
+                    </div>
+                </ng-template>
+
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">
                     {{item.productDescription}}</p>
+
                 <p><strong>Price:</strong> ${{item.unitPrice}}</p>
+
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-primary" (click)=addtocart(item)>Add to cart</button>
@@ -39,6 +56,7 @@
                         <button class="btn btn-primary" (click)="goToProductDetails(item)">View More</button>
                     </div>
                 </div>
+
             </div>
         </ng-container>
     </div>

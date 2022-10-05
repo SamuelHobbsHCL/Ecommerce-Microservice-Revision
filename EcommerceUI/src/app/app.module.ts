@@ -60,6 +60,7 @@ import { RegistrationService } from './service/registration.service';
 import { UserAuthService } from './service/user-auth.service';
 import { oktaAuth } from './global/okta.auth';
 import { AddUserComponent } from './admin/add-user/add-user.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
     MatMenuModule,
     MatIconModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    NgxStarRatingModule
   ],
   providers: [
     AuthGuard,
