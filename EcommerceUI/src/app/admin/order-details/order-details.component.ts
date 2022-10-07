@@ -36,11 +36,13 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   onSelected(value:string): void {
-		this.score = value;
+		this.updateStatus = value;
 	}
 
   updateOrder() {
-    console.log("Order update request sent")
+    console.log(this.updateStatus);
+    console.log("Order update request sent");
+    console.log(this.order.orderStatus);
     if(this.updateStatus == null || this.updateStatus == this.order.orderStatus){
       Swal.fire(
         'Error!',
@@ -48,6 +50,7 @@ export class OrderDetailsComponent implements OnInit {
         'error'
       )
     }else{
+      this.setDto(this.order);
       this.adminService.updateOrder(this.id, this.orderUpdate).subscribe(data => {
         Swal.fire(
           'Success',

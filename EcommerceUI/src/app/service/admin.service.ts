@@ -59,6 +59,7 @@ export class AdminService {
   }
 
   public updateOrder(id : any, orderDTO : OrderDto){
+    console.log(orderDTO.dtoStatus);
     console.log("Updating order status");
     return this.http.put(this.PATH_OF_API + "/admin/order/update/" + id, orderDTO);
   }
