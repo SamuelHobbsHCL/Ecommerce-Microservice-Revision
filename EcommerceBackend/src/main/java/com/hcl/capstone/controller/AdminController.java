@@ -66,7 +66,7 @@ public class AdminController {
 	@PostMapping("/admin/add-product")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Product addProduct(@RequestBody Product product) {
-		return productsService.saveProduct(product);
+		return productsService.addProduct(product);
 	}
 	
 	@DeleteMapping("/admin/product/{id}")

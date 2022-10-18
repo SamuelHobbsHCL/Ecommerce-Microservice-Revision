@@ -53,6 +53,13 @@ public class ProductService {
 		return productRepository.findById(productDTO.getProductIdDto());
 	}
 	
+	/*New*/
+	public Product updateProductStock(long id, int stock) {
+		Product product = productRepository.findById(id);
+		product.setProductStock(stock);
+		return productRepository.save(product);
+	}
+	
 	public List<Product> searchProducts(String searchStr, int index, int count) {
 		Pageable pageable = PageRequest.of(index, count);
 		// Returns top <count> results starting from <index>
@@ -67,16 +74,14 @@ public class ProductService {
 		return productRepository.findAllByProductNameContaining(searchStr);
 	}
 
-	public boolean updateProductImage(long productId, String imageUrl) {
-		Product product = productRepository.findById(productId);
+	public Product updateProductImage(long productId, String imageUrl) {
+		Product product = productRepository.findById(productId);				
+		
 		if(product == null) {
-			return false;
+			return null;
 		} else {
 			product.setProductImage(imageUrl);
-			productRepository.save(product);
-			return true;
-		}
-		
+			return productRepository.save(product);
+		}		
 	}
-
 }
