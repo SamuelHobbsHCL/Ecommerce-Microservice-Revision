@@ -57,7 +57,7 @@ public class ProductController {
 		return productService.getProductCategories();
 	}
 	
-	@PutMapping("/api/update-product-image/{id}")
+	@PutMapping("/api/product/update-image/{id}")
     public ResponseEntity<String> updateProductImage(@RequestBody UpdateImageDto updateImageDTO, @PathVariable long id) {
     	if(StringUtils.isNotEmpty(updateImageDTO.getImageUrl())) {
 

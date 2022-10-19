@@ -27,11 +27,13 @@ public class ProductService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	private final WebClient localClient;
-	@Autowired
-	ProductService(WebClient localClient) {
-		this.localClient = localClient;
-	}
+	private final WebClient localClient = WebClient.create("http://localhost:8081");
+	
+	
+	//@Autowired
+	//ProductService(WebClient localClient) {
+	//	this.localClient = localClient;
+	//}
 	
 	// ================= PRODUCT CONTROLLER =================
 	
@@ -41,8 +43,8 @@ public class ProductService {
 		//return productRepository.findAll();
 		return localClient
 				.get()
-				.uri("/api/add-product")
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				.uri("/api/products")
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 		        .retrieve()
 		        .bodyToMono(List.class)
 		        .block();
@@ -53,7 +55,7 @@ public class ProductService {
 		return localClient
 				.get()
 				.uri("/api/product/{id}",id)
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 		        .retrieve()
 		        .bodyToMono(Product.class)
 		        .block();
@@ -73,7 +75,7 @@ public class ProductService {
 						.queryParam("index",index)
 						.queryParam("count", count)
 						.build())
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
@@ -88,7 +90,7 @@ public class ProductService {
 						.path("/api/product/search")
 						.queryParam("searchStr",searchStr)
 						.build())
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
@@ -100,7 +102,7 @@ public class ProductService {
 		return localClient
 				.get()
 				.uri("/api/product/categories")
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
@@ -123,7 +125,7 @@ public class ProductService {
 						.path("/api/product/update-image/"+productId)
 						.queryParam("imageUrl",imageUrl)
 						.build())
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(Product.class)
 				.block();
@@ -134,12 +136,17 @@ public class ProductService {
 	// getAllProducts is excluded - non-admin version is reused above
 	
 	// Post to admin's addProduct
-	public Product addProduct(Product product) {
+	public Product addProduct(Product product, String authHeader) {
 		//return productRepository.save(product);
+		String bearerToken;
+		if (!authHeader.startsWith("Bearer "))
+			return null;
+		bearerToken = authHeader.substring(7,authHeader.length());
+		
 		return localClient
 				.post()
 				.uri("/admin/add-product")
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				.headers(h -> h.setBearerAuth(bearerToken))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(product),Product.class)
                 .retrieve()
@@ -147,15 +154,19 @@ public class ProductService {
                 .block();				
 	}
 	
-	public void deleteProductById(long id) {
+	public void deleteProductById(long id, String authHeader) {
 		//productRepository.deleteById(id);
+		String bearerToken;
+		if (!authHeader.startsWith("Bearer "))
+			return;
+		bearerToken = authHeader.substring(7,authHeader.length());
 		localClient
 			.delete()
 			.uri("/admin/product/{id}",id)
-			.headers(h -> h.setBearerAuth("PLACEHOLDER"));
+			.headers(h -> h.setBearerAuth(bearerToken));
 	}
 	
-	public Product updateProduct(ProductDto productDTO) {		
+	public Product updateProduct(ProductDto productDTO, String authHeader) {		
 		/*
 		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductIdDto()));
 		
@@ -169,12 +180,16 @@ public class ProductService {
 		
 		return productRepository.findById(productDTO.getProductIdDto());
 		*/
+		String bearerToken;
+		if (!authHeader.startsWith("Bearer "))
+			return null;
+		bearerToken = authHeader.substring(7,authHeader.length());
 		return localClient
 				.put()
 				.uri("/admin/product")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(productDTO),ProductDto.class)
-				.headers(h -> h.setBearerAuth("PLACEHOLDER"))
+				.headers(h -> h.setBearerAuth(bearerToken))
 				.retrieve()
 				.bodyToMono(Product.class)
 				.block();

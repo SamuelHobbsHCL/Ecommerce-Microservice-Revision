@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@Configuration
-@EnableWebFlux
+//@Configuration
+//@EnableWebFlux
 public class WebFluxConfig {
-	@Bean
-	public WebClient getWebClient() {
-		return WebClient.create("http://localhost:8081");
-	}
+	//@Bean
+	//public WebClient getWebClient() {
+	//	return WebClient.create("http://localhost:8081");
+	//}
 
 }

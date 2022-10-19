@@ -3,6 +3,7 @@ package com.hcl.capstone.controller;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,7 @@ public class AdminController {
 		return userService.getAllUsers();
 	}
 	
+	// Admin not currently needed by Product microservice, so bearer token not required
 	@GetMapping("/admin/products")
 	public List<Product> getAllProducts() {
 		return productsService.getAllProducts();
@@ -65,13 +67,14 @@ public class AdminController {
 	
 	@PostMapping("/admin/add-product")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Product addProduct(@RequestBody Product product) {
-		return productsService.addProduct(product);
+	public Product addProduct(HttpServletRequest request, @RequestBody Product product) {
+		return productsService.addProduct(product, request.getHeader("Authorization"));
 	}
 	
 	@DeleteMapping("/admin/product/{id}")
-	public void deleteProductById(@PathVariable(value = "id") long id) {
-		productsService.deleteProductById(id);
+	public void deleteProductById(HttpServletRequest request, @PathVariable(value = "id") long id) {
+		//System.out.println(request.getHeader("Authorization"));
+		productsService.deleteProductById(id, request.getHeader("Authorization"));
 	}
 	
 	@GetMapping("/admin/user/{id}")
@@ -107,9 +110,9 @@ public class AdminController {
 	}
 	
 	@PutMapping("/admin/product")
-	public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDTO){
+	public ResponseEntity<Product> updateProduct(HttpServletRequest request, @RequestBody ProductDto productDTO){
 		
-		Product result = productsService.updateProduct(productDTO);
+		Product result = productsService.updateProduct(productDTO, request.getHeader("Authorization"));
 		
 		if(result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
