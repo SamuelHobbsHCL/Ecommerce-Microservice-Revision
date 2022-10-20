@@ -1,9 +1,6 @@
 package com.hcl.capstone.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -13,49 +10,29 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.hcl.capstone.dto.ProductDto;
 import com.hcl.capstone.model.Category;
 import com.hcl.capstone.model.Product;
-import com.hcl.capstone.repository.CategoryRepository;
-import com.hcl.capstone.repository.ProductRepository;
-
 import reactor.core.publisher.Mono;
 
 @Service
-public class ProductService {
-	
-	@Autowired
-	private ProductRepository productRepository;
-	
-	@Autowired
-	private CategoryRepository categoryRepository;
-	
+public class ProductService {	
 	private final WebClient localClient = WebClient.create("http://localhost:8081");
-	
-	
-	//@Autowired
-	//ProductService(WebClient localClient) {
-	//	this.localClient = localClient;
-	//}
 	
 	// ================= PRODUCT CONTROLLER =================
 	
 	// Fetch all products (call to /api/add-product not initially used by FE - admin call was)
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllProducts() {
-		//return productRepository.findAll();
 		return localClient
 				.get()
 				.uri("/api/products")
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 		        .retrieve()
 		        .bodyToMono(List.class)
 		        .block();
 	}
 	
 	public Product getProductById(long id) {
-		//return productRepository.findById(id);
 		return localClient
 				.get()
 				.uri("/api/product/{id}",id)
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 		        .retrieve()
 		        .bodyToMono(Product.class)
 		        .block();
@@ -66,7 +43,6 @@ public class ProductService {
 	public List<Product> searchProducts(String searchStr, int index, int count) {
 		Pageable pageable = PageRequest.of(index, count);
 		// Returns top <count> results starting from <index>
-		//return productRepository.findAllByProductNameContaining(searchStr,pageable);
 		return localClient
 				.get()
 				.uri(uriBuilder -> uriBuilder
@@ -75,7 +51,6 @@ public class ProductService {
 						.queryParam("index",index)
 						.queryParam("count", count)
 						.build())
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
@@ -83,14 +58,12 @@ public class ProductService {
 		
 	@SuppressWarnings("unchecked")
 	public List<Product> searchProducts(String searchStr) {
-		//return productRepository.findAllByProductNameContaining(searchStr);
 		return localClient
 				.get()
 				.uri(uriBuilder -> uriBuilder
 						.path("/api/product/search")
 						.queryParam("searchStr",searchStr)
 						.build())
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
@@ -98,34 +71,21 @@ public class ProductService {
 
 	@SuppressWarnings("unchecked")
 	public List<Category> getProductCategories() {
-		//return categoryRepository.findAll();
 		return localClient
 				.get()
 				.uri("/api/product/categories")
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(List.class)
 				.block();
 	}
 	
 	public Product updateProductImage(long productId, String imageUrl) {
-		/*
-		Product product = productRepository.findById(productId);				
-		
-		if(product == null) {
-			return null;
-		} else {
-			product.setProductImage(imageUrl);
-			return productRepository.save(product);
-		}
-		*/
 		return localClient
 				.put()
 				.uri(uriBuilder -> uriBuilder
 						.path("/api/product/update-image/"+productId)
 						.queryParam("imageUrl",imageUrl)
 						.build())
-				//.headers(h -> h.setBearerAuth("PLACEHOLDER"))
 				.retrieve()
 				.bodyToMono(Product.class)
 				.block();
@@ -137,7 +97,6 @@ public class ProductService {
 	
 	// Post to admin's addProduct
 	public Product addProduct(Product product, String authHeader) {
-		//return productRepository.save(product);
 		String bearerToken;
 		if (!authHeader.startsWith("Bearer "))
 			return null;
@@ -155,7 +114,6 @@ public class ProductService {
 	}
 	
 	public Product deleteProductById(long id, String authHeader) {
-		//productRepository.deleteById(id);
 		String bearerToken;
 		if (!authHeader.startsWith("Bearer "))
 			return null;
@@ -169,20 +127,7 @@ public class ProductService {
             .block();
 	}
 	
-	public Product updateProduct(ProductDto productDTO, String authHeader) {		
-		/*
-		Optional<Product> productRepo = Optional.ofNullable(productRepository.findById(productDTO.getProductIdDto()));
-		
-		if(!productRepo.isPresent()) {
-			return null;
-		}
-		
-		Product update = new Product(productDTO);
-		
-		productRepository.save(update);
-		
-		return productRepository.findById(productDTO.getProductIdDto());
-		*/
+	public Product updateProduct(ProductDto productDTO, String authHeader) {
 		String bearerToken;
 		if (!authHeader.startsWith("Bearer "))
 			return null;
@@ -201,7 +146,6 @@ public class ProductService {
 	// =================== OTHER ====================
 	// Called by OrderService
 	public Product updateProductStock(Product product) {
-		//return productRepository.save(product);
 		return localClient
 				.put()
 				.uri(uriBuilder -> uriBuilder

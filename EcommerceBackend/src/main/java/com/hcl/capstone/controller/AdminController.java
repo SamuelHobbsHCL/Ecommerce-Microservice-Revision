@@ -73,7 +73,6 @@ public class AdminController {
 	
 	@DeleteMapping("/admin/delete-product/{id}")
 	public void deleteProductById(HttpServletRequest request, @PathVariable(value = "id") long id) {
-		//System.out.println(request.getHeader("Authorization"));
 		productsService.deleteProductById(id, request.getHeader("Authorization"));
 	}
 	

@@ -8,7 +8,9 @@
                     </div>
                     <div class="col-xs-7">
 
-                        <a routerLink="/admin/inventory-management/add-product" class="btn btn-primary" style="float: right;"><em class="material-icons">&#xE147;</em> <span>Add New Product</span></a>
+                        <a routerLink="/admin/inventory-management/add-product" class="btn btn-primary"
+                            style="float: right;"><em class="material-icons">&#xE147;</em> <span>Add New
+                                Product</span></a>
 
                     </div>
                 </div>
@@ -29,7 +31,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of productList; let i = index">
-                        <td>{{i+1}}</td>
+                        <td>{{product.productId}}</td>
                         <td><img src="{{product.productImage}}" alt="product image" style="width: 120px;" /></td>
                         <td>{{product.productName}}</td>
                         <td>${{product.unitPrice}}</td>
@@ -37,11 +39,15 @@
                         <td>{{product.stockThreshold}}</td>
                         <td>{{product.productDescription}}</td>
                         <td>
-                            <span *ngFor="let category of product.categories">{{category.categoryName}}<br/></span>
+                            <span *ngFor="let category of product.categories">{{category.categoryName}}<br /></span>
                         </td>
                         <td>
-                            <a type="button" href="/admin/inventory-management/update-product/{{product.productId}}" class="settings" title="Settings" data-toggle="tooltip"><em class="material-icons">&#xE3C9;</em></a>
-                            <a type="button" (click)="ifDeleteProduct(product.productId)" class="delete" title="Delete Product" data-toggle="tooltip"><em class="material-icons">&#xE5C9;</em></a>
+                            <a type="button" href="/admin/inventory-management/update-product/{{product.productId}}"
+                                class="settings" title="Settings" data-toggle="tooltip"><em
+                                    class="material-icons">&#xE3C9;</em></a>
+                            <a type="button" (click)="ifDeleteProduct(product.productId)" class="delete"
+                                title="Delete Product" data-toggle="tooltip"><em
+                                    class="material-icons">&#xE5C9;</em></a>
                         </td>
                     </tr>
                 </tbody>

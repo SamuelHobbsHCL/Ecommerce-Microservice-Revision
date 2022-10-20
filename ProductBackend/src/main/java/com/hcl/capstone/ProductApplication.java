@@ -8,10 +8,10 @@ import com.hcl.capstone.security.config.AppProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppProperties.class)
-public class EcommerceApplication {
+public class ProductApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(EcommerceApplication.class, args);
+		SpringApplication.run(ProductApplication.class, args);
 	}
 
 }

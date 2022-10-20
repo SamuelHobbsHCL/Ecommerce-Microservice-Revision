@@ -73,7 +73,6 @@ export class ApiService {
   }
 
   public updateProductImage(productId : string, updateImageDTO : UpdateImageDTO) : Observable<any>{
-    //console.log(updateImageDTO);
     console.log("updating product image");
     return this.http.put<any>(this.PATH_OF_API + "/api/product/update-image/" + productId, updateImageDTO);
   }
