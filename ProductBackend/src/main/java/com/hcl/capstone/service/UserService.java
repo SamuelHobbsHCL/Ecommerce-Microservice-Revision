@@ -1,13 +1,9 @@
 package com.hcl.capstone.service;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,11 +14,9 @@ import org.springframework.stereotype.Service;
 import com.hcl.capstone.dto.AddressDto;
 import com.hcl.capstone.dto.PasswordDto;
 import com.hcl.capstone.global.RoleName;
-import com.hcl.capstone.mailer.Mail;
 import com.hcl.capstone.model.Address;
 import com.hcl.capstone.model.Roles;
 import com.hcl.capstone.model.User;
-import com.hcl.capstone.model.enumeration.AuthProvider;
 import com.hcl.capstone.repository.RoleRepository;
 import com.hcl.capstone.repository.UserRepository;
 import com.hcl.capstone.security.CustomUserDetails;
@@ -42,37 +36,6 @@ public class UserService {
 
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
-	}
-
-	public User registerUser(User user) throws AddressException, MessagingException, IOException {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-
-		user.setPassword(encodedPassword);
-		user.setAuthProvider(AuthProvider.LOCAL);
-
-		Roles role = roleRepository.findByName(RoleName.USER);
-		Set<Roles> userRoles = new HashSet<>();
-		userRoles.add(role);
-
-		user.setRoles(userRoles);
-		// Default address is null, may be set in their profile page
-		user.setAddress(null);
-
-		sendRegistrationConfirmationEmail(user);
-
-		return userRepository.save(user);
-	}
-
-	private void sendRegistrationConfirmationEmail(User user) {
-		Mail mailer = new Mail();
-		try {
-			mailer.send(user);
-		} catch (AddressException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public boolean deleteUser(Authentication authentication) {
