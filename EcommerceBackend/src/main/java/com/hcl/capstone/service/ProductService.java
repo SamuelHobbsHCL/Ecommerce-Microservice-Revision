@@ -154,16 +154,19 @@ public class ProductService {
                 .block();				
 	}
 	
-	public void deleteProductById(long id, String authHeader) {
+	public Product deleteProductById(long id, String authHeader) {
 		//productRepository.deleteById(id);
 		String bearerToken;
 		if (!authHeader.startsWith("Bearer "))
-			return;
+			return null;
 		bearerToken = authHeader.substring(7,authHeader.length());
-		localClient
+		return localClient
 			.delete()
-			.uri("/admin/product/{id}",id)
-			.headers(h -> h.setBearerAuth(bearerToken));
+			.uri("/admin/delete-product/{id}",id)
+			.headers(h -> h.setBearerAuth(bearerToken))
+			.retrieve()
+            .bodyToMono(Product.class)
+            .block();
 	}
 	
 	public Product updateProduct(ProductDto productDTO, String authHeader) {		

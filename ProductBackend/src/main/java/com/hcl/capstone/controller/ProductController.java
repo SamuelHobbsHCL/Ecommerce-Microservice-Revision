@@ -84,9 +84,9 @@ public class ProductController {
 		return productService.saveProduct(product);
 	}
 
-	@DeleteMapping("/admin/product/{id}")
-	public void deleteProductById(@PathVariable(value = "id") long id) {
-		productService.deleteProductById(id);
+	@DeleteMapping("/admin/delete-product/{id}")
+	public Product deleteProductById(@PathVariable(value = "id") long id) {
+		return productService.deleteProductById(id);
 	}
 	
 	@PutMapping("/admin/product")

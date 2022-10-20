@@ -9,6 +9,9 @@ spring:
     allow-circular-references: true
   jpa:
     show-sql: false
+logging:
+  level:
+    '[org.springframework.web.filter.CommonsRequestLoggingFilter]': DEBUG
 okta:
   oauth2:
     issuer: https://dev-06861319.okta.com/oauth2/default

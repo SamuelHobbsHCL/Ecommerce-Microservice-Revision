@@ -71,7 +71,7 @@ public class AdminController {
 		return productsService.addProduct(product, request.getHeader("Authorization"));
 	}
 	
-	@DeleteMapping("/admin/product/{id}")
+	@DeleteMapping("/admin/delete-product/{id}")
 	public void deleteProductById(HttpServletRequest request, @PathVariable(value = "id") long id) {
 		//System.out.println(request.getHeader("Authorization"));
 		productsService.deleteProductById(id, request.getHeader("Authorization"));

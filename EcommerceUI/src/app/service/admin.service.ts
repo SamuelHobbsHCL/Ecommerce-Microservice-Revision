@@ -51,7 +51,7 @@ export class AdminService {
   }
   
   public deleteProduct(productId : any) {
-    return this.http.delete(this.PATH_OF_API + "/admin/product/" + productId);
+    return this.http.delete(this.PATH_OF_API + "/admin/delete-product/" + productId);
   }
 
   public updateProduct(product : any) {
