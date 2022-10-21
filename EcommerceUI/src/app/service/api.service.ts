@@ -19,6 +19,8 @@ export class ApiService {
   );
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
+  PRODUCT_API_PATH = environment.productGatewayUrl;
 
   product: Product | undefined;
   products: Product[] | undefined;
@@ -26,14 +28,14 @@ export class ApiService {
   constructor(private http : HttpClient) { }
 
   public getProduct(){
-    return this.http.get<any>(this.PATH_OF_API + "/api/products")
+    return this.http.get<any>(this.PRODUCT_API_PATH + "/api/products")
     .pipe(map((res:any)=>{
       return res;
     }))
   }
   
   public getProductById(id: string): Observable<Product>{
-    return this.http.get<Product>(this.PATH_OF_API + "/api/product/" + id).pipe(map((data: Product) => this.product = {
+    return this.http.get<Product>(this.PRODUCT_API_PATH + "/api/product/" + id).pipe(map((data: Product) => this.product = {
       productId: (data as any).productId,
       productName: (data as any).productName,
       unitPrice: (data as any).unitPrice,
@@ -48,37 +50,37 @@ export class ApiService {
   }
   //retrieve reviews for product based on id
   public getProductReviews(id : string): Observable<any>{
-    return this.http.get<any>(this.PATH_OF_API + "/api/review/" + id)
+    return this.http.get<any>(this.ECOMM_API_PATH + "/api/review/" + id)
     .pipe(map((res:any)=>{
       return res;
     }));
   }
 
   public addUserReview(userReviewDto:UserReviewDto){
-    return this.http.post<any>(this.PATH_OF_API + "/api/review", userReviewDto);
+    return this.http.post<any>(this.ECOMM_API_PATH + "/api/review", userReviewDto);
   }
 
   public getReviewAverage(id: string): Observable<number> {
-    return this.http.get<number>(this.PATH_OF_API+"/api/review/average/"+id);
+    return this.http.get<number>(this.ECOMM_API_PATH+"/api/review/average/"+id);
   }
 
   // Send page parameters to backend - allow it to handle pagination
   public getSearchResultPages(searchStr: string, index: string, count: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search/page", { params: {searchStr, index, count} });
+    return this.http.get<Product[]>(this.PRODUCT_API_PATH + "/api/product/search/page", { params: {searchStr, index, count} });
   }
 
   // Only send search string - allow frontend to handle pagination
   public getSearchResult(searchStr: string): Observable<Product[]> {
-    return this.http.get<Product[]>(this.PATH_OF_API + "/api/product/search", { params: {searchStr} });
+    return this.http.get<Product[]>(this.PRODUCT_API_PATH + "/api/product/search", { params: {searchStr} });
   }
 
   public updateProductImage(productId : string, updateImageDTO : UpdateImageDTO) : Observable<any>{
     console.log("updating product image");
-    return this.http.put<any>(this.PATH_OF_API + "/api/product/update-image/" + productId, updateImageDTO);
+    return this.http.put<any>(this.PRODUCT_API_PATH + "/api/product/update-image/" + productId, updateImageDTO);
   }
 
   public getCategories(): Observable<any> {
-    return this.http.get<any>(this.PATH_OF_API + "/api/product/categories");
+    return this.http.get<any>(this.PRODUCT_API_PATH + "/api/product/categories");
   }
 
   throwError(error: any) {

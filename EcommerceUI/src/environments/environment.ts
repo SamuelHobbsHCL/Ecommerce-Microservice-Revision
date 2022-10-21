@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   stripePublishableKey: "pk_test_51LfG2CDyv2YM2ORIc44V4mFeS98IC25SbMO4x3Mxjo1fzSda1hQhitfKIXBN3yhyHTAQfrHBiVaHhtwOOZuLl91Z00goFJBbcb",
-  apiUrl: "http://localhost:8080"
+  apiUrl: "http://localhost:8080",
+  ecommGatewayUrl: "http://localhost:8080/ecomm",  // For accessing the ecommerce api (port 8082) via the gateway
+  productGatewayUrl: "http://localhost:8080/product",   // For accessing the product api (port 8081) via the gateway
 };
 
 /*

@@ -12,13 +12,14 @@ import { UpdateImageDTO } from '../UpdateImageDTO';
 export class UserService {
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   constructor(private httpClient: HttpClient, private userAuthService: UserAuthService) { }
 
   public login(loginData: any) {
-    return this.httpClient.post(this.PATH_OF_API + '/auth/login', loginData, {
+    return this.httpClient.post(this.ECOMM_API_PATH + '/auth/login', loginData, {
       headers: this.requestHeader,
     });
   }
@@ -43,31 +44,31 @@ export class UserService {
   }
 
   public getAllUsers() : Observable<any> {
-    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/users/")
+    return this.httpClient.get<any>(this.ECOMM_API_PATH + "/admin/users/")
     .pipe(map((res:any)=>{
       return res;
     }));
   }
    
   public getCurrentUser() : Observable<any> {
-    return this.httpClient.get<any>(this.PATH_OF_API + "/user/getCurrentUser");
+    return this.httpClient.get<any>(this.ECOMM_API_PATH + "/user/getCurrentUser");
   }
 
   public getUserById(id: number) : Observable<any> {
-    return this.httpClient.get<any>(this.PATH_OF_API + "/admin/user/" + id);
+    return this.httpClient.get<any>(this.ECOMM_API_PATH + "/admin/user/" + id);
   }
 
   public updatePassword(passwordDTO) : Observable<any>{
-    return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-password", passwordDTO);
+    return this.httpClient.put<any>(this.ECOMM_API_PATH + "/user/update-password", passwordDTO);
   }
 
   public deleteCurrentUser() : Observable<any>{
-    return this.httpClient.delete<any>(this.PATH_OF_API + "/user/delete-user");
+    return this.httpClient.delete<any>(this.ECOMM_API_PATH + "/user/delete-user");
   }
 
   public updateUserImage(updateImageDTO : UpdateImageDTO) : Observable<any>{
     console.log("update user image");
-    return this.httpClient.put<any>(this.PATH_OF_API + "/user/update-profile-image", updateImageDTO);
+    return this.httpClient.put<any>(this.ECOMM_API_PATH + "/user/update-profile-image", updateImageDTO);
   }
 
  

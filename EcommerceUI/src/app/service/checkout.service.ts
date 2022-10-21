@@ -10,8 +10,9 @@ import { PaymentInfo } from '../common/payment-info';
 export class CheckoutService {
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
 
-  private paymentIntentUrl = this.PATH_OF_API + "/api/payment-intent";
+  private paymentIntentUrl = this.ECOMM_API_PATH + "/api/payment-intent";
 
   constructor(private httpClient: HttpClient) { }
 

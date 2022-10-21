@@ -11,10 +11,11 @@ export class UpdateService {
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
 
   constructor(private http : HttpClient) { }
 
   public updateUser(id : any, userInfo:User) {
-    return this.http.put(this.PATH_OF_API+"/admin/user/"+id,userInfo);
+    return this.http.put(this.ECOMM_API_PATH+"/admin/user/"+id,userInfo);
   }
 }

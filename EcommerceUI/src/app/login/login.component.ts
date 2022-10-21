@@ -21,8 +21,9 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
 
-  AUTH_URL = this.PATH_OF_API + "/oauth2/authorize/okta?redirect_uri=" + window.location.origin + "/oauth2/callback/okta";
+  AUTH_URL = this.ECOMM_API_PATH + "/oauth2/authorize/okta?redirect_uri=" + window.location.origin + "/oauth2/callback/okta";
 
   user = new User();
   response : any;

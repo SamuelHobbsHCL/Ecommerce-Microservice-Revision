@@ -8,11 +8,12 @@ import { environment } from 'src/environments/environment';
 export class JwtClientService {
 
   PATH_OF_API = environment.apiUrl;
+  ECOMM_API_PATH = environment.ecommGatewayUrl;
 
   constructor(private http:HttpClient) { }
 
   public generateToken(request: any) {
-    return this.http.post(this.PATH_OF_API + "/auth/login", request, {responseType: 'text' as 'json'})
+    return this.http.post(this.ECOMM_API_PATH + "/auth/login", request, {responseType: 'text' as 'json'})
   }
 
 }
